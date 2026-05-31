@@ -5,7 +5,7 @@
     <div class="container nav-inner">
       <router-link to="/" class="brand">
         <div class="brand-logo">
-          <img :src="logoAscad" alt="ASCAD LATAM - Logo" width="56" height="56" />
+          <img :src="logoAscad" alt="ASCAD LATAM - Logo" width="72" height="72" />
         </div>
         <div class="brand-text">
           <span class="brand-label">Certificación Internacional</span>
@@ -137,8 +137,8 @@ watch(menuOpen, async (val) => {
   margin-left: 8px;
 }
 .brand-logo {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   flex-shrink: 0;
   border-radius: 10px;
   overflow: hidden;
@@ -146,7 +146,7 @@ watch(menuOpen, async (val) => {
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
-.brand-logo svg { width: 52px; height: 52px; }
+.brand-logo svg { width: 68px; height: 68px; }
 .brand-text {
   display: flex;
   flex-direction: column;
@@ -164,7 +164,7 @@ watch(menuOpen, async (val) => {
 }
 .brand-text strong {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--white);
   letter-spacing: -0.02em;
