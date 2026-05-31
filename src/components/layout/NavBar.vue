@@ -8,7 +8,7 @@
           <img :src="logoAscad" alt="ASCAD LATAM - Logo" width="56" height="56" />
         </div>
         <div class="brand-text">
-          <span class="brand-label">Certificación Internacional</span>
+          <span class="brand-label">Cert. Int.</span>
           <strong>ASCAD LATAM</strong>
         </div>
       </router-link>
@@ -17,8 +17,8 @@
         <router-link to="/">Inicio</router-link>
         <router-link to="/certificaciones">Certificaciones</router-link>
         <router-link to="/flact">FLACT</router-link>
-        <router-link to="/formacion">Formación Académica</router-link>
-        <router-link to="/conocimiento">Centro de Conocimiento</router-link>
+        <router-link to="/formacion">Formación</router-link>
+        <router-link to="/noticias">Noticias</router-link>
         <router-link to="/aliados">Aliados</router-link>
         <router-link to="/directorio">Directorio</router-link>
         <router-link to="/contacto">Contacto</router-link>
@@ -61,8 +61,8 @@
       <router-link to="/" @click="closeMenu" tabindex="0">Inicio</router-link>
       <router-link to="/certificaciones" @click="closeMenu" tabindex="0">Certificaciones</router-link>
       <router-link to="/flact" @click="closeMenu" tabindex="0">FLACT</router-link>
-      <router-link to="/formacion" @click="closeMenu" tabindex="0">Formación Académica</router-link>
-      <router-link to="/conocimiento" @click="closeMenu" tabindex="0">Centro de Conocimiento</router-link>
+      <router-link to="/formacion" @click="closeMenu" tabindex="0">Formación</router-link>
+      <router-link to="/noticias" @click="closeMenu" tabindex="0">Noticias</router-link>
       <router-link to="/aliados" @click="closeMenu" tabindex="0">Aliados</router-link>
       <router-link to="/directorio" @click="closeMenu" tabindex="0">Directorio</router-link>
       <router-link to="/contacto" @click="closeMenu" tabindex="0">Contacto</router-link>
@@ -151,22 +151,20 @@ watch(menuOpen, async (val) => {
 .brand-logo svg { width: 52px; height: 52px; }
 .brand-text {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding-left: 4px;
+  align-items: baseline;
+  gap: 8px;
 }
 .brand-label {
   font-family: var(--font-mono);
   font-size: .625rem;
   font-weight: 500;
-  letter-spacing: .2em;
+  letter-spacing: .1em;
   color: var(--accent-dark);
   text-transform: uppercase;
-  padding-top: 3px;
 }
 .brand-text strong {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--white);
   letter-spacing: -0.02em;

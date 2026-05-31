@@ -32,10 +32,10 @@ const routes = [
     meta: { title: 'Educación y Formación Continua | ASCAD LATAM' }
   },
   {
-    path: '/conocimiento',
-    name: 'conocimiento',
+    path: '/noticias',
+    name: 'noticias',
     component: () => import('@/views/ConocimientoView.vue'),
-    meta: { title: 'Centro de Conocimiento | ASCAD LATAM' }
+    meta: { title: 'Noticias | ASCAD LATAM' }
   },
   {
     path: '/contacto',
