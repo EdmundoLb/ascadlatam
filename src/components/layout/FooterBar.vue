@@ -42,7 +42,6 @@
                 <li><router-link to="/flact">FLACT</router-link></li>
                 <li><router-link to="/formacion">Formación Académica</router-link></li>
                 <li><router-link to="/noticias">Noticias</router-link></li>
-                <li><router-link to="/aliados">Aliados</router-link></li>
                 <li><router-link to="/directorio">Directorio</router-link></li>
                 <li><router-link to="/contacto">Contacto</router-link></li>
               </ul>
