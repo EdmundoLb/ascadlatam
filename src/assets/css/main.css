@@ -97,7 +97,6 @@ a:hover { color: var(--primary); text-decoration: none; }
 img { display: block; max-width: 100%; }
 ul { list-style: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ─── LAYOUT ─────────────────────────────────────────────────── */
 .container { width: min(var(--max), calc(100% - 4rem)); margin: 0 auto; }
@@ -389,31 +388,6 @@ p.lead { font-size: 1.1875rem; color: var(--text-secondary); line-height: 1.8; m
 }
 @media (max-width: 480px) {
   .btn { width: 100%; justify-content: center; }
-}
-
-/* ─── DARK MODE ─────────────────────────────────────────────────── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-light: #0f1d2e;
-    --bg-gray: #0a1520;
-    --surface: #142840;
-    --surface-alt: #1a3248;
-    --text: #e8eef5;
-    --text-secondary: #9aabbf;
-    --text-muted: #6b7a94;
-    --text-light: #4a5568;
-    --line: #1e3a5c;
-    --line-light: #162d44;
-    --primary-light: #1a3a5c;
-    --primary-mid: #0f2840;
-    --shadow-xs: 0 1px 2px rgba(0,0,0,0.3);
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.4);
-    --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
-    --shadow-xl: 0 16px 48px rgba(0,0,0,0.7);
-  }
-  body { background: var(--bg-light); }
-  .page-hero { background: linear-gradient(180deg, var(--bg-gray) 0%, var(--bg-light) 100%); }
 }
 
 /* ─── ENHANCED RESPONSIVE ──────────────────────────────────────── */
