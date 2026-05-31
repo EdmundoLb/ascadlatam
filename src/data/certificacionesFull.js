@@ -21,6 +21,7 @@ export const certificationsFull = [
     code: 'OST',
     name: 'Operador Socioterapéutico',
     standard: 'TAP 21',
+    basedOn: 'Basados en los Fundamentos Transdisciplinarios del TAP 21',
     fee: 30,
     summary: 'Nivel inicial de acompañamiento supervisado en comunidades terapéuticas.',
     description: 'El Operador Socioterapéutico actúa con sensibilidad humana, respeto por la diversidad y vocación de servicio, fortaleciendo procesos de recuperación centrados en la persona y contribuyendo al desarrollo de entornos terapéuticos seguros y humanizados.',
@@ -33,6 +34,61 @@ export const certificationsFull = [
       'Funciones del Operador Socioterapéutico'
     ],
     technicalDescription: 'Este nivel está fundamentado en el TAP 21 (Treatment Accessibility Protocol 21), que establece las 12 funciones esenciales del consejero. El OST desarrolla competencias básicas en comprensión integral de las adicciones, identificación de factores de riesgo, acompañamiento terapéutico y trabajo interdisciplinario.',
+    requirements: [
+      'Secundaria completa o equivalente',
+      '3 avales profesionales',
+      'Firma del código de ética',
+      'Aprobación del examen OST',
+      'Ejercicio laboral en el país de origen'
+    ],
+    competencies: {
+      saberConocer: [
+        'Comprensión integral de las adicciones desde enfoques médicos, psicológicos y sociales',
+        'Conocimiento de los modelos de tratamiento y recuperación',
+        'Identificación de factores de riesgo, señales de consumo y necesidades de apoyo',
+        'Conocimiento de recursos comunitarios y redes de apoyo'
+      ],
+      saberHacer: [
+        'Aplicación de estrategias de acompañamiento, orientación y seguimiento terapéutico',
+        'Intervención básica en crisis y derivación oportuna',
+        'Facilitación de actividades grupales básicas',
+        'Registro y documentación de actividades'
+      ],
+      saberSer: [
+        'Desarrollo de habilidades de comunicación, escucha activa y empatía',
+        'Manejo ético y confidencial de la información',
+        'Compromiso con la formación continua y el autocuidado',
+        'Promoción del bienestar, la inclusión y la recuperación integral',
+        'Vocación de servicio y sensibilidad humana'
+      ]
+    }
+  },
+  {
+    code: 'ER',
+    name: 'Entrenador de Recuperación',
+    standard: 'TAP 21',
+    basedOn: 'Basados en los Fundamentos Transdisciplinarios del TAP 21',
+    fee: 30,
+    summary: 'Para personas con experiencia vivida en recuperación que brindar apoyo empático.',
+    description: 'El Entrenador de Recuperación actúa como modelo positivo y agente de esperanza, fortaleciendo procesos de recuperación desde el apoyo mutuo, la integración comunitaria y el acompañamiento no clínico, siempre desde una visión humana y libre de estigmas.',
+    professionalProfile: 'Profesional con experiencia vivida en recuperación que ejerce un rol de apoyo entre pares, facilitando espacios seguros de compartida y promoviendo la integración comunitaria y redes de recuperación.',
+    trainingAxes: [
+      'Conocimiento sobre Recuperación y Trastorno por Uso de Sustancias',
+      'Rol y Funciones del Entrenador de Pares',
+      'Habilidades de Apoyo y Acompañamiento',
+      'Ética y Límites Profesionales',
+      'Diversidad, Inclusión y Sensibilidad Cultural',
+      'Construcción Comunitaria y Redes de Recuperación',
+      'Desarrollo Profesional y Autocuidado'
+    ],
+    technicalDescription: 'Fundamentado en el TAP 21, este nivel utiliza el modelo de las 12 funciones del consejeroadaptado al contexto de apoyo entre pares. El ER basa su práctica en la experiencia compartida de recuperación, facilitando conexión con recursos comunitarios y promoviendo hábitos saludables.',
+    requirements: [
+      'Experiencia vivida en recuperación (mín. 2 años)',
+      'Secundaria completa o equivalente',
+      '2 a 3 avales personales o profesionales',
+      'Firma del código de ética',
+      'Aprobación del examen ER'
+    ],
     competencies: {
       saberConocer: [
         'Comprensión integral de las adicciones desde enfoques médicos, psicológicos y sociales',
@@ -100,6 +156,7 @@ export const certificationsFull = [
     code: 'CCAAD I',
     name: 'Consejero en Adicciones Nivel I',
     standard: 'TIP 64',
+    basedOn: 'Basados en la Orientación Técnica del TIP 64 para Latino-América',
     fee: 50,
     summary: 'Primer nivel técnico profesional con intervenciones estructuradas.',
     description: 'El Consejero en Adicciones CCAAD I brinda apoyo estructurado y acompañamiento terapéutico desde una perspectiva ética, técnica y centrada en la persona, fortaleciendo procesos de recuperación y bienestar integral.',
@@ -112,6 +169,13 @@ export const certificationsFull = [
       'Responsabilidad Profesional y Ética'
     ],
     technicalDescription: 'Basado en el TIP 64 (Treatment Improvement Protocol 64), este nivel proporciona la base científica y metodológica necesaria para la implementación de servicios de tratamiento. El CCAAD I desarrolla competencias en tamizaje, evaluación inicial, diseño de metas terapéuticas y coordinación de derivaciones.',
+    requirements: [
+      'Secundaria completa o equivalente',
+      '3 avales profesionales',
+      'Firma del código de ética',
+      'Aprobación del examen CCAAD I',
+      'Ejercicio laboral en el país de origen'
+    ],
     competencies: {
       saberConocer: [
         'Comprensión integral del trastorno por uso de sustancias y sus efectos biopsicosociales',
@@ -138,6 +202,7 @@ export const certificationsFull = [
     code: 'CCAAD II',
     name: 'Consejero en Adicciones Nivel II',
     standard: 'TIP 64',
+    basedOn: 'Basados en la Orientación Técnica del TIP 64 para Latino-América',
     fee: 75,
     summary: 'Competencias avanzadas en consejería con mayor responsabilidad clínica.',
     description: 'El Técnico en Consejería en Adicciones CCAAD II actúa con empatía, responsabilidad y compromiso humano, contribuyendo al acompañamiento terapéutico y fortaleciendo procesos de recuperación desde una atención ética, organizada y centrada en la dignidad de la persona.',
@@ -150,6 +215,13 @@ export const certificationsFull = [
       'Responsabilidad Profesional y Ética'
     ],
     technicalDescription: 'Estructurado sobre el TIP 64, el CCAAD II profundiza las competencias clínicas con énfasis en la evaluación integral, planificación de tratamiento centrada en la persona y coordinación de equipos. Desarrolla habilidades avanzadas de consejería y gestión de casos.',
+    requirements: [
+      'Título o diploma de CCAAD I o equivalente',
+      '2 años de experiencia mínima como CCAAD I',
+      '3 avales profesionales',
+      'Firma del código de ética',
+      'Aprobación del examen CCAAD II'
+    ],
     competencies: {
       saberConocer: [
         'Comprensión del trastorno por uso de sustancias desde un enfoque biopsicosocial',
@@ -176,6 +248,7 @@ export const certificationsFull = [
     code: 'CCAAD III',
     name: 'Consejero en Adicciones Nivel III',
     standard: 'TIP 52',
+    basedOn: 'Basados en el Enfoque Centrado en la Persona del TIP 52',
     fee: 100,
     summary: 'Nivel clínico avanzado con evaluación biopsicosocial y manejo de casos complejos.',
     description: 'El profesional CCAAD III actúa como líder en procesos de acompañamiento avanzado no clínico, promoviendo la recuperación integral, el fortalecimiento de redes de apoyo y la atención centrada en la persona, siempre dentro de los límites éticos y técnicos de su profesión.',
@@ -188,6 +261,13 @@ export const certificationsFull = [
       'Responsabilidad Profesional y Ética'
     ],
     technicalDescription: 'Fundamentado en el TIP 52 (Treatment Improvement Protocol 52), este nivel enfatiza la atención centrada en la recuperación, el bienestar y la dignidad. El CCAAD III integra enfoques neurobiológicos, psicológicos y sociales para la planificación terapéutica avanzada.',
+    requirements: [
+      'Título universitario en Psicología, Trabajo Social o carrera afín',
+      '2 años de experiencia mínima como CCAAD II',
+      '3 avales profesionales',
+      'Firma del código de ética',
+      'Aprobación del examen CCAAD III'
+    ],
     competencies: {
       saberConocer: [
         'Comprensión avanzada del trastorno por uso de sustancias desde enfoques neurobiológicos, psicológicos y sociales',
@@ -214,6 +294,7 @@ export const certificationsFull = [
     code: 'CCAAD IV',
     name: 'Supervisor Clínico en Adicciones',
     standard: 'TAP 21 + TIP 64/52',
+    basedOn: 'Integrando los Estándares Internacionales TAP 21, TIP 64 y TIP 52',
     fee: 125,
     summary: 'Máximo nivel. Supervisión clínica, liderazgo de equipos y garantía de calidad.',
     description: 'El profesional CCAAD IV posee capacidades avanzadas para supervisar, formar y fortalecer equipos de consejería y atención en adicciones, garantizando calidad técnica, ética profesional y desarrollo continuo del talento humano dentro de modelos orientados a la recuperación.',
@@ -227,6 +308,13 @@ export const certificationsFull = [
       'Evaluación y Monitoreo del Desempeño'
     ],
     technicalDescription: 'Integrando los estándares TAP 21, TIP 64 y TIP 52, el CCAAD IV representa la culminación del desarrollo profesional. Este nivelmasteriza las competencias de supervisión clínica, gestión del alcance profesional, desarrollo de relaciones de supervisión y evaluación del desempeño.',
+    requirements: [
+      'Título universitario avanzado en Salud Mental o carrera afín',
+      '3 años de experiencia mínima como CCAAD III',
+      '3 avales profesionales de supervisors certificados',
+      'Firma del código de ética',
+      'Aprobación del examen CCAAD IV'
+    ],
     competencies: {
       saberConocer: [
         'Comprensión de los fundamentos y modelos de supervisión clínica en adicciones',

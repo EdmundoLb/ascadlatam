@@ -265,6 +265,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                 <h4>Ejes de Formación</h4>
               </div>
+              <p v-if="certData.basedOn" class="based-on-text">{{ certData.basedOn }}</p>
               <div class="axes-tags">
                 <span v-for="(axis, i) in certData.trainingAxes" :key="i" class="axis-tag">{{ axis }}</span>
               </div>
@@ -1249,6 +1250,13 @@ const consortium = [
   font-weight: 500;
 }
 .axis-tag:hover { border-color: var(--accent); background: var(--accent-light); }
+.based-on-text {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
 
 @media (max-width: 768px) {
   .cert-modal { max-height: 100vh; border-radius: 0; }
