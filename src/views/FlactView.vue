@@ -35,25 +35,25 @@
           </div>
 
           <div class="flact-card">
-            <div class="flact-icon">✅</div>
+            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <h3>Estándares de Calidad</h3>
             <p>Las comunidades terapéuticas afiliadas a FLACT operan bajo protocolos éticos y clínicos alineados con estándares internacionales.</p>
           </div>
 
           <div class="flact-card">
-            <div class="flact-icon">📚</div>
+            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg></div>
             <h3>Formación Continua</h3>
             <p>Programas de capacitación y actualización para profesionales de las comunidades terapéuticas asociadas a la federación.</p>
           </div>
 
           <div class="flact-card">
-            <div class="flact-icon">🏆</div>
+            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
             <h3>Certificación Compartida</h3>
             <p>Los profesionales formados en comunidades FLACT pueden acceder a la certificación ASCAD LATAM mediante un proceso simplificado y tarifas preferenciales.</p>
           </div>
 
           <div class="flact-card">
-            <div class="flact-icon">🎯</div>
+            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
             <h3>Investigación y Ciencia</h3>
             <p>Promoción de congresos, conferencias y espacios de intercambio científico para innovar y mejorar prácticas en la región.</p>
           </div>
@@ -214,7 +214,21 @@ import logoFlact from '/images/FLACT.png'
   box-shadow: var(--shadow-lg);
   border-color: var(--accent-light);
 }
-.flact-icon { font-size: 2rem; margin-bottom: 16px; }
+.flact-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-light);
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+  color: var(--accent-dark);
+}
+.flact-icon svg {
+  width: 24px;
+  height: 24px;
+}
 .flact-card h3 { color: var(--text); margin-bottom: 10px; font-size: 1.125rem; }
 .flact-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.7; }
 
