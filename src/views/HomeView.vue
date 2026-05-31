@@ -49,9 +49,8 @@
               <div class="stat-info">
                 <div class="stat-number-row">
                   <span class="stat-number">{{ stat.num }}</span>
-                  <span class="stat-short-label">{{ stat.shortLabel }}</span>
+                  <span class="stat-short-label" :title="stat.tooltip">{{ stat.shortLabel }}</span>
                 </div>
-                <span class="stat-label">{{ stat.label }}</span>
                 <span v-if="stat.desc" class="stat-desc">{{ stat.desc }}</span>
               </div>
             </div>
@@ -457,7 +456,26 @@ onMounted(() => {
 .stat-info { display: flex; flex-direction: column; gap: 2px; }
 .stat-number-row { display: flex; align-items: baseline; gap: 8px; }
 .stat-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); line-height: 1; font-family: var(--font-display); }
-.stat-short-label { font-family: var(--font-mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-dark); background: var(--accent-light); padding: 3px 8px; border-radius: var(--radius-sm); }
+.stat-short-label { font-family: var(--font-mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-dark); background: var(--accent-light); padding: 3px 8px; border-radius: var(--radius-sm); cursor: help; position: relative; }
+.stat-short-label:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--white);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: .7rem;
+  font-weight: 400;
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity .2s;
+  pointer-events: none;
+}
+.stat-short-label:hover::after { opacity: 1; }
 .stat-label { font-size: .875rem; color: var(--text-secondary); font-weight: 500; }
 .stat-desc { font-size: .8125rem; color: var(--text-muted); margin-top: 4px; }
 

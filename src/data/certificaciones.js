@@ -24,8 +24,8 @@ export const levelIcons = {
 }
 
 export const stats = [
-  { num: '12', label: 'Funciones del Consejero', shortLabel: 'TAP 21', desc: 'Estándar internacional que guía las competencias profesionales en adicciones' },
-  { num: '64', label: 'Guía de Tratamiento', shortLabel: 'TIP 64', desc: 'Base científica y metodológica adaptada a la realidad latinoamericana' },
-  { num: '52', label: 'Enfoque en Personas', shortLabel: 'TIP 52', desc: 'Atención centrada en la recuperación, el bienestar y la dignidad' },
-  { num: '6', label: 'Niveles Progresivos', shortLabel: 'Ruta completa', desc: 'Desde Operador Socioterapéutico hasta Supervisor Profesional' },
+  { num: '12', label: '', shortLabel: 'TAP 21', desc: 'Treatment Accessibility Protocol 21 — 12 funciones internacionales para conselheiros', tooltip: 'Treatment Accessibility Protocol 21' },
+  { num: '64', label: '', shortLabel: 'TIP 64', desc: 'Treatment Improvement Protocol 64 — Base científica e metodológica para Latino-América', tooltip: 'Treatment Improvement Protocol 64' },
+  { num: '52', label: '', shortLabel: 'TIP 52', desc: 'Treatment Improvement Protocol 52 — Atenção centrada na recuperação e dignidade', tooltip: 'Treatment Improvement Protocol 52' },
+  { num: '6', label: '', shortLabel: 'Ruta completa', desc: 'Do Operador Socioterapéutico ao Supervisor Profissional', tooltip: 'Ruta completa de certificación' },
 ]
