@@ -259,6 +259,20 @@
               <p class="profile-text">{{ certData.professionalProfile }}</p>
             </div>
 
+            <!-- Funciones -->
+            <div class="functions-section" v-if="certData.functions?.length">
+              <div class="section-divider">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                <h4>Funciones del {{ certData.name }}</h4>
+              </div>
+              <ul class="functions-list">
+                <li v-for="func in certData.functions" :key="func">
+                  <span class="func-dot"></span>
+                  {{ func }}
+                </li>
+              </ul>
+            </div>
+
             <!-- Ejes de Formacion -->
             <div class="training-axes" v-if="certData.trainingAxes?.length">
               <div class="section-divider">
@@ -1224,7 +1238,7 @@ const consortium = [
   color: var(--text);
   margin: 0;
 }
-.technical-foundation, .professional-profile, .training-axes, .competencies-section {
+.technical-foundation, .professional-profile, .training-axes, .competencies-section, .functions-section {
   background: var(--bg-light);
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -1256,6 +1270,30 @@ const consortium = [
   font-style: italic;
   margin-bottom: 12px;
   padding-left: 4px;
+}
+.functions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.functions-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-light);
+}
+.functions-list li:last-child { border-bottom: none; }
+.func-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 7px;
 }
 
 @media (max-width: 768px) {
