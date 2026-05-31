@@ -37,7 +37,8 @@
             </router-link>
           </div>
         </div>
-        <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.15s">
+<div class="hero-stats animate-fade-in-up" style="animation-delay: 0.15s">
+          <div class="stats-subtitle">Certificaciones Internacionales basadas en TAP 21, TIP 64 y TIP 52</div>
           <div class="stats-grid">
             <div v-for="stat in stats" :key="stat.label" class="stat-card">
               <div class="stat-icon">
@@ -51,10 +52,9 @@
                   <span class="stat-number">{{ stat.num }}</span>
                   <span class="stat-short-label" :title="stat.tooltip">{{ stat.shortLabel }}</span>
                 </div>
-                <span v-if="stat.desc" class="stat-desc">{{ stat.desc }}</span>
               </div>
             </div>
-        </div>
+          </div>
           <div class="scroll-indicator">
             <span class="scroll-text">Descubrí más</span>
             <div class="scroll-arrow">
@@ -100,6 +100,39 @@
           <div v-for="(item, i) in origins" :key="i" class="timeline-item">
             <div class="timeline-year">{{ item.year }}</div>
             <p v-for="(line, j) in item.label.split('<br>')" :key="j">{{ line }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTÁNDARES INTERNACIONALES -->
+  <section class="section standards-section animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Estándares Internacionales</div>
+        <h2>Fundamentos técnicos de<br><em class="gold">nuestra certificación</em></h2>
+      </div>
+      <div class="standards-grid">
+        <div class="standard-card">
+          <div class="standard-badge">TAP 21</div>
+          <div class="standard-content">
+            <h4>Treatment Accessibility Protocol 21</h4>
+            <p>Establece las 12 funciones esenciales del consejero profesional en adicciones, proporcionando un marco de competencias reconocido internacionalmente para la práctica clínica y el desarrollo profesional.</p>
+          </div>
+        </div>
+        <div class="standard-card">
+          <div class="standard-badge">TIP 64</div>
+          <div class="standard-content">
+            <h4>Treatment Improvement Protocol 64</h4>
+            <p>Proporciona base científica e metodológica para la implementación de servicios de apoyo entre pares y recuperación, adaptados a la realidad cultural y social de América Latina.</p>
+          </div>
+        </div>
+        <div class="standard-card">
+          <div class="standard-badge">TIP 52</div>
+          <div class="standard-content">
+            <h4>Treatment Improvement Protocol 52</h4>
+            <p>Guía especializada en la supervisión clínica y el desarrollo profesional continuo del consejero en adicciones.</p>
           </div>
         </div>
       </div>
@@ -478,6 +511,20 @@ onMounted(() => {
 .stat-short-label:hover::after { opacity: 1; }
 .stat-label { font-size: .875rem; color: var(--text-secondary); font-weight: 500; }
 .stat-desc { font-size: .8125rem; color: var(--text-muted); margin-top: 4px; }
+.stats-subtitle {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  text-align: center;
+  margin-bottom: 20px;
+}
 
 /* ABOUT */
 .about-section { background: var(--white); }
@@ -526,7 +573,7 @@ onMounted(() => {
 .about-timeline {
   grid-column: 1/-1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   background: var(--surface);
   border: 1px solid var(--line-light);
@@ -544,6 +591,53 @@ onMounted(() => {
   margin-bottom: 8px;
 }
 .timeline-item p { font-size: .8125rem; color: var(--text-muted); line-height: 1.5; }
+
+/* STANDARDS SECTION */
+.standards-section { background: var(--white); }
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.standard-card {
+  background: var(--bg-light);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  transition: all .3s ease;
+}
+.standard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-light);
+}
+.standard-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--primary);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+.standard-content h4 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.standard-content p {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
 
 /* PATH */
 .path-section { background: var(--bg-light); }

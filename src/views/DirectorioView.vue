@@ -2,151 +2,221 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Registro oficial</div>
-        <h1>Directorio de<br><em class="gold">certificados</em></h1>
+        <div class="eyebrow">Información</div>
+        <h1>Países miembros del<br><em class="gold">consorcio</em></h1>
         <p class="lead" style="margin-top:18px;">
-          Verificá la autenticidad de cualquier certificación emitida por ASCAD LATAM.
-          Cada entrada incluye un código único de verificación.
+          Conocé los países que forman parte de ASCAD LATAM y las organizaciones que respaldan la certificación en adicciones en América Latina.
         </p>
       </div>
     </section>
 
-    <section class="section">
+    <!-- PAÍSES MIEMBROS -->
+    <section class="section countries-section">
       <div class="container">
-        <div class="controls">
-          <input
-            v-model="search"
-            class="dir-input"
-            type="text"
-            placeholder="Buscar por nombre o código…"
-          />
-          <select v-model="filterCert" class="dir-select">
-            <option value="">Todas las certificaciones</option>
-            <option v-for="c in certOptions" :key="c">{{ c }}</option>
-          </select>
-          <select v-model="filterCountry" class="dir-select">
-            <option value="">Todos los países</option>
-            <option v-for="p in countryOptions" :key="p">{{ p }}</option>
-          </select>
+        <div class="section-header">
+          <div class="eyebrow">América Latina</div>
+          <h2>Países <em class="gold">participantes</em></h2>
         </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Profesional</th>
-                <th>Certificación</th>
-                <th>País</th>
-                <th>Vigencia</th>
-                <th>Código</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="row in filtered" :key="row.id">
-                <td class="td-name">{{ row.nombre }}</td>
-                <td><span class="cert-badge">{{ row.cert }}</span></td>
-                <td>{{ row.pais }}</td>
-                <td class="td-date">{{ row.vigencia }}</td>
-                <td><span class="dir-code">{{ row.codigo }}</span></td>
-                <td>
-                  <span class="status-pill" :class="`status-${row.estado}`">
-                    {{ row.estado.charAt(0).toUpperCase() + row.estado.slice(1) }}
-                  </span>
-                </td>
-              </tr>
-              <tr v-if="filtered.length === 0">
-                <td colspan="6" class="no-results">No se encontraron resultados para la búsqueda.</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="countries-grid">
+          <div v-for="country in countries" :key="country.name" class="country-card">
+            <div class="country-flag">{{ country.flag }}</div>
+            <div class="country-info">
+              <h4>{{ country.name }}</h4>
+              <p>{{ country.description }}</p>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <p class="table-note">
-          Este directorio es de carácter público. Los datos son actualizados periódicamente por ASCAD LATAM.
-          Para reportar inconsistencias, escribí a <a href="mailto:info@ascadlatam.org">info@ascadlatam.org</a>.
-        </p>
+    <!-- SOBRE FLACT -->
+    <section class="section flact-section">
+      <div class="container">
+        <div class="flact-inner">
+          <div class="flact-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            FLACT
+          </div>
+          <h2>Federación Latinoamericana de<br><em class="gold">Comunidades Terapéuticas</em></h2>
+          <p>FLACT es la Federación Latinoamericana de Comunidades Terapéuticas, una organización que agrupa y representa a comunidades terapéuticas en toda América Latina, promoviendo estándares de calidad en el tratamiento de adicciones y el desarrollo profesional continuo de quienes trabajan en este campo.</p>
+          <div class="flact-features">
+            <div class="flact-feature">
+              <span class="feature-icon">🌎</span>
+              <div>
+                <strong>Cobertura Regional</strong>
+                <p>Presencia en más de 10 países de América Latina con comunidades terapéuticas asociadas.</p>
+              </div>
+            </div>
+            <div class="flact-feature">
+              <span class="feature-icon">📋</span>
+              <div>
+                <strong>Estándares de Calidad</strong>
+                <p>Lineamientos y protocolos para garantizar la calidad en el tratamiento de adicciones.</p>
+              </div>
+            </div>
+            <div class="flact-feature">
+              <span class="feature-icon">🤝</span>
+              <div>
+                <strong>Trabajo Colaborativo</strong>
+                <p>Red de organizaciones y profesionales unidos para mejorar la atención en adicciones.</p>
+              </div>
+            </div>
+          </div>
+          <router-link to="/flact" class="btn btn-gold">Conocer más sobre FLACT</router-link>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq-section">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="eyebrow">Preguntas frecuentes</div>
+          <h2>Preguntas <em class="gold">frecuentes</em></h2>
+        </div>
+        <div class="faq-list">
+          <div v-for="(faq, i) in faqs" :key="i" class="faq-item" :class="{ 'is-open': openFaq === i }">
+            <button class="faq-question" @click="toggleFaq(i)">
+              <span>{{ faq.question }}</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>{{ faq.answer }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
-const search = ref('')
-const filterCert = ref('')
-const filterCountry = ref('')
+const openFaq = ref(null)
 
-const certOptions = ['OST', 'ER', 'CCAAD I', 'CCAAD II', 'CCAAD III', 'CCAAD IV']
-const countryOptions = ['Argentina', 'Brasil', 'Chile', 'Colombia', 'Costa Rica', 'Ecuador', 'México', 'Panamá', 'Paraguay', 'Perú', 'Uruguay']
+function toggleFaq(index) {
+  openFaq.value = openFaq.value === index ? null : index
+}
 
-// Datos de ejemplo — en producción vendrán de la API backend
-const records = ref([
-  { id: 1, nombre: 'Nombre Apellido', cert: 'CCAAD II',  pais: 'Costa Rica', vigencia: 'Ene 2025 – Ene 2027', codigo: 'ASC-2025-00142', estado: 'vigente'    },
-  { id: 2, nombre: 'Nombre Apellido', cert: 'CCAAD III', pais: 'México',     vigencia: 'Mar 2024 – Mar 2026', codigo: 'ASC-2024-00098', estado: 'vigente'    },
-  { id: 3, nombre: 'Nombre Apellido', cert: 'OST',       pais: 'Colombia',   vigencia: 'Jun 2023 – Jun 2025', codigo: 'ASC-2023-00054', estado: 'vencido'    },
-  { id: 4, nombre: 'Nombre Apellido', cert: 'ER', pais: 'Argentina',  vigencia: 'Sep 2024 – Sep 2026', codigo: 'ASC-2024-00201', estado: 'vigente'    },
-  { id: 5, nombre: 'Nombre Apellido', cert: 'CCAAD I',   pais: 'Perú',       vigencia: 'Nov 2023 – Nov 2025', codigo: 'ASC-2023-00177', estado: 'suspendido' },
-])
+const countries = [
+  { name: 'Costa Rica', flag: '🇨🇷', description: 'Sede del consorcio ASCAD LATAM. Pionero en la creación del modelo de certificación en la región.' },
+  { name: 'Paraguay', flag: '🇵🇾', description: 'Participación activa en la red de profesionales certificados y alianzas de formación.' },
+  { name: 'Brasil', flag: '🇧🇷', description: 'Certificaciones disponibles en portugués. Gran cobertura de profesionales en el sector.' },
+  { name: 'Argentina', flag: '🇦🇷', description: 'Desarrollo de programas de certificación y formación continua.' },
+  { name: 'México', flag: '🇲🇽', description: 'Expansión de los estándares de certificación en América del Norte.' },
+  { name: 'Colombia', flag: '🇨🇴', description: 'Integración de comunidades terapéuticas y programas de formación.' },
+]
 
-const filtered = computed(() => {
-  const q = search.value.toLowerCase().trim()
-  return records.value.filter(r => {
-    const matchQ = !q || r.nombre.toLowerCase().includes(q) || r.codigo.toLowerCase().includes(q)
-    const matchC = !filterCert.value || r.cert === filterCert.value
-    const matchP = !filterCountry.value || r.pais === filterCountry.value
-    return matchQ && matchC && matchP
-  })
-})
+const faqs = [
+  { question: '¿Qué es ASCAD LATAM?', answer: 'ASCAD LATAM es el Consorcio Latinoamericano de Certificación en Adicciones, una organización que establece estándares internacionales para la formación y certificación de profesionales en el campo de las adicciones en toda América Latina.' },
+  { question: '¿Cuáles son los niveles de certificación disponibles?', answer: 'Existen 6 niveles de certificación: OST (Operador Socioterapéutico), ER (Entrenador de Recuperación), CCAAD I, CCAAD II, CCAAD III y CCAAD IV (Supervisor Profesional). Cada nivel tiene requisitos específicos de formación y experiencia.' },
+  { question: '¿Las certificaciones ASCAD LATAM son reconocidas internacionalmente?', answer: 'Sí, las certificaciones están basadas en estándares internacionales como TAP 21, TIP 64 y TIP 52 de SAMHSA (Substance Abuse and Mental Health Services Administration) de Estados Unidos.' },
+  { question: '¿Cuánto tiempo es válida la certificación?', answer: 'La certificación ASCAD LATAM tiene validez de 2 años (bianual). Para renovar es necesario acumular horas de educación continua específicas por nivel y presentar la documentación de renovación.' },
+  { question: '¿Puedo trabajar en cualquier país de América Latina con la certificación?', answer: 'La certificación ASCAD LATAM está reconocida en los países miembros del Consorcio. Cada país puede tener requisitos adicionales de validación local. Se recomienda consultar con la oficina de certificación de su país.' },
+]
 </script>
 
 <style scoped>
-.controls {
-  display: grid; grid-template-columns: 1fr auto auto;
-  gap: 12px; margin-bottom: 24px;
+.countries-section { background: var(--white); }
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
 }
-.dir-input, .dir-select {
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--radius-sm); color: var(--text);
-  font-family: var(--font-body); font-size: .88rem;
-  padding: 12px 16px; outline: none; transition: border-color .2s;
+.country-card {
+  background: var(--bg-light);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: all .3s ease;
 }
-.dir-input:focus, .dir-select:focus { border-color: var(--accent); }
-.dir-input::placeholder { color: var(--text-muted); }
-.dir-select option { background: var(--surface-alt); }
+.country-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-light);
+}
+.country-flag { font-size: 2.5rem; flex-shrink: 0; }
+.country-info h4 { font-size: 1.125rem; color: var(--text); margin-bottom: 8px; }
+.country-info p { font-size: .875rem; color: var(--text-muted); line-height: 1.6; }
 
-.table-wrap {
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--radius-lg); overflow: hidden; overflow-x: auto;
+.flact-section { background: var(--bg-light); }
+.flact-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+.flact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 8px 18px;
+  border-radius: 999px;
+  margin-bottom: 24px;
 }
-table { width: 100%; border-collapse: collapse; min-width: 700px; }
-thead { background: var(--surface-alt); border-bottom: 1px solid var(--line); }
-th {
-  padding: 16px 20px; text-align: left;
-  font-family: var(--font-mono); font-size: .68rem;
-  letter-spacing: .15em; color: var(--accent); text-transform: uppercase;
+.flact-inner h2 { margin-bottom: 20px; }
+.flact-inner > p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 40px; font-size: 1rem; }
+.flact-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  text-align: left;
+  margin-bottom: 40px;
 }
-td { padding: 16px 20px; font-size: .9rem; border-bottom: 1px solid var(--line); }
-tbody tr:last-child td { border-bottom: none; }
-tbody tr { transition: background .15s; }
-tbody tr:hover { background: var(--surface-alt); }
-.td-name { font-weight: 500; color: var(--text); }
-.td-date { font-size: .82rem; color: var(--text-muted); }
-.dir-code { font-family: var(--font-mono); font-size: .78rem; color: var(--text-muted); }
-.no-results { text-align: center; color: var(--text-muted); padding: 40px; font-style: italic; }
+.flact-feature { display: flex; gap: 14px; align-items: flex-start; }
+.feature-icon { font-size: 1.5rem; flex-shrink: 0; }
+.flact-feature strong { display: block; color: var(--text); font-size: .9375rem; margin-bottom: 4px; }
+.flact-feature p { font-size: .8125rem; color: var(--text-muted); line-height: 1.6; }
 
-.status-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: .78rem; font-weight: 600; padding: 5px 12px; border-radius: 999px;
+.faq-section { background: var(--white); }
+.faq-list { max-width: 800px; margin: 48px auto 0; }
+.faq-item {
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
 }
-.status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.status-vigente    { background: rgba(52,211,153,.1); color: #34d399; }
-.status-vencido    { background: rgba(251,191,36,.1);  color: #fbbf24; }
-.status-suspendido { background: rgba(239,68,68,.1);   color: #ef4444; }
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  font-size: .9375rem;
+  font-weight: 500;
+  color: var(--text);
+  text-align: left;
+  transition: background .2s;
+}
+.faq-question:hover { background: var(--bg-light); }
+.faq-icon { color: var(--accent-dark); transition: transform .3s; flex-shrink: 0; }
+.is-open .faq-icon { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+}
+.is-open .faq-answer { max-height: 200px; }
+.faq-answer p { padding: 0 24px 20px; font-size: .875rem; color: var(--text-muted); line-height: 1.7; }
 
-.table-note { margin-top: 16px; font-size: .82rem; color: var(--text-muted); }
-.table-note a { color: var(--accent); text-decoration: underline; }
-
-@media (max-width: 768px) { .controls { grid-template-columns: 1fr; } }
+@media (max-width: 900px) {
+  .countries-grid { grid-template-columns: repeat(2, 1fr); }
+  .flact-features { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .countries-grid { grid-template-columns: 1fr; }
+  .country-card { flex-direction: column; }
+}
 </style>

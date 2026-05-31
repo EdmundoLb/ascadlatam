@@ -5,7 +5,7 @@
         <div class="eyebrow">Certificaciones disponibles</div>
         <h1>Cada nivel,<br>un estándar <em class="gold">distinto</em></h1>
         <p class="lead" style="margin-top:20px;">
-          Seis niveles de certificación progresivos, desde el acompañamiento inicial hasta la supervisión profesional especializada. Todos alineados con estándares internacionales TAP 21 y el modelo de las 12 funciones del consejero.
+          Seis niveles de certificación progresivos, desde el acompañamiento inicial hasta la supervisión profesional especializada. Todos alineados con estándares internacionales adaptados culturalmente a la región.
         </p>
       </div>
     </section>
@@ -259,20 +259,6 @@
               <p class="profile-text">{{ certData.professionalProfile }}</p>
             </div>
 
-            <!-- Funciones -->
-            <div class="functions-section" v-if="certData.functions?.length">
-              <div class="section-divider">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <h4>Funciones del {{ certData.name }}</h4>
-              </div>
-              <ul class="functions-list">
-                <li v-for="func in certData.functions" :key="func">
-                  <span class="func-dot"></span>
-                  {{ func }}
-                </li>
-              </ul>
-            </div>
-
             <!-- Ejes de Formacion -->
             <div class="training-axes" v-if="certData.trainingAxes?.length">
               <div class="section-divider">
@@ -462,7 +448,7 @@ function getLevelIcon(code) {
 
 const comparisonData = [
   { code: 'OST',      name: 'Operador Socioterapéutico',       desc: 'Nivel inicial de acompañamiento supervisado',     formacion: '80h',    experiencia: '1.000h',  supervision: '100h',    fee: 30,  highlight: false },
-  { code: 'ER',       name: 'Entrenador de Recuperación',       desc: 'Apoyo desde la experiencia vivida en recuperación', formacion: '80h',    experiencia: '80h',     supervision: '—',      fee: 30,  highlight: false },
+  { code: 'ER',       name: 'Entrenador de Recuperación',       desc: 'Apoyo desde la experiencia vivida en recuperación', formacion: '80h',    experiencia: '100h',    supervision: '100h',   fee: 30,  highlight: false },
   { code: 'CCAAD I',  name: 'Consejero Asociado Junior',       desc: 'Primer nivel técnico profesional',                formacion: '120h',   experiencia: '1.500h',  supervision: '60h',    fee: 50,  highlight: false },
   { code: 'CCAAD II', name: 'Consejero Certificado',          desc: 'Competencias avanzadas en consejería',            formacion: '150h',   experiencia: '2.000h',  supervision: '96h',    fee: 75,  highlight: false },
   { code: 'CCAAD III',name: 'Consejero Senior',               desc: 'Nivel avanzado profesional con autonomía',          formacion: '170h',   experiencia: '3.000h',  supervision: '120h',   fee: 100, highlight: true  },
@@ -1238,7 +1224,7 @@ const consortium = [
   color: var(--text);
   margin: 0;
 }
-.technical-foundation, .professional-profile, .training-axes, .competencies-section, .functions-section {
+.technical-foundation, .professional-profile, .training-axes, .competencies-section {
   background: var(--bg-light);
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -1270,30 +1256,6 @@ const consortium = [
   font-style: italic;
   margin-bottom: 12px;
   padding-left: 4px;
-}
-.functions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.functions-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: .875rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--line-light);
-}
-.functions-list li:last-child { border-bottom: none; }
-.func-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-  margin-top: 7px;
 }
 
 @media (max-width: 768px) {

@@ -26,10 +26,10 @@ const routes = [
     meta: { title: 'FLACT - Federación Latinoamericana de Comunidades Terapéuticas | ASCAD LATAM' }
   },
   {
-    path: '/aliados',
-    name: 'aliados',
-    component: () => import('@/views/AliadosView.vue'),
-    meta: { title: 'Aliados Estratégicos - Universidad Gestalt y Aforind | ASCAD LATAM' }
+    path: '/formacion',
+    name: 'formacion',
+    component: () => import('@/views/FormacionView.vue'),
+    meta: { title: 'Educación y Formación Continua | ASCAD LATAM' }
   },
   {
     path: '/blog',
@@ -47,7 +47,7 @@ const routes = [
     path: '/directorio',
     name: 'directorio',
     component: () => import('@/views/DirectorioView.vue'),
-    meta: { title: 'Directorio de Certificados | ASCAD LATAM' }
+    meta: { title: 'Directorio | ASCAD LATAM' }
   },
   {
     path: '/:pathMatch(.*)*',

@@ -2,7 +2,6 @@ export const origins = [
   { year: '2004', label: 'Creación del consorcio<br>en Costa Rica' },
   { year: '2019', label: 'Evolución formal<br>a ASCAD LATAM' },
   { year: 'ES + PT', label: 'Certificaciones en<br>español y portugués' },
-  { year: 'TAP 21', label: 'Alineados con<br>estándares internacionales' },
 ]
 
 export const levels = [
@@ -24,8 +23,8 @@ export const levelIcons = {
 }
 
 export const stats = [
-  { num: '12', label: '', shortLabel: 'TAP 21', desc: 'Treatment Accessibility Protocol 21 — 12 funciones internacionales para conselheiros', tooltip: 'Treatment Accessibility Protocol 21' },
-  { num: '64', label: '', shortLabel: 'TIP 64', desc: 'Treatment Improvement Protocol 64 — Base científica e metodológica para Latino-América', tooltip: 'Treatment Improvement Protocol 64' },
-  { num: '52', label: '', shortLabel: 'TIP 52', desc: 'Treatment Improvement Protocol 52 — Atenção centrada na recuperação e dignidade', tooltip: 'Treatment Improvement Protocol 52' },
-  { num: '6', label: '', shortLabel: 'Ruta completa', desc: 'Do Operador Socioterapéutico ao Supervisor Profissional', tooltip: 'Ruta completa de certificación' },
+  { num: '21', label: '', shortLabel: 'TAP 21', tooltip: 'Treatment Accessibility Protocol 21' },
+  { num: '64', label: '', shortLabel: 'TIP 64', tooltip: 'Treatment Improvement Protocol 64' },
+  { num: '52', label: '', shortLabel: 'TIP 52', tooltip: 'Treatment Improvement Protocol 52' },
+  { num: '6', label: '', shortLabel: 'Ruta completa', tooltip: 'Ruta completa de certificación' },
 ]

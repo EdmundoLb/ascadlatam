@@ -93,10 +93,10 @@ const sending = ref(false)
 const message = ref(null)
 
 const contactItems = [
-  { icon: '✉️', label: 'Correo electrónico', value: 'info@ascadlatam.org' },
-  { icon: '📱', label: 'WhatsApp / Teléfono', value: '+00 0000 0000' },
-  { icon: '🌎', label: 'Cobertura',            value: 'América Latina y Brasil' },
-  { icon: '🕐', label: 'Horario de atención',  value: 'Lun – Vie · 8:00 – 17:00 (hora Costa Rica)' },
+  { icon: '👤', label: 'Gonzalo Esquivel (Costa Rica)', value: '+506 8374 3617 · ascadcr@gmail.com' },
+  { icon: '👤', label: 'Adriano Shuster (Paraguay)', value: '0984430915 · adrianoschuster2014@gmail.com' },
+  { icon: '🌎', label: 'Cobertura', value: 'América Latina y Brasil' },
+  { icon: '🕐', label: 'Horario de atención', value: 'Lun – Vie · 8:00 – 17:00 (hora Costa Rica)' },
 ]
 
 async function handleSubmit(event) {

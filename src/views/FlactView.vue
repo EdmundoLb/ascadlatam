@@ -160,7 +160,7 @@
           <p>Indicá los datos de tu organización en el formulario de solicitud para acceder a los beneficios de la alianza FLACT-ASCAD LATAM.</p>
           <div class="cta-buttons">
             <router-link to="/solicitud" class="btn btn-gold btn-lg">Iniciar solicitud con beneficio FLACT</router-link>
-            <router-link to="/aliados" class="btn btn-outline btn-lg">Ver todos los aliados</router-link>
+            <router-link to="/formacion" class="btn btn-outline btn-lg">Ver programas de formación</router-link>
           </div>
         </div>
       </div>
