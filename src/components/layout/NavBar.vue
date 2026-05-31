@@ -18,7 +18,7 @@
         <router-link to="/certificaciones">Certificaciones</router-link>
         <router-link to="/flact">FLACT</router-link>
         <router-link to="/formacion">Formación Académica</router-link>
-        <router-link to="/blog">Centro de Conocimiento</router-link>
+        <router-link to="/conocimiento">Centro de Conocimiento</router-link>
         <router-link to="/directorio">Directorio</router-link>
         <router-link to="/contacto">Contacto</router-link>
       </nav>
