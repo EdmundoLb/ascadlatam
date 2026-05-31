@@ -76,8 +76,9 @@
                   <span v-if="errors[`${cert.code}-documento`]" class="field-error">{{ errors[`${cert.code}-documento`] }}</span>
                 </div>
                 <div class="form-group">
-                  <label>Fecha de nacimiento *</label>
+                  <label for="fecha_nacimiento">Fecha de nacimiento *</label>
                   <input
+                    id="fecha_nacimiento"
                     type="date"
                     name="fecha_nacimiento"
                     required
@@ -156,7 +157,7 @@
                   <label>{{ horas.label }}</label>
                   <input type="number" :name="horas.name" :placeholder="horas.placeholder" min="0" />
                 </div>
-                <div class="form-group" v-if="cert.code === 'ER'">
+                <div class="form-group" v-if="cert.code === 'EPR'">
                   <label>Años en proceso de recuperación *</label>
                   <input type="number" name="anios_recuperacion" required placeholder="Mínimo 2 años" min="2" />
                 </div>
@@ -251,8 +252,8 @@ const certs = [
     docs: ['Copia de documento de identidad','Certificado de estudios (secundaria)','Certificados de formación (80h)','Constancia de experiencia supervisada (1.000h)','Constancia de entrenamiento práctico (100h)','Tres (3) cartas de referencia profesional','Código de ética firmado'],
   },
   {
-    code: 'ER', fee: 30,
-    name: 'Entrenador de Recuperación',
+    code: 'EPR', fee: 30,
+    name: 'Entrenador de Pares en Recuperación',
     description: 'Para personas con experiencia vivida en recuperación que brindan apoyo desde un enfoque no clínico y empático.',
     needsDegree: false,
     horasFields: [
@@ -551,8 +552,8 @@ function validateAllFields(form, code) {
   padding: 16px 20px; border-radius: var(--radius-sm);
   font-size: .9rem; font-weight: 500;
 }
-.form-msg.success { background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); color: #34d399; }
-.form-msg.error   { background: rgba(239,68,68,.1);  border: 1px solid rgba(239,68,68,.3);  color: #ef4444;  }
+.form-msg.success { background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); color: var(--success); }
+.form-msg.error   { background: rgba(239,68,68,.1);  border: 1px solid rgba(239,68,68,.3);  color: var(--danger);  }
 
 button:disabled { opacity: .6; cursor: not-allowed; }
 

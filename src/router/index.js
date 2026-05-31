@@ -50,6 +50,18 @@ const routes = [
     meta: { title: 'Directorio | ASCAD LATAM' }
   },
   {
+    path: '/blog',
+    name: 'blog',
+    component: () => import('@/views/BlogView.vue'),
+    meta: { title: 'Blog | ASCAD LATAM' }
+  },
+  {
+    path: '/aliados',
+    name: 'aliados',
+    component: () => import('@/views/AliadosView.vue'),
+    meta: { title: 'Aliados Estratégicos | ASCAD LATAM' }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/views/NotFoundView.vue'),

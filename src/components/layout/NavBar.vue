@@ -19,6 +19,7 @@
         <router-link to="/flact">FLACT</router-link>
         <router-link to="/formacion">Formación Académica</router-link>
         <router-link to="/conocimiento">Centro de Conocimiento</router-link>
+        <router-link to="/aliados">Aliados</router-link>
         <router-link to="/directorio">Directorio</router-link>
         <router-link to="/contacto">Contacto</router-link>
       </nav>
@@ -29,6 +30,7 @@
       </router-link>
 
       <button
+        ref="hamburgerRef"
         class="hamburger"
         @click="toggleMenu"
         :aria-expanded="menuOpen"
@@ -41,24 +43,40 @@
       </button>
     </div>
 
-    <nav id="mobile-menu" class="mobile-menu" :class="{ open: menuOpen }" role="navigation" aria-label="Menú móvil">
-      <router-link to="/" @click="closeMenu">Inicio</router-link>
-      <router-link to="/certificaciones" @click="closeMenu">Certificaciones</router-link>
-      <router-link to="/flact" @click="closeMenu">FLACT</router-link>
-      <router-link to="/formacion" @click="closeMenu">Formación Académica</router-link>
-      <router-link to="/blog" @click="closeMenu">Centro de Conocimiento</router-link>
-      <router-link to="/directorio" @click="closeMenu">Directorio</router-link>
-      <router-link to="/contacto" @click="closeMenu">Contacto</router-link>
-      <router-link to="/solicitud" @click="closeMenu" class="mobile-cta">Iniciar solicitud →</router-link>
+    <div
+      class="mobile-backdrop"
+      :class="{ active: menuOpen }"
+      @click="closeMenu"
+      aria-hidden="true"
+    ></div>
+
+    <nav
+      id="mobile-menu"
+      class="mobile-menu"
+      :class="{ open: menuOpen }"
+      role="navigation"
+      aria-label="Menú móvil"
+      @keydown.escape="closeMenu"
+    >
+      <router-link to="/" @click="closeMenu" tabindex="0">Inicio</router-link>
+      <router-link to="/certificaciones" @click="closeMenu" tabindex="0">Certificaciones</router-link>
+      <router-link to="/flact" @click="closeMenu" tabindex="0">FLACT</router-link>
+      <router-link to="/formacion" @click="closeMenu" tabindex="0">Formación Académica</router-link>
+      <router-link to="/conocimiento" @click="closeMenu" tabindex="0">Centro de Conocimiento</router-link>
+      <router-link to="/aliados" @click="closeMenu" tabindex="0">Aliados</router-link>
+      <router-link to="/directorio" @click="closeMenu" tabindex="0">Directorio</router-link>
+      <router-link to="/contacto" @click="closeMenu" tabindex="0">Contacto</router-link>
+      <router-link to="/solicitud" @click="closeMenu" class="mobile-cta" tabindex="0">Iniciar solicitud →</router-link>
     </nav>
   </header>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 
 const menuOpen = ref(false)
+const hamburgerRef = ref(null)
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
@@ -66,10 +84,18 @@ function toggleMenu() {
 
 function closeMenu() {
   menuOpen.value = false
+  nextTick(() => {
+    hamburgerRef.value?.focus()
+  })
 }
 
-watch(menuOpen, (val) => {
+watch(menuOpen, async (val) => {
   document.body.style.overflow = val ? 'hidden' : ''
+  if (val) {
+    await nextTick()
+    const firstLink = document.querySelector('#mobile-menu a')
+    firstLink?.focus()
+  }
 })
 </script>
 
@@ -84,7 +110,7 @@ watch(menuOpen, (val) => {
   border-radius: var(--radius);
   z-index: 9999;
   font-weight: 600;
-  transition: top .3s;
+  transition: top var(--duration-normal);
 }
 .skip-link:focus { top: 16px; }
 
@@ -119,6 +145,7 @@ watch(menuOpen, (val) => {
   border-radius: 10px;
   overflow: hidden;
   border: 2px solid var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
 .brand-logo svg { width: 52px; height: 52px; }
@@ -133,7 +160,7 @@ watch(menuOpen, (val) => {
   font-size: .625rem;
   font-weight: 500;
   letter-spacing: .2em;
-  color: var(--accent);
+  color: var(--accent-dark);
   text-transform: uppercase;
   padding-top: 3px;
 }
@@ -159,7 +186,7 @@ watch(menuOpen, (val) => {
   color: rgba(255,255,255,0.8);
   padding: 10px 16px;
   border-radius: var(--radius);
-  transition: all .2s ease;
+  transition: all var(--duration-normal);
   text-decoration: none;
 }
 .desktop-nav a:hover {
@@ -184,20 +211,38 @@ watch(menuOpen, (val) => {
   background: none;
   border: none;
   border-radius: var(--radius);
-  transition: background .2s;
+  transition: background var(--duration-normal);
 }
 .hamburger:hover { background: rgba(255,255,255,0.1); }
+.hamburger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .hamburger span {
   display: block;
   width: 22px;
   height: 2px;
   background: var(--white);
   border-radius: 2px;
-  transition: all .3s ease;
+  transition: all var(--duration-normal);
 }
 .hamburger span.active:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .hamburger span.active:nth-child(2) { opacity: 0; }
 .hamburger span.active:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity var(--duration-normal);
+}
+.mobile-backdrop.active {
+  display: block;
+  opacity: 1;
+}
 
 .mobile-menu {
   display: none;
@@ -206,18 +251,35 @@ watch(menuOpen, (val) => {
   border-top: 1px solid rgba(255,255,255,0.1);
   padding: 16px 24px 28px;
   box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 100;
 }
-.mobile-menu.open { display: flex; }
+.mobile-menu.open {
+  display: flex;
+  animation: slideDown var(--duration-normal) ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .mobile-menu a {
   font-size: 1rem;
   font-weight: 500;
   color: rgba(255,255,255,0.8);
   padding: 14px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: color .2s;
+  transition: color var(--duration-fast);
   text-decoration: none;
 }
-.mobile-menu a:hover { color: var(--white); }
+.mobile-menu a:hover,
+.mobile-menu a:focus {
+  color: var(--white);
+  outline: none;
+}
+.mobile-menu a:focus-visible {
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+}
 .mobile-menu a.router-link-exact-active { color: var(--white); font-weight: 600; }
 .mobile-menu .mobile-cta {
   color: var(--accent);

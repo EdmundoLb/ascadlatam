@@ -20,7 +20,11 @@
           </p>
           <div class="contact-items">
             <div v-for="item in contactItems" :key="item.label" class="contact-item">
-              <div class="contact-icon">{{ item.icon }}</div>
+              <div class="contact-icon">
+                <svg v-if="item.icon === 'user'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg v-else-if="item.icon === 'globe'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <svg v-else-if="item.icon === 'clock'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
               <div>
                 <strong>{{ item.label }}</strong>
                 <span>{{ item.value }}</span>
@@ -45,11 +49,14 @@
             <div class="cf-grid">
               <div class="form-group">
                 <label for="nombre">Nombre completo *</label>
-                <input id="nombre" type="text" name="nombre" required placeholder="Tu nombre" />
+                <input id="nombre" type="text" name="nombre" required placeholder="Tu nombre" autofocus />
               </div>
               <div class="form-group">
                 <label for="pais">País</label>
-                <input id="pais" type="text" name="pais" placeholder="Tu país" />
+                <select id="pais" name="pais">
+                  <option value="">Seleccionar país…</option>
+                  <option v-for="p in paises" :key="p">{{ p }}</option>
+                </select>
               </div>
               <div class="form-group form-full">
                 <label for="email">Correo electrónico *</label>
@@ -92,11 +99,17 @@ const formId = import.meta.env.VITE_FORMSPREE_CONTACT_ID
 const sending = ref(false)
 const message = ref(null)
 
+const paises = [
+  'Argentina','Bolivia','Brasil','Chile','Colombia','Costa Rica','Cuba',
+  'Ecuador','El Salvador','Guatemala','Honduras','México','Nicaragua',
+  'Panamá','Paraguay','Perú','República Dominicana','Uruguay','Venezuela','Otro'
+]
+
 const contactItems = [
-  { icon: '👤', label: 'Gonzalo Esquivel (Costa Rica)', value: '+506 8374 3617 · ascadcr@gmail.com' },
-  { icon: '👤', label: 'Adriano Shuster (Paraguay)', value: '0984430915 · adrianoschuster2014@gmail.com' },
-  { icon: '🌎', label: 'Cobertura', value: 'América Latina y Brasil' },
-  { icon: '🕐', label: 'Horario de atención', value: 'Lun – Vie · 8:00 – 17:00 (hora Costa Rica)' },
+  { icon: 'user', label: 'Gonzalo Esquivel (Costa Rica)', value: '+506 8374 3617 · ascadcr@gmail.com' },
+  { icon: 'user', label: 'Adriano Shuster (Paraguay)', value: '0984430915 · adrianoschuster2014@gmail.com' },
+  { icon: 'globe', label: 'Cobertura', value: 'América Latina y Brasil' },
+  { icon: 'clock', label: 'Horario de atención', value: 'Lun – Vie · 8:00 – 17:00 (hora Costa Rica)' },
 ]
 
 async function handleSubmit(event) {
@@ -152,8 +165,8 @@ async function handleSubmit(event) {
 .form-msg {
   padding: 14px 18px; border-radius: var(--radius-sm); font-size: .88rem; font-weight: 500;
 }
-.form-msg.success { background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); color: #34d399; }
-.form-msg.error   { background: rgba(239,68,68,.1);  border: 1px solid rgba(239,68,68,.3);  color: #ef4444; }
+.form-msg.success { background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); color: var(--success); }
+.form-msg.error   { background: rgba(239,68,68,.1);  border: 1px solid rgba(239,68,68,.3);  color: var(--danger); }
 button:disabled { opacity: .6; cursor: not-allowed; }
 
 @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }

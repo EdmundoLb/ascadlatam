@@ -86,8 +86,8 @@ export const certificationsFull = [
     ]
   },
   {
-    code: 'ER',
-    name: 'Entrenador de Recuperación',
+    code: 'EPR',
+    name: 'Entrenador de Pares en Recuperación',
     standard: 'TIP 64',
     basedOn: 'Basados en el TIP 64 de SAMHSA',
     fee: 30,
@@ -111,7 +111,7 @@ export const certificationsFull = [
       '100 horas de práctica supervisada en funciones de acompañamiento y apoyo en recuperación',
       '3 avales profesionales',
       'Firma y compromiso formal con el Código de Ética Profesional',
-      'Aprobación del examen internacional ER (Entrenador de Recuperación)',
+      'Aprobación del examen internacional EPR (Entrenador de Pares en Recuperación)',
       'Ejercicio laboral en el país de origen con al menos un 51% de práctica profesional',
       'Entrega completa de documentación académica y administrativa requerida'
     ],

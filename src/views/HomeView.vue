@@ -281,7 +281,7 @@
 <script setup>
 import { useCertificacionesStore } from '@/stores/certificaciones'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 import { levelIcons } from '@/data/certificaciones'
 
@@ -293,19 +293,28 @@ const observerOptions = {
   rootMargin: '0px 0px -50px 0px'
 }
 
+let scrollObserver = null
+
 onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
+  scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible')
-        observer.unobserve(entry.target)
+        scrollObserver.unobserve(entry.target)
       }
     })
   }, observerOptions)
 
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    observer.observe(el)
+    scrollObserver.observe(el)
   })
+})
+
+onUnmounted(() => {
+  if (scrollObserver) {
+    scrollObserver.disconnect()
+    scrollObserver = null
+  }
 })
 </script>
 
