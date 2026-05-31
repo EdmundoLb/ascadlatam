@@ -45,8 +45,8 @@
       <router-link to="/" @click="closeMenu">Inicio</router-link>
       <router-link to="/certificaciones" @click="closeMenu">Certificaciones</router-link>
       <router-link to="/flact" @click="closeMenu">FLACT</router-link>
-      <router-link to="/formacion" @click="closeMenu">Formación</router-link>
-      <router-link to="/blog" @click="closeMenu">Noticias</router-link>
+      <router-link to="/formacion" @click="closeMenu">Formación Académica</router-link>
+      <router-link to="/blog" @click="closeMenu">Centro de Conocimiento</router-link>
       <router-link to="/directorio" @click="closeMenu">Directorio</router-link>
       <router-link to="/contacto" @click="closeMenu">Contacto</router-link>
       <router-link to="/solicitud" @click="closeMenu" class="mobile-cta">Iniciar solicitud →</router-link>
