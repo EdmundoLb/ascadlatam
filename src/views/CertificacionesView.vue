@@ -234,9 +234,6 @@
         <div class="modal-header">
           <div class="modal-flact">Programa ASCAD LATAM de Formación en Adicciones</div>
           <div class="modal-cert-title">
-            <span v-if="certData?.standard" class="modal-standard-badge" :class="getStandardClass(certData.standard)">
-              {{ certData.standard }}
-            </span>
             <span class="modal-code">{{ certData?.code }}</span>
             <h2>{{ certData?.name }}</h2>
           </div>
@@ -347,14 +344,26 @@ const expandedAxis = ref(null)
 let lastFocusedElement = null
 
 const certData = computed(() => {
-  return certificationsFull.find(c => c.code === activeModal.value) || null
+  const cert = certificationsFull.find(c => c.code === activeModal.value)
+  if (!cert) return null
+  return {
+    ...cert,
+    competencies: transformCompetencies(cert.competencies)
+  }
 })
 
-function getStandardClass(standard) {
-  if (standard.includes('TAP 21')) return 'standard-tap'
-  if (standard.includes('TIP 64')) return 'standard-tip64'
-  if (standard.includes('TIP 52')) return 'standard-tip52'
-  return 'standard-combined'
+function transformCompetencies(comp) {
+  const axes = []
+  if (comp.saberConocer) {
+    axes.push({ axis: 'Saber Conocer', color: '#1565c0', items: comp.saberConocer })
+  }
+  if (comp.saberHacer) {
+    axes.push({ axis: 'Saber Hacer', color: '#2e7d32', items: comp.saberHacer })
+  }
+  if (comp.saberSer) {
+    axes.push({ axis: 'Saber Ser', color: '#c9a84c', items: comp.saberSer })
+  }
+  return axes
 }
 
 function openModal(code) {
