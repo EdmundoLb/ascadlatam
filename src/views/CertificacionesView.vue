@@ -227,26 +227,60 @@
 
     <!-- FULLSCREEN MODAL -->
     <div v-if="activeModal" class="cert-modal-overlay" @click.self="closeModal" role="presentation">
-      <div class="cert-modal" role="dialog" aria-modal="true" :aria-label="`Detalles de ${certifications.find(c => c.code === activeModal)?.name}`" ref="modalRef" tabindex="-1">
+      <div class="cert-modal" role="dialog" aria-modal="true" :aria-label="`Detalles de ${certData?.name}`" ref="modalRef" tabindex="-1">
         <button class="modal-close" @click="closeModal" aria-label="Cerrar">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div class="modal-header">
           <div class="modal-flact">Programa ASCAD LATAM de Formación en Adicciones</div>
           <div class="modal-cert-title">
-            <span class="modal-code">{{ certifications.find(c => c.code === activeModal)?.code }}</span>
-            <h2>{{ certifications.find(c => c.code === activeModal)?.name }}</h2>
+            <span v-if="certData?.standard" class="modal-standard-badge" :class="getStandardClass(certData.standard)">
+              {{ certData.standard }}
+            </span>
+            <span class="modal-code">{{ certData?.code }}</span>
+            <h2>{{ certData?.name }}</h2>
           </div>
-          <p class="modal-summary">{{ certifications.find(c => c.code === activeModal)?.summary }}</p>
+          <p class="modal-summary">{{ certData?.summary }}</p>
         </div>
         <div class="modal-body">
-          <template v-for="cert in certifications" :key="cert.code">
-            <div v-if="cert.code === activeModal" class="modal-content-inner">
-              <div class="cert-description">
-                <p>{{ cert.description }}</p>
+          <div v-if="certData" class="modal-content-inner">
+            <!-- Fundamentacion Tecnica -->
+            <div class="technical-foundation" v-if="certData.technicalDescription">
+              <div class="section-divider">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                <h4>Fundamentación Técnica</h4>
+              </div>
+              <p class="technical-text">{{ certData.technicalDescription }}</p>
+            </div>
+
+            <!-- Perfil Profesional -->
+            <div class="professional-profile" v-if="certData.professionalProfile">
+              <div class="section-divider">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <h4>Perfil Profesional</h4>
+              </div>
+              <p class="profile-text">{{ certData.professionalProfile }}</p>
+            </div>
+
+            <!-- Ejes de Formacion -->
+            <div class="training-axes" v-if="certData.trainingAxes?.length">
+              <div class="section-divider">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <h4>Ejes de Formación</h4>
+              </div>
+              <div class="axes-tags">
+                <span v-for="(axis, i) in certData.trainingAxes" :key="i" class="axis-tag">{{ axis }}</span>
+              </div>
+            </div>
+
+            <!-- Competencias -->
+            <div class="competencies-section">
+              <div class="section-divider">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <h4>Competencias por Eje</h4>
               </div>
               <div class="axis-blocks">
-                <div v-for="axis in cert.competencies" :key="axis.axis" class="axis-block" :class="{ 'is-expanded': expandedAxis === axis.axis }">
+                <div v-for="axis in certData.competencies" :key="axis.axis" class="axis-block" :class="{ 'is-expanded': expandedAxis === axis.axis }">
                   <button class="axis-header" @click="toggleAxis(axis.axis)">
                     <span class="axis-name" :style="{ background: axis.color }">{{ axis.axis }}</span>
                     <svg class="axis-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -259,38 +293,39 @@
                   </ul>
                 </div>
               </div>
-              <div class="modal-meta">
-                <div class="modal-section">
-                  <h5>Ámbitos de desempeño</h5>
-                  <div class="areas-tags">
-                    <span v-for="area in cert.areas" :key="area" class="area-tag">{{ area }}</span>
-                  </div>
-                </div>
-                <div class="modal-section">
-                  <h5>Requisitos</h5>
-                  <ul class="req-list">
-                    <li v-for="req in cert.requirements" :key="req">{{ req }}</li>
-                  </ul>
-                </div>
-                <div class="modal-section">
-                  <h5>Horas requeridas</h5>
-                  <div class="hours-grid">
-                    <div v-for="h in cert.hours" :key="h.label" class="hour-badge">
-                      <span class="hour-value">{{ h.value }}</span>
-                      <span class="hour-label">{{ h.label }}</span>
-                    </div>
-                  </div>
+            </div>
+
+            <div class="modal-meta">
+              <div class="modal-section" v-if="certData.areas?.length">
+                <h5>Ámbitos de desempeño</h5>
+                <div class="areas-tags">
+                  <span v-for="area in certData.areas" :key="area" class="area-tag">{{ area }}</span>
                 </div>
               </div>
-              <div class="cert-actions">
-                <button @click="goToSolicitud(cert.code)" class="btn btn-gold">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
-                  Aplicar ahora
-                </button>
-                <button @click="goToContacto()" class="btn btn-ghost">Más información</button>
+              <div class="modal-section" v-if="certData.requirements?.length">
+                <h5>Requisitos</h5>
+                <ul class="req-list">
+                  <li v-for="req in certData.requirements" :key="req">{{ req }}</li>
+                </ul>
+              </div>
+              <div class="modal-section" v-if="certData.hours?.length">
+                <h5>Horas requeridas</h5>
+                <div class="hours-grid">
+                  <div v-for="h in certData.hours" :key="h.label" class="hour-badge">
+                    <span class="hour-value">{{ h.value }}</span>
+                    <span class="hour-label">{{ h.label }}</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </template>
+            <div class="cert-actions">
+              <button @click="goToSolicitud(certData.code)" class="btn btn-gold">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
+                Aplicar ahora
+              </button>
+              <button @click="goToContacto()" class="btn btn-ghost">Más información</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -298,9 +333,10 @@
 </template>
 
 <script setup>
-import { ref, onUnmounted, onMounted, nextTick } from 'vue'
+import { ref, onUnmounted, onMounted, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { levelIcons } from '@/data/certificaciones'
+import { certificationsFull } from '@/data/certificacionesFull'
 
 const router = useRouter()
 const modalRef = ref(null)
@@ -309,6 +345,17 @@ const activeModal = ref(null)
 const openFaq = ref(null)
 const expandedAxis = ref(null)
 let lastFocusedElement = null
+
+const certData = computed(() => {
+  return certificationsFull.find(c => c.code === activeModal.value) || null
+})
+
+function getStandardClass(standard) {
+  if (standard.includes('TAP 21')) return 'standard-tap'
+  if (standard.includes('TIP 64')) return 'standard-tip64'
+  if (standard.includes('TIP 52')) return 'standard-tip52'
+  return 'standard-combined'
+}
 
 function openModal(code) {
   lastFocusedElement = document.activeElement
@@ -1134,11 +1181,73 @@ const consortium = [
   color: var(--text-secondary);
   line-height: 1.8;
 }
+.modal-standard-badge {
+  font-family: var(--font-mono);
+  font-size: .625rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+.standard-tap { background: #1565c0; color: #fff; }
+.standard-tip64 { background: #2e7d32; color: #fff; }
+.standard-tip52 { background: #6a1b9a; color: #fff; }
+.standard-combined { background: var(--accent); color: var(--primary); }
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-light);
+}
+.section-divider svg { color: var(--accent); flex-shrink: 0; }
+.section-divider h4 {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0;
+}
+.technical-foundation, .professional-profile, .training-axes, .competencies-section {
+  background: var(--bg-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.technical-text, .profile-text {
+  font-size: .9375rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin: 0;
+}
+.axes-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.axis-tag {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  font-size: .8125rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.axis-tag:hover { border-color: var(--accent); background: var(--accent-light); }
+
 @media (max-width: 768px) {
   .cert-modal { max-height: 100vh; border-radius: 0; }
   .modal-header { padding: 36px 24px 28px; }
   .modal-body { padding: 24px; }
   .modal-meta { grid-template-columns: 1fr; }
   .cert-modal-overlay { padding: 0; }
+  .modal-cert-title { flex-wrap: wrap; }
+  .modal-standard-badge { order: -1; width: 100%; text-align: center; margin-bottom: 8px; }
 }
 </style>
