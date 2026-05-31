@@ -78,7 +78,7 @@ const search = ref('')
 const filterCert = ref('')
 const filterCountry = ref('')
 
-const certOptions = ['OST', 'EPR / CPR', 'CCAAD I', 'CCAAD II', 'CCAAD III', 'CCAAD IV']
+const certOptions = ['OST', 'ER', 'CCAAD I', 'CCAAD II', 'CCAAD III', 'CCAAD IV']
 const countryOptions = ['Argentina', 'Brasil', 'Chile', 'Colombia', 'Costa Rica', 'Ecuador', 'México', 'Panamá', 'Paraguay', 'Perú', 'Uruguay']
 
 // Datos de ejemplo — en producción vendrán de la API backend
@@ -86,7 +86,7 @@ const records = ref([
   { id: 1, nombre: 'Nombre Apellido', cert: 'CCAAD II',  pais: 'Costa Rica', vigencia: 'Ene 2025 – Ene 2027', codigo: 'ASC-2025-00142', estado: 'vigente'    },
   { id: 2, nombre: 'Nombre Apellido', cert: 'CCAAD III', pais: 'México',     vigencia: 'Mar 2024 – Mar 2026', codigo: 'ASC-2024-00098', estado: 'vigente'    },
   { id: 3, nombre: 'Nombre Apellido', cert: 'OST',       pais: 'Colombia',   vigencia: 'Jun 2023 – Jun 2025', codigo: 'ASC-2023-00054', estado: 'vencido'    },
-  { id: 4, nombre: 'Nombre Apellido', cert: 'EPR / CPR', pais: 'Argentina',  vigencia: 'Sep 2024 – Sep 2026', codigo: 'ASC-2024-00201', estado: 'vigente'    },
+  { id: 4, nombre: 'Nombre Apellido', cert: 'ER', pais: 'Argentina',  vigencia: 'Sep 2024 – Sep 2026', codigo: 'ASC-2024-00201', estado: 'vigente'    },
   { id: 5, nombre: 'Nombre Apellido', cert: 'CCAAD I',   pais: 'Perú',       vigencia: 'Nov 2023 – Nov 2025', codigo: 'ASC-2023-00177', estado: 'suspendido' },
 ])
 

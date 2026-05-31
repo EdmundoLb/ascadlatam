@@ -156,7 +156,7 @@
                   <label>{{ horas.label }}</label>
                   <input type="number" :name="horas.name" :placeholder="horas.placeholder" min="0" />
                 </div>
-                <div class="form-group" v-if="cert.code === 'EPR'">
+                <div class="form-group" v-if="cert.code === 'ER'">
                   <label>Años en proceso de recuperación *</label>
                   <input type="number" name="anios_recuperacion" required placeholder="Mínimo 2 años" min="2" />
                 </div>
@@ -232,6 +232,11 @@ const paises = [
   'Panamá','Paraguay','Perú','República Dominicana','Uruguay','Venezuela','Otro'
 ]
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024
+const MAX_FILES = 10
+const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png']
+const ALLOWED_EXTENSIONS = ['.pdf', '.jpg', '.jpeg', '.png']
+
 const certs = [
   {
     code: 'OST', fee: 30,
@@ -246,8 +251,8 @@ const certs = [
     docs: ['Copia de documento de identidad','Certificado de estudios (secundaria)','Certificados de formación (80h)','Constancia de experiencia supervisada (1.000h)','Constancia de entrenamiento práctico (100h)','Tres (3) cartas de referencia profesional','Código de ética firmado'],
   },
   {
-    code: 'EPR', fee: 30,
-    name: 'Entrenador de Pares en Recuperación',
+    code: 'ER', fee: 30,
+    name: 'Entrenador de Recuperación',
     description: 'Para personas con experiencia vivida en recuperación que brindan apoyo desde un enfoque no clínico y empático.',
     needsDegree: false,
     horasFields: [
@@ -372,8 +377,44 @@ function triggerFile(code) {
   document.getElementById(`file-${code}`)?.click()
 }
 
+function validateFile(file) {
+  const ext = '.' + file.name.split('.').pop().toLowerCase()
+  if (!ALLOWED_EXTENSIONS.includes(ext)) {
+    return `El archivo "${file.name}" no tiene un formato permitido. Use PDF, JPG o PNG.`
+  }
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return `El archivo "${file.name}" no es un tipo válido.`
+  }
+  if (file.size > MAX_FILE_SIZE) {
+    const sizeMB = (file.size / (1024 * 1024)).toFixed(2)
+    return `El archivo "${file.name}" (${sizeMB}MB) excede el límite de 5MB.`
+  }
+  return null
+}
+
 function onFileChange(event, code) {
   const files = Array.from(event.target.files)
+
+  if (files.length > MAX_FILES) {
+    showToast(`Máximo ${MAX_FILES} archivos por solicitud.`, 'error')
+    event.target.value = ''
+    fileLabels.value[code] = ''
+    return
+  }
+
+  const errors = []
+  for (const file of files) {
+    const error = validateFile(file)
+    if (error) errors.push(error)
+  }
+
+  if (errors.length > 0) {
+    showToast(errors[0], 'error')
+    event.target.value = ''
+    fileLabels.value[code] = ''
+    return
+  }
+
   fileLabels.value[code] = files.length
     ? `${files.length} archivo(s) seleccionado(s): ${files.map(f => f.name).join(', ')}`
     : ''
@@ -381,6 +422,26 @@ function onFileChange(event, code) {
 
 async function handleSubmit(event, code) {
   const form = event.target
+  const fileInput = form.querySelector('input[type="file"]')
+  const files = fileInput?.files
+
+  if (!files || files.length === 0) {
+    showToast('Debes adjuntar al menos un documento.', 'error')
+    return
+  }
+
+  if (files.length > MAX_FILES) {
+    showToast(`Máximo ${MAX_FILES} archivos por solicitud.`, 'error')
+    return
+  }
+
+  for (const file of files) {
+    const error = validateFile(file)
+    if (error) {
+      showToast(error, 'error')
+      return
+    }
+  }
 
   if (!validateAllFields(form, code)) {
     showToast('Corregí los errores en el formulario antes de enviar.', 'error')

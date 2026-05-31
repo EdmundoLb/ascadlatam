@@ -22,7 +22,7 @@
             <div class="aliado-header">
               <div class="aliado-logo">
                 <div class="logo-placeholder">
-                  <img :src="logoAscad" alt="ASCAD LATAM" width="56" height="56" style="object-fit:contain" />
+                  <img :src="logoAscad" alt="ASCAD LATAM" width="56" height="56" style="object-fit:contain" loading="lazy" />
                 </div>
               </div>
               <div>
@@ -66,7 +66,7 @@
             <div class="aliado-header">
               <div class="aliado-logo">
                 <div class="logo-placeholder">
-                  <img :src="logoAforind" alt="Aforind" width="56" height="56" style="object-fit:contain" />
+                  <img :src="logoAforind" alt="Aforind" width="56" height="56" style="object-fit:contain" loading="lazy" />
                 </div>
               </div>
               <div>
@@ -138,7 +138,7 @@
 </template>
 
 <script setup>
-import logoAscad from '/images/ASCAD.png'
+import logoAscad from '/images/optimized/ASCAD.webp'
 import logoAforind from '/images/AFORING.jpg'
 </script>
 

@@ -5,12 +5,11 @@
     <div class="container nav-inner">
       <router-link to="/" class="brand">
         <div class="brand-logo">
-          <img :src="logoWebp" alt="ASCAD LATAM - Logo" width="56" height="56" />
+          <img :src="logoAscad" alt="ASCAD LATAM - Logo" width="56" height="56" />
         </div>
         <div class="brand-text">
           <span class="brand-label">Certificación Internacional</span>
           <strong>ASCAD LATAM</strong>
-          <span class="brand-sub">FLACT · Universidad Gestalt · Aforind</span>
         </div>
       </router-link>
 
@@ -57,7 +56,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import logoWebp from '/images/LOGO2.png'
+import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 
 const menuOpen = ref(false)
 
@@ -117,10 +116,9 @@ watch(menuOpen, (val) => {
   width: 56px;
   height: 56px;
   flex-shrink: 0;
-  border-radius: 50%;
+  border-radius: 10px;
   overflow: hidden;
   border: 2px solid var(--white);
-  background: var(--white);
 }
 .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
 .brand-logo svg { width: 52px; height: 52px; }
@@ -145,11 +143,6 @@ watch(menuOpen, (val) => {
   font-weight: 700;
   color: var(--white);
   letter-spacing: -0.02em;
-}
-.brand-sub {
-  font-size: .6875rem;
-  color: rgba(255,255,255,0.7);
-  font-weight: 500;
 }
 
 .desktop-nav {

@@ -39,7 +39,7 @@ export default [
   {
     files: ['**/*.vue'],
     languageOptions: {
-      globals: { document: 'readonly', URL: 'readonly', fetch: 'readonly', FormData: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', window: 'readonly' }
+      globals: { document: 'readonly', URL: 'readonly', fetch: 'readonly', FormData: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', window: 'readonly', IntersectionObserver: 'readonly', ResizeObserver: 'readonly' }
     }
   }
 ]

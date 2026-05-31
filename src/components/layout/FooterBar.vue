@@ -6,15 +6,14 @@
           <div class="footer-brand">
             <router-link to="/" class="brand">
               <div class="brand-logo">
-                <img :src="logoWebp" alt="ASCAD LATAM" width="40" height="40" />
+                <img :src="logoAscad" alt="ASCAD LATAM" width="40" height="40" />
               </div>
               <div class="brand-text">
                 <span class="brand-label">Certificación Internacional</span>
                 <strong>ASCAD LATAM</strong>
-                <span class="brand-sub">Consorcio LATAM</span>
               </div>
             </router-link>
-            <p class="brand-desc">Consorcio Latinoamericano de Certificación en Adicciones. ASCAD LATAM, FLACT, Universidad Gestalt y Aforind. Estándares de calidad, ética y competencia desde 2004.</p>
+            <p class="brand-desc">Consorcio Latinoamericano de Certificación en Adicciones. Estándares de calidad, ética y competencia desde 2004. Certificación culturalmente adaptable a Latinoamérica.</p>
             <div class="social-links">
               <a href="#" aria-label="LinkedIn" class="social-btn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -25,12 +24,12 @@
           <div class="footer-col">
             <h5>Certificaciones</h5>
             <ul>
-              <li v-for="cert in certs" :key="cert">
-                <router-link to="/certificaciones">{{ cert }}</router-link>
-              </li>
-              <li><router-link to="/flact">FLACT</router-link></li>
-              <li><router-link to="/aliados">Universidad Gestalt</router-link></li>
-              <li><router-link to="/aliados">Aforind</router-link></li>
+              <li><router-link to="/certificaciones">OST - Operador Socioterapéutico</router-link></li>
+              <li><router-link to="/certificaciones">ER - Entrenador de Recuperación</router-link></li>
+              <li><router-link to="/certificaciones">CCAAD I - Consejero Asociado Junior</router-link></li>
+              <li><router-link to="/certificaciones">CCAAD II - Consejero Certificado</router-link></li>
+              <li><router-link to="/certificaciones">CCAAD III - Consejero Senior</router-link></li>
+              <li><router-link to="/certificaciones">CCAAD IV - Supervisor Profesional</router-link></li>
             </ul>
           </div>
 
@@ -42,6 +41,7 @@
               <li><router-link to="/flact">FLACT</router-link></li>
               <li><router-link to="/aliados">Aliados</router-link></li>
               <li><router-link to="/blog">Noticias</router-link></li>
+              <li><router-link to="/directorio">Directorio</router-link></li>
               <li><router-link to="/contacto">Contacto</router-link></li>
             </ul>
           </div>
@@ -71,9 +71,9 @@
 </template>
 
 <script setup>
+import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
+
 const year = new Date().getFullYear()
-const certs = ['OST', 'EPR / CPR', 'CCAAD I', 'CCAAD II', 'CCAAD III', 'CCAAD IV']
-import logoWebp from '/images/LOGO2.png'
 </script>
 
 <style scoped>

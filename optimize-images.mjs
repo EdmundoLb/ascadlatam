@@ -1,30 +1,34 @@
 import sharp from 'sharp'
-import { mkdirSync, existsSync } from 'fs'
-import { dirname, join } from 'path'
+import { mkdir, readdir, unlink } from 'fs/promises'
+import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const imagesDir = join(__dirname, 'public', 'images')
-const originalDir = join(__dirname, 'images')
+const imagesDir = join(__dirname, 'images')
 
-if (!existsSync(imagesDir)) mkdirSync(imagesDir, { recursive: true })
-if (!existsSync(originalDir)) mkdirSync(originalDir, { recursive: true })
+const images = [
+  { name: 'LOGO_ASCAD10.png', maxWidth: 200 },
+  { name: 'ASCAD.png', maxWidth: 200 },
+  { name: 'LOGO2.png', maxWidth: 200 },
+  { name: 'GLACT2.png', maxWidth: 200 },
+]
 
-const webpPath = join(imagesDir, 'LOGO.webp')
-const pngPath = join(originalDir, 'LOGO.png')
+async function optimizeImages() {
+  await mkdir(join(imagesDir, 'optimized'), { recursive: true })
 
-const pngOptimizedPath = join(imagesDir, 'LOGO.png')
+  for (const img of images) {
+    const inputPath = join(imagesDir, img.name)
+    const outputPath = join(imagesDir, 'optimized', img.name.replace('.png', '.webp'))
 
-console.log('Creating PNG fallback...')
+    await sharp(inputPath)
+      .resize({ width: img.maxWidth, withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toFile(outputPath)
 
-await sharp(webpPath)
-  .png({ compressionLevel: 8, quality: 85 })
-  .toFile(pngOptimizedPath)
+    console.log(`✓ ${img.name} -> ${img.name.replace('.png', '.webp')}`)
+  }
 
-console.log('✓ PNG fallback creado')
+  console.log('\nOptimización completa. Carpeta: images/optimized/')
+}
 
-await sharp(webpPath)
-  .png({ compressionLevel: 8, quality: 85 })
-  .toFile(pngPath)
-
-console.log('✓ PNG original recreado')
+optimizeImages().catch(console.error)
