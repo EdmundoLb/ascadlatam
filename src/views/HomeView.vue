@@ -10,12 +10,7 @@
             <span class="title-main">Consorcio de Certificación<br>
             <span class="text-gradient">Latinoamericano</span><br>
             en Adicciones</span>
-          </h1>
-          <div class="title-brand">
-            <span class="brand-flact">FLACT</span>
-            <span class="brand-sep"> · </span>
-            <span class="brand-ascal">ASCAD-LATAM</span>
-          </div>
+</h1>
           <p class="hero-lead">
             Certificamos profesionales con estándares internacionales
             garantizando competencias integrales:
@@ -43,22 +38,10 @@
           </div>
         </div>
 <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.15s">
-          <div class="stats-subtitle">Certificaciones Internacionales basadas en <span class="acronym">TAP 21</span>, <span class="acronym">TIP 64</span> y <span class="acronym">TIP 52</span></div>
-          <div class="stats-grid">
-            <div v-for="stat in stats" :key="stat.label" class="stat-card">
-              <div class="stat-icon">
-                <svg v-if="stat.shortLabel === 'TAP 21'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                <svg v-else-if="stat.shortLabel === 'TIP 64'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                <svg v-else-if="stat.shortLabel === 'TIP 52'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                <svg v-else width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              </div>
-              <div class="stat-info">
-                <div class="stat-number-row">
-                  <span class="stat-number">{{ stat.num }}</span>
-                  <span class="stat-short-label" :title="stat.tooltip">{{ stat.shortLabel }}</span>
-                </div>
-              </div>
-            </div>
+          <div class="stats-subtitle">FLACT . ASCAD-LATAM</div>
+          <div class="stats-logos">
+            <img src="/images/GLACT2.png" alt="FLACT" class="stat-logo" />
+            <img src="/images/LOGO_ASCAD10.png" alt="ASCAD" class="stat-logo" />
           </div>
           <div class="scroll-indicator">
             <span class="scroll-text">Descubrí más</span>
@@ -291,7 +274,7 @@ import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 import { levelIcons } from '@/data/certificaciones'
 
 const store = useCertificacionesStore()
-const { origins, levels, stats } = storeToRefs(store)
+const { origins, levels } = storeToRefs(store)
 
 const observerOptions = {
   threshold: 0.1,
@@ -402,11 +385,20 @@ onUnmounted(() => {
   display: block;
 }
 .title-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
   margin-top: 16px;
   letter-spacing: .05em;
+}
+.title-brand .brand-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-left: 8px;
 }
 .title-brand .brand-flact { color: var(--primary); }
 .title-brand .brand-sep { color: var(--primary); opacity: 0.5; }
@@ -546,17 +538,29 @@ onUnmounted(() => {
 .stat-desc { font-size: .8125rem; color: var(--text-muted); margin-top: 4px; }
 .stats-subtitle {
   font-family: var(--font-mono);
-  font-size: .6875rem;
-  font-weight: 600;
-  letter-spacing: .08em;
+  font-size: .875rem;
+  font-weight: 700;
+  letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--primary);
-  background: rgba(10,37,64,0.08);
-  border: 1px solid rgba(10,37,64,0.15);
-  padding: 8px 16px;
+  color: var(--accent);
+  background: rgba(201,168,76,0.12);
+  border: 1px solid var(--accent);
+  padding: 10px 24px;
   border-radius: var(--radius);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
+}
+.stats-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 56px;
+  margin-bottom: 32px;
+}
+.stat-logo {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
 }
 
 /* ABOUT */
