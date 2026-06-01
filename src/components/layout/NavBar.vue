@@ -9,7 +9,11 @@
         </div>
         <div class="brand-text">
           <span class="brand-label">Certificación Internacional</span>
-          <strong>ASCAD LATAM</strong>
+          <strong class="brand-name">
+            <span class="brand-flact">FLACT</span>
+            <span class="brand-separator"> - </span>
+            <span class="brand-ascal">ASCAD LATAM</span>
+          </strong>
         </div>
       </router-link>
 
@@ -155,7 +159,7 @@ watch(menuOpen, async (val) => {
 }
 .brand-label {
   font-family: var(--font-mono);
-  font-size: .625rem;
+  font-size: .75rem;
   font-weight: 500;
   letter-spacing: .2em;
   color: var(--accent-dark);
@@ -164,11 +168,16 @@ watch(menuOpen, async (val) => {
 }
 .brand-text strong {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--white);
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
+.brand-name { display: flex; align-items: center; gap: 0; }
+.brand-flact { color: var(--accent); }
+.brand-separator { color: rgba(255,255,255,0.5); }
+.brand-ascal { color: var(--white); }
 
 .desktop-nav {
   display: flex;

@@ -11,6 +11,11 @@
             <span class="text-gradient">Latinoamericano</span><br>
             en Adicciones
           </h1>
+          <div class="hero-brand">
+            <span class="brand-flact">FLACT</span>
+            <span class="brand-separator"> · </span>
+            <span class="brand-ascal">ASCAD LATAM</span>
+          </div>
           <p class="hero-lead">
             Certificamos profesionales con estándares internacionales
             garantizando competencias integrales:
@@ -392,6 +397,16 @@ onUnmounted(() => {
   color: var(--text);
   line-height: 1.1;
 }
+.hero-brand {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 16px;
+  letter-spacing: -0.02em;
+}
+.hero-brand .brand-flact { color: var(--accent-dark); }
+.hero-brand .brand-separator { color: var(--text-muted); }
+.hero-brand .brand-ascal { color: var(--primary); }
 .text-gradient { color: var(--accent-dark); }
 .hero-lead strong { color: var(--accent-dark); }
 .hero-lead .competency-tooltip {
