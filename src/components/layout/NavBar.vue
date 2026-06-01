@@ -11,8 +11,8 @@
           <span class="brand-label">Certificación Internacional</span>
           <strong class="brand-name">
             <span class="brand-flact">FLACT</span>
-            <span class="brand-separator"> - </span>
-            <span class="brand-ascal">ASCAD LATAM</span>
+            <span class="brand-sep"> . </span>
+            <span class="brand-ascal">ASCAD-LATAM</span>
           </strong>
         </div>
       </router-link>
@@ -75,7 +75,7 @@
 
 <script setup>
 import { ref, watch, nextTick } from 'vue'
-import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
+import logoAscad from '/images/NUEVO_LOGO.png'
 
 const menuOpen = ref(false)
 const hamburgerRef = ref(null)
@@ -141,16 +141,17 @@ watch(menuOpen, async (val) => {
   margin-left: 8px;
 }
 .brand-logo {
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   flex-shrink: 0;
-  border-radius: 10px;
   overflow: hidden;
-  border: 2px solid var(--white);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-.brand-logo img { width: 100%; height: 100%; object-fit: cover; }
-.brand-logo svg { width: 68px; height: 68px; }
+.brand-logo img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  border-radius: 50%;
+}
 .brand-text {
   display: flex;
   flex-direction: column;
@@ -159,24 +160,25 @@ watch(menuOpen, async (val) => {
 }
 .brand-label {
   font-family: var(--font-mono);
-  font-size: .75rem;
+  font-size: .625rem;
   font-weight: 500;
-  letter-spacing: .2em;
-  color: var(--accent-dark);
+  letter-spacing: .15em;
+  color: var(--accent);
   text-transform: uppercase;
-  padding-top: 3px;
+  margin-bottom: 1px;
 }
-.brand-text strong {
+.brand-name {
+  display: flex;
+  align-items: center;
+  gap: 0;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--white);
-  letter-spacing: -0.02em;
   line-height: 1.2;
+  white-space: nowrap;
 }
-.brand-name { display: flex; align-items: center; gap: 0; }
-.brand-flact { color: var(--accent); }
-.brand-separator { color: rgba(255,255,255,0.5); }
+.brand-flact { color: var(--white); }
+.brand-sep { color: rgba(255,255,255,0.5); margin: 0 2px; }
 .brand-ascal { color: var(--white); }
 
 .desktop-nav {

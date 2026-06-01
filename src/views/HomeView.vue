@@ -7,14 +7,14 @@
       <div class="hero-inner">
         <div class="hero-content animate-fade-in-up">
           <h1 class="hero-title">
-            Consorcio de Certificación<br>
+            <span class="title-main">Consorcio de Certificación<br>
             <span class="text-gradient">Latinoamericano</span><br>
-            en Adicciones
+            en Adicciones</span>
           </h1>
-          <div class="hero-brand">
+          <div class="title-brand">
             <span class="brand-flact">FLACT</span>
-            <span class="brand-separator"> · </span>
-            <span class="brand-ascal">ASCAD LATAM</span>
+            <span class="brand-sep"> · </span>
+            <span class="brand-ascal">ASCAD-LATAM</span>
           </div>
           <p class="hero-lead">
             Certificamos profesionales con estándares internacionales
@@ -43,7 +43,7 @@
           </div>
         </div>
 <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.15s">
-          <div class="stats-subtitle">Certificaciones Internacionales basadas en TAP 21, TIP 64 y TIP 52</div>
+          <div class="stats-subtitle">Certificaciones Internacionales basadas en <span class="acronym">TAP 21</span>, <span class="acronym">TIP 64</span> y <span class="acronym">TIP 52</span></div>
           <div class="stats-grid">
             <div v-for="stat in stats" :key="stat.label" class="stat-card">
               <div class="stat-icon">
@@ -396,17 +396,21 @@ onUnmounted(() => {
 .hero-title {
   color: var(--text);
   line-height: 1.1;
+  margin-bottom: 0;
 }
-.hero-brand {
+.title-main {
+  display: block;
+}
+.title-brand {
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
   margin-top: 16px;
-  letter-spacing: -0.02em;
+  letter-spacing: .05em;
 }
-.hero-brand .brand-flact { color: var(--accent-dark); }
-.hero-brand .brand-separator { color: var(--text-muted); }
-.hero-brand .brand-ascal { color: var(--primary); }
+.title-brand .brand-flact { color: var(--primary); }
+.title-brand .brand-sep { color: var(--primary); opacity: 0.5; }
+.title-brand .brand-ascal { color: var(--primary); }
 .text-gradient { color: var(--accent-dark); }
 .hero-lead strong { color: var(--accent-dark); }
 .hero-lead .competency-tooltip {
@@ -533,6 +537,11 @@ onUnmounted(() => {
   pointer-events: none;
 }
 .stat-short-label:hover::after { opacity: 1; }
+.stats-subtitle .acronym {
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
 .stat-label { font-size: .875rem; color: var(--text-secondary); font-weight: 500; }
 .stat-desc { font-size: .8125rem; color: var(--text-muted); margin-top: 4px; }
 .stats-subtitle {
@@ -541,9 +550,9 @@ onUnmounted(() => {
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--accent-dark);
-  background: var(--accent-light);
-  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--primary);
+  background: rgba(10,37,64,0.08);
+  border: 1px solid rgba(10,37,64,0.15);
   padding: 8px 16px;
   border-radius: var(--radius);
   text-align: center;
