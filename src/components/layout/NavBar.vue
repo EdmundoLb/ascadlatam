@@ -22,7 +22,7 @@
         <router-link to="/certificaciones">Certificaciones</router-link>
         <router-link to="/flact">FLACT</router-link>
         <router-link to="/formacion">Formación</router-link>
-        <router-link to="/noticias">Noticias</router-link>
+        <router-link to="/noticias">Recursos</router-link>
         <router-link to="/directorio">Directorio</router-link>
         <router-link to="/contacto">Contacto</router-link>
       </nav>
@@ -65,7 +65,7 @@
       <router-link to="/certificaciones" @click="closeMenu" tabindex="0">Certificaciones</router-link>
       <router-link to="/flact" @click="closeMenu" tabindex="0">FLACT</router-link>
       <router-link to="/formacion" @click="closeMenu" tabindex="0">Formación</router-link>
-      <router-link to="/noticias" @click="closeMenu" tabindex="0">Noticias</router-link>
+      <router-link to="/noticias" @click="closeMenu" tabindex="0">Recursos</router-link>
       <router-link to="/directorio" @click="closeMenu" tabindex="0">Directorio</router-link>
       <router-link to="/contacto" @click="closeMenu" tabindex="0">Contacto</router-link>
       <router-link to="/solicitud" @click="closeMenu" class="mobile-cta" tabindex="0">Iniciar solicitud →</router-link>
