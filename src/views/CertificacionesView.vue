@@ -226,8 +226,8 @@
     </section>
 
     <!-- FULLSCREEN MODAL -->
-    <div v-if="activeModal" class="cert-modal-overlay" @click.self="closeModal" role="presentation">
-      <div class="cert-modal" role="dialog" aria-modal="true" :aria-label="`Detalles de ${certData?.name}`" ref="modalRef" tabindex="-1">
+    <div v-if="activeModal" class="cert-modal-overlay" @click="closeModal" role="presentation">
+      <div class="cert-modal" role="dialog" aria-modal="true" :aria-label="`Detalles de ${certData?.name}`" ref="modalRef" tabindex="-1" @click.stop>
         <button class="modal-close" @click="closeModal" aria-label="Cerrar">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
@@ -241,7 +241,6 @@
         </div>
         <div class="modal-body">
           <div v-if="certData" class="modal-content-inner">
-            <!-- Fundamentacion Tecnica -->
             <div class="technical-foundation" v-if="certData.technicalDescription">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -249,8 +248,6 @@
               </div>
               <p class="technical-text">{{ certData.technicalDescription }}</p>
             </div>
-
-            <!-- Perfil Profesional -->
             <div class="professional-profile" v-if="certData.professionalProfile">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -258,8 +255,6 @@
               </div>
               <p class="profile-text">{{ certData.professionalProfile }}</p>
             </div>
-
-            <!-- Ejes de Formacion -->
             <div class="training-axes" v-if="certData.trainingAxes?.length">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -270,8 +265,6 @@
                 <span v-for="(axis, i) in certData.trainingAxes" :key="i" class="axis-tag">{{ axis }}</span>
               </div>
             </div>
-
-            <!-- Competencias -->
             <div class="competencies-section">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -292,7 +285,6 @@
                 </div>
               </div>
             </div>
-
             <div class="modal-meta">
               <div class="modal-section" v-if="certData.areas?.length">
                 <h5>Ámbitos de desempeño</h5>
@@ -448,7 +440,7 @@ function getLevelIcon(code) {
 
 const comparisonData = [
   { code: 'OST',      name: 'Operador Socioterapéutico',       desc: 'Nivel inicial de acompañamiento supervisado',     formacion: '80h',    experiencia: '1.000h',  supervision: '100h',    fee: 30,  highlight: false },
-  { code: 'ER',       name: 'Entrenador de Recuperación',       desc: 'Apoyo desde la experiencia vivida en recuperación', formacion: '80h',    experiencia: '100h',    supervision: '100h',   fee: 30,  highlight: false },
+  { code: 'EPR',      name: 'Entrenador de Recuperación',       desc: 'Apoyo desde la experiencia vivida en recuperación', formacion: '80h',    experiencia: '100h',    supervision: '100h',   fee: 30,  highlight: false },
   { code: 'CCAAD I',  name: 'Consejero Asociado Junior',       desc: 'Primer nivel técnico profesional',                formacion: '120h',   experiencia: '1.500h',  supervision: '60h',    fee: 50,  highlight: false },
   { code: 'CCAAD II', name: 'Consejero Certificado',          desc: 'Competencias avanzadas en consejería',            formacion: '150h',   experiencia: '2.000h',  supervision: '96h',    fee: 75,  highlight: false },
   { code: 'CCAAD III',name: 'Consejero Senior',               desc: 'Nivel avanzado profesional con autonomía',          formacion: '170h',   experiencia: '3.000h',  supervision: '120h',   fee: 100, highlight: true  },
@@ -457,7 +449,7 @@ const comparisonData = [
 
 const certColors = {
   'OST':      { primary: '#1a3a5c', accent: '#c9a84c' },
-  'ER':       { primary: '#2e7d32', accent: '#81c784' },
+  'EPR':      { primary: '#2e7d32', accent: '#81c784' },
   'CCAAD I':  { primary: '#b85c1a', accent: '#e8a050' },
   'CCAAD II': { primary: '#6a1b9a', accent: '#ba68c8' },
   'CCAAD III':{ primary: '#1565c0', accent: '#64b5f6' },
@@ -498,12 +490,12 @@ const certifications = [
     hours: [{ value: '80h', label: 'Formación' }, { value: '1.000h', label: 'Experiencia supervisada' }, { value: '100h', label: 'Entrenamiento práctico' }]
   },
   {
-    code: 'ER', fee: 30,
+    code: 'EPR', fee: 30,
     name: 'Entrenador de Recuperación',
     summary: 'Apoyo desde la experiencia vivida en recuperación.',
     description: 'Para personas con experiencia vivida en recuperación de adicciones. Brinda apoyo emocional, motivacional e informativo desde la empatía de quien ha transitado el mismo camino.',
     competencies: [
-      { axis: 'Competencias Principales', color: certColors['ER'].primary, items: [
+      { axis: 'Competencias Principales', color: certColors['EPR'].primary, items: [
         'Comprensión del proceso de recuperación y del trastorno por uso de sustancias.',
         'Capacidad para identificar señales de riesgo y necesidades de apoyo.',
         'Habilidades de escucha activa, comunicación empática y acompañamiento humano.',
@@ -515,7 +507,7 @@ const certifications = [
         'Sensibilidad cultural, inclusión y respeto por la diversidad.',
         'Compromiso con el autocuidado, la formación continua y el crecimiento personal.'
       ]},
-      { axis: 'Ejes de Formación del Entrenador de Recuperación', color: certColors['ER'].primary, items: [
+      { axis: 'Ejes de Formación del Entrenador de Recuperación', color: certColors['EPR'].primary, items: [
         'Conocimiento sobre Recuperación y Trastorno por Uso de Sustancias',
         'Rol y Funciones del Entrenador de Recuperación',
         'Habilidades de Apoyo y Acompañamiento',
@@ -524,12 +516,12 @@ const certifications = [
         'Construcción Comunitaria y Redes de Recuperación',
         'Desarrollo Profesional y Autocuidado'
       ]},
-      { axis: 'Perfil Profesional', color: certColors['ER'].accent, items: [
+      { axis: 'Perfil Profesional', color: certColors['EPR'].accent, items: [
         'El Entrenador de Recuperación actúa como modelo positivo y agente de esperanza, fortaleciendo procesos de recuperación desde el apoyo mutuo, la integración comunitaria y el acompañamiento no clínico, siempre desde una visión humana y libre de estigmas.'
       ]}
     ],
     areas: ['Programas de Recuperación', 'Comunidades Terapéuticas', 'Centros de Reinserción', 'Redes de Apoyo comunitario'],
-    requirements: ['Experiencia vivida en recuperación (mín. 2 años)', 'Secundaria completa o equivalente', '2 a 3 avales personales o profesionales', 'Firma del código de ética', 'Aprobación del examen ER'],
+    requirements: ['Experiencia vivida en recuperación (mín. 2 años)', 'Secundaria completa o equivalente', '2 a 3 avales personales o profesionales', 'Firma del código de ética', 'Aprobación del examen EPR'],
     hours: [{ value: '80h', label: 'Formación' }, { value: '80h', label: 'Entrenamiento práctico' }]
   },
   {

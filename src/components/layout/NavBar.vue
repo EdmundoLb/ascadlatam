@@ -75,7 +75,7 @@
 
 <script setup>
 import { ref, watch, nextTick } from 'vue'
-import logoAscad from '/images/NUEVO_LOGO.png'
+import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 
 const menuOpen = ref(false)
 const hamburgerRef = ref(null)
