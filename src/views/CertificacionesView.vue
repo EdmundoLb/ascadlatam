@@ -1043,7 +1043,7 @@ const consortium = [
 .faq-item.is-open .faq-icon { transform: rotate(180deg); color: var(--accent-dark); }
 
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-answer.is-open { max-height: 2000px; }
+.faq-item.is-open .faq-answer { max-height: 2000px; }
 .faq-answer-inner { padding: 0 24px 20px; }
 .faq-answer-inner p { font-size: .9rem; color: var(--text-secondary); line-height: 1.75; }
 
