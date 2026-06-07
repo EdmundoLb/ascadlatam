@@ -23,7 +23,7 @@
         <router-link to="/flact">FLACT</router-link>
         <router-link to="/formacion">Formación</router-link>
         <router-link to="/noticias">Recursos</router-link>
-        <router-link to="/directorio">Directorio</router-link>
+        <router-link to="/directorio">Países</router-link>
         <router-link to="/contacto">Contacto</router-link>
       </nav>
 

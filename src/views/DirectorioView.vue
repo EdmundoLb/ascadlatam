@@ -102,12 +102,12 @@ function toggleFaq(index) {
 }
 
 const countries = [
-  { name: 'Costa Rica', flag: '🇨🇷', description: 'Sede del consorcio ASCAD LATAM. Pionero en la creación del modelo de certificación en la región.' },
-  { name: 'Paraguay', flag: '🇵🇾', description: 'Participación activa en la red de profesionales certificados y alianzas de formación.' },
-  { name: 'Brasil', flag: '🇧🇷', description: 'Certificaciones disponibles en portugués. Gran cobertura de profesionales en el sector.' },
-  { name: 'Argentina', flag: '🇦🇷', description: 'Desarrollo de programas de certificación y formación continua.' },
-  { name: 'México', flag: '🇲🇽', description: 'Expansión de los estándares de certificación en América del Norte.' },
-  { name: 'Colombia', flag: '🇨🇴', description: 'Integración de comunidades terapéuticas y programas de formación.' },
+  { name: 'Costa Rica', flag: '🇨🇷', description: 'Sede fundacional del consorcio ASCAD LATAM. Pionero en la implementación de estándares de certificación profesional en comunidades terapéuticas de América Central.' },
+  { name: 'Brasil', flag: '🇧🇷', description: 'Mayor cobertura de profesionales certificados en el región. Certificaciones disponibles en portugués con adaptación cultural a contextos latinoamericanos.' },
+  { name: 'Argentina', flag: '🇦🇷', description: 'Desarrollo de programas de certificación y formación continua. Red de comunidades terapéuticas asociadas a FLACT con estándares internacionales.' },
+  { name: 'Colombia', flag: '🇨🇴', description: 'Integración de comunidades terapéuticas y programas de formación. Representación de FLACT en el norte de Suramérica.' },
+  { name: 'Paraguay', flag: '🇵🇾', description: 'Participación activa en la red de profesionales certificados. Alianzas estratégicas para la expansión de estándares de certificación.' },
+  { name: 'México', flag: '🇲🇽', description: 'Punto de conexión con América del Norte. Desarrollo de programas de certificación con adaptación a contextos multiculturales.' },
 ]
 
 const faqs = [
