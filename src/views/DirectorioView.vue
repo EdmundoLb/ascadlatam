@@ -2,10 +2,10 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Información</div>
-        <h1>Países miembros del<br><em class="gold">consorcio</em></h1>
+        <div class="eyebrow">Cobertura Regional</div>
+        <h1>Países afiliados y<br><em class="gold">preafiliados</em></h1>
         <p class="lead" style="margin-top:18px;">
-          Conocé los países que forman parte de ASCAD LATAM y las organizaciones que respaldan la certificación en adicciones en América Latina.
+          ASCAD LATAM cuenta con 17 países participantes: 10 países afiliados con pleno reconocimiento y 7 países en proceso de preafiliación. Cada uno representa una red de profesionales certificados bajo estándares internacionales TAP 21, TIP 64 y TIP 52.
         </p>
       </div>
     </section>
@@ -13,12 +13,43 @@
     <!-- PAÍSES MIEMBROS -->
     <section class="section countries-section">
       <div class="container">
+        <div class="stats-summary">
+          <div class="stat-item">
+            <span class="stat-number">10</span>
+            <span class="stat-label">Países afiliados</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Países preafiliados</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">17</span>
+            <span class="stat-label">Total países</span>
+          </div>
+        </div>
+
+        <!-- AFILIADOS -->
         <div class="section-header">
-          <div class="eyebrow">América Latina</div>
-          <h2>Países <em class="gold">participantes</em></h2>
+          <div class="eyebrow">Afiliados</div>
+          <h2>Países <em class="gold">afiliados</em></h2>
         </div>
         <div class="countries-grid">
-          <div v-for="country in countries" :key="country.name" class="country-card">
+          <div v-for="country in affiliates" :key="country.name" class="country-card">
+            <div class="country-flag">{{ country.flag }}</div>
+            <div class="country-info">
+              <h4>{{ country.name }}</h4>
+              <p>{{ country.description }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PREAFILIADOS -->
+        <div class="section-header preaffiliates-header">
+          <div class="eyebrow">Preafiliados</div>
+          <h2>Países <em class="gold">preafiliados</em></h2>
+        </div>
+        <div class="countries-grid">
+          <div v-for="country in preAffiliates" :key="country.name" class="country-card preaffiliate">
             <div class="country-flag">{{ country.flag }}</div>
             <div class="country-info">
               <h4>{{ country.name }}</h4>
@@ -66,56 +97,31 @@
         </div>
       </div>
     </section>
-
-    <!-- FAQ -->
-    <section class="section faq-section">
-      <div class="container">
-        <div class="section-header centered">
-          <div class="eyebrow">Preguntas frecuentes</div>
-          <h2>Preguntas <em class="gold">frecuentes</em></h2>
-        </div>
-        <div class="faq-list">
-          <div v-for="(faq, i) in faqs" :key="i" class="faq-item" :class="{ 'is-open': openFaq === i }">
-            <button class="faq-question" @click="toggleFaq(i)">
-              <span>{{ faq.question }}</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>{{ faq.answer }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const openFaq = ref(null)
-
-function toggleFaq(index) {
-  openFaq.value = openFaq.value === index ? null : index
-}
-
-const countries = [
-  { name: 'Costa Rica', flag: '🇨🇷', description: 'Sede fundacional del consorcio ASCAD LATAM. Pionero en la implementación de estándares de certificación profesional en comunidades terapéuticas de América Central.' },
-  { name: 'Brasil', flag: '🇧🇷', description: 'Mayor cobertura de profesionales certificados en el región. Certificaciones disponibles en portugués con adaptación cultural a contextos latinoamericanos.' },
-  { name: 'Argentina', flag: '🇦🇷', description: 'Desarrollo de programas de certificación y formación continua. Red de comunidades terapéuticas asociadas a FLACT con estándares internacionales.' },
-  { name: 'Colombia', flag: '🇨🇴', description: 'Integración de comunidades terapéuticas y programas de formación. Representación de FLACT en el norte de Suramérica.' },
-  { name: 'Paraguay', flag: '🇵🇾', description: 'Participación activa en la red de profesionales certificados. Alianzas estratégicas para la expansión de estándares de certificación.' },
+const affiliates = [
   { name: 'México', flag: '🇲🇽', description: 'Punto de conexión con América del Norte. Desarrollo de programas de certificación con adaptación a contextos multiculturales.' },
+  { name: 'Brasil', flag: '🇧🇷', description: 'Mayor cobertura de profesionales certificados en la región. Certificaciones disponibles en portugués con adaptación cultural a contextos latinoamericanos.' },
+  { name: 'Bolivia', flag: '🇧🇴', description: 'Integración de comunidades terapéuticas y programas de formación en el corazón de Suramérica.' },
+  { name: 'Perú', flag: '🇵🇪', description: 'Desarrollo de programas de certificación y formación continua con alianzas estratégicas regionales.' },
+  { name: 'Ecuador', flag: '🇪🇨', description: 'Participación activa en la red de profesionales certificados con estándares internacionales.' },
+  { name: 'Paraguay', flag: '🇵🇾', description: 'Participación activa en la red de profesionales certificados. Alianzas estratégicas para la expansión de estándares de certificación.' },
+  { name: 'Chile', flag: '🇨🇱', description: 'Desarrollo de programas de certificación y formación continua con cobertura en el cono sur.' },
+  { name: 'Costa Rica', flag: '🇨🇷', description: 'Sede fundacional del consorcio ASCAD LATAM. Pionero en la implementación de estándares de certificación profesional en comunidades terapéuticas de América Central.' },
+  { name: 'El Salvador', flag: '🇸🇻', description: 'Integración de comunidades terapéuticas y programas de formación con estándares internacionales.' },
+  { name: 'Puerto Rico', flag: '🇵🇷', description: 'Punto de conexión con América del Norte y el Caribe. Desarrollo de programas de certificación bilingües.' },
 ]
 
-const faqs = [
-  { question: '¿Qué es ASCAD LATAM?', answer: 'ASCAD LATAM es el Consorcio Latinoamericano de Certificación en Adicciones, una organización que establece estándares internacionales para la formación y certificación de profesionales en el campo de las adicciones en toda América Latina.' },
-  { question: '¿Cuáles son los niveles de certificación disponibles?', answer: 'Existen 6 niveles de certificación: OST (Operador Socioterapéutico), ER (Entrenador de Recuperación), CCAAD I, CCAAD II, CCAAD III y CCAAD IV (Supervisor Profesional). Cada nivel tiene requisitos específicos de formación y experiencia.' },
-  { question: '¿Las certificaciones ASCAD LATAM son reconocidas internacionalmente?', answer: 'Sí, las certificaciones están basadas en estándares internacionales como TAP 21, TIP 64 y TIP 52 de SAMHSA (Substance Abuse and Mental Health Services Administration) de Estados Unidos.' },
-  { question: '¿Cuánto tiempo es válida la certificación?', answer: 'La certificación ASCAD LATAM tiene validez de 2 años (bianual). Para renovar es necesario acumular horas de educación continua específicas por nivel y presentar la documentación de renovación.' },
-  { question: '¿Puedo trabajar en cualquier país de América Latina con la certificación?', answer: 'La certificación ASCAD LATAM está reconocida en los países miembros del Consorcio. Cada país puede tener requisitos adicionales de validación local. Se recomienda consultar con la oficina de certificación de su país.' },
+const preAffiliates = [
+  { name: 'Guatemala', flag: '🇬🇹', description: 'País en proceso de integración al consorcio ASCAD LATAM. Desarrollo de programas de formación.' },
+  { name: 'Honduras', flag: '🇭🇳', description: 'País en proceso de integración. Alianzas estratégicas para la expansión de estándares de certificación.' },
+  { name: 'Nicaragua', flag: '🇳🇮', description: 'País en proceso de integración. Participación en redes de profesionales certificados.' },
+  { name: 'Venezuela', flag: '🇻🇪', description: 'País en proceso de integración. Desarrollo de programas de certificación en recuperación.' },
+  { name: 'Cuba', flag: '🇨🇺', description: 'País en proceso de integración. Alianzas estratégicas para la expansión de estándares.' },
+  { name: 'Panamá', flag: '🇵🇦', description: 'País en proceso de integración. Conexión entre América Central y el Caribe.' },
+  { name: 'República Dominicana', flag: '🇩🇴', description: 'País en proceso de integración. Desarrollo de programas de certificación en el Caribe.' },
 ]
 </script>
 
@@ -177,39 +183,46 @@ const faqs = [
 .flact-feature strong { display: block; color: var(--text); font-size: .9375rem; margin-bottom: 4px; }
 .flact-feature p { font-size: .8125rem; color: var(--text-muted); line-height: 1.6; }
 
-.faq-section { background: var(--white); }
-.faq-list { max-width: 800px; margin: 48px auto 0; }
-.faq-item {
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius);
-  margin-bottom: 12px;
-  overflow: hidden;
-}
-.faq-question {
+.stats-summary {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 56px;
+  padding: 32px;
+  background: var(--bg-light);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line-light);
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
-  padding: 20px 24px;
-  background: var(--surface);
-  border: none;
-  cursor: pointer;
-  font-size: .9375rem;
-  font-weight: 500;
-  color: var(--text);
-  text-align: left;
-  transition: background .2s;
+  gap: 8px;
 }
-.faq-question:hover { background: var(--bg-light); }
-.faq-icon { color: var(--accent-dark); transition: transform .3s; flex-shrink: 0; }
-.is-open .faq-icon { transform: rotate(180deg); }
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s ease;
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  line-height: 1;
 }
-.is-open .faq-answer { max-height: 200px; }
-.faq-answer p { padding: 0 24px 20px; font-size: .875rem; color: var(--text-muted); line-height: 1.7; }
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.preaffiliates-header {
+  margin-top: 64px;
+}
+
+.country-card.preaffiliate {
+  background: var(--surface-alt);
+  border-color: rgba(201, 168, 76, 0.3);
+}
 
 @media (max-width: 900px) {
   .countries-grid { grid-template-columns: repeat(2, 1fr); }
