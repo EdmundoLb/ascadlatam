@@ -5,7 +5,7 @@
         <div class="eyebrow">Cobertura Regional</div>
         <h1>Países afiliados y<br><em class="gold">preafiliados</em></h1>
         <p class="lead" style="margin-top:18px;">
-          ASCAD LATAM cuenta con 17 países participantes: 10 países afiliados con pleno reconocimiento y 7 países en proceso de preafiliación. Cada uno representa una red de profesionales certificados bajo estándares internacionales TAP 21, TIP 64 y TIP 52.
+          La FLACT cuenta con 17 países afiliados: 10 países afiliados con pleno reconocimiento y 7 países en proceso de preafiliación. Cada uno representa una red de comunidades terapéuticas y profesionales certificados bajo estándares de la FLACT.
         </p>
       </div>
     </section>
@@ -30,8 +30,8 @@
 
         <!-- AFILIADOS -->
         <div class="section-header">
-          <div class="eyebrow">Afiliados</div>
-          <h2>Países <em class="gold">afiliados</em></h2>
+          <div class="eyebrow">Afiliados a la FLACT</div>
+          <h2>Países afiliados <em class="gold">a la FLACT</em></h2>
         </div>
         <div class="countries-grid">
           <div v-for="country in affiliates" :key="country.name" class="country-card">
@@ -45,8 +45,8 @@
 
         <!-- PREAFILIADOS -->
         <div class="section-header preaffiliates-header">
-          <div class="eyebrow">Preafiliados</div>
-          <h2>Países <em class="gold">preafiliados</em></h2>
+          <div class="eyebrow">Preafiliados a la FLACT</div>
+          <h2>Países preafiliados <em class="gold">a la FLACT</em></h2>
         </div>
         <div class="countries-grid">
           <div v-for="country in preAffiliates" :key="country.name" class="country-card preaffiliate">
