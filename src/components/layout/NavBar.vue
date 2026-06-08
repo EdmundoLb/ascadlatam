@@ -127,6 +127,7 @@ watch(menuOpen, async (val) => {
   background: var(--primary);
   box-shadow: var(--shadow-md);
   padding: 8px 0;
+  overflow-x: hidden;
 }
 .nav-inner {
   display: flex;
@@ -134,6 +135,7 @@ watch(menuOpen, async (val) => {
   justify-content: space-between;
   min-height: var(--nav-height);
   gap: 24px;
+  overflow-x: hidden;
 }
 .brand {
   display: flex;
@@ -182,6 +184,34 @@ watch(menuOpen, async (val) => {
 .brand-flact { color: var(--white); }
 .brand-sep { color: rgba(255,255,255,0.5); margin: 0 2px; }
 .brand-ascal { color: var(--white); }
+
+@media (max-width: 600px) {
+  .brand-name {
+    white-space: normal;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .brand-logo {
+    width: 56px;
+    height: 56px;
+  }
+  .brand-text {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-logo {
+    width: 44px;
+    height: 44px;
+  }
+  .brand-label {
+    font-size: .5rem;
+  }
+  .brand-name {
+    font-size: .875rem;
+  }
+}
 
 .desktop-nav {
   display: flex;

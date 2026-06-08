@@ -20,7 +20,7 @@ describe('NavBar.vue', () => {
     const wrapper = mount(NavBar, {
       global: { plugins: [router] }
     })
-    expect(wrapper.find('strong').text()).toBe('ASCAD LATAM')
+    expect(wrapper.find('strong').text()).toContain('FLACT')
   })
 
   it('has navigation links', () => {

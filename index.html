@@ -6,28 +6,68 @@
   <title>ASCAD LATAM | Certificación Internacional en Adicciones - FLACT, Universidad Gestalt, Aforind</title>
   <meta name="description" content="Consorcio Latinoamericano de Certificación en Adicciones. ASCAD LATAM, FLACT, Universidad Gestalt y Aforind. Certificaciones OST, EPR, CCAAD I-IV en español y portugués para América Latina." />
   <meta name="keywords" content="certificación adicciones, operador socio-terapéutico, entrenador de pares, CCAAD, FLACT, Universidad Gestalt, Aforind, América Latina" />
-  <meta name="author" content="ASCAD LATAM - Consorcio Latinoamericano de Certificación" />
+  <meta name="author" content="ASCAD LATAM - Consortium Latinoamericano de Certificación" />
   <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a2540" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ASCAD LATAM" />
 
   <link rel="canonical" href="https://ascadlatam.org/" />
+  <link rel="manifest" href="/manifest.json" />
 
   <meta property="og:title" content="ASCAD LATAM | Certificación Internacional en Adicciones" />
   <meta property="og:description" content="Consorcio Latinoamericano de Certificación en Adicciones. ASCAD LATAM, FLACT, Universidad Gestalt y Aforind. Estándares internacionales TAP 21 para profesionales de las adicciones." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ascadlatam.org/" />
   <meta property="og:locale" content="es_LA" />
+  <meta property="og:image" content="/images/optimized/LOGO_ASCAD10.webp" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
 
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ASCAD LATAM | Certificación Internacional en Adicciones" />
   <meta name="twitter:description" content="Consorcio Latinoamericano de Certificación en Adicciones. FLACT, Universidad Gestalt y Aforind." />
+  <meta name="twitter:image" content="/images/optimized/LOGO_ASCAD10.webp" />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/images/optimized/LOGO_ASCAD10.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ASCAD LATAM",
+    "alternateName": "Consorcio Latinoamericano de Certificación en Adicciones",
+    "url": "https://ascadlatam.org",
+    "logo": "https://ascadlatam.org/images/optimized/LOGO_ASCAD10.webp",
+    "description": "Consorcio para la certificación profesional en adicciones con estándares internacionales TAP 21 y TIP 64",
+    "areaServed": "Latin America",
+    "knowsAbout": ["Adicciones", "Certificación Profesional", "TAP 21", "TIP 64", "Intervención en Crisis"],
+    "memberOf": [
+      {"@type": "Organization", "name": "FLACT"},
+      {"@type": "Organization", "name": "Universidad Gestalt"},
+      {"@type": "Organization", "name": "Aforind"}
+    ]
+  }
+  </script>
 </head>
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(
+          (registration) => { console.log('SW registered:', registration.scope); },
+          (error) => { console.log('SW registration failed:', error); }
+        );
+      });
+    }
+  </script>
 </body>
 </html>

@@ -944,13 +944,19 @@ onUnmounted(() => {
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .cultural-title { font-size: 2rem; }
   .scroll-indicator { bottom: 24px; }
+  .standards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 480px) {
   .hero-actions { flex-direction: column; }
   .stats-grid { grid-template-columns: 1fr; }
-  .ally-card { padding: 28px 20px; }
+  .ally-card { padding: 24px 16px; }
   .cultural-title { font-size: 1.625rem; }
   .cta-intermediate-actions { flex-direction: column; }
+  .stat-logo { width: 100px; height: 100px; }
+  .stats-logos { gap: 24px; }
+  .standards-grid { grid-template-columns: 1fr; }
+  .about-timeline { padding: 20px; }
+  .cta-intermediate-inner { padding: 32px 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

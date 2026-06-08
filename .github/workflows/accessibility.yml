@@ -1,0 +1,106 @@
+name: Accessibility Audit
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  accessibility:
+    name: Run Accessibility Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Build preview
+        run: npm run build:no-check
+
+      - name: Start preview server
+        run: npm run preview &
+        env:
+          PORT: 4173
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:4173 --timeout 30000
+
+      - name: Run accessibility audit with Playwright
+        run: |
+          node -e "
+            const { chromium } = require('@playwright/test');
+            (async () => {
+              const browser = await chromium.launch();
+              const page = await browser.newPage();
+              const errors = [];
+              
+              page.on('console', msg => {
+                if (msg.type() === 'error') {
+                  errors.push(msg.text());
+                }
+              });
+              
+              await page.goto('http://localhost:4173');
+              await page.waitForLoadState('networkidle');
+              
+              const results = await page.evaluate(() => {
+                const issues = [];
+                
+                // Check for images without alt
+                document.querySelectorAll('img').forEach(img => {
+                  if (!img.alt && !img.getAttribute('role')) {
+                    issues.push('Image missing alt text: ' + img.src);
+                  }
+                });
+                
+                // Check for buttons without accessible names
+                document.querySelectorAll('button').forEach(btn => {
+                  if (!btn.textContent.trim() && !btn.getAttribute('aria-label')) {
+                    issues.push('Button missing accessible name');
+                  }
+                });
+                
+                // Check for links without text
+                document.querySelectorAll('a').forEach(a => {
+                  if (!a.textContent.trim() && !a.getAttribute('aria-label')) {
+                    issues.push('Link missing text content');
+                  }
+                });
+                
+                // Check for form inputs without labels
+                document.querySelectorAll('input, select, textarea').forEach(el => {
+                  const label = el.id && document.querySelector('label[for=\"' + el.id + '\"]');
+                  const ariaLabel = el.getAttribute('aria-label') || el.getAttribute('aria-labelledby');
+                  if (!label && !ariaLabel && !el.getAttribute('type')?.match(/hidden|submit|button|reset/)) {
+                    issues.push('Form element missing label: ' + el.tagName);
+                  }
+                });
+                
+                return issues;
+              });
+              
+              if (results.length > 0) {
+                console.log('Accessibility issues found:');
+                results.forEach(r => console.log('  - ' + r));
+                process.exit(1);
+              } else {
+                console.log('No critical accessibility issues found!');
+              }
+              
+              await browser.close();
+            })();
+          "
+
+      - name: Stop preview server
+        run: pkill -f "vite preview" || true

@@ -5,162 +5,192 @@
         <div class="eyebrow">FLACT</div>
         <h1>Federación Latinoamericana de<br><em class="gold">Comunidades Terapéuticas</em></h1>
         <p class="lead" style="margin-top:18px;">
-          Llegando donde los gobiernos aún no pueden llegar, con calidad internacional al servicio de la vida.
+          Una organización internacional fundada el 9 de noviembre de 1999, dedicada a fortalecer y representar a las comunidades terapéuticas de América Latina.
         </p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
+
+        <!-- QUIÉNES SOMOS -->
         <div class="flact-intro">
           <div class="flact-logo-wrap">
             <img :src="logoFlact" alt="FLACT" width="80" height="80" style="object-fit:contain" />
           </div>
-          <h2>¿Qué es la FLACT?</h2>
-          <p>La <strong>Federación Latinoamericana de Comunidades Terapéuticas (FLACT)</strong> es una Fundación de Interés Privado, regida por sus Estatutos, el Reglamento Interno, los lineamientos de la Federación Mundial de Comunidades Terapéuticas y las normas de Derecho Internacional aplicables.</p>
-          <p>Es una federación de federaciones, que integra y representa a las organizaciones del sistema de tratamiento, recuperación y servicios comunitarios de América Latina. Está Conformada por Federaciones Nacionales, las cuales agrupan programas e instituciones dedicadas al tratamiento de personas con trastorno por uso de sustancias, así como al acompañamiento y fortalecimiento de sus familias.</p>
+          <h2>¿Quiénes Somos?</h2>
+          <p>La <strong>Federación Latinoamericana de Comunidades Terapéuticas (FLACT)</strong> es una organización internacional dedicada a fortalecer y representar a las comunidades terapéuticas de América Latina en la prevención, tratamiento, rehabilitación e inclusión social de personas con problemas de adicciones.</p>
+          <p>Actualmente integra organizaciones de <strong>más de 14 países</strong> de la región, promoviendo modelos integrales de atención basados en la dignidad de la persona, el respeto por los derechos humanos y la construcción de comunidades saludables.</p>
         </div>
 
-        <div class="flact-grid">
-          <div class="flact-card">
-            <div class="flact-icon">🌎</div>
-            <h3>Cobertura Regional</h3>
-            <p>Presencia en múltiples países de América Latina con comunidades terapéuticas certificadas y profesionales acreditados.</p>
+        <!-- MISIÓN Y VISIÓN -->
+        <div class="mission-vision-grid">
+          <div class="mv-card mission">
+            <div class="mv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            </div>
+            <h3>Misión</h3>
+            <p>Fortalecer y articular el trabajo de las comunidades terapéuticas mediante programas de calidad institucional, capacitación, certificación y cooperación internacional, promoviendo modelos integrales de atención para las personas afectadas por las adicciones.</p>
           </div>
-
-          <div class="flact-card">
-            <div class="flact-icon">🤝</div>
-            <h3>Alianza con ASCAD LATAM</h3>
-            <p>Los miembros de FLACT tienen acceso prioritario al proceso de certificación ASCAD LATAM y beneficios exclusivos en los costos de certificación.</p>
-          </div>
-
-          <div class="flact-card">
-            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-            <h3>Estándares de Calidad</h3>
-            <p>Las comunidades terapéuticas afiliadas a FLACT operan bajo protocolos éticos y clínicos alineados con estándares internacionales.</p>
-          </div>
-
-          <div class="flact-card">
-            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg></div>
-            <h3>Formación Continua</h3>
-            <p>Programas de capacitación y actualización para profesionales de las comunidades terapéuticas asociadas a la federación.</p>
-          </div>
-
-          <div class="flact-card">
-            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-            <h3>Certificación Compartida</h3>
-            <p>Los profesionales formados en comunidades FLACT pueden acceder a la certificación ASCAD LATAM mediante un proceso simplificado y tarifas preferenciales.</p>
-          </div>
-
-          <div class="flact-card">
-            <div class="flact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-            <h3>Investigación y Ciencia</h3>
-            <p>Promoción de congresos, conferencias y espacios de intercambio científico para innovar y mejorar prácticas en la región.</p>
+          <div class="mv-card vision">
+            <div class="mv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Visión</h3>
+            <p>Ser la organización líder en América Latina en el fortalecimiento de las comunidades terapéuticas, impulsando la excelencia, la innovación y los más altos estándares de calidad en la atención de las adicciones.</p>
           </div>
         </div>
 
-        <div class="flact-benefits">
-          <h2>Beneficios de la Membresía FLACT</h2>
-          <div class="benefits-grid">
-            <div class="benefit-item">
-              <span class="benefit-check">✓</span>
+        <!-- FILOSOFÍA -->
+        <div class="philosophy-section">
+          <h2>Filosofía</h2>
+          <div class="philosophy-content">
+            <p>La FLACT se basa en el principio de que <strong>"la comunidad sana a la comunidad"</strong>, promoviendo la participación activa de la persona en recuperación a través del apoyo mutuo, la corresponsabilidad y la convivencia en un entorno seguro y libre de violencia.</p>
+            <p>Asimismo, fomenta la dignidad, la inclusión y el respeto a los derechos humanos, impulsando modelos de atención que respondan a las realidades sociales y culturales de la región.</p>
+            <p class="philosophy-highlight">Creemos que toda persona tiene la capacidad de transformarse cuando encuentra una comunidad solidaria, estructurada y respetuosa.</p>
+          </div>
+        </div>
+
+        <!-- IMPACTO REGIONAL -->
+        <div class="impact-section">
+          <h2>Impacto Regional</h2>
+          <div class="impact-grid">
+            <div class="impact-card">
+              <div class="impact-number">700+</div>
+              <div class="impact-label">Comunidades terapéuticas afiliadas</div>
+            </div>
+            <div class="impact-card">
+              <div class="impact-number">14+</div>
+              <div class="impact-label">Países en América Latina</div>
+            </div>
+            <div class="impact-card">
+              <div class="impact-number">8,000</div>
+              <div class="impact-label">Profesionales y colaboradores</div>
+            </div>
+            <div class="impact-card">
+              <div class="impact-number">Miles</div>
+              <div class="impact-label">Personas beneficiadas cada año</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LÍNEAS ESTRATÉGICAS -->
+        <div class="strategic-section">
+          <h2>Líneas Estratégicas</h2>
+          <div class="strategic-grid">
+            <div class="strategic-card">
+              <div class="strategic-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h4>Calidad Institucional</h4>
+              <p>Promovemos procesos de evaluación y acreditación para garantizar servicios de excelencia.</p>
+            </div>
+            <div class="strategic-card">
+              <div class="strategic-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <h4>Capacitación Permanente</h4>
+              <p>Desarrollamos programas de formación continua para profesionales y equipos técnicos.</p>
+            </div>
+            <div class="strategic-card">
+              <div class="strategic-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              </div>
+              <h4>Certificación Profesional</h4>
+              <p>Impulsamos la certificación de consejeros y especialistas en adicciones para fortalecer la calidad de la atención.</p>
+            </div>
+            <div class="strategic-card">
+              <div class="strategic-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <h4>Investigación y Cooperación</h4>
+              <p>Fomentamos la generación de conocimiento y el intercambio de experiencias entre países de la región.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRESIDENTES -->
+        <div class="presidents-section">
+          <h2>Presidentes de la FLACT</h2>
+          <div class="presidents-table">
+            <div class="table-header">
+              <span>Período</span>
+              <span>Presidente</span>
+            </div>
+            <div class="table-row">
+              <span>1998 – 2014</span>
+              <span>Gabriel Mejía</span>
+            </div>
+            <div class="table-row">
+              <span>2014 – 2018</span>
+              <span>Juan Palacios</span>
+            </div>
+            <div class="table-row">
+              <span>2018 – 2022</span>
+              <span>Fabián Chiosso</span>
+            </div>
+            <div class="table-row">
+              <span>2022 – 2026</span>
+              <span>Jorge Olivares</span>
+            </div>
+            <div class="table-row current">
+              <span>2026 – 2028</span>
+              <span>Iván Alvarado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MENSAJE INSTITUCIONAL CON PRESIDENTE -->
+        <div class="message-section">
+          <div class="message-content">
+            <h2>Mensaje Institucional</h2>
+            <blockquote class="institutional-message">
+              "Trabajamos por una América Latina más saludable e inclusiva, fortaleciendo las comunidades terapéuticas y promoviendo procesos de recuperación integral para las personas y sus familias."
+            </blockquote>
+          </div>
+          <div class="president-card">
+            <div class="president-info">
+              <img :src="presidenteImg" alt="Iván Alvarado - Presidente FLACT" class="president-photo" />
+              <div class="president-details">
+                <span class="president-name">Iván Alvarado</span>
+                <span class="president-role">Presidente FLACT 2026-2028</span>
+              </div>
+            </div>
+            <img :src="firmaImg" alt="Firma Iván Alvarado" class="president-signature" />
+          </div>
+        </div>
+
+        <!-- ALIANZA FLACT-ASCAD -->
+        <div class="alliance-section">
+          <h2>Alianza FLACT – ASCAD LATAM</h2>
+          <p>Los miembros de FLACT tienen acceso prioritario al proceso de certificación ASCAD LATAM, con beneficios exclusivos en los costos de certificación y programas de formación continua.</p>
+          <div class="alliance-benefits">
+            <div class="alliance-item">
+              <span class="alliance-check">✓</span>
               <span>Descuento del 20% en cuotas de certificación ASCAD LATAM</span>
             </div>
-            <div class="benefit-item">
-              <span class="benefit-check">✓</span>
+            <div class="alliance-item">
+              <span class="alliance-check">✓</span>
               <span>Acceso a programas de formación continua exclusivos</span>
             </div>
-            <div class="benefit-item">
-              <span class="benefit-check">✓</span>
+            <div class="alliance-item">
+              <span class="alliance-check">✓</span>
               <span>Verificación automática de experiencia en comunidades FLACT</span>
             </div>
-            <div class="benefit-item">
-              <span class="benefit-check">✓</span>
-              <span>Red de contactos profesionales en toda América Latina</span>
-            </div>
-            <div class="benefit-item">
-              <span class="benefit-check">✓</span>
+            <div class="alliance-item">
+              <span class="alliance-check">✓</span>
               <span>Participación en eventos y conferencias regionales</span>
             </div>
-            <div class="benefit-item">
-              <span class="benefit-check">✓</span>
-              <span>Asesoría técnica para el desarrollo de programas terapéuticos</span>
-            </div>
           </div>
         </div>
 
-        <div class="flact-objectives">
-          <h2>Objetivos Estratégicos 2026 – 2028</h2>
-          <div class="objectives-grid">
-            <div class="objective-card">
-              <div class="objective-number">1</div>
-              <div class="objective-content">
-                <h4>Integración de programas</h4>
-                <p>Congregar y articular federaciones y programas de atención (centros comunitarios, tratamiento residencial, programas de recuperación, prevención, consulta externa, intervenciones breves, tratamientos ambulatorios), siempre adheridos a códigos éticos que protejan la dignidad y los derechos del usuario.</p>
-              </div>
-            </div>
-            <div class="objective-card">
-              <div class="objective-number">2</div>
-              <div class="objective-content">
-                <h4>Fortalecimiento institucional</h4>
-                <p>Apoyar la consolidación y expansión de los programas afiliados, impulsar modelos de sostenibilidad y autogestión, fortalecer las redes nacionales y regionales.</p>
-              </div>
-            </div>
-            <div class="objective-card">
-              <div class="objective-number">3</div>
-              <div class="objective-content">
-                <h4>Formación del recurso humano</h4>
-                <p>Capacitar y profesionalizar a operadores terapéuticos, consejeros en adicciones, entrenadores de recuperación y profesionales de la salud.</p>
-              </div>
-            </div>
-            <div class="objective-card">
-              <div class="objective-number">4</div>
-              <div class="objective-content">
-                <h4>Desarrollo académico y científico</h4>
-                <p>Promover congresos internacionales, conferencias, simposios, encuentros científicos, espacios de intercambio de experiencias e investigación sobre consumo de sustancias, para innovar, mejorar prácticas y generar conocimiento regional.</p>
-              </div>
-            </div>
-            <div class="objective-card">
-              <div class="objective-number">5</div>
-              <div class="objective-content">
-                <h4>Cooperación y políticas públicas</h4>
-                <p>Impulsar programas de prevención integral, procesos de rehabilitación y reinserción social, trabajo conjunto con gobiernos y organismos internacionales, incidencia en políticas públicas sobre farmacodependencia, especialmente en poblaciones vulnerables.</p>
-              </div>
-            </div>
-            <div class="objective-card">
-              <div class="objective-number">6</div>
-              <div class="objective-content">
-                <h4>Calidad y certificación</h4>
-                <p>Desarrollar estándares internacionales de calidad, sistemas de certificación de programas, certificación del recurso humano, supervisión y mejora continua de servicios para garantizar atención digna, ética y efectiva.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flact-vision">
-          <h2>Visión / Consolidación</h2>
-          <p>Queremos que la FLACT se consolide como una organización líder en América Latina, capaz de unir federaciones de comunidades terapéuticas para: fortalecer el tratamiento, impulsar la prevención, promover la investigación, formar profesionales e incidir en políticas públicas.</p>
-          <p class="vision-purpose">Todo con un mismo propósito: <strong>transformar vidas y restaurar esperanza</strong>.</p>
-        </div>
-
-        <div class="flact-slogan">
-          <blockquote>
-            "FLACT: Llegando donde los gobiernos aún no pueden llegar, con calidad internacional al servicio de la vida."
-          </blockquote>
-        </div>
-
-        <div class="flact-beneficiaries">
-          <h2>Beneficiarios</h2>
-          <p>La Fundación de Interés Privado FLACT es una Federación Internacional que agrupa a las Federaciones Nacionales de Comunidades Terapéuticas de América Latina, las cuales a su vez reúnen organizaciones de la sociedad civil que brinda tratamiento a personas con problemas de adicción y a sus familias.</p>
-          <p><strong>Los beneficiarios finales son las personas que reciben tratamiento por problemas de adicción.</strong></p>
-        </div>
-
+        <!-- CTA -->
         <div class="flact-cta">
           <h3>¿Sos miembro de una comunidad FLACT?</h3>
           <p>Indicá los datos de tu organización en el formulario de solicitud para acceder a los beneficios de la alianza FLACT-ASCAD LATAM.</p>
           <div class="cta-buttons">
             <router-link to="/solicitud" class="btn btn-gold btn-lg">Iniciar solicitud con beneficio FLACT</router-link>
-            <router-link to="/formacion" class="btn btn-outline btn-lg">Ver programas de formación</router-link>
+            <router-link to="/directorio" class="btn btn-outline btn-lg">Ver países afiliados</router-link>
           </div>
         </div>
       </div>
@@ -170,22 +200,17 @@
 
 <script setup>
 import logoFlact from '/images/FLACT.png'
+import presidenteImg from '/images/presidente.png'
+import firmaImg from '/images/firma.png'
 </script>
 
 <style scoped>
-.flact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 64px;
-}
-
 .flact-intro {
   background: var(--surface);
   border: 1px solid var(--line-light);
   border-radius: var(--radius-xl);
   padding: 48px;
-  margin-bottom: 64px;
+  margin-bottom: 48px;
 }
 .flact-logo-wrap {
   width: 80px;
@@ -202,19 +227,104 @@ import logoFlact from '/images/FLACT.png'
 .flact-intro p { color: var(--text-secondary); line-height: 1.8; font-size: 1.0625rem; margin-bottom: 16px; }
 .flact-intro p:last-child { margin-bottom: 0; }
 
-.flact-card {
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.mv-card {
   background: var(--surface);
   border: 1px solid var(--line-light);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+}
+.mv-card.mission { border-top: 4px solid var(--primary); }
+.mv-card.vision { border-top: 4px solid var(--accent); }
+.mv-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
   border-radius: var(--radius-lg);
-  padding: 32px 28px;
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+.mv-card.vision .mv-icon { color: var(--accent-dark); }
+.mv-icon svg { width: 24px; height: 24px; }
+.mv-card h3 { margin-bottom: 16px; font-size: 1.25rem; }
+.mv-card p { color: var(--text-secondary); line-height: 1.7; font-size: .9375rem; }
+
+.philosophy-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+  border-radius: var(--radius-xl);
+  padding: 56px;
+  margin-bottom: 48px;
+}
+.philosophy-section h2 { color: var(--white); margin-bottom: 24px; font-size: 1.5rem; }
+.philosophy-content p { color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1rem; margin-bottom: 16px; }
+.philosophy-content p:last-child { margin-bottom: 0; }
+.philosophy-content strong { color: var(--accent); }
+.philosophy-highlight {
+  background: rgba(201,168,76,0.15);
+  border-left: 4px solid var(--accent);
+  padding: 20px 24px;
+  border-radius: var(--radius);
+  margin-top: 24px;
+  font-style: italic;
+  color: var(--white) !important;
+}
+
+.impact-section { margin-bottom: 48px; }
+.impact-section h2 { margin-bottom: 32px; font-size: 1.5rem; }
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.impact-card {
+  background: var(--surface);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-xl);
+  padding: 32px 24px;
+  text-align: center;
+}
+.impact-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.impact-label {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.strategic-section { margin-bottom: 48px; }
+.strategic-section h2 { margin-bottom: 32px; font-size: 1.5rem; }
+.strategic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.strategic-card {
+  background: var(--surface);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-xl);
+  padding: 32px 24px;
   transition: all .3s ease;
 }
-.flact-card:hover {
+.strategic-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--accent-light);
 }
-.flact-icon {
+.strategic-icon {
   width: 48px;
   height: 48px;
   display: flex;
@@ -225,22 +335,117 @@ import logoFlact from '/images/FLACT.png'
   margin-bottom: 16px;
   color: var(--accent-dark);
 }
-.flact-icon svg {
-  width: 24px;
-  height: 24px;
-}
-.flact-card h3 { color: var(--text); margin-bottom: 10px; font-size: 1.125rem; }
-.flact-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.7; }
+.strategic-icon svg { width: 24px; height: 24px; }
+.strategic-card h4 { margin-bottom: 10px; font-size: 1rem; color: var(--text); }
+.strategic-card p { font-size: .8125rem; color: var(--text-muted); line-height: 1.6; }
 
-.flact-benefits {
+.presidents-section { margin-bottom: 48px; }
+.presidents-section h2 { margin-bottom: 32px; font-size: 1.5rem; }
+.presidents-table {
+  background: var(--surface);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  background: var(--primary);
+  color: var(--white);
+  padding: 16px 32px;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--line-light);
+  font-size: .9375rem;
+}
+.table-row:last-child { border-bottom: none; }
+.table-row span:first-child { color: var(--text-muted); font-family: var(--font-mono); }
+.table-row span:last-child { color: var(--text); font-weight: 500; }
+.table-row.current { background: var(--accent-light); }
+.table-row.current span:last-child { color: var(--accent-dark); font-weight: 700; }
+
+.message-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  margin-bottom: 48px;
+}
+.message-content h2 { margin-bottom: 20px; font-size: 1.25rem; }
+.institutional-message {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 24px;
+  border-left: 4px solid var(--accent);
+}
+.president-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.president-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.president-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+}
+.president-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.president-name {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1rem;
+}
+.president-role {
+  font-size: .75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.president-signature {
+  max-width: 160px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.alliance-section {
   background: var(--primary);
   border-radius: var(--radius-xl);
-  padding: 56px;
-  margin-bottom: 64px;
+  padding: 48px;
+  margin-bottom: 48px;
 }
-.flact-benefits h2 { color: var(--white); margin-bottom: 36px; font-size: 1.75rem; }
-.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.benefit-item {
+.alliance-section h2 { color: var(--white); margin-bottom: 16px; font-size: 1.5rem; }
+.alliance-section > p { color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 32px; }
+.alliance-benefits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.alliance-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -248,92 +453,8 @@ import logoFlact from '/images/FLACT.png'
   background: rgba(255,255,255,0.06);
   border-radius: var(--radius);
 }
-.benefit-check {
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-.benefit-item span:last-child { color: rgba(255,255,255,0.85); font-size: .9375rem; line-height: 1.5; }
-
-.flact-objectives {
-  background: var(--surface);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 56px;
-  margin-bottom: 64px;
-}
-.flact-objectives h2 { margin-bottom: 40px; font-size: 1.75rem; }
-.objectives-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.objective-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 28px;
-  background: var(--bg-light);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--line-light);
-}
-.objective-number {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--white);
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.objective-content h4 { color: var(--text); margin-bottom: 8px; font-size: 1.0625rem; }
-.objective-content p { color: var(--text-muted); font-size: .875rem; line-height: 1.7; }
-
-.flact-vision {
-  background: var(--surface);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 56px;
-  margin-bottom: 40px;
-  text-align: center;
-}
-.flact-vision h2 { margin-bottom: 24px; font-size: 1.75rem; }
-.flact-vision p { color: var(--text-secondary); line-height: 1.8; font-size: 1.0625rem; max-width: 700px; margin: 0 auto 16px; }
-.vision-purpose { font-size: 1.125rem; color: var(--text); }
-.vision-purpose strong { color: var(--accent-dark); }
-
-.flact-slogan {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
-  border-radius: var(--radius-xl);
-  padding: 48px;
-  margin-bottom: 64px;
-  text-align: center;
-}
-.flact-slogan blockquote {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--white);
-  line-height: 1.6;
-  font-style: italic;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.flact-slogan blockquote::before { content: '"'; color: var(--accent); }
-.flact-slogan blockquote::after { content: '"'; color: var(--accent); }
-
-.flact-beneficiaries {
-  background: var(--accent-light);
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: var(--radius-xl);
-  padding: 48px;
-  margin-bottom: 64px;
-}
-.flact-beneficiaries h2 { margin-bottom: 20px; font-size: 1.5rem; color: var(--accent-dark); }
-.flact-beneficiaries p { color: var(--text-secondary); line-height: 1.8; font-size: 1rem; margin-bottom: 12px; }
-.flact-beneficiaries p:last-child { margin-bottom: 0; }
-.flact-beneficiaries strong { color: var(--text); }
+.alliance-check { color: var(--accent); font-weight: 700; }
+.alliance-item span:last-child { color: rgba(255,255,255,0.85); font-size: .9375rem; }
 
 .flact-cta {
   background: var(--surface);
@@ -347,13 +468,21 @@ import logoFlact from '/images/FLACT.png'
 .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
 @media (max-width: 1024px) {
-  .flact-grid { grid-template-columns: repeat(2, 1fr); }
-  .benefits-grid { grid-template-columns: 1fr; }
-  .objectives-grid { grid-template-columns: 1fr; }
+  .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .strategic-grid { grid-template-columns: repeat(2, 1fr); }
+  .message-section { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .flact-grid { grid-template-columns: 1fr; }
-  .flact-intro, .flact-benefits, .flact-objectives, .flact-vision, .flact-slogan, .flact-beneficiaries, .flact-cta { padding: 36px 28px; }
-  .flact-cta { padding: 36px 28px; }
+  .mission-vision-grid { grid-template-columns: 1fr; }
+  .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .strategic-grid { grid-template-columns: 1fr; }
+  .alliance-benefits { grid-template-columns: 1fr; }
+  .table-header, .table-row { padding: 12px 20px; }
+  .flact-intro, .philosophy-section, .message-section, .alliance-section, .flact-cta { padding: 32px 24px; }
+}
+@media (max-width: 480px) {
+  .impact-grid { grid-template-columns: 1fr 1fr; }
+  .cta-buttons { flex-direction: column; }
+  .cta-buttons .btn { width: 100%; }
 }
 </style>
