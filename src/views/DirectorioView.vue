@@ -102,26 +102,26 @@
 
 <script setup>
 const affiliates = [
-  { name: 'México', flag: '🇲🇽', description: 'Punto de conexión con América del Norte. Desarrollo de programas de certificación con adaptación a contextos multiculturales.' },
-  { name: 'Brasil', flag: '🇧🇷', description: 'Mayor cobertura de profesionales certificados en la región. Certificaciones disponibles en portugués con adaptación cultural a contextos latinoamericanos.' },
-  { name: 'Bolivia', flag: '🇧🇴', description: 'Integración de comunidades terapéuticas y programas de formación en el corazón de Suramérica.' },
-  { name: 'Perú', flag: '🇵🇪', description: 'Desarrollo de programas de certificación y formación continua con alianzas estratégicas regionales.' },
-  { name: 'Ecuador', flag: '🇪🇨', description: 'Participación activa en la red de profesionales certificados con estándares internacionales.' },
-  { name: 'Paraguay', flag: '🇵🇾', description: 'Participación activa en la red de profesionales certificados. Alianzas estratégicas para la expansión de estándares de certificación.' },
-  { name: 'Chile', flag: '🇨🇱', description: 'Desarrollo de programas de certificación y formación continua con cobertura en el cono sur.' },
-  { name: 'Costa Rica', flag: '🇨🇷', description: 'Sede fundacional del consorcio ASCAD LATAM. Pionero en la implementación de estándares de certificación profesional en comunidades terapéuticas de América Central.' },
-  { name: 'El Salvador', flag: '🇸🇻', description: 'Integración de comunidades terapéuticas y programas de formación con estándares internacionales.' },
-  { name: 'Puerto Rico', flag: '🇵🇷', description: 'Punto de conexión con América del Norte y el Caribe. Desarrollo de programas de certificación bilingües.' },
+  { name: 'México', flag: 'MX', description: 'Punto de conexión con América del Norte. Desarrollo de programas de certificación con adaptación a contextos multiculturales.' },
+  { name: 'Brasil', flag: 'BR', description: 'Mayor cobertura de profesionales certificados en la región. Certificaciones disponibles en portugués con adaptación cultural a contextos latinoamericanos.' },
+  { name: 'Bolivia', flag: 'BO', description: 'Integración de comunidades terapéuticas y programas de formación en el corazón de Suramérica.' },
+  { name: 'Perú', flag: 'PE', description: 'Desarrollo de programas de certificación y formación continua con alianzas estratégicas regionales.' },
+  { name: 'Ecuador', flag: 'EC', description: 'Participación activa en la red de profesionales certificados con estándares internacionales.' },
+  { name: 'Paraguay', flag: 'PY', description: 'Participación activa en la red de profesionales certificados. Alianzas estratégicas para la expansión de estándares de certificación.' },
+  { name: 'Chile', flag: 'CL', description: 'Desarrollo de programas de certificación y formación continua con cobertura en el cono sur.' },
+  { name: 'Costa Rica', flag: 'CR', description: 'Sede fundacional del consorcio ASCAD LATAM. Pionero en la implementación de estándares de certificación profesional en comunidades terapéuticas de América Central.' },
+  { name: 'El Salvador', flag: 'SV', description: 'Integración de comunidades terapéuticas y programas de formación con estándares internacionales.' },
+  { name: 'Puerto Rico', flag: 'PR', description: 'Punto de conexión con América del Norte y el Caribe. Desarrollo de programas de certificación bilingües.' },
 ]
 
 const preAffiliates = [
-  { name: 'Guatemala', flag: '🇬🇹', description: 'País en proceso de integración al consorcio ASCAD LATAM. Desarrollo de programas de formación.' },
-  { name: 'Honduras', flag: '🇭🇳', description: 'País en proceso de integración. Alianzas estratégicas para la expansión de estándares de certificación.' },
-  { name: 'Nicaragua', flag: '🇳🇮', description: 'País en proceso de integración. Participación en redes de profesionales certificados.' },
-  { name: 'Venezuela', flag: '🇻🇪', description: 'País en proceso de integración. Desarrollo de programas de certificación en recuperación.' },
-  { name: 'Cuba', flag: '🇨🇺', description: 'País en proceso de integración. Alianzas estratégicas para la expansión de estándares.' },
-  { name: 'Panamá', flag: '🇵🇦', description: 'País en proceso de integración. Conexión entre América Central y el Caribe.' },
-  { name: 'República Dominicana', flag: '🇩🇴', description: 'País en proceso de integración. Desarrollo de programas de certificación en el Caribe.' },
+  { name: 'Guatemala', flag: 'GT', description: 'País en proceso de integración al consorcio ASCAD LATAM. Desarrollo de programas de formación.' },
+  { name: 'Honduras', flag: 'HN', description: 'País en proceso de integración. Alianzas estratégicas para la expansión de estándares de certificación.' },
+  { name: 'Nicaragua', flag: 'NI', description: 'País en proceso de integración. Participación en redes de profesionales certificados.' },
+  { name: 'Venezuela', flag: 'VE', description: 'País en proceso de integración. Desarrollo de programas de certificación en recuperación.' },
+  { name: 'Cuba', flag: 'CU', description: 'País en proceso de integración. Alianzas estratégicas para la expansión de estándares.' },
+  { name: 'Panamá', flag: 'PA', description: 'País en proceso de integración. Conexión entre América Central y el Caribe.' },
+  { name: 'República Dominicana', flag: 'DO', description: 'País en proceso de integración. Desarrollo de programas de certificación en el Caribe.' },
 ]
 </script>
 
@@ -148,7 +148,20 @@ const preAffiliates = [
   box-shadow: var(--shadow-md);
   border-color: var(--accent-light);
 }
-.country-flag { font-size: 2.5rem; flex-shrink: 0; }
+.country-flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
 .country-info h4 { font-size: 1.125rem; color: var(--text); margin-bottom: 8px; }
 .country-info p { font-size: .875rem; color: var(--text-muted); line-height: 1.6; }
 

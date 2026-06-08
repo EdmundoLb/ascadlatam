@@ -358,7 +358,7 @@ onUnmounted(() => {
   padding: calc(var(--nav-height) + 60px) 0 80px;
   background: linear-gradient(160deg, var(--bg-light) 0%, var(--white) 60%, var(--accent-light) 100%);
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .hero-bg-pattern {
   position: absolute;
