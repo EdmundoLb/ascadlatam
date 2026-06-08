@@ -35,7 +35,7 @@
         </div>
         <div class="countries-grid">
           <div v-for="country in affiliates" :key="country.name" class="country-card">
-            <div class="country-flag">{{ country.flag }}</div>
+            <span :class="'flag-icon flag-icon-' + country.code.toLowerCase() + ' country-flag'"></span>
             <div class="country-info">
               <h4>{{ country.name }}</h4>
               <p>{{ country.description }}</p>
@@ -50,7 +50,7 @@
         </div>
         <div class="countries-grid">
           <div v-for="country in preAffiliates" :key="country.name" class="country-card preaffiliate">
-            <div class="country-flag">{{ country.flag }}</div>
+            <span :class="'flag-icon flag-icon-' + country.code.toLowerCase() + ' country-flag'"></span>
             <div class="country-info">
               <h4>{{ country.name }}</h4>
               <p>{{ country.description }}</p>
@@ -102,28 +102,28 @@
 
 <script setup>
 const affiliates = [
-  { name: 'Argentina', flag: 'AR', description: 'Reconocida por su amplia trayectoria en el desarrollo de comunidades terapéuticas y programas de inclusión social.' },
-  { name: 'Uruguay', flag: 'UY', description: 'Destacado por su compromiso con la innovación y el fortalecimiento de modelos integrales de atención y rehabilitación.' },
-  { name: 'México', flag: 'MX', description: 'Aporta una extensa experiencia en prevención, tratamiento y fortalecimiento de redes comunitarias.' },
-  { name: 'Brasil', flag: 'BR', description: 'Contribuye con una sólida tradición de trabajo social y comunitario, promoviendo iniciativas de alcance nacional.' },
-  { name: 'Bolivia', flag: 'BO', description: 'Impulsa acciones de acompañamiento y reinserción social adaptadas a las realidades culturales de la región andina.' },
-  { name: 'Perú', flag: 'PE', description: 'Fortalece la labor terapéutica mediante programas de desarrollo humano y apoyo familiar.' },
-  { name: 'Ecuador', flag: 'EC', description: 'Promueve la integración de enfoques comunitarios centrados en la persona y su entorno.' },
-  { name: 'Paraguay', flag: 'PY', description: 'Desarrolla iniciativas orientadas a la recuperación integral y la construcción de redes de apoyo social.' },
-  { name: 'Chile', flag: 'CL', description: 'Contribuye con experiencias innovadoras en rehabilitación y fortalecimiento institucional.' },
-  { name: 'Costa Rica', flag: 'CR', description: 'Destaca por su enfoque humanista y la promoción de procesos terapéuticos integrales.' },
-  { name: 'El Salvador', flag: 'SV', description: 'Impulsa programas comunitarios enfocados en la prevención, recuperación y reintegración social.' },
-  { name: 'Puerto Rico', flag: 'PR', description: 'Aporta experiencia en modelos de atención basados en la participación comunitaria y el acompañamiento continuo.' },
+  { name: 'Argentina', code: 'AR', description: 'Reconocida por su amplia trayectoria en el desarrollo de comunidades terapéuticas y programas de inclusión social.' },
+  { name: 'Uruguay', code: 'UY', description: 'Destacado por su compromiso con la innovación y el fortalecimiento de modelos integrales de atención y rehabilitación.' },
+  { name: 'México', code: 'MX', description: 'Aporta una extensa experiencia en prevención, tratamiento y fortalecimiento de redes comunitarias.' },
+  { name: 'Brasil', code: 'BR', description: 'Contribuye con una sólida tradición de trabajo social y comunitario, promoviendo iniciativas de alcance nacional.' },
+  { name: 'Bolivia', code: 'BO', description: 'Impulsa acciones de acompañamiento y reinserción social adaptadas a las realidades culturales de la región andina.' },
+  { name: 'Perú', code: 'PE', description: 'Fortalece la labor terapéutica mediante programas de desarrollo humano y apoyo familiar.' },
+  { name: 'Ecuador', code: 'EC', description: 'Promueve la integración de enfoques comunitarios centrados en la persona y su entorno.' },
+  { name: 'Paraguay', code: 'PY', description: 'Desarrolla iniciativas orientadas a la recuperación integral y la construcción de redes de apoyo social.' },
+  { name: 'Chile', code: 'CL', description: 'Contribuye con experiencias innovadoras en rehabilitación y fortalecimiento institucional.' },
+  { name: 'Costa Rica', code: 'CR', description: 'Destaca por su enfoque humanista y la promoción de procesos terapéuticos integrales.' },
+  { name: 'El Salvador', code: 'SV', description: 'Impulsa programas comunitarios enfocados en la prevención, recuperación y reintegración social.' },
+  { name: 'Puerto Rico', code: 'PR', description: 'Aporta experiencia en modelos de atención basados en la participación comunitaria y el acompañamiento continuo.' },
 ]
 
 const preAffiliates = [
-  { name: 'Guatemala', flag: 'GT', description: 'Avanza en el fortalecimiento de sus comunidades terapéuticas y redes de cooperación regional.' },
-  { name: 'Honduras', flag: 'HN', description: 'Promueve iniciativas orientadas al desarrollo de servicios de atención y rehabilitación.' },
-  { name: 'Nicaragua', flag: 'NI', description: 'Trabaja en la consolidación de programas comunitarios y espacios de formación profesional.' },
-  { name: 'Venezuela', flag: 'VE', description: 'Participa activamente en procesos de integración regional y fortalecimiento institucional.' },
-  { name: 'Cuba', flag: 'CU', description: 'Contribuye con experiencias vinculadas a la promoción de la salud y el bienestar comunitario.' },
-  { name: 'Panamá', flag: 'PA', description: 'Impulsa el crecimiento de redes terapéuticas y programas de acompañamiento social.' },
-  { name: 'República Dominicana', flag: 'DO', description: 'Fortalece acciones de prevención, tratamiento e inclusión social en beneficio de las comunidades.' },
+  { name: 'Guatemala', code: 'GT', description: 'Avanza en el fortalecimiento de sus comunidades terapéuticas y redes de cooperación regional.' },
+  { name: 'Honduras', code: 'HN', description: 'Promueve iniciativas orientadas al desarrollo de servicios de atención y rehabilitación.' },
+  { name: 'Nicaragua', code: 'NI', description: 'Trabaja en la consolidación de programas comunitarios y espacios de formación profesional.' },
+  { name: 'Venezuela', code: 'VE', description: 'Participa activamente en procesos de integración regional y fortalecimiento institucional.' },
+  { name: 'Cuba', code: 'CU', description: 'Contribuye con experiencias vinculadas a la promoción de la salud y el bienestar comunitario.' },
+  { name: 'Panamá', code: 'PA', description: 'Impulsa el crecimiento de redes terapéuticas y programas de acompañamiento social.' },
+  { name: 'República Dominicana', code: 'DO', description: 'Fortalece acciones de prevención, tratamiento e inclusión social en beneficio de las comunidades.' },
 ]
 </script>
 
@@ -151,18 +151,14 @@ const preAffiliates = [
   border-color: var(--accent-light);
 }
 .country-flag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: var(--primary);
-  color: var(--white);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
+  background: var(--bg-gray);
+}
+.country-flag.flag-icon {
+  background: none;
 }
 .country-info h4 { font-size: 1.125rem; color: var(--text); margin-bottom: 8px; }
 .country-info p { font-size: .875rem; color: var(--text-muted); line-height: 1.6; }
