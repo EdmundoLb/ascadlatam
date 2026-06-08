@@ -21,6 +21,7 @@
         <router-link to="/">Inicio</router-link>
         <router-link to="/certificaciones">Certificaciones</router-link>
         <router-link to="/flact">FLACT</router-link>
+        <router-link to="/ascadlatam">ASCAD-LATAM</router-link>
         <router-link to="/formacion">Formación</router-link>
         <router-link to="/noticias">Recursos</router-link>
         <router-link to="/directorio">Países</router-link>
@@ -64,9 +65,10 @@
       <router-link to="/" @click="closeMenu" tabindex="0">Inicio</router-link>
       <router-link to="/certificaciones" @click="closeMenu" tabindex="0">Certificaciones</router-link>
       <router-link to="/flact" @click="closeMenu" tabindex="0">FLACT</router-link>
+      <router-link to="/ascadlatam" @click="closeMenu" tabindex="0">ASCAD-LATAM</router-link>
       <router-link to="/formacion" @click="closeMenu" tabindex="0">Formación</router-link>
       <router-link to="/noticias" @click="closeMenu" tabindex="0">Recursos</router-link>
-      <router-link to="/directorio" @click="closeMenu" tabindex="0">Directorio</router-link>
+      <router-link to="/directorio" @click="closeMenu" tabindex="0">Países</router-link>
       <router-link to="/contacto" @click="closeMenu" tabindex="0">Contacto</router-link>
       <router-link to="/solicitud" @click="closeMenu" class="mobile-cta" tabindex="0">Iniciar solicitud →</router-link>
     </nav>

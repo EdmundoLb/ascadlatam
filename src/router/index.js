@@ -26,6 +26,12 @@ const routes = [
     meta: { title: 'FLACT - Federación Latinoamericana de Comunidades Terapéuticas | ASCAD LATAM' }
   },
   {
+    path: '/ascadlatam',
+    name: 'ascadlatam',
+    component: () => import('@/views/AscadLatamView.vue'),
+    meta: { title: 'ASCAD-LATAM | Nuestra Historia' }
+  },
+  {
     path: '/formacion',
     name: 'formacion',
     component: () => import('@/views/FormacionView.vue'),
