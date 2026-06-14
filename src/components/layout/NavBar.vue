@@ -10,8 +10,6 @@
         <div class="brand-text">
           <span class="brand-label">Certificación Internacional</span>
           <strong class="brand-name">
-            <span class="brand-flact">FLACT</span>
-            <span class="brand-sep"> . </span>
             <span class="brand-ascal">ASCAD-LATAM</span>
           </strong>
         </div>
@@ -20,7 +18,7 @@
       <nav class="desktop-nav" role="navigation" aria-label="Navegación principal">
         <router-link to="/">Inicio</router-link>
         <router-link to="/certificaciones">Certificaciones</router-link>
-        <router-link to="/flact">FLACT</router-link>
+        <router-link to="/etica">Ética</router-link>
         <router-link to="/ascadlatam">ASCAD-LATAM</router-link>
         <router-link to="/formacion">Formación</router-link>
         <router-link to="/noticias">Recursos</router-link>
@@ -64,7 +62,7 @@
     >
       <router-link to="/" @click="closeMenu" tabindex="0">Inicio</router-link>
       <router-link to="/certificaciones" @click="closeMenu" tabindex="0">Certificaciones</router-link>
-      <router-link to="/flact" @click="closeMenu" tabindex="0">FLACT</router-link>
+      <router-link to="/etica" @click="closeMenu" tabindex="0">Ética</router-link>
       <router-link to="/ascadlatam" @click="closeMenu" tabindex="0">ASCAD-LATAM</router-link>
       <router-link to="/formacion" @click="closeMenu" tabindex="0">Formación</router-link>
       <router-link to="/noticias" @click="closeMenu" tabindex="0">Recursos</router-link>
@@ -181,8 +179,6 @@ watch(menuOpen, async (val) => {
   line-height: 1.2;
   white-space: nowrap;
 }
-.brand-flact { color: var(--white); }
-.brand-sep { color: rgba(255,255,255,0.5); margin: 0 2px; }
 .brand-ascal { color: var(--white); }
 
 @media (max-width: 600px) {

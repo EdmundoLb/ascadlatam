@@ -5,7 +5,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import('@/views/HomeView.vue'),
-    meta: { title: 'ASCAD LATAM | Certificación Internacional en Adicciones - FLACT, Universidad Gestalt, Aforind' }
+    meta: { title: 'ASCAD LATAM | Certificación Internacional en Adicciones' }
   },
   {
     path: '/certificaciones',
@@ -20,10 +20,10 @@ const routes = [
     meta: { title: 'Solicitud de Certificación | ASCAD LATAM' }
   },
   {
-    path: '/flact',
-    name: 'flact',
-    component: () => import('@/views/FlactView.vue'),
-    meta: { title: 'FLACT - Federación Latinoamericana de Comunidades Terapéuticas | ASCAD LATAM' }
+    path: '/etica',
+    name: 'etica',
+    component: () => import('@/views/EticaView.vue'),
+    meta: { title: 'Ética y Calidad Profesional | ASCAD LATAM' }
   },
   {
     path: '/ascadlatam',

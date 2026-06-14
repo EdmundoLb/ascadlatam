@@ -48,7 +48,8 @@ src/
 │   ├── DirectorioView.vue       # Directorio de profesionales certificados
 │   ├── BlogView.vue             # Blog y noticias
 │   ├── ContactoView.vue         # Formulario de contacto (Formspree)
-│   ├── FlactView.vue            # Página de FLACT (Federación Latinoamericana CT)
+│   ├── FlactView.vue            # ELIMINADO - Ver EticaView.vue
+│   ├── EticaView.vue            # Página de Ética y Calidad Profesional
 │   ├── AliadosView.vue          # Página de aliados estratégicos
 │   └── NotFoundView.vue         # Página 404
 ├── stores/
@@ -104,7 +105,8 @@ Cada nivel de certificación desarrolla tres ejes:
 | `/directorio` | DirectorioView |
 | `/blog` | BlogView |
 | `/contacto` | ContactoView |
-| `/flact` | FlactView |
+| `/flact` | ELIMINADO |
+| `/etica` | EticaView |
 | `/aliados` | AliadosView |
 
 ---
@@ -115,7 +117,7 @@ images/
 ├── LOGO.png      # Logo antiguo
 ├── LOGO2.png     # Logo PRINCIPAL (usar este)
 ├── ASCAD.png     # Logo ASCAD
-├── FLACT.png     # Logo FLACT
+├── FLACT.png     # ELIMINADO
 ├── AFORING.jpg   # Logo Aforind
 ```
 
@@ -128,7 +130,7 @@ images/
 ### NavBar.vue
 - **Estilo**: Fondo azul oscuro `--primary` (#0a2540), texto blanco
 - **Logo**: Importa `LOGO2.png`, borde blanco, fondo blanco
-- **Brand text**: "ASCAD LATAM" en blanco, subtítulo "FLACT · Universidad Gestalt · Aforind"
+- **Brand text**: "ASCAD-LATAM" en blanco
 - **Links de navegación**: Texto blanco con hover rgba(255,255,255,0.1)
 - **Mobile menu**: Fondo `--primary-dark`, texto blanco
 

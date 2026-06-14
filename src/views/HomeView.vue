@@ -38,9 +38,8 @@
           </div>
         </div>
 <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.15s">
-          <div class="stats-subtitle">FLACT . ASCAD-LATAM</div>
+          <div class="stats-subtitle">ASCAD-LATAM</div>
           <div class="stats-logos">
-            <img src="/images/GLACT2.png" alt="FLACT" class="stat-logo" />
             <img src="/images/LOGO_ASCAD10.png" alt="ASCAD" class="stat-logo" />
           </div>
           <div class="scroll-indicator">
