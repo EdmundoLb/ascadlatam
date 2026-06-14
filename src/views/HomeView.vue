@@ -38,9 +38,56 @@
           </div>
         </div>
 <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.15s">
-          <div class="stats-subtitle">ASCAD-LATAM</div>
-          <div class="stats-logos">
-            <img src="/images/LOGO_ASCAD10.png" alt="ASCAD" class="stat-logo" />
+          <div class="stats-subtitle">Números que importan</div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number-row">
+                  <span class="stat-number">8</span>
+                </div>
+                <span class="stat-short-label" title="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile">Países</span>
+                <span class="stat-label">Miembros</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number-row">
+                  <span class="stat-number">6</span>
+                </div>
+                <span class="stat-short-label" title="OST, EPR, CCAAD I, CCAAD II, CCAAD III, CCAAD IV">Niveles</span>
+                <span class="stat-label">de Certificación</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number-row">
+                  <span class="stat-number">TAP 21</span>
+                </div>
+                <span class="stat-short-label" title="Treatment Accessibility Protocol 21">Estándar</span>
+                <span class="stat-label">Internacional</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number-row">
+                  <span class="stat-number">TIP 64</span>
+                </div>
+                <span class="stat-short-label" title="Treatment Improvement Protocol 64">Guía</span>
+                <span class="stat-label">de Tratamiento</span>
+              </div>
+            </div>
           </div>
           <div class="scroll-indicator">
             <span class="scroll-text">Descubrí más</span>
@@ -94,7 +141,7 @@
   </section>
 
   <!-- ESTÁNDARES INTERNACIONALES -->
-  <section class="section standards-section animate-on-scroll">
+  <section class="section standards-section section-alt animate-on-scroll">
     <div class="container">
       <div class="section-header">
         <div class="eyebrow">Estándares Internacionales</div>
@@ -148,7 +195,7 @@
   </section>
 
   <!-- CULTURAL ADAPTABILITY -->
-  <section class="section cultural-section animate-on-scroll">
+  <section class="section cultural-section section-alt animate-on-scroll">
     <div class="container">
       <div class="cultural-inner">
         <div class="cultural-badge">
@@ -199,7 +246,7 @@
         <p class="lead" style="margin-top: 16px; max-width: 600px;">Seis niveles de certificación diseñados para acompañarte en cada etapa de tu desarrollo profesional.</p>
       </div>
       <div class="path-grid">
-        <div v-for="(level, index) in levels" :key="level.code" class="path-card">
+        <div v-for="(level, index) in levels" :key="level.code" class="path-card" :style="{ animationDelay: (index * 0.1) + 's' }">
           <div class="path-card-header">
             <div class="path-node">
               <span class="path-code">{{ level.code }}</span>
@@ -225,23 +272,71 @@
     </div>
   </section>
 
-  <!-- ALIADOS -->
-  <section class="section allies-section">
+  <!-- PAÍSES MIEMBROS -->
+  <section class="section countries-section">
     <div class="container">
       <div class="section-header centered">
-        <div class="eyebrow">Certificación Internacional</div>
-        <h2>Estándares que <em class="gold">respaldan</em> nuestra certificación</h2>
+        <div class="eyebrow">Cobertura Regional</div>
+        <h2>Países <em class="gold">miembros</em></h2>
+        <p class="lead" style="margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto;">Una red regional comprometida con la excelencia profesional en toda América Latina.</p>
       </div>
-      <div class="allies-grid">
-        <router-link to="/certificaciones" class="ally-card">
-          <div class="ally-logo">
-            <div class="ally-logo-placeholder">
-              <img :src="logoAscad" alt="ASCAD LATAM" width="48" height="48" style="object-fit:contain" />
-            </div>
+      <div class="countries-grid">
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/cr.png" alt="Costa Rica" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>Costa Rica</h4>
+            <p>País fundador del modelo de certificación.</p>
           </div>
-          <h4>ASCAD LATAM</h4>
-          <p class="muted">Certificación y Acreditación en Adicciones para América Latina</p>
-        </router-link>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/ni.png" alt="Nicaragua" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>Nicaragua</h4>
+            <p>Profesionalización y capacitación continua.</p>
+          </div>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/pa.png" alt="Panamá" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>Panamá</h4>
+            <p>Fortalecimiento institucional y programas.</p>
+          </div>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/mx.png" alt="México" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>México</h4>
+            <p>Prevención y tratamiento especializado.</p>
+          </div>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/do.png" alt="República Dominicana" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>Rep. Dominicana</h4>
+            <p>Estándares de calidad y certificación.</p>
+          </div>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/ec.png" alt="Ecuador" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>Ecuador</h4>
+            <p>Intervención basada en evidencia.</p>
+          </div>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/py.png" alt="Paraguay" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>Paraguay</h4>
+            <p>Desarrollo de capacidades profesionales.</p>
+          </div>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/cl.png" alt="Chile" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>Chile</h4>
+            <p>Innovación en rehabilitación.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -269,7 +364,6 @@
 import { useCertificacionesStore } from '@/stores/certificaciones'
 import { storeToRefs } from 'pinia'
 import { onMounted, onUnmounted } from 'vue'
-import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 import { levelIcons } from '@/data/certificaciones'
 
 const store = useCertificacionesStore()
@@ -407,24 +501,36 @@ onUnmounted(() => {
 .hero-lead .competency-tooltip {
   position: relative;
   cursor: help;
-  border-bottom: 1px dashed var(--accent);
+  border-bottom: 2px solid var(--accent);
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  transition: all .2s ease;
+}
+.competency-tooltip:hover {
+  background: var(--accent-light);
+  color: var(--accent-dark);
 }
 .tooltip-text {
   visibility: hidden;
   position: absolute;
-  bottom: 130%;
+  bottom: 140%;
   left: 50%;
-  transform: translateX(-50%);
-  background: var(--text);
+  transform: translateX(-50%) translateY(8px);
+  background: var(--primary);
   color: var(--white);
-  padding: 8px 12px;
-  border-radius: var(--radius);
-  font-size: .75rem;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  font-size: .8125rem;
   font-weight: 400;
-  white-space: nowrap;
+  white-space: normal;
+  width: 240px;
+  text-align: center;
   z-index: 10;
   opacity: 0;
-  transition: opacity .2s;
+  transition: all .25s ease;
+  box-shadow: var(--shadow-lg);
+  line-height: 1.5;
 }
 .tooltip-text::after {
   content: '';
@@ -432,12 +538,13 @@ onUnmounted(() => {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: var(--text);
+  border: 8px solid transparent;
+  border-top-color: var(--primary);
 }
 .competency-tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 .hero-actions {
   display: flex;
@@ -564,6 +671,7 @@ onUnmounted(() => {
 
 /* ABOUT */
 .about-section { background: var(--white); }
+.section-alt { background: var(--bg-light); }
 .section-header { margin-bottom: 56px; }
 .section-header.centered { text-align: center; }
 .section-header.centered .lead { margin: 16px auto 0; }
@@ -617,7 +725,17 @@ onUnmounted(() => {
   padding: 40px 48px;
   box-shadow: var(--shadow-sm);
 }
-.timeline-item { text-align: center; }
+.timeline-item {
+  text-align: center;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  transition: all .3s ease;
+}
+.timeline-item:hover {
+  background: var(--white);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
 .timeline-year {
   font-family: var(--font-display);
   font-size: 2.5rem;
@@ -676,7 +794,7 @@ onUnmounted(() => {
 }
 
 /* PATH */
-.path-section { background: var(--bg-light); }
+.path-section { background: var(--white); }
 .path-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -691,6 +809,15 @@ onUnmounted(() => {
   transition: all .3s ease;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .path-card::before {
   content: '';
@@ -748,47 +875,43 @@ onUnmounted(() => {
 .path-fee { display: flex; }
 .section-cta { text-align: center; margin-top: 56px; }
 
-/* ALLIES */
-.allies-section { background: var(--white); }
-.allies-grid {
-  display: flex;
-  justify-content: center;
-  margin-top: 56px;
+/* COUNTRIES */
+.countries-section { background: var(--bg-light); }
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
 }
-.ally-card {
-  background: var(--surface);
+.country-card {
+  background: var(--white);
   border: 1px solid var(--line-light);
   border-radius: var(--radius-xl);
-  padding: 48px 64px;
-  text-align: center;
-  transition: all .3s ease;
-  max-width: 480px;
-  width: 100%;
-}
-.ally-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--accent-light);
-}
-.ally-logo { margin-bottom: 20px; }
-.ally-logo-placeholder {
-  width: 100px; height: 100px;
-  margin: 0 auto;
-  border-radius: var(--radius-lg);
-  background: var(--bg-light);
-  border: 1px solid var(--line);
+  padding: 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  overflow: hidden;
+  gap: 16px;
+  transition: all .3s ease;
 }
-.ally-card h4 { color: var(--text); font-size: 1.25rem; margin-bottom: 8px; }
-.ally-card p { font-size: .9375rem; color: var(--text-muted); }
+.country-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-light);
+}
+.country-flag {
+  width: 48px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  border: 1px solid var(--line-light);
+}
+.country-info h4 { font-size: .9375rem; color: var(--text); margin-bottom: 4px; }
+.country-info p { font-size: .75rem; color: var(--text-muted); line-height: 1.4; }
 
 /* CULTURAL SECTION */
 .cultural-section {
-  background: var(--white);
+  background: var(--bg-light);
   padding: 100px 0;
 }
 .cultural-inner {
