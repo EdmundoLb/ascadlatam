@@ -290,6 +290,9 @@ watch(menuOpen, async (val) => {
   box-shadow: var(--shadow-lg);
   position: relative;
   z-index: 100;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 .mobile-menu.open {
   display: flex;
@@ -307,6 +310,8 @@ watch(menuOpen, async (val) => {
   border-bottom: 1px solid rgba(255,255,255,0.1);
   transition: color var(--duration-fast);
   text-decoration: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .mobile-menu a:hover,
 .mobile-menu a:focus {
