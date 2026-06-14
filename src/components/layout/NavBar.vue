@@ -212,7 +212,7 @@ watch(menuOpen, async (val) => {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 .desktop-nav a {
   display: inline-flex;
@@ -221,7 +221,7 @@ watch(menuOpen, async (val) => {
   font-size: .875rem;
   font-weight: 500;
   color: rgba(255,255,255,0.8);
-  padding: 10px 16px;
+  padding: 10px 12px;
   border-radius: var(--radius);
   transition: all var(--duration-normal);
   text-decoration: none;
@@ -325,7 +325,7 @@ watch(menuOpen, async (val) => {
   margin-top: 12px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .desktop-nav { display: none; }
   .hamburger { display: flex; }
 }
