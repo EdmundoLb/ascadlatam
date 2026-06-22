@@ -1,5 +1,5 @@
 import sharp from 'sharp'
-import { mkdir, readdir, unlink } from 'fs/promises'
+import { mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -8,10 +8,6 @@ const imagesDir = join(__dirname, 'images')
 
 const images = [
   { name: 'LOGO_ASCAD10.png', maxWidth: 200 },
-  { name: 'ASCAD.png', maxWidth: 200 },
-  { name: 'LOGO2.png', maxWidth: 200 },
-  { name: 'info01.png', maxWidth: 1400 },
-  { name: 'infor02.png', maxWidth: 1400 },
 ]
 
 async function optimizeImages() {
