@@ -2,7 +2,7 @@
 
 ## Proyecto
 Sitio web institucional del **Consorcio Latinoamericano de Certificación en Adicciones**.
-Certificación profesional con estándares internacionales TAP 21 y TIP 64.
+Certificación profesional con estándares internacionales TAP 21 y TIP 64, disponible en español y portugués.
 
 ---
 
@@ -10,22 +10,26 @@ Certificación profesional con estándares internacionales TAP 21 y TIP 64.
 - **Vue 3** con Composition API y `<script setup>`
 - **Vue Router 4** para routing
 - **Pinia** para state management
-- **Vite 8** como build tool
-- **Vitest** para tests
-- **ESLint** para linting
+- **vue-i18n** para i18n (es/pt) — ver `src/i18n/`
+- **Vite** como build tool
+- **Vitest** + **@vue/test-utils** para tests unitarios
+- **Playwright** para tests E2E
+- **ESLint** + **Prettier** + **Husky** + **commitlint**
 
 ---
 
 ## Scripts Disponibles
 ```bash
 npm run dev        # Desarrollo
-npm run build      # Build producción
+npm run build      # Build producción (con typecheck)
 npm run preview    # Preview del build
 npm run lint       # Linting
 npm run lint:fix   # Auto-fixing lint
-npm run test       # Tests
+npm run typecheck  # vue-tsc --noEmit
+npm run test       # Tests unitarios
 npm run test:ui    # Tests con UI
-npm run coverage   # Coverage
+npm run test:coverage   # Coverage
+npm run test:e2e   # Tests E2E (Playwright)
 ```
 
 ---
@@ -33,32 +37,49 @@ npm run coverage   # Coverage
 ## Estructura del Proyecto
 ```
 src/
-├── main.js                      # Entry point
+├── main.js                      # Entry point (Pinia + router + i18n)
 ├── App.vue                      # Root component (NavBar + RouterView + FooterBar)
 ├── assets/css/main.css          # Estilos globales, variables CSS, diseño tokens
+├── i18n/
+│   ├── index.js                 # Config de vue-i18n, detecta locale guardado o del browser
+│   └── locales/{es,pt}.json     # Diccionarios de traducción
 ├── components/
-│   ├── Toast.vue                # Componente de notificaciones toast
+│   ├── Toast.vue                # Notificaciones toast (con íconos por tipo)
 │   ├── layout/
-│   │   ├── NavBar.vue           # Navegación principal (AZUL OSCURO con texto blanco)
+│   │   ├── NavBar.vue           # Navegación principal (AZUL OSCURO con texto blanco) + selector de idioma
 │   │   └── FooterBar.vue        # Pie de página (texto blanco, fondo oscuro)
+│   ├── forms/
+│   │   └── StepIndicator.vue    # Indicador de pasos (usado en SolicitudView)
+│   └── ui/
+│       ├── LazyImage.vue        # Imagen con lazy loading
+│       └── Pagination.vue       # Paginación (usada en BlogView)
+├── composables/
+│   ├── toast.js                 # Lógica de notificaciones
+│   └── useLazyLoad.js           # Lazy loading con IntersectionObserver
 ├── views/
-│   ├── HomeView.vue             # Página principal (Hero + About + Path + Aliados + CTA)
+│   ├── HomeView.vue             # Página principal (Hero + About + Path + CTA)
 │   ├── CertificacionesView.vue  # Certificaciones (comparativa + detalles expandibles + FAQ)
-│   ├── SolicitudView.vue        # Formulario de solicitud de certificación
+│   ├── SolicitudView.vue        # Formulario de solicitud de certificación (multi-step)
 │   ├── DirectorioView.vue       # Directorio de profesionales certificados
-│   ├── BlogView.vue             # Blog y noticias
+│   ├── BlogView.vue             # Blog institucional (paginado)
 │   ├── ContactoView.vue         # Formulario de contacto (Formspree)
-│   ├── FlactView.vue            # ELIMINADO - Ver EticaView.vue
-│   ├── EticaView.vue            # Página de Ética y Calidad Profesional
-│   ├── AliadosView.vue          # Página de aliados estratégicos
+│   ├── EticaView.vue            # Ética y Calidad Profesional
+│   ├── AscadLatamView.vue       # Nuestra Historia
+│   ├── FormacionView.vue        # Educación y formación continua
+│   ├── ConocimientoView.vue     # Centro de Conocimiento (biblioteca, infografías, artículos, FAQ) — ruta /noticias
 │   └── NotFoundView.vue         # Página 404
 ├── stores/
-│   └── certificaciones.js       # Pinia store (origins, levels, stats)
+│   └── certificaciones.js       # Pinia store (origins, levels, stats, certificaciones completas, form data)
 ├── router/
 │   └── index.js                 # Configuración de rutas
 └── data/
-    └── certificaciones.js       # Datos estáticos (levels, origins, stats)
+    ├── certificaciones.js       # Niveles, países de origen, stats, íconos SVG por nivel
+    ├── certificacionesFull.js   # Contenido completo por nivel (competencias, ejes, perfil)
+    ├── solicitudForms.js        # Configuración del formulario de solicitud derivada de certificacionesFull
+    └── blog.js                  # Posts del blog
 ```
+
+> Nota: no existen vistas `FlactView` ni `AliadosView` — fueron reemplazadas por `EticaView` y diluidas en el contenido institucional actual.
 
 ---
 
@@ -101,27 +122,31 @@ Cada nivel de certificación desarrolla tres ejes:
 |------|-------|
 | `/` | HomeView |
 | `/certificaciones` | CertificacionesView |
-| `/solicitud` | SolicitudView (query param: ?nivel=OST) |
+| `/solicitud` | SolicitudView (query param: `?nivel=OST`) |
+| `/etica` | EticaView |
+| `/ascadlatam` | AscadLatamView |
+| `/formacion` | FormacionView |
+| `/noticias` | ConocimientoView |
+| `/contacto` | ContactoView |
 | `/directorio` | DirectorioView |
 | `/blog` | BlogView |
-| `/contacto` | ContactoView |
-| `/flact` | ELIMINADO |
-| `/etica` | EticaView |
-| `/aliados` | AliadosView |
+| `*` | NotFoundView |
+
+---
+
+## Internacionalización (i18n)
+- `vue-i18n` en modo `legacy: false` (Composition API, `useI18n()` / `$t()` en templates).
+- Locale por defecto: el guardado en `localStorage.locale`, o el del navegador si es `es`/`pt`, o `es` como fallback.
+- Las claves de traducción viven en `src/i18n/locales/es.json` y `pt.json` — mantenerlas espejadas en estructura.
+- **Tests que montan componentes con `$t()` deben incluir el plugin `i18n`** en `global.plugins` (ver `src/components/__tests__/NavBar.test.js`), si no `$t` queda `undefined` y el test falla.
 
 ---
 
 ## Imágenes
-```
-images/
-├── LOGO.png      # Logo antiguo
-├── LOGO2.png     # Logo PRINCIPAL (usar este)
-├── ASCAD.png     # Logo ASCAD
-├── FLACT.png     # ELIMINADO
-├── AFORING.jpg   # Logo Aforind
-```
-
-**Logo principal**: NavBar y FooterBar importan `LOGO2.png`.
+- Las fuentes originales (PNG pesados) viven en `images/`; las versiones optimizadas para producción en `images/optimized/*.webp`, generadas con `optimize-images.mjs` (usa `sharp`).
+- **Siempre importar las imágenes con `import x from '/images/optimized/archivo.webp'`** dentro del `<script setup>`, nunca como string literal (`image: '/images/foo.png'`) — los strings literales no pasan por el bundler y `images/` no es la carpeta `public/`, así que romperían en producción aunque funcionen en `npm run dev`.
+- Logo principal: `LOGO_ASCAD10.webp` (importado en NavBar y FooterBar).
+- Al agregar una imagen nueva, sumarla al array `images` en `optimize-images.mjs` y correr `node optimize-images.mjs`.
 
 ---
 
@@ -129,14 +154,12 @@ images/
 
 ### NavBar.vue
 - **Estilo**: Fondo azul oscuro `--primary` (#0a2540), texto blanco
-- **Logo**: Importa `LOGO2.png`, borde blanco, fondo blanco
-- **Brand text**: "ASCAD-LATAM" en blanco
-- **Links de navegación**: Texto blanco con hover rgba(255,255,255,0.1)
+- **Logo**: Importa `LOGO_ASCAD10.webp` desde `images/optimized/`
+- **Selector de idioma**: cambia `locale` de vue-i18n y lo persiste en `localStorage`
 - **Mobile menu**: Fondo `--primary-dark`, texto blanco
 
 ### FooterBar.vue
 - **Estilo**: Fondo oscuro `--text` (#0a1628), texto blanco
-- **Logo**: Importa `LOGO2.png`
 - **Descripción**: "Consorcio Latinoamericano de Certificación en Adicciones"
 - **Redes sociales**: Botones con hover `--accent`
 
@@ -145,10 +168,12 @@ images/
 - Cada cert tiene un `cert-body` con `max-height: 3000px` cuando está expandido
 - Los botones "Aplicar ahora" y "Más información" aparecen al expandir cada cert
 
-### HomeView.vue - Hero
-- Badge: "Estándares Internacionales · TAP 21 y TIP 64"
-- Título: "Consorcio Latinoamericano de Certificación en Adicciones"
-- Descripción menciona TAP 21, TIP 64, y los tres ejes: Saber Conocer, Saber Hacer, Saber Ser
+### SolicitudView.vue
+- Flujo multi-step con `StepIndicator.vue`
+- Los datos de cada certificación para el formulario vienen de `data/solicitudForms.js` (derivado de `certificacionesFull.js`)
+
+### v-html
+- `vue/no-v-html` está deshabilitado puntualmente en `HomeView.vue`, `CertificacionesView.vue` y `ConocimientoView.vue` (ver `eslint.config.js`) porque ahí solo se renderizan SVGs propios y strings de los locales — nunca contenido de usuario o de una API externa. Si se agrega contenido dinámico/externo en esas vistas, sanitizarlo antes de usar `v-html`.
 
 ---
 
@@ -162,8 +187,9 @@ VITE_FORMSPREE_SOLICITUD_ID=id_para_formulario_solicitud
 
 ## Errores Conocidos y Soluciones
 
-### `certs` is not defined
-- **Solución**: El array `certs` debe estar definido en el `<script setup>` de `SolicitudView.vue` con los 6 niveles de certificación.
+### `$t is not a function` en tests
+- **Causa**: el componente usa `$t()`/`useI18n()` pero el wrapper de test no instaló el plugin i18n.
+- **Solución**: agregar el `i18n` exportado por `src/i18n/index.js` a `global.plugins` al montar con `@vue/test-utils`.
 
 ### Botones no visibles en CertificacionesView
 - **Problema**: `max-height: 1200px` en `.cert-body.is-open` era insuficiente.
@@ -176,14 +202,15 @@ VITE_FORMSPREE_SOLICITUD_ID=id_para_formulario_solicitud
 {
   "vue": "^3.4.0",
   "vue-router": "^4.3.0",
-  "pinia": "^2.1.0"
+  "pinia": "^2.1.0",
+  "vue-i18n": "^9.14.5"
 }
 ```
 
 ---
 
 ## Notas de Desarrollo
-- Las vistas usan `<script setup>` con Composition API
-- Los datos de certificaciones vienen del Pinia store `useCertificacionesStore`
-- Las imágenes se importan con paths directos desde `/images/`
-- El router usa rutas con parámetros query (ej: `/solicitud?nivel=CCAAD III`)
+- Las vistas usan `<script setup>` con Composition API.
+- Los datos de certificaciones vienen del Pinia store `useCertificacionesStore`.
+- El router usa rutas con parámetros query (ej: `/solicitud?nivel=CCAAD III`).
+- Deploy automático a Vercel vía GitHub Actions al pushear a `main` — ver `DEPLOY.md`.
