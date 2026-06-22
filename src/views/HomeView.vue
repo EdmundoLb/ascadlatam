@@ -619,7 +619,9 @@ onUnmounted(() => {
   border-radius: var(--radius);
   font-size: .7rem;
   font-weight: 400;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: min(220px, 90vw);
+  text-align: center;
   z-index: 10;
   opacity: 0;
   transition: opacity .2s;
