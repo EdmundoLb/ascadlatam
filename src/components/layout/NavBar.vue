@@ -1,42 +1,48 @@
 <template>
-  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <a href="#main-content" class="skip-link">{{ $t('nav.skipLink') }}</a>
 
   <header class="navbar">
     <div class="container nav-inner">
       <router-link to="/" class="brand">
         <div class="brand-logo">
-          <img :src="logoAscad" alt="ASCAD LATAM - Logo" width="72" height="72" />
+          <img :src="logoAscad" :alt="'ASCAD LATAM - Logo'" width="72" height="72" />
         </div>
         <div class="brand-text">
-          <span class="brand-label">Certificación Internacional</span>
+          <span class="brand-label">{{ $t('nav.brandLabel') }}</span>
           <strong class="brand-name">
-            <span class="brand-ascal">ASCAD-LATAM</span>
+            <span class="brand-ascal">{{ $t('nav.brandName') }}</span>
           </strong>
         </div>
       </router-link>
 
       <nav class="desktop-nav" role="navigation" aria-label="Navegación principal">
-        <router-link to="/">Inicio</router-link>
-        <router-link to="/certificaciones">Certificaciones</router-link>
-        <router-link to="/etica">Ética</router-link>
-        <router-link to="/ascadlatam">ASCAD-LATAM</router-link>
-        <router-link to="/formacion">Formación</router-link>
-        <router-link to="/noticias">Recursos</router-link>
-        <router-link to="/directorio">Países</router-link>
-        <router-link to="/contacto">Contacto</router-link>
+        <router-link to="/">{{ $t('nav.inicio') }}</router-link>
+        <router-link to="/certificaciones">{{ $t('nav.certificaciones') }}</router-link>
+        <router-link to="/etica">{{ $t('nav.etica') }}</router-link>
+        <router-link to="/ascadlatam">{{ $t('nav.ascadlatam') }}</router-link>
+        <router-link to="/formacion">{{ $t('nav.formacion') }}</router-link>
+        <router-link to="/noticias">{{ $t('nav.recursos') }}</router-link>
+        <router-link to="/directorio">{{ $t('nav.paises') }}</router-link>
+        <router-link to="/contacto">{{ $t('nav.contacto') }}</router-link>
       </nav>
 
-      <router-link to="/solicitud" class="btn btn-gold hide-mobile">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
-        Iniciar solicitud
-      </router-link>
+      <div class="nav-actions">
+        <button class="lang-btn" @click="toggleLocale" :aria-label="$t('common.language')">
+          {{ currentLocale === 'es' ? '🇪🇸' : '🇧🇷' }}
+        </button>
+
+        <router-link to="/solicitud" class="btn btn-gold hide-mobile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
+          {{ $t('nav.iniciarSolicitud') }}
+        </router-link>
+      </div>
 
       <button
         ref="hamburgerRef"
         class="hamburger"
         @click="toggleMenu"
         :aria-expanded="menuOpen"
-        aria-label="Menú de navegación"
+        :aria-label="$t('nav.menu')"
         aria-controls="mobile-menu"
       >
         <span :class="{ active: menuOpen }"></span>
@@ -60,23 +66,30 @@
       aria-label="Menú móvil"
       @keydown.escape="closeMenu"
     >
-      <router-link to="/" @click="closeMenu" tabindex="0">Inicio</router-link>
-      <router-link to="/certificaciones" @click="closeMenu" tabindex="0">Certificaciones</router-link>
-      <router-link to="/etica" @click="closeMenu" tabindex="0">Ética</router-link>
-      <router-link to="/ascadlatam" @click="closeMenu" tabindex="0">ASCAD-LATAM</router-link>
-      <router-link to="/formacion" @click="closeMenu" tabindex="0">Formación</router-link>
-      <router-link to="/noticias" @click="closeMenu" tabindex="0">Recursos</router-link>
-      <router-link to="/directorio" @click="closeMenu" tabindex="0">Países</router-link>
-      <router-link to="/contacto" @click="closeMenu" tabindex="0">Contacto</router-link>
-      <router-link to="/solicitud" @click="closeMenu" class="mobile-cta" tabindex="0">Iniciar solicitud →</router-link>
+      <router-link to="/" @click="closeMenu" tabindex="0">{{ $t('nav.inicio') }}</router-link>
+      <router-link to="/certificaciones" @click="closeMenu" tabindex="0">{{ $t('nav.certificaciones') }}</router-link>
+      <router-link to="/etica" @click="closeMenu" tabindex="0">{{ $t('nav.etica') }}</router-link>
+      <router-link to="/ascadlatam" @click="closeMenu" tabindex="0">{{ $t('nav.ascadlatam') }}</router-link>
+      <router-link to="/formacion" @click="closeMenu" tabindex="0">{{ $t('nav.formacion') }}</router-link>
+      <router-link to="/noticias" @click="closeMenu" tabindex="0">{{ $t('nav.recursos') }}</router-link>
+      <router-link to="/directorio" @click="closeMenu" tabindex="0">{{ $t('nav.paises') }}</router-link>
+      <router-link to="/contacto" @click="closeMenu" tabindex="0">{{ $t('nav.contacto') }}</router-link>
+      <div class="mobile-lang">
+        <button @click="setLocale('es')" :class="{ active: currentLocale === 'es' }">🇪🇸 Español</button>
+        <button @click="setLocale('pt')" :class="{ active: currentLocale === 'pt' }">🇧🇷 Português</button>
+      </div>
+      <router-link to="/solicitud" @click="closeMenu" class="mobile-cta" tabindex="0">{{ $t('nav.iniciarSolicitud') }} →</router-link>
     </nav>
   </header>
 </template>
 
 <script setup>
 import { ref, watch, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 
+const { locale } = useI18n()
+const currentLocale = ref(locale.value)
 const menuOpen = ref(false)
 const hamburgerRef = ref(null)
 
@@ -91,6 +104,19 @@ function closeMenu() {
   })
 }
 
+function toggleLocale() {
+  const newLocale = currentLocale.value === 'es' ? 'pt' : 'es'
+  locale.value = newLocale
+  currentLocale.value = newLocale
+  localStorage.setItem('locale', newLocale)
+}
+
+function setLocale(lang) {
+  locale.value = lang
+  currentLocale.value = lang
+  localStorage.setItem('locale', lang)
+}
+
 watch(menuOpen, async (val) => {
   document.body.style.overflow = val ? 'hidden' : ''
   if (val) {
@@ -98,6 +124,10 @@ watch(menuOpen, async (val) => {
     const firstLink = document.querySelector('#mobile-menu a')
     firstLink?.focus()
   }
+})
+
+watch(locale, (val) => {
+  currentLocale.value = val
 })
 </script>
 
@@ -333,5 +363,64 @@ watch(menuOpen, async (val) => {
 @media (max-width: 1100px) {
   .desktop-nav { display: none; }
   .hamburger { display: flex; }
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all var(--duration-normal);
+}
+.lang-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
+}
+.lang-btn:active {
+  transform: scale(0.95);
+}
+
+.mobile-lang {
+  display: flex;
+  gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.mobile-lang button {
+  flex: 1;
+  padding: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  color: rgba(255,255,255,0.7);
+  font-size: .875rem;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+.mobile-lang button:hover {
+  background: rgba(255,255,255,0.12);
+  color: var(--white);
+}
+.mobile-lang button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .nav-actions { display: none; }
 }
 </style>

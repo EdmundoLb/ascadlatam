@@ -6,39 +6,25 @@
     <div class="container">
       <div class="hero-inner">
         <div class="hero-content animate-fade-in-up">
-          <h1 class="hero-title">
-            <span class="title-main">Consorcio de Certificación<br>
-            <span class="text-gradient">Latinoamericano</span><br>
-            en Adicciones</span>
-</h1>
+<h1 class="hero-title">
+            <!-- v-html: texto fijo desde locales es/pt, no contenido dinámico -->
+            <span class="title-main" v-html="$t('home.tituloHero')"></span>
+          </h1>
           <p class="hero-lead">
-            Certificamos profesionales con estándares internacionales
-            garantizando competencias integrales:
-            <strong class="competency-tooltip">
-              Saber Conocer
-              <span class="tooltip-text">Dominio teórico y comprensión de los ejes de formación</span>
-            </strong>,
-            <strong class="competency-tooltip">
-              Saber Hacer
-              <span class="tooltip-text">Aplicación práctica de protocolos y metodologías</span>
-            </strong> y
-            <strong class="competency-tooltip">
-              Saber Ser
-              <span class="tooltip-text">Ética, liderazgo y responsabilidad social</span>
-            </strong>.
+            {{ $t('home.descripcion') }}
           </p>
           <div class="hero-actions">
             <router-link to="/solicitud" class="btn btn-gold btn-lg">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
-              Iniciar mi solicitud
+              {{ $t('home.btnIniciarSolicitud') }}
             </router-link>
             <router-link to="/certificaciones" class="btn btn-outline btn-lg">
-              Ver certificaciones
+              {{ $t('home.btnCertificaciones') }}
             </router-link>
           </div>
         </div>
 <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.15s">
-          <div class="stats-subtitle">Números que importan</div>
+          <div class="stats-subtitle">{{ $t('home.certificados') }}</div>
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-icon">
@@ -48,8 +34,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">8</span>
                 </div>
-                <span class="stat-short-label" title="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile">Países</span>
-                <span class="stat-label">Miembros</span>
+                <span class="stat-short-label" title="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile">{{ $t('home.paises') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -60,8 +45,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">6</span>
                 </div>
-                <span class="stat-short-label" title="OST, EPR, CCAAD I, CCAAD II, CCAAD III, CCAAD IV">Niveles</span>
-                <span class="stat-label">de Certificación</span>
+                <span class="stat-short-label" title="OST, EPR, CCAAD I, CCAAD II, CCAAD III, CCAAD IV">{{ $t('home.anos') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -72,8 +56,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">TAP 21</span>
                 </div>
-                <span class="stat-short-label" title="Treatment Accessibility Protocol 21">Estándar</span>
-                <span class="stat-label">Internacional</span>
+                <span class="stat-short-label" title="Treatment Accessibility Protocol 21">{{ $t('home.anos') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -84,13 +67,12 @@
                 <div class="stat-number-row">
                   <span class="stat-number">TIP 64</span>
                 </div>
-                <span class="stat-short-label" title="Treatment Improvement Protocol 64">Guía</span>
-                <span class="stat-label">de Tratamiento</span>
+                <span class="stat-short-label" title="Treatment Improvement Protocol 64">{{ $t('home.anos') }}</span>
               </div>
             </div>
           </div>
           <div class="scroll-indicator">
-            <span class="scroll-text">Descubrí más</span>
+            <span class="scroll-text">{{ $t('home.certificacionesOtorgadas') }}</span>
             <div class="scroll-arrow">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
@@ -106,8 +88,8 @@
   <section class="section about-section animate-on-scroll">
     <div class="container">
       <div class="section-header">
-        <div class="eyebrow">Sobre ASCAD LATAM</div>
-        <h2>Una organización construida<br>sobre <em class="gold">estándares reales</em></h2>
+        <div class="eyebrow">{{ $t('home.sobreNosostros') }}</div>
+        <h2>{{ $t('home.sobreTitulo') }}</h2>
       </div>
       <div class="about-grid">
         <div class="about-card">
@@ -115,20 +97,20 @@
             <div class="about-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
-            <div class="eyebrow" style="margin-bottom: 0">Misión</div>
+            <div class="eyebrow" style="margin-bottom: 0">{{ $t('home.mision') }}</div>
           </div>
-          <h3>Profesionalizar el campo de las adicciones</h3>
-          <p>Promovemos la certificación de quienes intervienen en el tratamiento de las adicciones, garantizando calidad, ética y competencia en toda América Latina.</p>
+          <h3>{{ $t('home.misionTitulo') }}</h3>
+          <p>{{ $t('home.misionDesc') }}</p>
         </div>
         <div class="about-card about-card-accent">
           <div class="about-card-header">
             <div class="about-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </div>
-            <div class="eyebrow" style="margin-bottom: 0">Visión</div>
+            <div class="eyebrow" style="margin-bottom: 0">{{ $t('home.vision') }}</div>
           </div>
-          <h3>Líderes en certificación regional</h3>
-          <p>Ser la organización referente en certificación y acreditación en adicciones, contribuyendo al desarrollo de sistemas de atención integrales y basados en evidencia.</p>
+          <h3>{{ $t('home.visionTitulo') }}</h3>
+          <p>{{ $t('home.visionDesc') }}</p>
         </div>
         <div class="about-timeline">
           <div v-for="(item, i) in origins" :key="i" class="timeline-item">
@@ -144,29 +126,29 @@
   <section class="section standards-section section-alt animate-on-scroll">
     <div class="container">
       <div class="section-header">
-        <div class="eyebrow">Estándares Internacionales</div>
-        <h2>Fundamentos técnicos de<br><em class="gold">nuestra certificación</em></h2>
+        <div class="eyebrow">{{ $t('home.estandares') }}</div>
+        <h2>{{ $t('home.fundamentosTecnicos') }}<br><em class="gold">{{ $t('home.certificaciones') }}</em></h2>
       </div>
       <div class="standards-grid">
         <div class="standard-card">
           <div class="standard-badge">TAP 21</div>
           <div class="standard-content">
             <h4>Treatment Accessibility Protocol 21</h4>
-            <p>Establece las 12 funciones esenciales del consejero profesional en adicciones, proporcionando un marco de competencias reconocido internacionalmente para la práctica clínica y el desarrollo profesional.</p>
+            <p>{{ $t('home.tap21Desc') }}</p>
           </div>
         </div>
         <div class="standard-card">
           <div class="standard-badge">TIP 64</div>
           <div class="standard-content">
             <h4>Treatment Improvement Protocol 64</h4>
-            <p>Proporciona base científica e metodológica para la implementación de servicios de apoyo entre pares y recuperación, adaptados a la realidad cultural y social de América Latina.</p>
+            <p>{{ $t('home.tip64Desc') }}</p>
           </div>
         </div>
         <div class="standard-card">
           <div class="standard-badge">TIP 52</div>
           <div class="standard-content">
             <h4>Treatment Improvement Protocol 52</h4>
-            <p>Guía especializada en la supervisión clínica y el desarrollo profesional continuo del consejero en adicciones.</p>
+            <p>{{ $t('home.tip52Desc') }}</p>
           </div>
         </div>
       </div>
@@ -178,16 +160,16 @@
     <div class="container">
       <div class="cta-intermediate-inner">
         <div class="cta-intermediate-content">
-          <h3>Conocé tu nivel de certificación</h3>
-          <p>Explorá los seis niveles y encontrá el punto de partida ideal para tu desarrollo profesional en adicciones.</p>
+          <h3>{{ $t('home.ctaIntermedioTitulo') }}</h3>
+          <p>{{ $t('home.ctaIntermedioDesc') }}</p>
         </div>
         <div class="cta-intermediate-actions">
           <router-link to="/certificaciones" class="btn btn-gold btn-lg">
-            Ver certificaciones
+            {{ $t('home.ver') }} {{ $t('home.certificaciones').toLowerCase() }}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </router-link>
           <router-link to="/solicitud" class="btn btn-outline btn-lg">
-            Iniciar solicitud
+{{ $t('home.iniciarSolicitud') }}
           </router-link>
         </div>
       </div>
@@ -200,37 +182,38 @@
       <div class="cultural-inner">
         <div class="cultural-badge">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-          Adaptación cultural
+          {{ $t('home.adaptacionCultural') }}
         </div>
-        <h2 class="cultural-title">¿Es esta certificación <em class="gold">culturalmente adaptable</em> a Latinoamérica?</h2>
+        <!-- v-html: texto fijo desde locales es/pt, no contenido dinámico -->
+        <h2 class="cultural-title" v-html="$t('home.culturalTitulo')"></h2>
         <div class="cultural-grid">
           <div class="cultural-point">
             <div class="cultural-point-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
-            <h4>Basada en evidencia internacional</h4>
-            <p>Estándares y competencias sustentadas en evidencia, adaptados a la realidad cultural y social de Latinoamérica.</p>
+            <h4>{{ $t('home.culturalItem1Titulo') }}</h4>
+            <p>{{ $t('home.culturalItem1Desc') }}</p>
           </div>
           <div class="cultural-point">
             <div class="cultural-point-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <h4>Elementos propios de la región</h4>
-            <p>Familia, espiritualidad, redes comunitarias y desafíos sociales integrados en el enfoque.</p>
+            <h4>{{ $t('home.culturalItem2Titulo') }}</h4>
+            <p>{{ $t('home.culturalItem2Desc') }}</p>
           </div>
           <div class="cultural-point">
             <div class="cultural-point-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
-            <h4>Protección para usuarios y familias</h4>
-            <p>Formación continua, ética profesional y estándares internacionales orientados a una atención humana y responsable.</p>
+            <h4>{{ $t('home.culturalItem3Titulo') }}</h4>
+            <p>{{ $t('home.culturalItem3Desc') }}</p>
           </div>
           <div class="cultural-point">
             <div class="cultural-point-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
-            <h4>Certificación de competencias</h4>
-            <p>Un aval de que la persona posee las competencias necesarias para desempeñarse adecuadamente en su nivel profesional.</p>
+            <h4>{{ $t('home.culturalItem4Titulo') }}</h4>
+            <p>{{ $t('home.culturalItem4Desc') }}</p>
           </div>
         </div>
       </div>
@@ -241,15 +224,16 @@
   <section class="section path-section animate-on-scroll">
     <div class="container">
       <div class="section-header">
-        <div class="eyebrow">Escalera de desarrollo</div>
-        <h2>Tu ruta profesional<br>en <em class="gold">adicciones</em></h2>
-        <p class="lead" style="margin-top: 16px; max-width: 600px;">Seis niveles de certificación diseñados para acompañarte en cada etapa de tu desarrollo profesional.</p>
+        <div class="eyebrow">{{ $t('home.escaleraDesarrollo') }}</div>
+        <h2>Tu {{ $t('home.rutaFormacion').toLowerCase() }}<br>en <em class="gold">{{ $t('home.adicciones') }}</em></h2>
+        <p class="lead" style="margin-top: 16px; max-width: 600px;">{{ $t('home.rutaFormacionDesc') }}</p>
       </div>
       <div class="path-grid">
         <div v-for="(level, index) in levels" :key="level.code" class="path-card" :style="{ animationDelay: (index * 0.1) + 's' }">
           <div class="path-card-header">
             <div class="path-node">
               <span class="path-code">{{ level.code }}</span>
+              <!-- v-html: SVG fijo definido en data/certificaciones.js -->
               <span class="path-icon" v-html="levelIcons[level.code]"></span>
             </div>
             <div class="path-number">{{ String(index + 1).padStart(2, '0') }}</div>
@@ -265,7 +249,7 @@
       </div>
       <div class="section-cta">
         <router-link to="/certificaciones" class="btn btn-gold btn-lg">
-          Ver todos los requisitos
+          {{ $t('home.verTodosRequisitos') }}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </router-link>
       </div>
@@ -276,65 +260,65 @@
   <section class="section countries-section">
     <div class="container">
       <div class="section-header centered">
-        <div class="eyebrow">Cobertura Regional</div>
-        <h2>Países <em class="gold">miembros</em></h2>
-        <p class="lead" style="margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto;">Una red regional comprometida con la excelencia profesional en toda América Latina.</p>
+        <div class="eyebrow">{{ $t('home.coberturaRegional') }}</div>
+        <h2>{{ $t('home.paisesMiembros') }} <em class="gold">{{ $t('home.miembros') }}</em></h2>
+        <p class="lead" style="margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto;">{{ $t('home.redRegional') }}</p>
       </div>
       <div class="countries-grid">
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/cr.png" alt="Costa Rica" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>Costa Rica</h4>
-            <p>País fundador del modelo de certificación.</p>
+            <h4>{{ $t('home.costaRica') }}</h4>
+            <p>{{ $t('home.costaRicaDesc') }}</p>
           </div>
         </div>
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/ni.png" alt="Nicaragua" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>Nicaragua</h4>
-            <p>Profesionalización y capacitación continua.</p>
+            <h4>{{ $t('home.nicaragua') }}</h4>
+            <p>{{ $t('home.nicaraguaDesc') }}</p>
           </div>
         </div>
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/pa.png" alt="Panamá" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>Panamá</h4>
-            <p>Fortalecimiento institucional y programas.</p>
+            <h4>{{ $t('home.panama') }}</h4>
+            <p>{{ $t('home.panamaDesc') }}</p>
           </div>
         </div>
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/mx.png" alt="México" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>México</h4>
-            <p>Prevención y tratamiento especializado.</p>
+            <h4>{{ $t('home.mexico') }}</h4>
+            <p>{{ $t('home.mexicoDesc') }}</p>
           </div>
         </div>
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/do.png" alt="República Dominicana" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.republicaDominicana')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>Rep. Dominicana</h4>
-            <p>Estándares de calidad y certificación.</p>
+            <h4>{{ $t('home.repDominicana') }}</h4>
+            <p>{{ $t('home.republicaDominicanaDesc') }}</p>
           </div>
         </div>
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/ec.png" alt="Ecuador" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>Ecuador</h4>
-            <p>Intervención basada en evidencia.</p>
+            <h4>{{ $t('home.ecuador') }}</h4>
+            <p>{{ $t('home.ecuadorDesc') }}</p>
           </div>
         </div>
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/py.png" alt="Paraguay" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>Paraguay</h4>
-            <p>Desarrollo de capacidades profesionales.</p>
+            <h4>{{ $t('home.paraguay') }}</h4>
+            <p>{{ $t('home.paraguayDesc') }}</p>
           </div>
         </div>
         <div class="country-card">
-          <img src="https://flagcdn.com/w40/cl.png" alt="Chile" class="country-flag" loading="lazy" />
+          <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="country-flag" loading="lazy" />
           <div class="country-info">
-            <h4>Chile</h4>
-            <p>Innovación en rehabilitación.</p>
+            <h4>{{ $t('home.chile') }}</h4>
+            <p>{{ $t('home.chileDesc') }}</p>
           </div>
         </div>
       </div>
@@ -347,12 +331,12 @@
     <div class="container">
       <div class="cta-inner">
         <div class="cta-content">
-          <h2>¿Listo para certificarte?</h2>
-          <p class="lead">Completá tu solicitud en línea. El proceso es claro, documentado y alineado con estándares internacionales.</p>
+          <h2>{{ $t('home.ctaTitulo') }}</h2>
+          <p class="lead">{{ $t('home.ctaDesc') }}</p>
         </div>
         <div class="cta-actions">
-          <router-link to="/solicitud" class="btn btn-gold btn-lg">Iniciar solicitud</router-link>
-          <router-link to="/contacto" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.4); color: var(--white);">Consultar primero</router-link>
+          <router-link to="/solicitud" class="btn btn-gold btn-lg">{{ $t('home.iniciarSolicitud') }}</router-link>
+          <router-link to="/contacto" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.4); color: var(--white);">{{ $t('home.consultarPrimero') }}</router-link>
         </div>
       </div>
     </div>

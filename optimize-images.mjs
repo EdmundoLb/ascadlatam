@@ -10,7 +10,8 @@ const images = [
   { name: 'LOGO_ASCAD10.png', maxWidth: 200 },
   { name: 'ASCAD.png', maxWidth: 200 },
   { name: 'LOGO2.png', maxWidth: 200 },
-  { name: 'GLACT2.png', maxWidth: 200 },
+  { name: 'info01.png', maxWidth: 1400 },
+  { name: 'infor02.png', maxWidth: 1400 },
 ]
 
 async function optimizeImages() {

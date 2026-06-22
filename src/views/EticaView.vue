@@ -2,10 +2,10 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Ética y Calidad Profesional</div>
-        <h1>Compromiso Ético y<br><em class="gold">Excelencia Profesional</em></h1>
+        <div class="eyebrow">{{ $t('etica.eyebrow') }}</div>
+        <h1>{{ $t('etica.titulo') }}</h1>
         <p class="lead" style="margin-top:18px;">
-          En ASCAD/LATAM creemos que la certificación profesional debe ir más allá del conocimiento técnico. Por ello, todos nuestros procesos están fundamentados en un sólido Código Internacional de Ética que orienta la práctica profesional hacia el respeto, la responsabilidad, la integridad y la protección de las personas atendidas.
+          {{ $t('etica.descripcion') }}
         </p>
       </div>
     </section>
@@ -18,144 +18,144 @@
           <div class="ethics-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h2>La Calidad Comienza con la Ética</h2>
-          <p> Nuestros profesionales certificados asumen el compromiso de actuar bajo principios de <strong>dignidad humana, justicia, competencia profesional, confidencialidad, honestidad</strong> y respeto por los derechos humanos, garantizando una atención segura, ética y centrada en la recuperación.</p>
+          <h2>{{ $t('etica.calidadComienza') }}</h2>
+          <p>{{ $t('etica.calidadComienzaDesc') }}</p>
         </div>
 
         <!-- SISTEMA DE CERTIFICACIÓN -->
         <div class="cert-system-section">
-          <h2>Un Sistema de Certificación con Rigor Internacional</h2>
-          <p>ASCAD/LATAM desarrolla procesos de certificación basados en competencias verificables, estándares internacionales y formación continua. La certificación no constituye un reconocimiento permanente, sino un compromiso continuo con la excelencia profesional.</p>
-          <p>Para garantizar la calidad del sistema, ASCAD/LATAM mantiene mecanismos de evaluación, supervisión, actualización profesional y revisión ética que permiten asegurar el cumplimiento de los estándares establecidos para cada nivel de certificación.</p>
+          <h2>{{ $t('etica.sistemaCertificacion') }}</h2>
+          <p>{{ $t('etica.sistemaCertificacionDesc1') }}</p>
+          <p>{{ $t('etica.sistemaCertificacionDesc2') }}</p>
         </div>
 
         <!-- MONITOREO Y CUMPLIMIENTO -->
         <div class="monitoring-section">
-          <h2>Monitoreo y Cumplimiento Ético</h2>
-          <p>Toda persona certificada por ASCAD/LATAM está sujeta a un sistema de seguimiento y cumplimiento ético respaldado por el <strong>Comité Internacional de Ética</strong>. Este organismo tiene la responsabilidad de:</p>
+          <h2>{{ $t('etica.monitoreoCumplimiento') }}</h2>
+          <p>{{ $t('etica.monitoreoCumplimientoDesc') }}</p>
           <ul class="ethics-list">
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Promover la práctica ética y responsable.</span>
+              <span>{{ $t('etica.practicaEtica') }}</span>
             </li>
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Investigar denuncias o incumplimientos éticos.</span>
+              <span>{{ $t('etica.investigarDenuncias') }}</span>
             </li>
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Proteger a las personas usuarias de los servicios.</span>
+              <span>{{ $t('etica.protegerUsuarios') }}</span>
             </li>
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Garantizar la transparencia y credibilidad del sistema de certificación.</span>
+              <span>{{ $t('etica.garantizarTransparencia') }}</span>
             </li>
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Aplicar medidas correctivas cuando sea necesario.</span>
+              <span>{{ $t('etica.aplicarMedidas') }}</span>
             </li>
           </ul>
-          <p class="highlight-text">Este compromiso fortalece la confianza pública y garantiza que la certificación ASCAD/LATAM represente una verdadera garantía de calidad profesional.</p>
+          <p class="highlight-text">{{ $t('etica.destacadoEtica') }}</p>
         </div>
 
         <!-- DIVERSIDAD CULTURAL -->
         <div class="diversity-section">
-          <h2>Respeto a la Diversidad Cultural de América Latina</h2>
-          <p>ASCAD/LATAM reconoce la riqueza cultural, social y humana de América Latina. Por ello, promueve una práctica profesional sensible a las particularidades culturales, religiosas, sociales y comunitarias de cada país y población atendida.</p>
-          <p>Nuestros profesionales certificados se comprometen a brindar servicios libres de discriminación, respetando la identidad, cultura, creencias, idioma, género, orientación sexual, nacionalidad y contexto social de cada persona.</p>
+          <h2>{{ $t('etica.respetoDiversidad') }}</h2>
+          <p>{{ $t('etica.respetoDiversidadDesc1') }}</p>
+          <p>{{ $t('etica.respetoDiversidadDesc2') }}</p>
           <div class="diversity-highlight">
-            <p><strong>La diversidad es entendida como una fortaleza</strong> que enriquece los procesos de recuperación, inclusión social y desarrollo humano.</p>
+            <p><strong>{{ $t('etica.diversidadFortaleza') }}</strong> {{ $t('etica.diversidadFortalezaDesc') }}</p>
           </div>
         </div>
 
         <!-- CONFIANZA Y TRANSPARENCIA -->
         <div class="transparency-section">
-          <h2>Confianza, Transparencia y Responsabilidad</h2>
-          <p>La certificación ASCAD/LATAM representa un compromiso permanente con la calidad, la ética y el bienestar de las personas. Cada profesional certificado forma parte de una comunidad internacional que comparte valores de excelencia, responsabilidad social y respeto por la dignidad humana.</p>
-          <p>Nuestro objetivo es contribuir al fortalecimiento de sistemas de atención más humanos, seguros, inclusivos y basados en evidencia para toda América Latina.</p>
+          <h2>{{ $t('etica.confianzaTransparencia') }}</h2>
+          <p>{{ $t('etica.confianzaTransparenciaDesc1') }}</p>
+          <p>{{ $t('etica.confianzaTransparenciaDesc2') }}</p>
         </div>
 
         <!-- RED LATINOAMERICANA -->
         <div class="network-section">
-          <h2>Red Latinoamericana para la Excelencia Profesional</h2>
-          <p>ASCAD/LATAM reúne actualmente a organizaciones y profesionales de <strong>Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay y Chile</strong>, conformando una red regional comprometida con el fortalecimiento de los sistemas de prevención, tratamiento, recuperación e inclusión social en el campo de las adicciones.</p>
-          <p>La integración de estos países permite compartir experiencias, promover estándares comunes de calidad y desarrollar recursos humanos altamente capacitados para responder a los desafíos que enfrentan nuestras comunidades.</p>
-          <p>La Certificación Internacional ASCAD/LATAM representa una oportunidad estratégica para que los países miembros fortalezcan sus sistemas nacionales de atención mediante la profesionalización del talento humano, la certificación basada en competencias y la implementación de estándares internacionales reconocidos.</p>
+          <h2>{{ $t('etica.redLatinoamericana') }}</h2>
+          <p>{{ $t('etica.redLatinoamericanaDesc1') }}</p>
+          <p>{{ $t('etica.redLatinoamericanaDesc2') }}</p>
+          <p>{{ $t('etica.redLatinoamericanaDesc3') }}</p>
         </div>
 
         <!-- PAÍSES AFILIADOS -->
         <div class="countries-intro">
           <div class="section-header">
             <div class="eyebrow">ASCAD/LATAM</div>
-            <h2>Países Afiliados a <em class="gold">ASCAD/LATAM</em></h2>
+            <h2>{{ $t('etica.paisesAfiliados') }} <em class="gold">ASCAD/LATAM</em></h2>
           </div>
         </div>
 
         <div class="countries-grid">
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/cr.png" alt="Costa Rica" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Costa Rica</h4>
-              <p>País fundador del modelo de certificación y referente regional en el desarrollo de estándares profesionales para el abordaje de las adicciones.</p>
+              <h4>{{ $t('home.costaRica') }}</h4>
+              <p>{{ $t('directorio.costaRicaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/ni.png" alt="Nicaragua" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Nicaragua</h4>
-              <p>Impulsa la profesionalización de los recursos humanos mediante procesos de capacitación y certificación orientados a la mejora continua.</p>
+              <h4>{{ $t('home.nicaragua') }}</h4>
+              <p>{{ $t('directorio.nicaraguaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/pa.png" alt="Panamá" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Panamá</h4>
-              <p>Promueve el fortalecimiento institucional y el desarrollo de programas de atención basados en calidad y competencias profesionales.</p>
+              <h4>{{ $t('home.panama') }}</h4>
+              <p>{{ $t('directorio.panamaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/mx.png" alt="México" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>México</h4>
-              <p>Contribuye con una amplia trayectoria en prevención, tratamiento y formación especializada de profesionales en adicciones.</p>
+              <h4>{{ $t('home.mexico') }}</h4>
+              <p>{{ $t('directorio.mexicoDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/do.png" alt="República Dominicana" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.republicaDominicana')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>República Dominicana</h4>
-              <p>Fortalece sus sistemas de atención mediante la implementación de estándares de calidad y certificación profesional.</p>
+              <h4>{{ $t('home.repDominicana') }}</h4>
+              <p>{{ $t('directorio.republicaDominicanaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/ec.png" alt="Ecuador" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Ecuador</h4>
-              <p>Promueve modelos de intervención basados en evidencia y el fortalecimiento continuo de las competencias del personal especializado.</p>
+              <h4>{{ $t('home.ecuador') }}</h4>
+              <p>{{ $t('directorio.ecuadorDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/py.png" alt="Paraguay" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Paraguay</h4>
-              <p>Participa activamente en los procesos de certificación y desarrollo de capacidades para mejorar la calidad de los servicios de atención.</p>
+              <h4>{{ $t('home.paraguay') }}</h4>
+              <p>{{ $t('directorio.paraguayDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/cl.png" alt="Chile" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Chile</h4>
-              <p>Contribuye con experiencias innovadoras en rehabilitación y fortalecimiento institucional para la región.</p>
+              <h4>{{ $t('home.chile') }}</h4>
+              <p>{{ $t('directorio.chileDesc') }}</p>
             </div>
           </div>
         </div>
 
         <!-- BENEFICIOS PAÍSES -->
         <div class="benefits-section">
-          <h2>Beneficios para los Países Afiliados</h2>
-          <p>ASCAD/LATAM (Asociación Latinoamericana para la Certificación y Acreditación de Consejeros en Adicciones)</p>
-          <p>La incorporación a ASCAD/LATAM permite a los países fortalecer sus políticas públicas, mejorar la calidad de los servicios y consolidar una red de profesionales certificados bajo estándares internacionales.</p>
-          <p>Los países afiliados obtienen:</p>
+          <h2>{{ $t('etica.beneficiosPaises') }}</h2>
+          <p>{{ $t('etica.beneficiosPaisesDesc1') }}</p>
+          <p>{{ $t('etica.beneficiosPaisesDesc2') }}</p>
+          <p>{{ $t('etica.beneficiosPaisesDesc3') }}</p>
           <ul class="benefits-list">
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -202,9 +202,9 @@
 
         <!-- BENEFICIOS INSTITUCIONES -->
         <div class="benefits-institutions-section">
-          <h2>Beneficios para las Instituciones</h2>
-          <p>Las organizaciones que implementan el Modelo ASCAD/LATAM fortalecen sus capacidades operativas y elevan sus estándares de calidad, generando mayor confianza entre usuarios, familias y organismos aliados.</p>
-          <p>Entre los principales beneficios destacan:</p>
+          <h2>{{ $t('etica.beneficiosInstituciones') }}</h2>
+          <p>{{ $t('etica.beneficiosInstitucionesDesc') }}</p>
+          <p>{{ $t('etica.principalesBeneficiosInst') }}</p>
           <ul class="benefits-list">
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -239,9 +239,9 @@
 
         <!-- BENEFICIOS PROFESIONALES -->
         <div class="benefits-professionals-section">
-          <h2>Beneficios para los Profesionales Certificados</h2>
-          <p>ASCAD/LATAM reconoce formalmente los conocimientos, habilidades y competencias de quienes trabajan en prevención, tratamiento y recuperación de las adicciones.</p>
-          <p>La certificación permite:</p>
+          <h2>{{ $t('etica.beneficiosProfesionales') }}</h2>
+          <p>{{ $t('etica.beneficiosProfesionalesDesc') }}</p>
+          <p>{{ $t('etica.laCertificacionPermite') }}</p>
           <ul class="benefits-list">
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -280,9 +280,9 @@
 
         <!-- BENEFICIOS PERSONAS Y FAMILIAS -->
         <div class="benefits-families-section">
-          <h2>Beneficios para las Personas y las Familias</h2>
-          <p>La certificación profesional tiene como propósito final garantizar que las personas afectadas por trastornos por uso de sustancias reciban servicios de calidad, brindados por profesionales competentes y comprometidos con la recuperación.</p>
-          <p>Esto se traduce en:</p>
+          <h2>{{ $t('etica.beneficiosFamilias') }}</h2>
+          <p>{{ $t('etica.beneficiosFamiliasDesc') }}</p>
+          <p>{{ $t('etica.estoSeTraduce') }}</p>
           <ul class="benefits-list">
             <li>
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -313,18 +313,18 @@
 
         <!-- UNA INVERSIÓN PARA AMÉRICA LATINA -->
         <div class="investment-section">
-          <h2>Una Inversión para América Latina</h2>
-          <p>La experiencia de Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay y Chile demuestra que la certificación profesional es una herramienta fundamental para fortalecer los sistemas de atención, elevar la calidad de los servicios y promover una recuperación más efectiva y sostenible.</p>
-          <p>ASCAD/LATAM continúa expandiendo esta visión regional, construyendo una comunidad latinoamericana comprometida con la excelencia profesional, la ética, la calidad y el bienestar de las personas, familias y comunidades afectadas por las adicciones.</p>
+          <h2>{{ $t('etica.inversionLatam') }}</h2>
+          <p>{{ $t('etica.inversionLatamDesc') }}</p>
+          <p>{{ $t('etica.ascadContinua') }}</p>
         </div>
 
         <!-- CTA -->
         <div class="etica-cta">
-          <h3>¿Querés conocer más sobre nuestros principios éticos?</h3>
-          <p>Explorá nuestras certificaciones y unete a la red de profesionales certificados más importante de América Latina.</p>
+          <h3>{{ $t('etica.conocerMas') }}</h3>
+          <p>{{ $t('etica.exploraCertificaciones') }}</p>
           <div class="cta-buttons">
-            <router-link to="/solicitud" class="btn btn-gold btn-lg">Iniciar mi solicitud</router-link>
-            <router-link to="/certificaciones" class="btn btn-outline btn-lg">Ver certificaciones</router-link>
+            <router-link to="/solicitud" class="btn btn-gold btn-lg">{{ $t('home.iniciarSolicitud') }}</router-link>
+            <router-link to="/certificaciones" class="btn btn-outline btn-lg">{{ $t('home.btnCertificaciones') }}</router-link>
           </div>
         </div>
 

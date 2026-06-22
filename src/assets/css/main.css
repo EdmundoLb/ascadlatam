@@ -79,6 +79,26 @@
   --bp-lg: 1024px;
   --bp-xl: 1280px;
   --bp-2xl: 1440px;
+
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal-backdrop: 500;
+  --z-modal: 600;
+  --z-toast: 1000;
+
+  --toast-success-bg: #065f46;
+  --toast-success-text: #d1fae5;
+  --toast-success-border: #059669;
+  --toast-error-bg: #7f1d1d;
+  --toast-error-text: #fee2e2;
+  --toast-error-border: #dc2626;
+  --toast-warning-bg: #78350f;
+  --toast-warning-text: #fef3c7;
+  --toast-warning-border: #d97706;
+  --toast-info-bg: #1e3a5f;
+  --toast-info-text: #dbeafe;
+  --toast-info-border: #3b82f6;
+  --toast-duration: 5000ms;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

@@ -2,11 +2,10 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Contacto</div>
-        <h1>¿Preguntas sobre tu <em class="gold">certificación</em>?</h1>
+        <div class="eyebrow">{{ $t('contacto.titulo') }}</div>
+        <h1>{{ $t('contacto.preguntas') }} <em class="gold">{{ $t('solicitud.certificacion') }}</em>?</h1>
         <p class="lead" style="margin-top:18px;">
-          Consultá sobre requisitos, procesos, vigencia de certificaciones o alianzas institucionales.
-          Nuestro equipo responde en un plazo de 2 a 3 días hábiles.
+          {{ $t('contacto.descripcion') }}
         </p>
       </div>
     </section>
@@ -14,7 +13,7 @@
     <section class="section">
       <div class="container contact-grid">
         <div class="contact-info">
-          <h3>Información de contacto</h3>
+          <h3>{{ $t('contacto.infoTitulo') }}</h3>
           <p class="muted" style="margin-top:12px; line-height:1.8;">
             Para consultas sobre el proceso de certificación, requisitos por nivel, verificación de credenciales o para establecer alianzas institucionales.
           </p>
@@ -32,14 +31,14 @@
             </div>
           </div>
           <div class="quick-links">
-            <p class="eyebrow" style="margin-bottom:14px;">Accesos rápidos</p>
-            <router-link to="/solicitud" class="btn btn-outline" style="margin-bottom:10px; display:flex;">Iniciar solicitud de certificación</router-link>
-            <router-link to="/directorio" class="btn btn-ghost" style="display:flex;">Verificar un certificado</router-link>
+            <p class="eyebrow" style="margin-bottom:14px;">{{ $t('contacto.accesosRapidos') }}</p>
+            <router-link to="/solicitud" class="btn btn-outline" style="margin-bottom:10px; display:flex;">{{ $t('contacto.iniciarSolicitudCert') }}</router-link>
+            <router-link to="/directorio" class="btn btn-ghost" style="display:flex;">{{ $t('contacto.verificarCertificado') }}</router-link>
           </div>
         </div>
 
         <div class="contact-form-wrap">
-          <h3>Enviar consulta</h3>
+          <h3>{{ $t('contacto.enviarConsulta') }}</h3>
           <form
             :action="`https://formspree.io/f/${formId}`"
             method="POST"
@@ -48,38 +47,38 @@
           >
             <div class="cf-grid">
               <div class="form-group">
-                <label for="nombre">Nombre completo *</label>
-                <input id="nombre" type="text" name="nombre" required placeholder="Tu nombre" autofocus />
+                <label for="nombre">{{ $t('contacto.nombre') }} *</label>
+                <input id="nombre" type="text" name="nombre" required :placeholder="$t('contacto.placeholders.nombre')" autofocus />
               </div>
               <div class="form-group">
-                <label for="pais">País</label>
+                <label for="pais">{{ $t('contacto.pais') }}</label>
                 <select id="pais" name="pais">
-                  <option value="">Seleccionar país…</option>
+                  <option value="">{{ $t('contacto.placeholders.pais') }}</option>
                   <option v-for="p in paises" :key="p">{{ p }}</option>
                 </select>
               </div>
               <div class="form-group form-full">
-                <label for="email">Correo electrónico *</label>
-                <input id="email" type="email" name="email" required placeholder="correo@ejemplo.com" />
+                <label for="email">{{ $t('contacto.email') }} *</label>
+                <input id="email" type="email" name="email" required :placeholder="$t('contacto.placeholders.email')" />
               </div>
               <div class="form-group form-full">
-                <label for="asunto">Asunto</label>
+                <label for="asunto">{{ $t('contacto.asunto') }}</label>
                 <select id="asunto" name="asunto">
-                  <option value="">Seleccionar tema…</option>
-                  <option>Requisitos de certificación</option>
-                  <option>Estado de mi solicitud</option>
-                  <option>Verificar certificado</option>
-                  <option>Alianza institucional</option>
-                  <option>Otro</option>
+                  <option value="">{{ $t('contacto.placeholders.asunto') }}</option>
+                  <option>{{ $t('contacto.requisitosCertificacion') }}</option>
+                  <option>{{ $t('contacto.estadoSolicitud') }}</option>
+                  <option>{{ $t('contacto.verificarCertificado') }}</option>
+                  <option>{{ $t('contacto.alianzaInstitucional') }}</option>
+                  <option>{{ $t('common.other') }}</option>
                 </select>
               </div>
               <div class="form-group form-full">
-                <label for="mensaje">Mensaje *</label>
-                <textarea id="mensaje" name="mensaje" required placeholder="Escribí tu consulta aquí…" style="min-height:130px;"></textarea>
+                <label for="mensaje">{{ $t('contacto.mensaje') }} *</label>
+                <textarea id="mensaje" name="mensaje" required :placeholder="$t('contacto.placeholders.mensaje')" style="min-height:130px;"></textarea>
               </div>
             </div>
             <button type="submit" class="btn btn-gold" style="width:100%; margin-top:8px; justify-content:center;" :disabled="sending">
-              {{ sending ? 'Enviando…' : 'Enviar mensaje →' }}
+              {{ sending ? $t('contacto.btnEnviarProcesando') : $t('contacto.btnEnviar') + ' →' }}
             </button>
             <div v-if="message" class="form-msg" :class="message.type" style="margin-top:14px;">
               {{ message.text }}

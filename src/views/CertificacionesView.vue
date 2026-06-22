@@ -2,45 +2,45 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Certificaciones disponibles</div>
-        <h1>Cada nivel,<br>un estándar <em class="gold">distinto</em></h1>
+        <div class="eyebrow">{{ $t('certificaciones.disponibles') || 'Certificaciones disponibles' }}</div>
+        <h1>{{ $t('certificaciones.titulo') }}<br><em class="gold">{{ $t('certificaciones.distinto') || 'distinto' }}</em></h1>
         <p class="lead" style="margin-top:20px;">
-          Seis niveles de certificación progresivos, desde el acompañamiento inicial hasta la supervisión profesional especializada. Todos alineados con estándares internacionales adaptados culturalmente a la región.
+          {{ $t('certificaciones.descripcion') }}
         </p>
       </div>
     </section>
 
     <section class="section toc-section">
       <div class="container">
-        <p class="toc-intro">Navegá rápidamente a la sección que necesites</p>
+        <p class="toc-intro">{{ $t('certificaciones.tocIntro') || 'Navegá rápidamente a la sección que necesites' }}</p>
         <div class="toc-grid">
           <a href="#comparativa" class="toc-item">
             <span class="toc-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
             </span>
-            <span class="toc-label">Vista comparativa</span>
-            <span class="toc-desc">Compará todos los niveles</span>
+            <span class="toc-label">{{ $t('certificaciones.vistaComparativa') || 'Vista comparativa' }}</span>
+            <span class="toc-desc">{{ $t('certificaciones.comparaNiveles') || 'Compará todos los niveles' }}</span>
           </a>
           <a href="#detalles" class="toc-item">
             <span class="toc-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             </span>
-            <span class="toc-label">Requisitos por nivel</span>
-            <span class="toc-desc">Competencias y horas requeridas</span>
+            <span class="toc-label">{{ $t('certificaciones.requisitosNivel') || 'Requisitos por nivel' }}</span>
+            <span class="toc-desc">{{ $t('certificaciones.competenciasHoras') || 'Competencias y horas requeridas' }}</span>
           </a>
           <a href="#proceso" class="toc-item">
             <span class="toc-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </span>
-            <span class="toc-label">Proceso de certificación</span>
-            <span class="toc-desc">Cómo obtener tu certificación</span>
+            <span class="toc-label">{{ $t('certificaciones.procesoCertificacion') || 'Proceso de certificación' }}</span>
+            <span class="toc-desc">{{ $t('certificaciones.comoObtener') || 'Cómo obtener tu certificación' }}</span>
           </a>
           <a href="#faq" class="toc-item">
             <span class="toc-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </span>
-            <span class="toc-label">Preguntas frecuentes</span>
-            <span class="toc-desc">Resolvé tus dudas</span>
+            <span class="toc-label">{{ $t('certificaciones.preguntasFrecuentes') || 'Preguntas frecuentes' }}</span>
+            <span class="toc-desc">{{ $t('certificaciones.resolviDudas') || 'Resolvé tus dudas' }}</span>
           </a>
         </div>
       </div>
@@ -50,20 +50,20 @@
     <section id="comparativa" class="section comparison-section">
       <div class="container">
         <div class="section-header">
-          <div class="eyebrow">Comparativa rápida</div>
-          <h2>Todos los niveles <em class="gold">lado a lado</em></h2>
+          <div class="eyebrow">{{ $t('certificaciones.comparativaRapida') || 'Comparativa rápida' }}</div>
+          <h2>{{ $t('certificaciones.todosNiveles') || 'Todos los niveles' }} <em class="gold">{{ $t('certificaciones.ladoLado') || 'lado a lado' }}</em></h2>
         </div>
 
         <div class="table-wrap">
           <table class="comparison-table">
             <thead>
               <tr>
-                <th>Certificación</th>
-                <th>Descripción breve</th>
-                <th>Formación</th>
-                <th>Experiencia</th>
-                <th>Supervisión</th>
-                <th class="text-right">Cuota bianual</th>
+                <th>{{ $t('certificaciones.certificacion') || 'Certificación' }}</th>
+                <th>{{ $t('certificaciones.descripcionBreve') || 'Descripción breve' }}</th>
+                <th>{{ $t('certificaciones.formacion') || 'Formación' }}</th>
+                <th>{{ $t('certificaciones.experiencia') || 'Experiencia' }}</th>
+                <th>{{ $t('certificaciones.supervision') || 'Supervisión' }}</th>
+                <th class="text-right">{{ $t('certificaciones.cuotaBianual') || 'Cuota bianual' }}</th>
               </tr>
             </thead>
             <tbody>
@@ -87,11 +87,11 @@
         <div class="table-legend">
           <div class="legend-item">
             <span class="legend-dot"></span>
-            <span>Todas las certificaciones incluyen firma del código de ética y examen de evaluación</span>
+            <span>{{ $t('certificaciones.incluyeFirma') || 'Todas las certificaciones incluyen firma del código de ética y examen de evaluación' }}</span>
           </div>
           <div class="legend-item">
             <span class="legend-dot"></span>
-            <span>Los montos están en USD y no son reembolsables</span>
+            <span>{{ $t('certificaciones.montosUSD') || 'Los montos están en USD y no son reembolsables' }}</span>
           </div>
         </div>
       </div>
@@ -101,9 +101,9 @@
     <section id="detalles" class="section details-section">
       <div class="container">
         <div class="section-header">
-          <div class="eyebrow">Niveles de certificación</div>
-          <h2>Conocé cada <em class="gold">certificación</em></h2>
-          <p class="lead" style="margin-top:16px; max-width: 600px;">Hacé click en cada nivel para ver los requisitos completos, competencias y horas requeridas.</p>
+          <div class="eyebrow">{{ $t('certificaciones.nivelesCertificacion') || 'Niveles de certificación' }}</div>
+          <h2>{{ $t('certificaciones.conoceCada') || 'Conocé cada' }} <em class="gold">{{ $t('certificaciones.certificacion') || 'certificación' }}</em></h2>
+          <p class="lead" style="margin-top:16px; max-width: 600px;">{{ $t('certificaciones.hazClick') || 'Hacé click en cada nivel para ver los requisitos completos, competencias y horas requeridas.' }}</p>
         </div>
 
         <div class="cert-grid">
@@ -117,6 +117,7 @@
             <div class="cert-header">
               <div class="cert-level">
                 <span class="cert-code">{{ cert.code }}</span>
+                <!-- v-html: SVG fijo definido en data/certificaciones.js -->
                 <span class="cert-icon" v-html="getLevelIcon(cert.code)"></span>
               </div>
               <div class="cert-title-area">
@@ -126,9 +127,9 @@
               <div class="cert-meta">
                 <div class="cert-price">
                   <span class="price-amount">${{ cert.fee }}</span>
-                  <span class="price-period">/bianual</span>
+                  <span class="price-period">/{{ $t('certificaciones.bianual') || 'bianual' }}</span>
                 </div>
-                <button class="expand-btn" :aria-label="`Ver más sobre ${cert.name}`">
+                <button class="expand-btn" :aria-label="`${$t('certificaciones.verMasSobre') || 'Ver más sobre'} ${cert.name}`">
                   <svg class="expand-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 12 15 18 9"/>
                   </svg>
@@ -144,8 +145,8 @@
     <section id="proceso" class="section process-section">
       <div class="container">
         <div class="section-header centered">
-          <div class="eyebrow">Proceso de certificación</div>
-          <h2>¿Cómo funciona la <em class="gold">certificación</em>?</h2>
+          <div class="eyebrow">{{ $t('certificaciones.procesoTitulo') || 'Proceso de certificación' }}</div>
+          <h2>{{ $t('certificaciones.comoFunciona') || '¿Cómo funciona la' }} <em class="gold">{{ $t('certificaciones.certificacion') || 'certificación' }}</em>?</h2>
         </div>
 
         <div class="process-track">
@@ -161,7 +162,7 @@
         </div>
 
         <div class="process-cta">
-          <router-link to="/solicitud" class="btn btn-gold btn-lg">Comenzar mi solicitud</router-link>
+          <router-link to="/solicitud" class="btn btn-gold btn-lg">{{ $t('certificaciones.comenzarSolicitud') || 'Comenzar mi solicitud' }}</router-link>
         </div>
       </div>
     </section>
@@ -170,8 +171,8 @@
     <section id="faq" class="section faq-section">
       <div class="container">
         <div class="section-header centered">
-          <div class="eyebrow">Preguntas frecuentes</div>
-          <h2>Resolved tus <em class="gold">dudas</em></h2>
+          <div class="eyebrow">{{ $t('certificaciones.preguntasFrecuentes') || 'Preguntas frecuentes' }}</div>
+          <h2>{{ $t('certificaciones.resuelveDudas') || 'Resolved tus' }} <em class="gold">{{ $t('certificaciones.dudas') || 'dudas' }}</em></h2>
         </div>
 
         <div class="faq-list">
@@ -196,8 +197,8 @@
         </div>
 
         <div class="faq-cta">
-          <p>¿No encontraste la respuesta que buscabas?</p>
-          <router-link to="/contacto" class="btn btn-outline">Contactanos</router-link>
+          <p>{{ $t('certificaciones.noEncontraste') || '¿No encontraste la respuesta que buscabas?' }}</p>
+          <router-link to="/contacto" class="btn btn-outline">{{ $t('contacto.contactanos') || 'Contactanos' }}</router-link>
         </div>
       </div>
     </section>
@@ -207,10 +208,10 @@
       <div class="container">
         <div class="alliance-inner">
           <div class="alliance-text">
-            <span class="eyebrow">Consorcio Latinoamericano de Certificación</span>
-            <h2>Una certificación que <em class="gold">garantiza calidad</em></h2>
-            <p>ASCAD LATAM asegura que cada profesional certificado cumpla con los más altos estándares de calidad, ética y competencia en el campo de las adicciones, basados en TAP 21, TIP 64 y TIP 52.</p>
-            <router-link to="/contacto" class="btn btn-gold btn-lg" style="margin-top:24px;">Contactanos</router-link>
+            <span class="eyebrow">{{ $t('certificaciones.consorcioLatinoamericano') || 'Consorcio Latinoamericano de Certificación' }}</span>
+            <h2>{{ $t('certificaciones.certificacionGarantiza') || 'Una certificación que' }} <em class="gold">{{ $t('certificaciones.garantizaCalidad') || 'garantiza calidad' }}</em></h2>
+            <p>{{ $t('certificaciones.ascadAsegura') || 'ASCAD LATAM asegura que cada profesional certificado cumpla con los más altos estándares de calidad, ética y competencia en el campo de las adicciones, basados en TAP 21, TIP 64 y TIP 52.' }}</p>
+            <router-link to="/contacto" class="btn btn-gold btn-lg" style="margin-top:24px;">{{ $t('contacto.contactanos') || 'Contactanos' }}</router-link>
           </div>
           <div class="alliance-visual">
             <div class="consorcio-grid">
@@ -228,11 +229,11 @@
     <!-- FULLSCREEN MODAL -->
     <div v-if="activeModal" class="cert-modal-overlay" @click="closeModal" role="presentation">
       <div class="cert-modal" role="dialog" aria-modal="true" :aria-label="`Detalles de ${certData?.name}`" ref="modalRef" tabindex="-1" @click.stop>
-        <button class="modal-close" @click="closeModal" aria-label="Cerrar">
+        <button class="modal-close" @click="closeModal" :aria-label="$t('common.close') || 'Cerrar'">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div class="modal-header">
-          <div class="modal-flact">Programa ASCAD LATAM de Formación en Adicciones</div>
+          <div class="modal-flact">{{ $t('certificaciones.programaAscad') || 'Programa ASCAD LATAM de Formación en Adicciones' }}</div>
           <div class="modal-cert-title">
             <span class="modal-code">{{ certData?.code }}</span>
             <h2>{{ certData?.name }}</h2>
@@ -244,21 +245,21 @@
             <div class="technical-foundation" v-if="certData.technicalDescription">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                <h4>Fundamentación Técnica</h4>
+                <h4>{{ $t('certificaciones.fundamentacionTecnica') || 'Fundamentación Técnica' }}</h4>
               </div>
               <p class="technical-text">{{ certData.technicalDescription }}</p>
             </div>
             <div class="professional-profile" v-if="certData.professionalProfile">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <h4>Perfil Profesional</h4>
+                <h4>{{ $t('certificaciones.perfilProfesional') || 'Perfil Profesional' }}</h4>
               </div>
               <p class="profile-text">{{ certData.professionalProfile }}</p>
             </div>
             <div class="training-axes" v-if="certData.trainingAxes?.length">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                <h4>Ejes de Formación</h4>
+                <h4>{{ $t('certificaciones.ejesFormacion') || 'Ejes de Formación' }}</h4>
               </div>
               <p v-if="certData.basedOn" class="based-on-text">{{ certData.basedOn }}</p>
               <div class="axes-tags">
@@ -268,7 +269,7 @@
             <div class="competencies-section">
               <div class="section-divider">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <h4>Competencias por Eje</h4>
+                <h4>{{ $t('certificaciones.competenciasEje') || 'Competencias por Eje' }}</h4>
               </div>
               <div class="axis-blocks">
                 <div v-for="axis in certData.competencies" :key="axis.axis" class="axis-block" :class="{ 'is-expanded': expandedAxis === axis.axis }">
@@ -287,19 +288,19 @@
             </div>
             <div class="modal-meta">
               <div class="modal-section" v-if="certData.areas?.length">
-                <h5>Ámbitos de desempeño</h5>
+                <h5>{{ $t('certificaciones.ambitosDesempeno') || 'Ámbitos de desempeño' }}</h5>
                 <div class="areas-tags">
                   <span v-for="area in certData.areas" :key="area" class="area-tag">{{ area }}</span>
                 </div>
               </div>
               <div class="modal-section" v-if="certData.requirements?.length">
-                <h5>Requisitos</h5>
+                <h5>{{ $t('certificaciones.requisitos') || 'Requisitos' }}</h5>
                 <ul class="req-list">
                   <li v-for="req in certData.requirements" :key="req">{{ req }}</li>
                 </ul>
               </div>
               <div class="modal-section" v-if="certData.hours?.length">
-                <h5>Horas requeridas</h5>
+                <h5>{{ $t('certificaciones.horasRequeridas') || 'Horas requeridas' }}</h5>
                 <div class="hours-grid">
                   <div v-for="h in certData.hours" :key="h.label" class="hour-badge">
                     <span class="hour-value">{{ h.value }}</span>
@@ -311,9 +312,9 @@
             <div class="cert-actions">
               <button @click="goToSolicitud(certData.code)" class="btn btn-gold">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
-                Aplicar ahora
+                {{ $t('certificaciones.aplicar') }}
               </button>
-              <button @click="goToContacto()" class="btn btn-ghost">Más información</button>
+              <button @click="goToContacto()" class="btn btn-ghost">{{ $t('certificaciones.masInfo') }}</button>
             </div>
           </div>
         </div>
@@ -778,7 +779,7 @@ const consortium = [
 .cert-cell strong { color: var(--text); font-size: .875rem; }
 .td-desc { color: var(--text-muted); font-size: .8125rem; max-width: 220px; }
 .td-center { text-align: center; color: var(--text-secondary); font-size: .8125rem; }
-.td-price { text-align: right; font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: var(--accent-dark); }
+.td-price { text-align: right; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--accent-dark); }
 
 .table-legend { display: flex; gap: 24px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--text-muted); }

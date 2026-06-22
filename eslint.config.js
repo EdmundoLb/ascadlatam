@@ -33,12 +33,48 @@ export default [
     }
   },
   {
+    // Estos archivos solo usan v-html para SVGs propios (data/certificaciones.js,
+    // íconos locales) y strings de los locales es/pt — nunca contenido de usuario o de
+    // una API externa, así que se desactiva la regla de forma explícita en vez de
+    // arrastrar el warning indefinidamente.
+    files: [
+      'src/views/HomeView.vue',
+      'src/views/CertificacionesView.vue',
+      'src/views/ConocimientoView.vue'
+    ],
+    rules: {
+      'vue/no-v-html': 'off'
+    }
+  },
+  {
     files: ['**/*.js', '**/*.mjs'],
-    ignores: ['e2e/**', 'playwright.config.js', 'public/sw.js'],
+    ignores: ['e2e/**', 'playwright.config.js', 'public/sw.js', 'src/i18n/**'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
-      globals: { document: 'readonly', URL: 'readonly', fetch: 'readonly', FormData: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', console: 'readonly' }
+      globals: { document: 'readonly', URL: 'readonly', fetch: 'readonly', FormData: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', console: 'readonly', localStorage: 'readonly', navigator: 'readonly' }
+    },
+    rules: {
+      'no-console': 'warn',
+      'no-debugger': 'warn'
+    }
+  },
+  {
+    files: ['src/i18n/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        document: 'readonly',
+        URL: 'readonly',
+        fetch: 'readonly',
+        FormData: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        console: 'readonly',
+        localStorage: 'readonly',
+        navigator: 'readonly'
+      }
     },
     rules: {
       'no-console': 'warn',
@@ -121,7 +157,9 @@ export default [
         window: 'readonly',
         IntersectionObserver: 'readonly',
         ResizeObserver: 'readonly',
-        console: 'readonly'
+        console: 'readonly',
+        localStorage: 'readonly',
+        navigator: 'readonly'
       }
     }
   }

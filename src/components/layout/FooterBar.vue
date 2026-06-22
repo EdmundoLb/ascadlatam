@@ -9,51 +9,51 @@
                 <img :src="logoAscad" alt="ASCAD LATAM - Logo" width="40" height="40" />
               </div>
               <div class="brand-text">
-                <span class="brand-label">Certificación Internacional</span>
+                <span class="brand-label">{{ $t('footer.brandLabel') }}</span>
                 <strong>ASCAD LATAM</strong>
               </div>
             </router-link>
-            <p class="brand-desc">Consorcio Latinoamericano de Certificación en Adicciones. Estándares de calidad, ética y competencia desde 2004. Certificación culturalmente adaptable a Latinoamérica.</p>
+            <p class="brand-desc">{{ $t('footer.brandDesc') }}</p>
             <div class="social-links">
-              <a href="#" aria-label="LinkedIn de ASCAD LATAM" class="social-btn" target="_blank" rel="noopener noreferrer">
+              <a href="#" :aria-label="'LinkedIn de ASCAD LATAM'" class="social-btn" target="_blank" rel="noopener noreferrer">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
             </div>
           </div>
 
           <div class="footer-col">
-            <h5>Certificaciones</h5>
+            <h5>{{ $t('footer.certificaciones') }}</h5>
             <ul>
-              <li><router-link to="/solicitud?nivel=OST">OST - Operador Socioterapéutico</router-link></li>
-              <li><router-link to="/solicitud?nivel=EPR">EPR - Entrenador de Pares en Recuperación</router-link></li>
-              <li><router-link to="/solicitud?nivel=CCAAD%20I">CCAAD I - Consejero Asociado Junior</router-link></li>
-              <li><router-link to="/solicitud?nivel=CCAAD%20II">CCAAD II - Consejero Certificado</router-link></li>
-              <li><router-link to="/solicitud?nivel=CCAAD%20III">CCAAD III - Consejero Senior</router-link></li>
-              <li><router-link to="/solicitud?nivel=CCAAD%20IV">CCAAD IV - Supervisor Profesional</router-link></li>
+              <li><router-link to="/solicitud?nivel=OST">{{ $t('footer.ost') }}</router-link></li>
+              <li><router-link to="/solicitud?nivel=EPR">{{ $t('footer.epr') }}</router-link></li>
+              <li><router-link to="/solicitud?nivel=CCAAD%20I">{{ $t('footer.ccaad1') }}</router-link></li>
+              <li><router-link to="/solicitud?nivel=CCAAD%20II">{{ $t('footer.ccaad2') }}</router-link></li>
+              <li><router-link to="/solicitud?nivel=CCAAD%20III">{{ $t('footer.ccaad3') }}</router-link></li>
+              <li><router-link to="/solicitud?nivel=CCAAD%20IV">{{ $t('footer.ccaad4') }}</router-link></li>
             </ul>
           </div>
 
           <div class="footer-col">
-            <h5>Explorar</h5>
+            <h5>{{ $t('footer.explorar') }}</h5>
             <nav aria-label="Navegación del footer">
               <ul>
-                <li><router-link to="/">Inicio</router-link></li>
-                <li><router-link to="/certificaciones">Certificaciones</router-link></li>
-                <li><router-link to="/etica">Ética</router-link></li>
-                <li><router-link to="/formacion">Formación Académica</router-link></li>
-                <li><router-link to="/noticias">Recursos</router-link></li>
-                <li><router-link to="/directorio">Directorio</router-link></li>
-                <li><router-link to="/contacto">Contacto</router-link></li>
+                <li><router-link to="/">{{ $t('nav.inicio') }}</router-link></li>
+                <li><router-link to="/certificaciones">{{ $t('nav.certificaciones') }}</router-link></li>
+                <li><router-link to="/etica">{{ $t('nav.etica') }}</router-link></li>
+                <li><router-link to="/formacion">{{ $t('footer.formacionAcademica') }}</router-link></li>
+                <li><router-link to="/noticias">{{ $t('nav.recursos') }}</router-link></li>
+                <li><router-link to="/directorio">{{ $t('footer.directorio') }}</router-link></li>
+                <li><router-link to="/contacto">{{ $t('footer.contactoTitle') }}</router-link></li>
               </ul>
             </nav>
           </div>
 
           <div class="footer-col">
-            <h5>Contacto</h5>
+            <h5>{{ $t('footer.contactoTitle') }}</h5>
             <ul>
-              <li><a href="mailto:info@ascadlatam.org">info@ascadlatam.org</a></li>
-              <li><router-link to="/contacto">Formulario de contacto</router-link></li>
-              <li><router-link to="/solicitud">Iniciar solicitud</router-link></li>
+              <li><a :href="'mailto:' + $t('footer.email')">{{ $t('footer.email') }}</a></li>
+              <li><router-link to="/contacto">{{ $t('footer.formularioContacto') }}</router-link></li>
+              <li><router-link to="/solicitud">{{ $t('footer.iniciarSolicitud') }}</router-link></li>
             </ul>
           </div>
         </div>
@@ -62,7 +62,7 @@
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>© {{ year }} ASCAD LATAM · Certificación y Acreditación en Adicciones · América Latina</p>
+        <p>© {{ year }} ASCAD LATAM · {{ $t('footer.copyright') }}</p>
       </div>
     </div>
   </footer>

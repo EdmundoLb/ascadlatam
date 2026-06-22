@@ -2,10 +2,10 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Cobertura Regional</div>
-        <h1>Países afiliados a<br><em class="gold">ASCAD/LATAM</em></h1>
+        <div class="eyebrow">{{ $t('directorio.coberturaRegional') }}</div>
+        <h1>{{ $t('directorio.paisesAfiliados') }}<br><em class="gold">ASCAD/LATAM</em></h1>
         <p class="lead" style="margin-top:18px;">
-          ASCAD/LATAM reúne actualmente a organizaciones y profesionales de ocho países latinoamericanos, conformando una red regional comprometida con el fortalecimiento de los sistemas de prevención, tratamiento, recuperación e inclusión social en el campo de las adicciones.
+          {{ $t('directorio.descripcion') }}
         </p>
       </div>
     </section>
@@ -16,78 +16,89 @@
         <div class="stats-summary">
           <div class="stat-item">
             <span class="stat-number">8</span>
-            <span class="stat-label">Países afiliados</span>
+            <span class="stat-label">{{ $t('directorio.paisesAfiliados') }}</span>
           </div>
           <div class="stat-item">
             <span class="stat-number">8</span>
-            <span class="stat-label">Profesionales certificados</span>
+            <span class="stat-label">{{ $t('directorio.profesionalesCertificados') }}</span>
           </div>
           <div class="stat-item">
             <span class="stat-number">∞</span>
-            <span class="stat-label">Compromiso con la excelencia</span>
+            <span class="stat-label">{{ $t('directorio.compromisoExcelencia') }}</span>
+          </div>
+        </div>
+
+        <div class="directory-cta">
+          <div class="cta-content">
+            <h3>¿Sos profesional de la salud o las ciencias sociales?</h3>
+            <p>Obtené tu certificación internacional y forma parte de la red de profesionales certificados más grande de América Latina.</p>
+          </div>
+          <div class="cta-actions">
+            <router-link to="/solicitud" class="btn btn-gold btn-lg">Iniciar mi certificación</router-link>
+            <router-link to="/certificaciones" class="btn btn-outline btn-lg">Ver certificaciones</router-link>
           </div>
         </div>
 
         <!-- PAÍSES AFILIADOS -->
         <div class="section-header">
           <div class="eyebrow">ASCAD/LATAM</div>
-          <h2>Países afiliados <em class="gold">a ASCAD/LATAM</em></h2>
+          <h2>{{ $t('directorio.paisesAfiliados') }} <em class="gold">a ASCAD/LATAM</em></h2>
         </div>
         <div class="countries-grid">
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/cr.png" alt="Costa Rica" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Costa Rica</h4>
-              <p>País fundador del modelo de certificación y referente regional en el desarrollo de estándares profesionales para el abordaje de las adicciones.</p>
+              <h4>{{ $t('home.costaRica') }}</h4>
+              <p>{{ $t('directorio.costaRicaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/ni.png" alt="Nicaragua" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Nicaragua</h4>
-              <p>Impulsa la profesionalización de los recursos humanos mediante procesos de capacitación y certificación orientados a la mejora continua.</p>
+              <h4>{{ $t('home.nicaragua') }}</h4>
+              <p>{{ $t('directorio.nicaraguaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/pa.png" alt="Panamá" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Panamá</h4>
-              <p>Promueve el fortalecimiento institucional y el desarrollo de programas de atención basados en calidad y competencias profesionales.</p>
+              <h4>{{ $t('home.panama') }}</h4>
+              <p>{{ $t('directorio.panamaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/mx.png" alt="México" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>México</h4>
-              <p>Contribuye con una amplia trayectoria en prevención, tratamiento y formación especializada de profesionales en adicciones.</p>
+              <h4>{{ $t('home.mexico') }}</h4>
+              <p>{{ $t('directorio.mexicoDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/do.png" alt="República Dominicana" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.republicaDominicana')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>República Dominicana</h4>
-              <p>Fortalece sus sistemas de atención mediante la implementación de estándares de calidad y certificación profesional.</p>
+              <h4>{{ $t('home.repDominicana') }}</h4>
+              <p>{{ $t('directorio.republicaDominicanaDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/ec.png" alt="Ecuador" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Ecuador</h4>
-              <p>Promueve modelos de intervención basados en evidencia y el fortalecimiento continuo de las competencias del personal especializado.</p>
+              <h4>{{ $t('home.ecuador') }}</h4>
+              <p>{{ $t('directorio.ecuadorDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/py.png" alt="Paraguay" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Paraguay</h4>
-              <p>Participa activamente en los procesos de certificación y desarrollo de capacidades para mejorar la calidad de los servicios de atención.</p>
+              <h4>{{ $t('home.paraguay') }}</h4>
+              <p>{{ $t('directorio.paraguayDesc') }}</p>
             </div>
           </div>
           <div class="country-card">
-            <img src="https://flagcdn.com/w40/cl.png" alt="Chile" class="country-flag" loading="lazy" />
+            <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="country-flag" loading="lazy" />
             <div class="country-info">
-              <h4>Chile</h4>
-              <p>Contribuye con experiencias innovadoras en rehabilitación y fortalecimiento institucional para la región.</p>
+              <h4>{{ $t('home.chile') }}</h4>
+              <p>{{ $t('directorio.chileDesc') }}</p>
             </div>
           </div>
         </div>
@@ -108,26 +119,26 @@
             <div class="ascad-feature">
               <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
               <div>
-                <strong>Cobertura Regional</strong>
-                <p>8 países integrados en la red de certificación profesional de América Latina.</p>
+                <strong>{{ $t('directorio.coberturaRegional') }}</strong>
+                <p>{{ $t('directorio.ochoPaises') }}</p>
               </div>
             </div>
             <div class="ascad-feature">
               <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
               <div>
-                <strong>Estándares de Calidad</strong>
-                <p>Lineamientos y protocolos para garantizar la calidad en el tratamiento de adicciones basados en TAP 21 y TIP 64.</p>
+                <strong>{{ $t('directorio.estandaresCalidad') }}</strong>
+                <p>{{ $t('directorio.lineamientosProtocolos') }}</p>
               </div>
             </div>
             <div class="ascad-feature">
               <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
               <div>
-                <strong>Trabajo Colaborativo</strong>
-                <p>Red de organizaciones y profesionales unidos para mejorar la atención en adicciones.</p>
+                <strong>{{ $t('directorio.trabajoColaborativo') }}</strong>
+                <p>{{ $t('directorio.redOrganizaciones') }}</p>
               </div>
             </div>
           </div>
-          <router-link to="/etica" class="btn btn-gold">Conocer más sobre Ética y Calidad</router-link>
+          <router-link to="/etica" class="btn btn-gold">{{ $t('directorio.conocerMasEtica') }}</router-link>
         </div>
       </div>
     </section>
@@ -208,6 +219,32 @@
   border-radius: var(--radius-xl);
   border: 1px solid var(--line-light);
 }
+
+.directory-cta {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  margin-bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.directory-cta .cta-content { flex: 1; min-width: 280px; }
+.directory-cta h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 12px; }
+.directory-cta p { color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.7; }
+.directory-cta .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.directory-cta .btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.directory-cta .btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+}
+
 .stat-item {
   display: flex;
   flex-direction: column;

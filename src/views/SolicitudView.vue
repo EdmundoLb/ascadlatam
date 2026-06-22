@@ -2,31 +2,18 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Aplicación en línea</div>
-        <h1>Solicitud de <em class="gold">certificación</em></h1>
+        <div class="eyebrow">{{ $t('solicitud.aplicacionLinea') }}</div>
+        <h1>{{ $t('solicitud.titulo') }} <em class="gold">{{ $t('solicitud.certificacion') }}</em></h1>
         <p class="lead" style="margin-top:18px;">
-          Completá el formulario del nivel al que estás aplicando. Las solicitudes incompletas no serán procesadas.
-          El administrador recibirá tu solicitud con toda la documentación adjunta.
+          {{ $t('solicitud.subtitulo') }}
         </p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <!-- Tabs -->
-        <div class="tabs">
-          <button
-            v-for="cert in certs"
-            :key="cert.code"
-            class="tab"
-            :class="{ active: activeTab === cert.code }"
-            @click="activeTab = cert.code"
-          >
-            {{ cert.code }}
-          </button>
-        </div>
+        <StepIndicator :steps="steps" :current-step="currentStep" @step-click="goToStep" />
 
-        <!-- Form panel -->
         <div v-for="cert in certs" :key="cert.code" v-show="activeTab === cert.code" class="form-panel">
           <div class="panel-header">
             <div>
@@ -35,11 +22,12 @@
             </div>
             <div class="panel-fee">
               <span class="fee-amount">USD ${{ cert.fee }}</span>
-              <span class="fee-note">Cuota bianual · No reembolsable</span>
+              <span class="fee-note">{{ $t('solicitud.cuotaBianual') }}</span>
             </div>
           </div>
 
           <form
+            :ref="el => setFormRef(cert.code, el)"
             :action="`https://formspree.io/f/${formId}`"
             method="POST"
             enctype="multipart/form-data"
@@ -48,161 +36,172 @@
           >
             <input type="hidden" name="nivel_certificacion" :value="`${cert.code} – ${cert.name}`" />
 
-            <fieldset class="fieldset">
-              <legend>Datos personales</legend>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label>Nombre completo *</label>
-                  <input
-                    type="text"
-                    name="nombre"
-                    required
-                    placeholder="Ej. María González Pérez"
-                    @blur="handleBlur($event, cert.code)"
-                    :class="{ 'input-error': errors[`${cert.code}-nombre`] }"
-                  />
-                  <span v-if="errors[`${cert.code}-nombre`]" class="field-error">{{ errors[`${cert.code}-nombre`] }}</span>
-                </div>
-                <div class="form-group">
-                  <label>Documento de identidad *</label>
-                  <input
-                    type="text"
-                    name="documento"
-                    required
-                    placeholder="Número de cédula o pasaporte"
-                    @blur="handleBlur($event, cert.code)"
-                    :class="{ 'input-error': errors[`${cert.code}-documento`] }"
-                  />
-                  <span v-if="errors[`${cert.code}-documento`]" class="field-error">{{ errors[`${cert.code}-documento`] }}</span>
-                </div>
-                <div class="form-group">
-                  <label for="fecha_nacimiento">Fecha de nacimiento *</label>
-                  <input
-                    id="fecha_nacimiento"
-                    type="date"
-                    name="fecha_nacimiento"
-                    required
-                    :min="minDate"
-                    :max="maxDate"
-                    @blur="handleBlur($event, cert.code)"
-                    @change="validateField('fecha_nacimiento', $event.target.value, cert.code)"
-                    :class="{ 'input-error': errors[`${cert.code}-fecha_nacimiento`] }"
-                  />
-                  <span v-if="errors[`${cert.code}-fecha_nacimiento`]" class="field-error">{{ errors[`${cert.code}-fecha_nacimiento`] }}</span>
-                </div>
-                <div class="form-group">
-                  <label>País de residencia *</label>
-                  <select
-                    name="pais"
-                    required
-                    @blur="handleBlur($event, cert.code)"
-                    :class="{ 'input-error': errors[`${cert.code}-pais`] }"
-                  >
-                    <option value="">Seleccionar…</option>
-                    <option v-for="p in paises" :key="p">{{ p }}</option>
-                  </select>
-                  <span v-if="errors[`${cert.code}-pais`]" class="field-error">{{ errors[`${cert.code}-pais`] }}</span>
-                </div>
-                <div class="form-group">
-                  <label>Ciudad *</label>
-                  <input
-                    type="text"
-                    name="ciudad"
-                    required
-                    placeholder="Ciudad donde ejerce"
-                    @blur="handleBlur($event, cert.code)"
-                    :class="{ 'input-error': errors[`${cert.code}-ciudad`] }"
-                  />
-                  <span v-if="errors[`${cert.code}-ciudad`]" class="field-error">{{ errors[`${cert.code}-ciudad`] }}</span>
-                </div>
-                <div class="form-group">
-                  <label>Teléfono / WhatsApp *</label>
-                  <input
-                    type="tel"
-                    name="telefono"
-                    required
-                    placeholder="+00 0000 0000"
-                    @blur="handleBlur($event, cert.code)"
-                    :class="{ 'input-error': errors[`${cert.code}-telefono`] }"
-                  />
-                  <span v-if="errors[`${cert.code}-telefono`]" class="field-error">{{ errors[`${cert.code}-telefono`] }}</span>
-                </div>
-                <div class="form-group form-full">
-                  <label>Correo electrónico *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="correo@ejemplo.com"
-                    @blur="handleBlur($event, cert.code)"
-                    :class="{ 'input-error': errors[`${cert.code}-email`] }"
-                  />
-                  <span v-if="errors[`${cert.code}-email`]" class="field-error">{{ errors[`${cert.code}-email`] }}</span>
-                </div>
-              </div>
-            </fieldset>
+            <transition name="step-fade" mode="out-in">
+              <div :key="currentStep" class="step-content">
+                <fieldset v-if="currentStep === 1" class="fieldset">
+                  <legend>{{ $t('solicitud.datosPersonales') }}</legend>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label>{{ $t('solicitud.campos.nombre') }} *</label>
+                      <input
+                        type="text"
+                        name="nombre"
+                        required
+                        :placeholder="$t('solicitud.placeholders.nombre')"
+                        @input="clearError($event, cert.code)"
+                        @blur="handleBlur($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-nombre`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-nombre`]" class="field-error">{{ errors[`${cert.code}-nombre`] }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label>{{ $t('solicitud.documentoIdentidad') }} *</label>
+                      <input
+                        type="text"
+                        name="documento"
+                        required
+                        :placeholder="$t('solicitud.placeholders.documento')"
+                        @input="clearError($event, cert.code)"
+                        @blur="handleBlur($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-documento`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-documento`]" class="field-error">{{ errors[`${cert.code}-documento`] }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="fecha_nacimiento">{{ $t('solicitud.fechaNacimiento') }} *</label>
+                      <input
+                        id="fecha_nacimiento"
+                        type="date"
+                        name="fecha_nacimiento"
+                        required
+                        :min="minDate"
+                        :max="maxDate"
+                        @input="clearError($event, cert.code)"
+                        @blur="handleBlur($event, cert.code)"
+                        @change="validateField('fecha_nacimiento', $event.target.value, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-fecha_nacimiento`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-fecha_nacimiento`]" class="field-error">{{ errors[`${cert.code}-fecha_nacimiento`] }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label>{{ $t('solicitud.campos.pais') }} *</label>
+                      <select
+                        name="pais"
+                        required
+                        @change="clearError($event, cert.code)"
+                        @blur="handleBlur($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-pais`] }"
+                      >
+                        <option value="">{{ $t('solicitud.placeholders.pais') || 'Seleccionar…' }}</option>
+                        <option v-for="p in paises" :key="p">{{ p }}</option>
+                      </select>
+                      <span v-if="errors[`${cert.code}-pais`]" class="field-error">{{ errors[`${cert.code}-pais`] }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label>{{ $t('solicitud.ciudad') }} *</label>
+                      <input
+                        type="text"
+                        name="ciudad"
+                        required
+                        :placeholder="$t('solicitud.placeholders.ciudad')"
+                        @input="clearError($event, cert.code)"
+                        @blur="handleBlur($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-ciudad`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-ciudad`]" class="field-error">{{ errors[`${cert.code}-ciudad`] }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label>{{ $t('solicitud.telefonoWhatsapp') }} *</label>
+                      <input
+                        type="tel"
+                        name="telefono"
+                        required
+                        :placeholder="$t('solicitud.placeholders.telefono')"
+                        @input="clearError($event, cert.code)"
+                        @blur="handleBlur($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-telefono`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-telefono`]" class="field-error">{{ errors[`${cert.code}-telefono`] }}</span>
+                    </div>
+                    <div class="form-group form-full">
+                      <label>{{ $t('solicitud.campos.email') }} *</label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        :placeholder="$t('solicitud.placeholders.email')"
+                        @input="clearError($event, cert.code)"
+                        @blur="handleBlur($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-email`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-email`]" class="field-error">{{ errors[`${cert.code}-email`] }}</span>
+                    </div>
+                  </div>
+                </fieldset>
 
-            <fieldset class="fieldset">
-              <legend>Información profesional</legend>
-              <div class="form-grid">
-                <div class="form-group" v-if="cert.needsDegree">
-                  <label>Título universitario *</label>
-                  <input type="text" name="titulo" required :placeholder="cert.degreePlaceholder" />
-                </div>
-                <div class="form-group">
-                  <label>Institución / Programa donde ejerce</label>
-                  <input type="text" name="institucion" placeholder="Centro o programa actual" />
-                </div>
-                <div class="form-group" v-for="horas in cert.horasFields" :key="horas.name">
-                  <label>{{ horas.label }}</label>
-                  <input type="number" :name="horas.name" :placeholder="horas.placeholder" min="0" />
-                </div>
-                <div class="form-group" v-if="cert.code === 'EPR'">
-                  <label>Años en proceso de recuperación *</label>
-                  <input type="number" name="anios_recuperacion" required placeholder="Mínimo 2 años" min="2" />
-                </div>
-              </div>
-            </fieldset>
+                <fieldset v-else-if="currentStep === 2" class="fieldset">
+                  <legend>{{ $t('solicitud.infoProfesional') }}</legend>
+                  <div class="form-grid">
+                    <div class="form-group" v-if="cert.needsDegree">
+                      <label>{{ $t('solicitud.tituloUniversitario') }} *</label>
+                      <input type="text" name="titulo" required :placeholder="cert.degreePlaceholder" />
+                    </div>
+                    <div class="form-group">
+                      <label>{{ $t('solicitud.institucionPrograma') }}</label>
+                      <input type="text" name="institucion" placeholder="Centro o programa actual" />
+                    </div>
+                    <div class="form-group" v-for="horas in cert.horasFields" :key="horas.name">
+                      <label>{{ horas.label }}</label>
+                      <input type="number" :name="horas.name" :placeholder="horas.placeholder" min="0" />
+                    </div>
+                    <div class="form-group" v-if="cert.code === 'EPR'">
+                      <label>{{ $t('solicitud.aniosRecuperacion') }} *</label>
+                      <input type="number" name="anios_recuperacion" required placeholder="Mínimo 2 años" min="2" />
+                    </div>
+                  </div>
+                </fieldset>
 
-            <fieldset class="fieldset">
-              <legend>Documentación</legend>
-              <div class="docs-info">
-                <h4>Documentos requeridos para {{ cert.code }}</h4>
-                <ul>
-                  <li v-for="doc in cert.docs" :key="doc">{{ doc }}</li>
-                </ul>
+                <fieldset v-else-if="currentStep === 3" class="fieldset">
+                  <legend>Revisión y Envío</legend>
+                  <div class="review-section">
+                    <div class="review-header">
+                      <div class="review-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
+                      </div>
+                      <h4>Resumen de tu solicitud</h4>
+                    </div>
+                    <div class="review-grid">
+                      <div class="review-item">
+                        <span class="review-label">Certificación</span>
+                        <span class="review-value">{{ cert.code }} – {{ cert.name }}</span>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">Cuota bianual</span>
+                        <span class="review-value highlight">USD ${{ cert.fee }}</span>
+                      </div>
+                    </div>
+                    <p class="review-note">{{ $t('solicitud.cuotaNoReembolsable') }}</p>
+                  </div>
+                </fieldset>
               </div>
-              <div class="file-drop" @click="triggerFile(cert.code)">
-                <div class="file-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-                </div>
-                <p><strong>Clic para adjuntar archivos</strong></p>
-                <p class="muted" style="font-size:.82rem; margin-top:4px;">PDF, JPG, PNG — podés seleccionar múltiples archivos a la vez</p>
-              </div>
-              <input
-                :id="`file-${cert.code}`"
-                type="file"
-                name="documentos"
-                multiple
-                accept=".pdf,.jpg,.jpeg,.png"
-                style="display:none"
-                @change="onFileChange($event, cert.code)"
-              />
-              <p v-if="fileLabels[cert.code]" class="file-label">{{ fileLabels[cert.code] }}</p>
-              <div class="form-group" style="margin-top:16px;">
-                <label>Observaciones adicionales</label>
-                <textarea name="observaciones" placeholder="Información adicional relevante para su solicitud…"></textarea>
-              </div>
-            </fieldset>
+            </transition>
 
             <div class="form-footer">
-              <div class="fee-display">
+              <div class="fee-display" v-if="currentStep === 4">
                 <span class="fee-big">USD ${{ cert.fee }}</span>
-                <span class="muted" style="font-size:.84rem;">Cuota bianual no reembolsable</span>
+                <span class="muted" style="font-size:.84rem;">{{ $t('solicitud.cuotaNoReembolsable') }}</span>
               </div>
-              <button type="submit" class="btn btn-gold" :disabled="sending[cert.code]">
-                {{ sending[cert.code] ? 'Enviando…' : `Enviar solicitud ${cert.code} →` }}
-              </button>
+              <div class="form-nav">
+                <button v-if="currentStep > 1" type="button" class="btn btn-outline" @click="prevStep">
+                  ← Anterior
+                </button>
+                <button v-if="currentStep < 4" type="button" class="btn btn-gold" @click="nextStep(cert.code)">
+                  Siguiente →
+                </button>
+                <button v-else type="submit" class="btn btn-gold" :disabled="sending[cert.code]">
+                  {{ sending[cert.code] ? $t('solicitud.btnEnviarProcesando') : `${$t('solicitud.btnEnviar')} ${cert.code} →` }}
+                </button>
+              </div>
             </div>
 
             <div v-if="messages[cert.code]" class="form-msg" :class="messages[cert.code].type">
@@ -210,24 +209,47 @@
             </div>
           </form>
         </div>
+
+        <div class="tabs">
+          <button
+            v-for="cert in certs"
+            :key="cert.code"
+            class="tab"
+            :class="{ active: activeTab === cert.code }"
+            @click="changeTab(cert.code)"
+          >
+            {{ cert.code }}
+          </button>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { showToast } from '@/composables/toast.js'
+import { useCertificacionesStore } from '@/stores/certificaciones'
+import StepIndicator from '@/components/forms/StepIndicator.vue'
 
 const route = useRoute()
+const router = useRouter()
+const store = useCertificacionesStore()
 
-const formId = import.meta.env.VITE_FORMSPREE_SOLICITUD_ID
+const formId = import.meta.env.VITE_FORMSPREE_SOLICITUD_ID || 'placeholder'
 const activeTab = ref('OST')
-const fileLabels = ref({})
+const currentStep = ref(1)
 const sending = ref({})
 const messages = ref({})
 const errors = ref({})
+const formRefs = ref({})
+
+const steps = [
+  { id: 'datos', label: 'Datos Personales' },
+  { id: 'profesional', label: 'Info Profesional' },
+  { id: 'revision', label: 'Revisión' },
+]
 
 const paises = [
   'Argentina','Bolivia','Brasil','Chile','Colombia','Costa Rica','Cuba',
@@ -235,87 +257,105 @@ const paises = [
   'Panamá','Paraguay','Perú','República Dominicana','Uruguay','Venezuela','Otro'
 ]
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024
-const MAX_FILES = 10
-const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png']
-const ALLOWED_EXTENSIONS = ['.pdf', '.jpg', '.jpeg', '.png']
+const certs = store.formCertifications
 
-const certs = [
-  {
-    code: 'OST', fee: 30,
-    name: 'Operador Socio-Terapéutico',
-    description: 'Nivel inicial de la ruta. Acompañamiento supervisado en comunidades terapéuticas y centros de tratamiento.',
-    needsDegree: false,
-    horasFields: [
-      { name: 'horas_formacion',    label: 'Horas de formación completadas',       placeholder: 'Mín. 80 horas'    },
-      { name: 'horas_experiencia',  label: 'Horas de experiencia supervisada',     placeholder: 'Mín. 1.000 horas' },
-      { name: 'horas_entrenamiento',label: 'Horas de entrenamiento práctico',      placeholder: 'Mín. 100 horas'   },
-    ],
-    docs: ['Copia de documento de identidad','Certificado de estudios (secundaria)','Certificados de formación (80h)','Constancia de experiencia supervisada (1.000h)','Constancia de entrenamiento práctico (100h)','Tres (3) cartas de referencia profesional','Código de ética firmado'],
-  },
-  {
-    code: 'EPR', fee: 30,
-    name: 'Entrenador de Pares en Recuperación',
-    description: 'Para personas con experiencia vivida en recuperación que brindan apoyo desde un enfoque no clínico y empático.',
-    needsDegree: false,
-    horasFields: [
-      { name: 'horas_formacion',    label: 'Horas de formación específica',        placeholder: 'Mín. 80 horas' },
-      { name: 'horas_entrenamiento',label: 'Horas de entrenamiento práctico',      placeholder: 'Mín. 80 horas' },
-    ],
-    docs: ['Copia de documento de identidad','Certificado de estudios','Certificados de formación por ejes (80h)','Constancia de entrenamiento práctico (80h)','Declaración de experiencia vivida en recuperación','2 a 3 cartas de referencia','Código de ética firmado'],
-  },
-  {
-    code: 'CCAAD I', fee: 50,
-    name: 'Consejero en Adicciones Nivel I',
-    description: 'Primer nivel técnico profesional para la atención de personas con trastornos por uso de sustancias.',
-    needsDegree: false,
-    horasFields: [
-      { name: 'horas_formacion',    label: 'Horas de formación específica',        placeholder: 'Mín. 120 horas'   },
-      { name: 'horas_experiencia',  label: 'Horas de experiencia supervisada',     placeholder: 'Mín. 1.500 horas' },
-      { name: 'horas_entrenamiento',label: 'Horas de entrenamiento práctico',      placeholder: 'Mín. 60 horas'    },
-    ],
-    docs: ['Documento de identidad','Certificado de estudios','Certificados de formación (120h)','Constancia de experiencia supervisada (1.500h)','Constancia de entrenamiento práctico (60h)','Tres (3) cartas de referencia profesional','Código de ética firmado'],
-  },
-  {
-    code: 'CCAAD II', fee: 75,
-    name: 'Consejero en Adicciones Nivel II',
-    description: 'Competencias avanzadas en consejería con mayor responsabilidad clínica y coordinación de casos.',
-    needsDegree: false,
-    horasFields: [
-      { name: 'horas_formacion',    label: 'Horas de formación específica',        placeholder: 'Mín. 150 horas'   },
-      { name: 'horas_experiencia',  label: 'Horas de experiencia supervisada',     placeholder: 'Mín. 2.000 horas' },
-      { name: 'horas_entrenamiento',label: 'Horas de entrenamiento práctico',      placeholder: 'Mín. 96 horas'    },
-    ],
-    docs: ['Documento de identidad','Certificado de estudios','Certificados de formación (150h)','Constancia de experiencia supervisada (2.000h)','Constancia de entrenamiento práctico (96h)','Tres (3) cartas de referencia profesional','Código de ética firmado'],
-  },
-  {
-    code: 'CCAAD III', fee: 100,
-    name: 'Consejero en Adicciones Nivel III',
-    description: 'Nivel clínico avanzado. Evaluación biopsicosocial, diagnósticos funcionales y manejo de casos complejos.',
-    needsDegree: true,
-    degreePlaceholder: 'Ej. Licenciatura en Psicología – Universidad de…',
-    horasFields: [
-      { name: 'horas_formacion',   label: 'Horas de formación especializada',     placeholder: 'Mín. 170 horas'   },
-      { name: 'horas_experiencia', label: 'Horas de experiencia en consejería',   placeholder: 'Mín. 3.000 horas' },
-      { name: 'horas_practica',    label: 'Horas de práctica supervisada',        placeholder: 'Mín. 120 horas'   },
-    ],
-    docs: ['Documento de identidad','Título universitario (Psicología, Trabajo Social o afines)','Certificados de formación (170h)','Constancia de experiencia en consejería (3.000h)','Certificado de práctica supervisada (120h)','Tres (3) cartas de referencia profesional','Código de ética firmado'],
-  },
-  {
-    code: 'CCAAD IV', fee: 125,
-    name: 'Supervisor Clínico – Nivel IV',
-    description: 'Máximo nivel de la ruta. Supervisión clínica, liderazgo y formación de equipos de tratamiento.',
-    needsDegree: true,
-    degreePlaceholder: 'Ej. Maestría en Salud Mental – Universidad de…',
-    horasFields: [
-      { name: 'horas_consejero',   label: 'Horas como consejero en adicciones',   placeholder: 'Mín. 2.000 horas' },
-      { name: 'horas_supervision', label: 'Horas de supervisión clínica',          placeholder: 'Mín. 4.000 horas' },
-      { name: 'horas_formacion',   label: 'Horas de formación en supervisión',     placeholder: 'Mín. 40 horas'    },
-      { name: 'horas_recibida',    label: 'Horas de supervisión recibida',          placeholder: 'Mín. 120 horas'   },
-    ],
-    docs: ['Documento de identidad','Título universitario (Licenciatura o superior)','Certificados de formación en supervisión (40h)','Constancia como consejero (2.000h)','Constancia de supervisión clínica (4.000h)','Certificado de supervisión recibida (120h)','Tres (3) cartas de referencia profesional','Código de ética firmado'],
-  },
-]
+function setFormRef(code, el) {
+  if (el) formRefs.value[code] = el
+}
+
+function changeTab(code) {
+  const oldCode = activeTab.value
+  activeTab.value = code
+  currentStep.value = 1
+  if (errors.value[oldCode]) {
+    Object.keys(errors.value).forEach(k => {
+      if (k.startsWith(oldCode)) delete errors.value[k]
+    })
+  }
+  messages.value[code] = null
+}
+
+function goToStep(step) {
+  currentStep.value = step
+}
+
+function nextStep(code) {
+  if (currentStep.value === 1 && !validateStep1(code)) {
+    showToast('Completá los campos obligatorios', 'error')
+    return
+  }
+  if (currentStep.value === 2 && !validateStep2(code)) {
+    showToast('Completá los campos obligatorios en información profesional', 'error')
+    return
+  }
+  currentStep.value++
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+function prevStep() {
+  currentStep.value--
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+function clearError(event, code) {
+  const key = `${code}-${event.target.name}`
+  if (errors.value[key]) {
+    delete errors.value[key]
+  }
+}
+
+function validateStep1(code) {
+  const form = formRefs.value[code]
+  if (!form) return true
+
+  const required = ['nombre', 'documento', 'fecha_nacimiento', 'pais', 'ciudad', 'telefono', 'email']
+  let isValid = true
+
+  Object.keys(errors.value).forEach(k => {
+    if (k.startsWith(code)) delete errors.value[k]
+  })
+
+  for (const field of required) {
+    const input = form.querySelector(`[name="${field}"]`)
+    if (!input) continue
+
+    if (!input.value.trim()) {
+      errors.value[`${code}-${field}`] = 'Este campo es obligatorio'
+      isValid = false
+    } else {
+      const fieldValid = validateField(field, input.value, code)
+      if (!fieldValid) isValid = false
+    }
+  }
+
+  return isValid
+}
+
+function validateStep2(code) {
+  const form = formRefs.value[code]
+  if (!form) return true
+
+  const cert = certs.find(c => c.code === code)
+  if (!cert) return true
+
+  if (cert.needsDegree) {
+    const tituloInput = form.querySelector('[name="titulo"]')
+    if (tituloInput && !tituloInput.value.trim()) {
+      errors.value[`${code}-titulo`] = 'Este campo es obligatorio'
+      return false
+    }
+  }
+
+  if (code === 'EPR') {
+    const aniosInput = form.querySelector('[name="anios_recuperacion"]')
+    if (aniosInput && (!aniosInput.value || parseInt(aniosInput.value) < 2)) {
+      errors.value[`${code}-anios_recuperacion`] = 'Mínimo 2 años de recuperación requeridos'
+      return false
+    }
+  }
+
+  return true
+}
 
 onMounted(() => {
   const nivel = route.query.nivel
@@ -325,6 +365,10 @@ onMounted(() => {
       activeTab.value = nivel
     }
   }
+})
+
+watch(activeTab, (newTab) => {
+  router.replace({ query: { nivel: newTab } })
 })
 
 const today = new Date()
@@ -376,77 +420,10 @@ function handleBlur(event, code) {
   validateField(name, value, code)
 }
 
-function triggerFile(code) {
-  document.getElementById(`file-${code}`)?.click()
-}
-
-function validateFile(file) {
-  const ext = '.' + file.name.split('.').pop().toLowerCase()
-  if (!ALLOWED_EXTENSIONS.includes(ext)) {
-    return `El archivo "${file.name}" no tiene un formato permitido. Use PDF, JPG o PNG.`
-  }
-  if (!ALLOWED_TYPES.includes(file.type)) {
-    return `El archivo "${file.name}" no es un tipo válido.`
-  }
-  if (file.size > MAX_FILE_SIZE) {
-    const sizeMB = (file.size / (1024 * 1024)).toFixed(2)
-    return `El archivo "${file.name}" (${sizeMB}MB) excede el límite de 5MB.`
-  }
-  return null
-}
-
-function onFileChange(event, code) {
-  const files = Array.from(event.target.files)
-
-  if (files.length > MAX_FILES) {
-    showToast(`Máximo ${MAX_FILES} archivos por solicitud.`, 'error')
-    event.target.value = ''
-    fileLabels.value[code] = ''
-    return
-  }
-
-  const errors = []
-  for (const file of files) {
-    const error = validateFile(file)
-    if (error) errors.push(error)
-  }
-
-  if (errors.length > 0) {
-    showToast(errors[0], 'error')
-    event.target.value = ''
-    fileLabels.value[code] = ''
-    return
-  }
-
-  fileLabels.value[code] = files.length
-    ? `${files.length} archivo(s) seleccionado(s): ${files.map(f => f.name).join(', ')}`
-    : ''
-}
-
 async function handleSubmit(event, code) {
-  const form = event.target
-  const fileInput = form.querySelector('input[type="file"]')
-  const files = fileInput?.files
+  const form = formRefs.value[code]
 
-  if (!files || files.length === 0) {
-    showToast('Debes adjuntar al menos un documento.', 'error')
-    return
-  }
-
-  if (files.length > MAX_FILES) {
-    showToast(`Máximo ${MAX_FILES} archivos por solicitud.`, 'error')
-    return
-  }
-
-  for (const file of files) {
-    const error = validateFile(file)
-    if (error) {
-      showToast(error, 'error')
-      return
-    }
-  }
-
-  if (!validateAllFields(form, code)) {
+  if (!validateAllFields(code)) {
     showToast('Corregí los errores en el formulario antes de enviar.', 'error')
     return
   }
@@ -463,7 +440,7 @@ async function handleSubmit(event, code) {
       messages.value[code] = { type: 'success', text: '✓ Solicitud enviada correctamente. Le contactaremos en los próximos días hábiles.' }
       showToast('Solicitud enviada correctamente', 'success')
       form.reset()
-      fileLabels.value[code] = ''
+      currentStep.value = 1
     } else {
       throw new Error()
     }
@@ -475,21 +452,40 @@ async function handleSubmit(event, code) {
   }
 }
 
-function validateAllFields(form, code) {
-  let valid = true
-  const requiredFields = form.querySelectorAll('[required]')
-  requiredFields.forEach(field => {
-    const key = `${code}-${field.name}`
-    if (field.type === 'file') return
-    if (!field.value || !field.value.trim()) {
-      errors.value[key] = 'Este campo es obligatorio'
-      valid = false
+function validateAllFields(code) {
+  const form = formRefs.value[code]
+  if (!form) return false
+
+  const fieldsToValidate = [
+    { name: 'nombre', label: 'Nombre' },
+    { name: 'documento', label: 'Documento' },
+    { name: 'fecha_nacimiento', label: 'Fecha de nacimiento' },
+    { name: 'pais', label: 'País' },
+    { name: 'ciudad', label: 'Ciudad' },
+    { name: 'telefono', label: 'Teléfono' },
+    { name: 'email', label: 'Email' },
+  ]
+
+  let isValid = true
+
+  for (const field of fieldsToValidate) {
+    const input = form.querySelector(`[name="${field.name}"]`)
+    if (!input) continue
+
+    const value = input.value
+
+    if (!value.trim()) {
+      errors.value[`${code}-${field.name}`] = 'Este campo es obligatorio'
+      isValid = false
     } else {
-      validateField(field.name, field.value, code)
-      if (errors.value[key]) valid = false
+      delete errors.value[`${code}-${field.name}`]
+      if (!validateField(field.name, value, code)) {
+        isValid = false
+      }
     }
-  })
-  return valid
+  }
+
+  return isValid
 }
 </script>
 
@@ -498,7 +494,7 @@ function validateAllFields(form, code) {
   display: flex; gap: 2px; flex-wrap: wrap;
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 4px; width: fit-content;
-  margin-bottom: 36px;
+  margin-top: 36px;
 }
 .tab {
   padding: 10px 22px; border-radius: var(--radius-sm);
@@ -520,35 +516,58 @@ function validateAllFields(form, code) {
 .fee-note { font-size: .8rem; color: var(--text-muted); }
 
 .solicitud-form { display: flex; flex-direction: column; gap: 32px; }
+.step-content { min-height: 400px; }
 .fieldset { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 32px; }
 .fieldset legend { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .2em; color: var(--accent); text-transform: uppercase; padding: 0 10px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
 .form-full { grid-column: 1/-1; }
 
-.docs-info {
-  background: var(--surface-alt); border: 1px solid var(--line);
-  border-left: 3px solid var(--accent); border-radius: var(--radius-sm);
-  padding: 20px 24px; margin-bottom: 20px;
+.review-section {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px;
 }
-.docs-info h4 { color: var(--accent-dark); font-family: var(--font-display); margin-bottom: 12px; }
-.docs-info ul { display: flex; flex-direction: column; gap: 6px; }
-.docs-info li { font-size: .86rem; color: var(--text-muted); padding-left: 16px; position: relative; }
-.docs-info li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
-
-.file-drop {
-  border: 1px dashed rgba(201,168,76,0.3); border-radius: var(--radius);
-  padding: 28px; text-align: center; cursor: pointer; transition: .2s;
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.review-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-dark);
 }
-.file-drop:hover { border-color: var(--accent); background: rgba(201,168,76,.1); }
-.file-icon { font-size: 1.8rem; margin-bottom: 8px; }
-.file-drop p { color: var(--text); }
-.file-label { font-size: .8rem; color: var(--accent-dark); margin-top: 8px; }
+.review-header h4 { margin: 0; color: var(--text); }
+.review-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.review-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.review-label { display: block; font-size: .75rem; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .05em; }
+.review-value { font-weight: 600; color: var(--text); }
+.review-value.highlight { color: var(--accent); font-size: 1.125rem; }
+.review-note { font-size: .8rem; color: var(--text-muted); text-align: center; }
 
 .form-footer {
   display: flex; justify-content: space-between; align-items: center;
   gap: 20px; padding: 24px 0; border-top: 1px solid var(--line); flex-wrap: wrap;
 }
+.form-nav { display: flex; gap: 12px; }
+.fee-display { text-align: left; }
 .fee-big { display: block; font-family: var(--font-display); font-size: 2rem; color: var(--accent); font-weight: 700; line-height: 1; }
 .form-msg {
   padding: 16px 20px; border-radius: var(--radius-sm);
@@ -568,6 +587,19 @@ button:disabled { opacity: .6; cursor: not-allowed; }
   font-weight: 500;
 }
 
+.step-fade-enter-active,
+.step-fade-leave-active {
+  transition: all 0.3s ease;
+}
+.step-fade-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.step-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
 @media (max-width: 768px) {
   .form-grid { grid-template-columns: 1fr; }
   .form-full { grid-column: auto; }
@@ -575,5 +607,8 @@ button:disabled { opacity: .6; cursor: not-allowed; }
   .tabs { width: 100%; }
   .tab { flex: 1; text-align: center; padding: 10px 8px; font-size: .72rem; }
   .form-footer { flex-direction: column; align-items: flex-start; }
+  .form-nav { width: 100%; flex-direction: column; }
+  .form-nav .btn { width: 100%; }
+  .review-grid { grid-template-columns: 1fr; }
 }
 </style>
