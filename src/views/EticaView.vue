@@ -148,6 +148,13 @@
               <p>{{ $t('directorio.chileDesc') }}</p>
             </div>
           </div>
+          <div class="country-card">
+            <img src="https://flagcdn.com/w40/uy.png" :alt="$t('home.uruguay')" class="country-flag" loading="lazy" />
+            <div class="country-info">
+              <h4>{{ $t('home.uruguay') }}</h4>
+              <p>{{ $t('directorio.uruguayDesc') }}</p>
+            </div>
+          </div>
         </div>
 
         <!-- BENEFICIOS PAÍSES -->

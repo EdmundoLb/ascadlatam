@@ -8,6 +8,7 @@ Sitio institucional del **Consorcio Latinoamericano de Certificación en Adiccio
 - **Vue Router 4** para routing
 - **Pinia** para state management
 - **vue-i18n** para internacionalización (es/pt)
+- **Supabase** (Postgres + Edge Functions) para solicitudes, contacto y el directorio de profesionales certificados — ver `supabase/README.md`. Formspree se mantiene como respaldo en paralelo.
 - **Vite** como build tool
 - **Vitest** + **@vue/test-utils** para tests unitarios
 - **Playwright** para tests E2E y auditoría de accesibilidad
@@ -94,7 +95,11 @@ Crear un archivo `.env` en la raíz (ver `.env.example`):
 ```env
 VITE_FORMSPREE_CONTACT_ID=tu_contact_form_id
 VITE_FORMSPREE_SOLICITUD_ID=tu_solicitud_form_id
+VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+VITE_SUPABASE_ANON_KEY=tu_anon_key
 ```
+
+Setup completo de Supabase (esquema SQL, Edge Function, Resend, webhooks) en `supabase/README.md`.
 
 ## Calidad de código
 

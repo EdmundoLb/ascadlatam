@@ -93,6 +93,7 @@
 <script setup>
 import { ref } from 'vue'
 import { showToast } from '@/composables/toast.js'
+import { supabase } from '@/lib/supabase'
 
 const formId = import.meta.env.VITE_FORMSPREE_CONTACT_ID
 const sending = ref(false)
@@ -111,17 +112,42 @@ const contactItems = [
   { icon: 'clock', label: 'Horario de atención', value: 'Lun – Vie · 8:00 – 17:00 (hora Costa Rica)' },
 ]
 
+async function submitToSupabase(form) {
+  if (!supabase) return false
+  const data = new FormData(form)
+  const row = {
+    nombre: data.get('nombre'),
+    email: data.get('email'),
+    pais: data.get('pais') || null,
+    asunto: data.get('asunto') || null,
+    mensaje: data.get('mensaje')
+  }
+  const { error } = await supabase.from('contactos').insert(row)
+  return !error
+}
+
+async function submitToFormspree(form) {
+  const res = await fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { Accept: 'application/json' }
+  })
+  if (!res.ok) throw new Error('formspree submission failed')
+}
+
 async function handleSubmit(event) {
   const form = event.target
   sending.value = true
   message.value = null
   try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { Accept: 'application/json' }
-    })
-    if (res.ok) {
+    const [supabaseResult, formspreeResult] = await Promise.allSettled([
+      submitToSupabase(form),
+      submitToFormspree(form)
+    ])
+    const supabaseOk = supabaseResult.status === 'fulfilled' && supabaseResult.value
+    const formspreeOk = formspreeResult.status === 'fulfilled'
+
+    if (supabaseOk || formspreeOk) {
       message.value = { type: 'success', text: '✓ Mensaje enviado. Le responderemos en 2 a 3 días hábiles.' }
       showToast('Mensaje enviado correctamente', 'success')
       form.reset()

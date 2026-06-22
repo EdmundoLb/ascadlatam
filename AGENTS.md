@@ -167,10 +167,11 @@ Cada nivel de certificación desarrolla tres ejes:
 - Las competencias se muestran por **ejes de formación** (Saber Conocer, Saber Hacer, Saber Ser)
 - Cada cert tiene un `cert-body` con `max-height: 3000px` cuando está expandido
 - Los botones "Aplicar ahora" y "Más información" aparecen al expandir cada cert
+- Sección "Profesionales certificados" (`#certificados`): trae datos de `certified_professionals` en Supabase (solo lectura pública, `status = 'active'`). Si la tabla está vacía o Supabase no está configurado (`src/lib/supabase.js` exporta `null`), muestra un estado vacío con CTA a `/solicitud` en vez de romper o quedar en loading infinito.
 
-### SolicitudView.vue
-- Flujo multi-step con `StepIndicator.vue`
-- Los datos de cada certificación para el formulario vienen de `data/solicitudForms.js` (derivado de `certificacionesFull.js`)
+### SolicitudView.vue / ContactoView.vue
+- Flujo multi-step con `StepIndicator.vue` (solo Solicitud). Los datos de cada certificación para el formulario vienen de `data/solicitudForms.js` (derivado de `certificacionesFull.js`).
+- **Envío dual**: cada submit dispara `Promise.allSettled` con un insert a Supabase (`solicitudes`/`contactos`) y el POST a Formspree que ya existía. Éxito si al menos uno de los dos resuelve — Formspree queda como respaldo mientras se valida Supabase en producción (ver `supabase/README.md`). No asumir que `supabase` (de `@/lib/supabase`) existe: es `null` hasta que se configuren `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY`.
 
 ### v-html
 - `vue/no-v-html` está deshabilitado puntualmente en `HomeView.vue`, `CertificacionesView.vue` y `ConocimientoView.vue` (ver `eslint.config.js`) porque ahí solo se renderizan SVGs propios y strings de los locales — nunca contenido de usuario o de una API externa. Si se agrega contenido dinámico/externo en esas vistas, sanitizarlo antes de usar `v-html`.
@@ -181,6 +182,8 @@ Cada nivel de certificación desarrolla tres ejes:
 ```env
 VITE_FORMSPREE_CONTACT_ID=id_para_formulario_contacto
 VITE_FORMSPREE_SOLICITUD_ID=id_para_formulario_solicitud
+VITE_SUPABASE_URL=url_del_proyecto_supabase
+VITE_SUPABASE_ANON_KEY=anon_key_publica_de_supabase
 ```
 
 ---

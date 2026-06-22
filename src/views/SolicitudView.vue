@@ -232,6 +232,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { showToast } from '@/composables/toast.js'
 import { useCertificacionesStore } from '@/stores/certificaciones'
 import StepIndicator from '@/components/forms/StepIndicator.vue'
+import { supabase } from '@/lib/supabase'
 
 const route = useRoute()
 const router = useRouter()
@@ -420,6 +421,48 @@ function handleBlur(event, code) {
   validateField(name, value, code)
 }
 
+const SOLICITUD_CORE_FIELDS = {
+  nombre: 'full_name',
+  email: 'email',
+  telefono: 'phone',
+  pais: 'country',
+  ciudad: 'city',
+  documento: 'document_id',
+  fecha_nacimiento: 'birth_date'
+}
+
+function buildSolicitudRow(form, code) {
+  const data = new FormData(form)
+  const row = { certification_code: code, details: {} }
+
+  for (const [key, value] of data.entries()) {
+    if (key === 'nivel_certificacion') continue
+    const column = SOLICITUD_CORE_FIELDS[key]
+    if (column) {
+      row[column] = value
+    } else {
+      row.details[key] = value
+    }
+  }
+
+  return row
+}
+
+async function submitToSupabase(form, code) {
+  if (!supabase) return false
+  const { error } = await supabase.from('solicitudes').insert(buildSolicitudRow(form, code))
+  return !error
+}
+
+async function submitToFormspree(form) {
+  const res = await fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { Accept: 'application/json' }
+  })
+  if (!res.ok) throw new Error('formspree submission failed')
+}
+
 async function handleSubmit(event, code) {
   const form = formRefs.value[code]
 
@@ -431,12 +474,14 @@ async function handleSubmit(event, code) {
   sending.value[code] = true
   messages.value[code] = null
   try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { Accept: 'application/json' }
-    })
-    if (res.ok) {
+    const [supabaseResult, formspreeResult] = await Promise.allSettled([
+      submitToSupabase(form, code),
+      submitToFormspree(form)
+    ])
+    const supabaseOk = supabaseResult.status === 'fulfilled' && supabaseResult.value
+    const formspreeOk = formspreeResult.status === 'fulfilled'
+
+    if (supabaseOk || formspreeOk) {
       messages.value[code] = { type: 'success', text: '✓ Solicitud enviada correctamente. Le contactaremos en los próximos días hábiles.' }
       showToast('Solicitud enviada correctamente', 'success')
       form.reset()
