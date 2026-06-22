@@ -1,6 +1,10 @@
-const CACHE_NAME = 'ascadlatam-v2';
+const CACHE_NAME = 'ascadlatam-v3';
+const OFFLINE_URL = '/offline.html';
 
-self.addEventListener('install', () => {
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.add(OFFLINE_URL))
+  );
   self.skipWaiting();
 });
 
@@ -34,8 +38,12 @@ self.addEventListener('fetch', (event) => {
 
         return response;
       })
-      .catch(() => {
-        return caches.match(event.request);
+      .catch(async () => {
+        const cached = await caches.match(event.request);
+        if (cached) return cached;
+        if (event.request.mode === 'navigate') {
+          return caches.match(OFFLINE_URL);
+        }
       })
   );
 });
