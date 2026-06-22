@@ -1,11 +1,13 @@
-// Disparada por un Database Webhook de Supabase en INSERT sobre
-// `solicitudes` y `contactos`. Manda un email al equipo de ASCAD LATAM
-// y uno de confirmación a quien llenó el formulario, vía Resend.
+// Disparada por un trigger de Postgres (ver supabase/migrations/0002_notify_trigger.sql)
+// en INSERT sobre `solicitudes` y `contactos`. Manda un email al equipo de
+// ASCAD LATAM y uno de confirmación a quien llenó el formulario, vía Resend.
 //
-// Deploy: npx supabase functions deploy notify-submission
-// Secret:  npx supabase secrets set RESEND_API_KEY=...
+// Deploy: pegar este archivo en Supabase Dashboard > Edge Functions > notify-submission
+// Secrets: RESEND_API_KEY y WEBHOOK_SECRET (el mismo valor que se guardó en
+// Vault como 'webhook_shared_secret' en la migración 0002).
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
+const WEBHOOK_SECRET = Deno.env.get('WEBHOOK_SECRET')
 const FROM_EMAIL = Deno.env.get('RESEND_FROM_EMAIL') ?? 'ASCAD LATAM <onboarding@resend.dev>'
 const STAFF_EMAIL = Deno.env.get('STAFF_NOTIFICATION_EMAIL') ?? 'info@ascadlatam.org'
 
@@ -100,6 +102,13 @@ async function notifyContacto(record: Record<string, unknown>) {
 Deno.serve(async (req) => {
   if (!RESEND_API_KEY) {
     return new Response('RESEND_API_KEY no configurada', { status: 500 })
+  }
+
+  // Solo el trigger de Postgres (que conoce el secreto guardado en Vault)
+  // puede invocar esta función. Sin esto, cualquiera con la URL podría
+  // mandar emails de phishing a nombre de ASCAD LATAM con datos inventados.
+  if (!WEBHOOK_SECRET || req.headers.get('x-webhook-secret') !== WEBHOOK_SECRET) {
+    return new Response('No autorizado', { status: 401 })
   }
 
   const payload = await req.json()

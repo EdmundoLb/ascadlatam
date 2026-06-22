@@ -11,27 +11,26 @@ Backend de datos para las solicitudes de certificación, los mensajes de contact
 
 ## Setup (una sola vez)
 
-1. **SQL**: Supabase Dashboard → SQL Editor → pegar y correr `migrations/0001_init.sql`.
-2. **Credenciales del cliente**: Project Settings → API → copiar `Project URL` y `anon public key` → pegarlas en tu `.env` local como `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (ver `.env.example`). La anon key es pública por diseño — lo que protege los datos son las políticas RLS del paso 1, no el secreto de la key.
-3. **Resend**: crear cuenta en [resend.com](https://resend.com), verificar el dominio `ascadlatam.org` (Dashboard → Domains) para que los emails no caigan en spam, y generar una API key. Mientras el dominio no esté verificado, podés probar con el remitente de prueba `onboarding@resend.dev`.
-4. **Deploy de la Edge Function**:
-   ```bash
-   npx supabase login                          # una vez, abre el browser
-   npx supabase link --project-ref <tu-ref>     # el ref está en la URL del proyecto
-   npx supabase functions deploy notify-submission
-   npx supabase secrets set RESEND_API_KEY=re_xxxxxxxx
-   # opcional, si no usás info@ascadlatam.org o el dominio de prueba:
-   npx supabase secrets set RESEND_FROM_EMAIL="ASCAD LATAM <noreply@ascadlatam.org>"
-   npx supabase secrets set STAFF_NOTIFICATION_EMAIL=info@ascadlatam.org
-   ```
-5. **Database Webhooks** (Dashboard → Database → Webhooks → Create a new hook):
-   - Uno en `INSERT` sobre `solicitudes`, apuntando a la URL de `notify-submission`.
-   - Otro en `INSERT` sobre `contactos`, apuntando a la misma URL.
+Correr las migraciones en orden (`0001` a `0005`, todas en SQL Editor → pegar y correr):
 
-   Esto es lo que conecta "alguien llena el formulario" con "se manda el email" — sin este paso la función nunca se invoca.
+1. **`0001_init.sql`**: crea las 3 tablas + RLS.
+2. **Credenciales del cliente**: Project Settings → API → copiar `Project URL` y `anon public key` → pegarlas en tu `.env` local como `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (ver `.env.example`). La anon key es pública por diseño — lo que protege los datos son las políticas RLS, no el secreto de la key.
+3. **Resend**: crear cuenta en [resend.com](https://resend.com) y generar una API key. **Mientras el dominio no esté verificado, el remitente de prueba `onboarding@resend.dev` SOLO entrega emails a la dirección con la que te registraste en Resend** — ni el equipo ni los solicitantes reales van a recibir nada hasta verificar el dominio (Dashboard → Domains → Add Domain `ascadlatam.org`, agregar los registros SPF/DKIM que pida en el DNS del dominio). Esto es obligatorio antes de lanzar a producción, no opcional.
+4. **Deploy de la Edge Function** (Dashboard → Edge Functions → New function → nombre `notify-submission` → pegar el contenido de `functions/notify-submission/index.ts`):
+   - Edge Functions → `notify-submission` → Secrets, agregar:
+     - `RESEND_API_KEY` (la API key de Resend)
+     - `WEBHOOK_SECRET` (un string largo y random que inventes — el mismo valor va en el paso 5)
+     - opcional: `RESEND_FROM_EMAIL` (usar un email del dominio verificado una vez que esté listo), `STAFF_NOTIFICATION_EMAIL` si no usás el default `info@ascadlatam.org`.
+5. **`0002_notify_trigger.sql`** (en vez de "Database Webhooks" del dashboard — esa pantalla pide elegir una función de Postgres ya creada, no permite apuntar directo a una URL):
+   - Antes, correr **una sola vez**: `select vault.create_secret('EL-MISMO-STRING-RANDOM-DEL-PASO-4', 'webhook_shared_secret');`
+   - Crea la extensión `pg_net`, la función `notify_submission()` (llama a la Edge Function por HTTP) y los triggers `AFTER INSERT` en `solicitudes`/`contactos`.
+6. **`0003_fix_insert_policies.sql`**: recrea las políticas de insert explícitas `to anon` — necesario, las políticas `to public` implícitas de `0001` no las tomaba PostgREST en este proyecto.
+7. **`0005_fix_trigger_auth_header.sql`**: agrega el header `Authorization: Bearer <anon key>` a la llamada del trigger — el gateway de Supabase delante de las Edge Functions exige un JWT válido ahí (chequeo de plataforma, separado del `x-webhook-secret` propio).
+
+Validado de punta a punta con inserts de prueba reales: trigger → Edge Function → Resend → email recibido. (`0004`/`0006` fueron solo para diagnosticar este setup, no son necesarios en un proyecto nuevo.)
 
 ## Qué hace la Edge Function (`functions/notify-submission/index.ts`)
-Recibe el payload estándar de un Database Webhook (`{ table, record }`) y manda dos emails por cada fila nueva: uno al equipo (`STAFF_NOTIFICATION_EMAIL`, por defecto `info@ascadlatam.org`) con el detalle completo, y uno de confirmación a la persona que llenó el formulario (`record.email`).
+Recibe `{ table, record }` desde el trigger de Postgres (valida primero el header `x-webhook-secret`) y manda dos emails por cada fila nueva: uno al equipo (`STAFF_NOTIFICATION_EMAIL`, por defecto `info@ascadlatam.org`) con el detalle completo, y uno de confirmación a la persona que llenó el formulario (`record.email`).
 
 ## Cargar profesionales certificados
 No hay UI de alta — es deliberado, para que solo el equipo decida quién aparece publicado. Dashboard → Table Editor → `certified_professionals` → Insert row, con `status = 'active'`.
