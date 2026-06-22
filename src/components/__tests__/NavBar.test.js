@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import NavBar from '../layout/NavBar.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import i18n from '@/i18n'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -18,14 +19,14 @@ const router = createRouter({
 describe('NavBar.vue', () => {
   it('renders the brand name', () => {
     const wrapper = mount(NavBar, {
-      global: { plugins: [router] }
+      global: { plugins: [router, i18n] }
     })
     expect(wrapper.find('strong').text()).toContain('ASCAD')
   })
 
   it('has navigation links', () => {
     const wrapper = mount(NavBar, {
-      global: { plugins: [router] }
+      global: { plugins: [router, i18n] }
     })
     const links = wrapper.findAll('a')
     expect(links.length).toBeGreaterThan(0)
@@ -33,7 +34,7 @@ describe('NavBar.vue', () => {
 
   it('toggles mobile menu on hamburger click', async () => {
     const wrapper = mount(NavBar, {
-      global: { plugins: [router] }
+      global: { plugins: [router, i18n] }
     })
     const mobileMenu = wrapper.find('.mobile-menu')
     expect(mobileMenu.classes()).not.toContain('open')

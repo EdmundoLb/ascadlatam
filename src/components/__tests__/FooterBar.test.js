@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import FooterBar from '../layout/FooterBar.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import i18n from '@/i18n'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -18,21 +19,21 @@ const router = createRouter({
 describe('FooterBar.vue', () => {
   it('renders the brand name', () => {
     const wrapper = mount(FooterBar, {
-      global: { plugins: [router] }
+      global: { plugins: [router, i18n] }
     })
     expect(wrapper.find('strong').text()).toBe('ASCAD LATAM')
   })
 
   it('renders current year', () => {
     const wrapper = mount(FooterBar, {
-      global: { plugins: [router] }
+      global: { plugins: [router, i18n] }
     })
     expect(wrapper.find('.footer-bottom p').text()).toContain(new Date().getFullYear().toString())
   })
 
   it('has navigation links', () => {
     const wrapper = mount(FooterBar, {
-      global: { plugins: [router] }
+      global: { plugins: [router, i18n] }
     })
     const links = wrapper.findAll('a')
     expect(links.length).toBeGreaterThan(0)
