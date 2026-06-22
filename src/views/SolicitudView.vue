@@ -3,7 +3,7 @@
     <section class="page-hero">
       <div class="container">
         <div class="eyebrow">{{ $t('solicitud.aplicacionLinea') }}</div>
-        <h1>{{ $t('solicitud.titulo') }} <em class="gold">{{ $t('solicitud.certificacion') }}</em></h1>
+        <h1>{{ $t('solicitud.titulo') }}</h1>
         <p class="lead" style="margin-top:18px;">
           {{ $t('solicitud.subtitulo') }}
         </p>

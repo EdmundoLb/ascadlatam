@@ -161,7 +161,8 @@
     "incluyeFirma": "Todas las certificaciones incluyen firma del código de ética y examen de evaluación",
     "montosUSD": "Los montos están en USD y no son reembolsables",
     "nivelesCertificacion": "Niveles de certificación",
-    "ConoceCada": "Conocé cada",
+    "conoceCada": "Conocé cada",
+    "requisitos": "Requisitos",
     "hazClick": "Hacé click en cada nivel para ver los requisitos completos, competencias y horas requeridas.",
     "bianual": "bianual",
     "verMasSobre": "Ver más sobre",
@@ -189,7 +190,7 @@
     "faqRespuesta2": "El proceso incluye: solicitud online, presentación de documentación, evaluación de competencias, examen teórico-práctico y entrevista con el comité evaluador.",
     "faqPregunta3": "¿Cuál es la vigencia de la certificación?",
     "faqRespuesta3": "La certificación tiene validez de 3 años. Para renovar, se requiere completar horas de educación continua y demostrar práctica profesional activa.",
-    "faqPregunta4": "¿Puedo certificationrme si vivo fuera de Latinoamérica?",
+    "faqPregunta4": "¿Puedo certificarme si vivo fuera de Latinoamérica?",
     "faqRespuesta4": "Sí, el programa está abierto a profesionales de cualquier país. Las certificaciones tienen reconocimiento internacional y son especialmente relevantes para quienes trabajan con poblaciones latinas."
   },
   "solicitud": {
@@ -292,6 +293,7 @@
     "subtitulo": "Artículos, noticias y recursos sobre certificación profesional",
     "noticiasRecursos": "Noticias y recursos",
     "actualidad": "Actualidad en",
+    "buscar": "Buscar artículos...",
     "sinPublicaciones": "No hay publicaciones en esta categoría todavía.",
     "leerMas": "Leer más",
     "leerMenos": "Leer menos",
@@ -306,6 +308,8 @@
   },
   "contacto": {
     "titulo": "Contacto",
+    "contactanos": "Contáctanos",
+    "pais": "País",
     "subtitulo": "Estamos aquí para ayudarte",
     "descripcion": "Completa el formulario y nos pondremos en contacto contigo lo antes posible.",
     "nombre": "Nombre",

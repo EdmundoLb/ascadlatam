@@ -677,6 +677,8 @@ onUnmounted(() => {
   border-color: transparent;
 }
 .about-card-accent * { color: var(--white) !important; }
+.about-card-accent .about-icon,
+.about-card-accent .about-icon * { color: var(--primary) !important; }
 .about-card-accent .eyebrow { color: rgba(255,255,255,0.7) !important; }
 .about-card-accent .eyebrow::before { background: rgba(255,255,255,0.4); }
 .about-card-header {
