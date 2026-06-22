@@ -1,3 +1,4 @@
+import { watch } from 'vue'
 import { createI18n } from 'vue-i18n'
 import es from './locales/es.json'
 import pt from './locales/pt.json'
@@ -11,6 +12,11 @@ const i18n = createI18n({
   locale: defaultLocale,
   fallbackLocale: 'es',
   messages: { es, pt }
+})
+
+document.documentElement.lang = defaultLocale
+watch(i18n.global.locale, (newLocale) => {
+  document.documentElement.lang = newLocale
 })
 
 export default i18n
