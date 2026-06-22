@@ -52,7 +52,7 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
-      globals: { document: 'readonly', URL: 'readonly', fetch: 'readonly', FormData: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', console: 'readonly', localStorage: 'readonly', navigator: 'readonly' }
+      globals: { document: 'readonly', URL: 'readonly', fetch: 'readonly', FormData: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', console: 'readonly', localStorage: 'readonly', navigator: 'readonly', window: 'readonly' }
     },
     rules: {
       'no-console': 'warn',

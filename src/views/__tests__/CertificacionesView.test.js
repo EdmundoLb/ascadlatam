@@ -1,9 +1,13 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import CertificacionesView from '../CertificacionesView.vue'
 import i18n from '@/i18n'
+
+// Independiente de si .env tiene credenciales reales de Supabase: este test
+// cubre específicamente el estado vacío cuando el cliente no está configurado.
+vi.mock('@/lib/supabase', () => ({ supabase: null }))
 
 const router = createRouter({
   history: createWebHistory(),

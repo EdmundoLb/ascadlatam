@@ -83,4 +83,15 @@ router.afterEach((to) => {
   document.title = to.meta.title || 'ASCAD LATAM'
 })
 
+// Tras un deploy, los chunks lazy de rutas vistas en una pestaña vieja
+// quedan apuntando a archivos que ya no existen en el servidor. En vez de
+// dejar la navegación colgada, forzamos una recarga completa a la ruta
+// destino para que tome los archivos nuevos.
+router.onError((error, to) => {
+  const chunkLoadFailed = /Failed to fetch dynamically imported module|error loading dynamically imported module|Importing a module script failed/i
+  if (chunkLoadFailed.test(error.message)) {
+    window.location.href = to.fullPath
+  }
+})
+
 export default router
