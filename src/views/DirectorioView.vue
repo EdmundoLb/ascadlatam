@@ -19,10 +19,6 @@
             <span class="stat-label">{{ $t('directorio.paisesAfiliados') }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">8</span>
-            <span class="stat-label">{{ $t('directorio.profesionalesCertificados') }}</span>
-          </div>
-          <div class="stat-item">
             <span class="stat-number">∞</span>
             <span class="stat-label">{{ $t('directorio.compromisoExcelencia') }}</span>
           </div>
