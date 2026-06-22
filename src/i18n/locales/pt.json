@@ -28,7 +28,7 @@
     "formacionAcademica": "Formação Acadêmica",
     "directorio": "Diretório",
     "contactoTitle": "Contato",
-    "email": "info@ascadlatam.org",
+    "email": "info{'@'}ascadlatam.org",
     "formularioContacto": "Formulário de contato",
     "iniciarSolicitud": "Iniciar solicitação",
     "copyright": "Certificação e Acreditação em Adições · América Latina"
@@ -224,7 +224,7 @@
     },
     "placeholders": {
       "nombre": "Digite seu nome completo",
-      "email": "seu@email.com",
+      "email": "seu{'@'}email.com",
       "telefono": "+XX XXX XXX XXXX",
       "pais": "Selecione seu país",
       "experiencia": "Ex: 3 anos",
@@ -238,7 +238,7 @@
     "documentoIdentidad": "Documento de identidade",
     "placeholders": {
       "nombre": "Digite seu nome completo",
-      "email": "seu@email.com",
+      "email": "seu{'@'}email.com",
       "telefono": "+XX XXX XXX XXXX",
       "pais": "Selecione seu país",
       "experiencia": "Ex: 3 anos",
@@ -278,7 +278,7 @@
     },
     "mensajes": {
       "exito": "✓ Solicitação enviada corretamente. Entraremos em contato nos próximos dias úteis.",
-      "error": "✗ Erro ao enviar. Por favor, tente novamente ou escreva para info@ascadlatam.org"
+      "error": "✗ Erro ao enviar. Por favor, tente novamente ou escreva para info{'@'}ascadlatam.org"
     }
   },
   "directorio": {
@@ -352,7 +352,7 @@
     "enviarConsulta": "Enviar consulta",
     "placeholders": {
       "nombre": "Seu nome",
-      "email": "email@exemplo.com",
+      "email": "email{'@'}exemplo.com",
       "pais": "Selecionar país…",
       "asunto": "Selecionar tema…",
       "mensaje": "Escreva sua consulta aqui…"
@@ -364,7 +364,7 @@
     "infoPagina": "Website",
     "mensajes": {
       "exito": "✓ Mensagem enviada. Responderemos em 2 a 3 dias úteis.",
-      "error": "✗ Erro ao enviar. Por favor, escreva diretamente para info@ascadlatam.org"
+      "error": "✗ Erro ao enviar. Por favor, escreva diretamente para info{'@'}ascadlatam.org"
     }
   },
   "etica": {

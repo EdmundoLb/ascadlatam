@@ -28,7 +28,7 @@
     "formacionAcademica": "Formación Académica",
     "directorio": "Directorio",
     "contactoTitle": "Contacto",
-    "email": "info@ascadlatam.org",
+    "email": "info{'@'}ascadlatam.org",
     "formularioContacto": "Formulario de contacto",
     "iniciarSolicitud": "Iniciar solicitud",
     "copyright": "Certificación y Acreditación en Adicciones · América Latina"
@@ -220,7 +220,7 @@
     },
     "placeholders": {
       "nombre": "Ingresa tu nombre completo",
-      "email": "tu@email.com",
+      "email": "tu{'@'}email.com",
       "telefono": "+XX XXX XXX XXXX",
       "pais": "Selecciona tu país",
       "experiencia": "Ej: 3 años",
@@ -265,7 +265,7 @@
     },
     "mensajes": {
       "exito": "✓ Solicitud enviada correctamente. Le contactaremos en los próximos días hábiles.",
-      "error": "✗ Error al enviar. Por favor, intente nuevamente o escriba a info@ascadlatam.org"
+      "error": "✗ Error al enviar. Por favor, intente nuevamente o escriba a info{'@'}ascadlatam.org"
     }
   },
   "directorio": {
@@ -339,7 +339,7 @@
     "enviarConsulta": "Enviar consulta",
     "placeholders": {
       "nombre": "Tu nombre",
-      "email": "correo@ejemplo.com",
+      "email": "correo{'@'}ejemplo.com",
       "pais": "Seleccionar país…",
       "asunto": "Seleccionar tema…",
       "mensaje": "Escribí tu consulta aquí…"
@@ -351,7 +351,7 @@
     "infoPagina": "Página web",
     "mensajes": {
       "exito": "✓ Mensaje enviado. Le responderemos en 2 a 3 días hábiles.",
-      "error": "✗ Error al enviar. Por favor, escriba directamente a info@ascadlatam.org"
+      "error": "✗ Error al enviar. Por favor, escriba directamente a info{'@'}ascadlatam.org"
     }
   },
   "etica": {
