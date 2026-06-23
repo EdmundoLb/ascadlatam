@@ -36,9 +36,8 @@
           >
             <input type="hidden" name="nivel_certificacion" :value="`${cert.code} – ${cert.name}`" />
 
-            <transition name="step-fade" mode="out-in">
-              <div :key="currentStep" class="step-content">
-                <fieldset v-if="currentStep === 1" class="fieldset">
+            <div class="step-content">
+                <fieldset v-show="currentStep === 1" class="fieldset">
                   <legend>{{ $t('solicitud.datosPersonales') }}</legend>
                   <div class="form-grid">
                     <div class="form-group">
@@ -139,7 +138,7 @@
                   </div>
                 </fieldset>
 
-                <fieldset v-else-if="currentStep === 2" class="fieldset">
+                <fieldset v-show="currentStep === 2" class="fieldset">
                   <legend>{{ $t('solicitud.infoProfesional') }}</legend>
                   <div class="form-grid">
                     <div class="form-group" v-if="cert.needsDegree">
@@ -161,7 +160,7 @@
                   </div>
                 </fieldset>
 
-                <fieldset v-else-if="currentStep === 3" class="fieldset">
+                <fieldset v-show="currentStep === 3" class="fieldset">
                   <legend>Revisión y Envío</legend>
                   <div class="review-section">
                     <div class="review-header">
@@ -183,8 +182,7 @@
                     <p class="review-note">{{ $t('solicitud.cuotaNoReembolsable') }}</p>
                   </div>
                 </fieldset>
-              </div>
-            </transition>
+            </div>
 
             <div class="form-footer">
               <div class="fee-display" v-if="currentStep === 4">
@@ -630,19 +628,6 @@ button:disabled { opacity: .6; cursor: not-allowed; }
   color: var(--danger);
   margin-top: 4px;
   font-weight: 500;
-}
-
-.step-fade-enter-active,
-.step-fade-leave-active {
-  transition: all 0.3s ease;
-}
-.step-fade-enter-from {
-  opacity: 0;
-  transform: translateX(20px);
-}
-.step-fade-leave-to {
-  opacity: 0;
-  transform: translateX(-20px);
 }
 
 @media (max-width: 768px) {
