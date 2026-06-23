@@ -171,6 +171,30 @@
                     </div>
                     <div class="review-grid">
                       <div class="review-item">
+                        <span class="review-label">{{ $t('solicitud.campos.nombre') }}</span>
+                        <span class="review-value">{{ fieldValue(cert.code, 'nombre') }}</span>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">{{ $t('solicitud.campos.email') }}</span>
+                        <span class="review-value">{{ fieldValue(cert.code, 'email') }}</span>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">{{ $t('solicitud.telefonoWhatsapp') }}</span>
+                        <span class="review-value">{{ fieldValue(cert.code, 'telefono') }}</span>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">{{ $t('solicitud.documentoIdentidad') }}</span>
+                        <span class="review-value">{{ fieldValue(cert.code, 'documento') }}</span>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">{{ $t('solicitud.fechaNacimiento') }}</span>
+                        <span class="review-value">{{ fieldValue(cert.code, 'fecha_nacimiento') }}</span>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">{{ $t('solicitud.campos.pais') }}</span>
+                        <span class="review-value">{{ fieldValue(cert.code, 'pais') }}, {{ fieldValue(cert.code, 'ciudad') }}</span>
+                      </div>
+                      <div class="review-item">
                         <span class="review-label">Certificación</span>
                         <span class="review-value">{{ cert.code }} – {{ cert.name }}</span>
                       </div>
@@ -179,7 +203,7 @@
                         <span class="review-value highlight">USD ${{ cert.fee }}</span>
                       </div>
                     </div>
-                    <p class="review-note">{{ $t('solicitud.cuotaNoReembolsable') }}</p>
+                    <p class="review-note">¿Algo no es correcto? Volvé a "Anterior" para corregirlo. {{ $t('solicitud.cuotaNoReembolsable') }}</p>
                   </div>
                 </fieldset>
             </div>
@@ -256,6 +280,13 @@ const certs = store.formCertifications
 
 function setFormRef(code, el) {
   if (el) formRefs.value[code] = el
+}
+
+function fieldValue(code, name) {
+  const form = formRefs.value[code]
+  if (!form) return ''
+  const input = form.querySelector(`[name="${name}"]`)
+  return input ? input.value : ''
 }
 
 function changeTab(code) {
