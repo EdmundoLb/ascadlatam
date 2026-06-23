@@ -15,18 +15,37 @@
         <div class="contact-info">
           <h3>{{ $t('contacto.infoTitulo') }}</h3>
           <p class="muted" style="margin-top:12px; line-height:1.8;">
-            Para consultas sobre el proceso de certificación, requisitos por nivel, verificación de credenciales o para establecer alianzas institucionales.
+            {{ $t('contacto.consultaDescripcion') }}
           </p>
           <div class="contact-items">
-            <div v-for="item in contactItems" :key="item.label" class="contact-item">
+            <div v-for="person in contactPeople" :key="person.email" class="contact-item">
               <div class="contact-icon">
-                <svg v-if="item.icon === 'user'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <svg v-else-if="item.icon === 'globe'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                <svg v-else-if="item.icon === 'clock'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </div>
               <div>
-                <strong>{{ item.label }}</strong>
-                <span>{{ item.value }}</span>
+                <strong>{{ person.name }} ({{ person.location }})</strong>
+                <span>
+                  <a :href="`tel:${person.phone.replace(/\s+/g, '')}`">{{ person.phone }}</a>
+                  · <a :href="`mailto:${person.email}`">{{ person.email }}</a>
+                </span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div>
+                <strong>{{ $t('contacto.cobertura') }}</strong>
+                <span>{{ $t('contacto.coberturaValor') }}</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <strong>{{ $t('contacto.horario') }}</strong>
+                <span>{{ $t('contacto.horarioValor') }}</span>
               </div>
             </div>
           </div>
@@ -48,18 +67,18 @@
             <div class="cf-grid">
               <div class="form-group">
                 <label for="nombre">{{ $t('contacto.nombre') }} *</label>
-                <input id="nombre" type="text" name="nombre" required :placeholder="$t('contacto.placeholders.nombre')" autofocus />
+                <input id="nombre" type="text" name="nombre" required autocomplete="name" :placeholder="$t('contacto.placeholders.nombre')" />
               </div>
               <div class="form-group">
                 <label for="pais">{{ $t('contacto.pais') }}</label>
-                <select id="pais" name="pais">
+                <select id="pais" name="pais" autocomplete="country-name">
                   <option value="">{{ $t('contacto.placeholders.pais') }}</option>
                   <option v-for="p in paises" :key="p">{{ p }}</option>
                 </select>
               </div>
               <div class="form-group form-full">
                 <label for="email">{{ $t('contacto.email') }} *</label>
-                <input id="email" type="email" name="email" required :placeholder="$t('contacto.placeholders.email')" />
+                <input id="email" type="email" name="email" required autocomplete="email" :placeholder="$t('contacto.placeholders.email')" />
               </div>
               <div class="form-group form-full">
                 <label for="asunto">{{ $t('contacto.asunto') }}</label>
@@ -80,7 +99,7 @@
             <button type="submit" class="btn btn-gold" style="width:100%; margin-top:8px; justify-content:center;" :disabled="sending">
               {{ sending ? $t('contacto.btnEnviarProcesando') : $t('contacto.btnEnviar') + ' →' }}
             </button>
-            <div v-if="message" class="form-msg" :class="message.type" style="margin-top:14px;">
+            <div v-if="message" class="form-msg" :class="message.type" style="margin-top:14px;" role="status" aria-live="polite">
               {{ message.text }}
             </div>
           </form>
@@ -91,11 +110,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { showToast } from '@/composables/toast.js'
 import { supabase } from '@/lib/supabase'
+import { trackEvent } from '@/composables/analytics.js'
 
-const formId = import.meta.env.VITE_FORMSPREE_CONTACT_ID
+const { t } = useI18n()
+
+const formId = import.meta.env.VITE_FORMSPREE_CONTACT_ID || 'placeholder'
 const sending = ref(false)
 const message = ref(null)
 
@@ -105,12 +128,10 @@ const paises = [
   'Panamá','Paraguay','Perú','República Dominicana','Uruguay','Venezuela','Otro'
 ]
 
-const contactItems = [
-  { icon: 'user', label: 'Gonzalo Esquivel (Costa Rica)', value: '+506 8374 3617 · ascadcr@gmail.com' },
-  { icon: 'user', label: 'Adriano Schuster (Paraguay)', value: '+595984430915 · adrianoschuster2014@gmail.com' },
-  { icon: 'globe', label: 'Cobertura', value: 'América Latina y Brasil' },
-  { icon: 'clock', label: 'Horario de atención', value: 'Lun – Vie · 8:00 – 17:00 (hora Costa Rica)' },
-]
+const contactPeople = computed(() => [
+  { name: 'Gonzalo Esquivel', location: 'Costa Rica', phone: '+506 8374 3617', email: 'ascadcr@gmail.com' },
+  { name: 'Adriano Schuster', location: t('contacto.paraguay'), phone: '+595984430915', email: 'adrianoschuster2014@gmail.com' },
+])
 
 async function submitToSupabase(form) {
   if (!supabase) return false
@@ -148,12 +169,13 @@ async function handleSubmit(event) {
     const formspreeOk = formspreeResult.status === 'fulfilled'
 
     if (supabaseOk || formspreeOk) {
-      message.value = { type: 'success', text: '✓ Mensaje enviado. Le responderemos en 2 a 3 días hábiles.' }
+      message.value = { type: 'success', text: t('contacto.mensajes.exito') }
       showToast('Mensaje enviado correctamente', 'success')
+      trackEvent('generate_lead', { form_name: 'contacto', subject: form.asunto.value || 'sin_asunto' })
       form.reset()
     } else throw new Error()
   } catch {
-    message.value = { type: 'error', text: '✗ Error al enviar. Por favor, escriba directamente a info@ascadlatam.org' }
+    message.value = { type: 'error', text: t('contacto.mensajes.error') }
     showToast('Error al enviar el mensaje', 'error')
   } finally {
     sending.value = false

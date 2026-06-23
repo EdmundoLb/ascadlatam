@@ -97,6 +97,7 @@ VITE_FORMSPREE_CONTACT_ID=tu_contact_form_id
 VITE_FORMSPREE_SOLICITUD_ID=tu_solicitud_form_id
 VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
 VITE_SUPABASE_ANON_KEY=tu_anon_key
+VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX  # opcional, Google Analytics 4
 ```
 
 Setup completo de Supabase (esquema SQL, Edge Function, Resend, webhooks) en `supabase/README.md`.

@@ -14,6 +14,18 @@
       <div class="container">
         <StepIndicator :steps="steps" :current-step="currentStep" @step-click="goToStep" />
 
+        <div class="tabs">
+          <button
+            v-for="cert in certs"
+            :key="cert.code"
+            class="tab"
+            :class="{ active: activeTab === cert.code }"
+            @click="changeTab(cert.code)"
+          >
+            {{ cert.code }}
+          </button>
+        </div>
+
         <div v-for="cert in certs" :key="cert.code" v-show="activeTab === cert.code" class="form-panel">
           <div class="panel-header">
             <div>
@@ -46,12 +58,15 @@
                         type="text"
                         name="nombre"
                         required
+                        autocomplete="name"
                         :placeholder="$t('solicitud.placeholders.nombre')"
                         @input="clearError($event, cert.code)"
                         @blur="handleBlur($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-nombre`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-nombre`])"
+                        :aria-describedby="errors[`${cert.code}-nombre`] ? `${cert.code}-nombre-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-nombre`]" class="field-error">{{ errors[`${cert.code}-nombre`] }}</span>
+                      <span v-if="errors[`${cert.code}-nombre`]" :id="`${cert.code}-nombre-error`" class="field-error">{{ errors[`${cert.code}-nombre`] }}</span>
                     </div>
                     <div class="form-group">
                       <label>{{ $t('solicitud.documentoIdentidad') }} *</label>
@@ -63,8 +78,10 @@
                         @input="clearError($event, cert.code)"
                         @blur="handleBlur($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-documento`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-documento`])"
+                        :aria-describedby="errors[`${cert.code}-documento`] ? `${cert.code}-documento-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-documento`]" class="field-error">{{ errors[`${cert.code}-documento`] }}</span>
+                      <span v-if="errors[`${cert.code}-documento`]" :id="`${cert.code}-documento-error`" class="field-error">{{ errors[`${cert.code}-documento`] }}</span>
                     </div>
                     <div class="form-group">
                       <label for="fecha_nacimiento">{{ $t('solicitud.fechaNacimiento') }} *</label>
@@ -73,28 +90,34 @@
                         type="date"
                         name="fecha_nacimiento"
                         required
+                        autocomplete="bday"
                         :min="minDate"
                         :max="maxDate"
                         @input="clearError($event, cert.code)"
                         @blur="handleBlur($event, cert.code)"
                         @change="validateField('fecha_nacimiento', $event.target.value, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-fecha_nacimiento`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-fecha_nacimiento`])"
+                        :aria-describedby="errors[`${cert.code}-fecha_nacimiento`] ? `${cert.code}-fecha_nacimiento-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-fecha_nacimiento`]" class="field-error">{{ errors[`${cert.code}-fecha_nacimiento`] }}</span>
+                      <span v-if="errors[`${cert.code}-fecha_nacimiento`]" :id="`${cert.code}-fecha_nacimiento-error`" class="field-error">{{ errors[`${cert.code}-fecha_nacimiento`] }}</span>
                     </div>
                     <div class="form-group">
                       <label>{{ $t('solicitud.campos.pais') }} *</label>
                       <select
                         name="pais"
                         required
+                        autocomplete="country-name"
                         @change="clearError($event, cert.code)"
                         @blur="handleBlur($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-pais`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-pais`])"
+                        :aria-describedby="errors[`${cert.code}-pais`] ? `${cert.code}-pais-error` : null"
                       >
                         <option value="">{{ $t('solicitud.placeholders.pais') || 'Seleccionar…' }}</option>
                         <option v-for="p in paises" :key="p">{{ p }}</option>
                       </select>
-                      <span v-if="errors[`${cert.code}-pais`]" class="field-error">{{ errors[`${cert.code}-pais`] }}</span>
+                      <span v-if="errors[`${cert.code}-pais`]" :id="`${cert.code}-pais-error`" class="field-error">{{ errors[`${cert.code}-pais`] }}</span>
                     </div>
                     <div class="form-group">
                       <label>{{ $t('solicitud.ciudad') }} *</label>
@@ -102,12 +125,15 @@
                         type="text"
                         name="ciudad"
                         required
+                        autocomplete="address-level2"
                         :placeholder="$t('solicitud.placeholders.ciudad')"
                         @input="clearError($event, cert.code)"
                         @blur="handleBlur($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-ciudad`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-ciudad`])"
+                        :aria-describedby="errors[`${cert.code}-ciudad`] ? `${cert.code}-ciudad-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-ciudad`]" class="field-error">{{ errors[`${cert.code}-ciudad`] }}</span>
+                      <span v-if="errors[`${cert.code}-ciudad`]" :id="`${cert.code}-ciudad-error`" class="field-error">{{ errors[`${cert.code}-ciudad`] }}</span>
                     </div>
                     <div class="form-group">
                       <label>{{ $t('solicitud.telefonoWhatsapp') }} *</label>
@@ -115,12 +141,15 @@
                         type="tel"
                         name="telefono"
                         required
+                        autocomplete="tel"
                         :placeholder="$t('solicitud.placeholders.telefono')"
                         @input="clearError($event, cert.code)"
                         @blur="handleBlur($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-telefono`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-telefono`])"
+                        :aria-describedby="errors[`${cert.code}-telefono`] ? `${cert.code}-telefono-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-telefono`]" class="field-error">{{ errors[`${cert.code}-telefono`] }}</span>
+                      <span v-if="errors[`${cert.code}-telefono`]" :id="`${cert.code}-telefono-error`" class="field-error">{{ errors[`${cert.code}-telefono`] }}</span>
                     </div>
                     <div class="form-group form-full">
                       <label>{{ $t('solicitud.campos.email') }} *</label>
@@ -128,12 +157,15 @@
                         type="email"
                         name="email"
                         required
+                        autocomplete="email"
                         :placeholder="$t('solicitud.placeholders.email')"
                         @input="clearError($event, cert.code)"
                         @blur="handleBlur($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-email`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-email`])"
+                        :aria-describedby="errors[`${cert.code}-email`] ? `${cert.code}-email-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-email`]" class="field-error">{{ errors[`${cert.code}-email`] }}</span>
+                      <span v-if="errors[`${cert.code}-email`]" :id="`${cert.code}-email-error`" class="field-error">{{ errors[`${cert.code}-email`] }}</span>
                     </div>
                   </div>
                 </fieldset>
@@ -143,7 +175,15 @@
                   <div class="form-grid">
                     <div class="form-group" v-if="cert.needsDegree">
                       <label>{{ $t('solicitud.tituloUniversitario') }} *</label>
-                      <input type="text" name="titulo" required :placeholder="cert.degreePlaceholder" />
+                      <input
+                        type="text"
+                        name="titulo"
+                        required
+                        :placeholder="cert.degreePlaceholder"
+                        @input="clearError($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-titulo`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-titulo`]" class="field-error">{{ errors[`${cert.code}-titulo`] }}</span>
                     </div>
                     <div class="form-group">
                       <label>{{ $t('solicitud.institucionPrograma') }}</label>
@@ -155,7 +195,16 @@
                     </div>
                     <div class="form-group" v-if="cert.code === 'EPR'">
                       <label>{{ $t('solicitud.aniosRecuperacion') }} *</label>
-                      <input type="number" name="anios_recuperacion" required placeholder="Mínimo 2 años" min="2" />
+                      <input
+                        type="number"
+                        name="anios_recuperacion"
+                        required
+                        placeholder="Mínimo 2 años"
+                        min="2"
+                        @input="clearError($event, cert.code)"
+                        :class="{ 'input-error': errors[`${cert.code}-anios_recuperacion`] }"
+                      />
+                      <span v-if="errors[`${cert.code}-anios_recuperacion`]" class="field-error">{{ errors[`${cert.code}-anios_recuperacion`] }}</span>
                     </div>
                   </div>
                 </fieldset>
@@ -222,22 +271,10 @@
               </div>
             </div>
 
-            <div v-if="messages[cert.code]" class="form-msg" :class="messages[cert.code].type">
+            <div v-if="messages[cert.code]" class="form-msg" :class="messages[cert.code].type" role="status" aria-live="polite">
               {{ messages[cert.code].text }}
             </div>
           </form>
-        </div>
-
-        <div class="tabs">
-          <button
-            v-for="cert in certs"
-            :key="cert.code"
-            class="tab"
-            :class="{ active: activeTab === cert.code }"
-            @click="changeTab(cert.code)"
-          >
-            {{ cert.code }}
-          </button>
         </div>
       </div>
     </section>
@@ -247,11 +284,14 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { showToast } from '@/composables/toast.js'
 import { useCertificacionesStore } from '@/stores/certificaciones'
 import StepIndicator from '@/components/forms/StepIndicator.vue'
 import { supabase } from '@/lib/supabase'
+import { trackEvent } from '@/composables/analytics.js'
 
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const store = useCertificacionesStore()
@@ -507,15 +547,16 @@ async function handleSubmit(event, code) {
     const formspreeOk = formspreeResult.status === 'fulfilled'
 
     if (supabaseOk || formspreeOk) {
-      messages.value[code] = { type: 'success', text: '✓ Solicitud enviada correctamente. Le contactaremos en los próximos días hábiles.' }
+      messages.value[code] = { type: 'success', text: t('solicitud.mensajes.exito') }
       showToast('Solicitud enviada correctamente', 'success')
+      trackEvent('generate_lead', { form_name: 'solicitud', certification_code: code })
       form.reset()
       currentStep.value = 1
     } else {
       throw new Error()
     }
   } catch {
-    messages.value[code] = { type: 'error', text: '✗ Error al enviar. Por favor, intente nuevamente o escriba a info@ascadlatam.org' }
+    messages.value[code] = { type: 'error', text: t('solicitud.mensajes.error') }
     showToast('Error al enviar la solicitud', 'error')
   } finally {
     sending.value[code] = false
@@ -564,7 +605,7 @@ function validateAllFields(code) {
   display: flex; gap: 2px; flex-wrap: wrap;
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 4px; width: fit-content;
-  margin-top: 36px;
+  margin-bottom: 36px;
 }
 .tab {
   padding: 10px 22px; border-radius: var(--radius-sm);

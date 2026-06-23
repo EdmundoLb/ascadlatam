@@ -174,6 +174,12 @@ Cada nivel de certificación desarrolla tres ejes:
 - **Envío dual**: cada submit dispara `Promise.allSettled` con un insert a Supabase (`solicitudes`/`contactos`) y el POST a Formspree que ya existía. Éxito si al menos uno de los dos resuelve — Formspree se mantiene como respaldo permanente a pedido del cliente, no solo mientras se valida Supabase (ver `supabase/README.md`, que tiene el estado real de credenciales/dominio en uso). No asumir que `supabase` (de `@/lib/supabase`) existe: es `null` hasta que se configuren `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY`.
 - **Los fieldsets de cada paso usan `v-show`, nunca `v-if`/`v-else-if`.** El submit final hace `new FormData(form)` sobre el `<form>` completo — si un paso anterior se desmonta del DOM (v-if), sus inputs (nombre, email, etc.) desaparecen de ese FormData y la columna correspondiente llega `null`/ausente al insert de Supabase (violando los `NOT NULL` de `solicitudes`). Este bug real estuvo en producción meses antes de la integración con Supabase — Formspree nunca lo mostró porque no valida campos requeridos del lado del servidor.
 - El paso de Revisión lee los valores en vivo del DOM con `fieldValue(code, name)` (no hay v-model en estos campos) para mostrarle a la persona lo que escribió antes de enviar.
+- En `SolicitudView.vue`, el selector de certificación (`.tabs`) se renderiza **antes** del `form-panel`, no después — la persona elige certificación primero y recién ahí completa datos. No volver a mover ese bloque al final.
+- `trackEvent('generate_lead', ...)` (de `@/composables/analytics.js`) se dispara en el branch de éxito de `handleSubmit`, tanto en `SolicitudView.vue` como en `ContactoView.vue` — es el evento de conversión real para medir leads en GA4.
+
+### SEO por ruta y analítica (router/index.js)
+- Cada ruta tiene `meta.title` y `meta.description`. El `router.afterEach` en `src/router/index.js` actualiza `document.title`, `meta[name="description"]`, `og:*`, `twitter:*` y el `<link rel="canonical">` en cada navegación — no hay SSR, así que esto es lo único que mantiene esos tags correctos por página (en `index.html` solo quedan los valores por defecto de la home). Al agregar una ruta nueva, siempre completar `meta.description` y agregarla a `public/sitemap.xml`.
+- **Google Analytics 4** (`src/composables/analytics.js`) solo se carga si existe `VITE_GA4_MEASUREMENT_ID` **y** el usuario aceptó el banner de cookies (`src/composables/consent.js`, estado en `localStorage`, componente `src/components/CookieConsent.vue` montado desde `App.vue`). No llamar a `window.gtag` directamente desde una vista — usar `trackEvent()`/`trackPageview()` del composable, que ya verifican que GA esté cargado.
 
 ### v-html
 - `vue/no-v-html` está deshabilitado puntualmente en `HomeView.vue`, `CertificacionesView.vue` y `ConocimientoView.vue` (ver `eslint.config.js`) porque ahí solo se renderizan SVGs propios y strings de los locales — nunca contenido de usuario o de una API externa. Si se agrega contenido dinámico/externo en esas vistas, sanitizarlo antes de usar `v-html`.
@@ -186,6 +192,7 @@ VITE_FORMSPREE_CONTACT_ID=id_para_formulario_contacto
 VITE_FORMSPREE_SOLICITUD_ID=id_para_formulario_solicitud
 VITE_SUPABASE_URL=url_del_proyecto_supabase
 VITE_SUPABASE_ANON_KEY=anon_key_publica_de_supabase
+VITE_GA4_MEASUREMENT_ID=measurement_id_de_google_analytics_4  # opcional
 ```
 
 ---

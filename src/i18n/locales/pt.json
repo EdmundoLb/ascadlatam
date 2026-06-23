@@ -361,6 +361,11 @@
     "alianzaInstitucional": "Aliança institucional",
     "infoEmail": "E-mail",
     "infoPagina": "Website",
+    "cobertura": "Abrangência",
+    "coberturaValor": "América Latina e Brasil",
+    "horario": "Horário de atendimento",
+    "horarioValor": "Seg – Sex · 8:00 – 17:00 (horário da Costa Rica)",
+    "paraguay": "Paraguai",
     "mensajes": {
       "exito": "✓ Mensagem enviada. Responderemos em 2 a 3 dias úteis.",
       "error": "✗ Erro ao enviar. Por favor, escreva diretamente para info{'@'}ascadlatam.org"
@@ -501,5 +506,10 @@
     "no": "Não",
     "other": "Outro",
     "language": "Idioma"
+  },
+  "cookieConsent": {
+    "mensaje": "Usamos cookies de análise para entender como o site é usado e melhorar a experiência. Não compartilhamos seus dados com terceiros para fins publicitários.",
+    "aceptar": "Aceitar",
+    "rechazar": "Rejeitar"
   }
 }

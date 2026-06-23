@@ -26,7 +26,10 @@ Configurar en el dashboard de Vercel (Project → Settings → Environment Varia
 ```env
 VITE_FORMSPREE_CONTACT_ID=tu_contact_form_id
 VITE_FORMSPREE_SOLICITUD_ID=tu_solicitud_form_id
+VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
+
+`VITE_GA4_MEASUREMENT_ID` es opcional — si no está seteada, el sitio funciona igual pero no carga ningún script de Google Analytics (ver `supabase/README.md`-style gotcha: es una var `VITE_*`, así que aplican las mismas reglas de "no marcar como Sensitive" y "Redeploy después de cambiarla").
 
 ---
 

@@ -4,7 +4,7 @@ Backend de datos para las solicitudes de certificación, los mensajes de contact
 
 **Estado actual (2026-06-22): confirmado funcionando de punta a punta en producción** (`ascadlatam.org`) — insert → trigger → Edge Function → Resend → email recibido, en ambos formularios. Dominio `ascadlatam.org` verificado en Resend. Configuración real en uso:
 - `RESEND_FROM_EMAIL` = `ASCAD LATAM <notificaciones@ascadlatam.org>`
-- `STAFF_NOTIFICATION_EMAIL` = `ascadcr@gmail.com` (no el default `info@ascadlatam.org` — así lo pidió el cliente)
+- `STAFF_NOTIFICATION_EMAIL` = `ascadcr@gmail.com` (no el default `info@ascadlatam.org` — así lo pidió el cliente). `info@ascadlatam.org` reenvía a esa misma casilla, así que es seguro mostrarlo públicamente (footer, mensajes de error) como dirección de contacto institucional: cualquier mail enviado ahí también le llega al staff.
 - Formspree sigue mandando su propia notificación a la cuenta personal con la que se creó el form (no es un bug, es solo una copia de respaldo redundante; no le llega a nadie más ni duplica nada para el solicitante).
 
 ## Esquema

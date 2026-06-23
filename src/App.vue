@@ -9,12 +9,14 @@
   </main>
   <FooterBar />
   <Toast />
+  <CookieConsent />
 </template>
 
 <script setup>
 import NavBar from '@/components/layout/NavBar.vue'
 import FooterBar from '@/components/layout/FooterBar.vue'
 import Toast from '@/components/Toast.vue'
+import CookieConsent from '@/components/CookieConsent.vue'
 </script>
 
 <style>
