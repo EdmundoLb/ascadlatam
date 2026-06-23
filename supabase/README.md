@@ -1,6 +1,11 @@
 # Supabase — ASCAD LATAM
 
-Backend de datos para las solicitudes de certificación, los mensajes de contacto y el directorio público de profesionales certificados. Corre en paralelo con Formspree (que se mantiene como respaldo temporal) mientras se valida en producción.
+Backend de datos para las solicitudes de certificación, los mensajes de contacto y el directorio público de profesionales certificados. Corre en paralelo con Formspree (que se mantiene como respaldo temporal/permanente a pedido del cliente) mientras se valida en producción.
+
+**Estado actual (2026-06-22): confirmado funcionando de punta a punta en producción** (`ascadlatam.org`) — insert → trigger → Edge Function → Resend → email recibido, en ambos formularios. Dominio `ascadlatam.org` verificado en Resend. Configuración real en uso:
+- `RESEND_FROM_EMAIL` = `ASCAD LATAM <notificaciones@ascadlatam.org>`
+- `STAFF_NOTIFICATION_EMAIL` = `ascadcr@gmail.com` (no el default `info@ascadlatam.org` — así lo pidió el cliente)
+- Formspree sigue mandando su propia notificación a la cuenta personal con la que se creó el form (no es un bug, es solo una copia de respaldo redundante; no le llega a nadie más ni duplica nada para el solicitante).
 
 ## Esquema
 `migrations/0001_init.sql` crea 3 tablas:
@@ -28,6 +33,13 @@ Correr las migraciones en orden (`0001` a `0005`, todas en SQL Editor → pegar 
 7. **`0005_fix_trigger_auth_header.sql`**: agrega el header `Authorization: Bearer <anon key>` a la llamada del trigger — el gateway de Supabase delante de las Edge Functions exige un JWT válido ahí (chequeo de plataforma, separado del `x-webhook-secret` propio).
 
 Validado de punta a punta con inserts de prueba reales: trigger → Edge Function → Resend → email recibido. (`0004`/`0006` fueron solo para diagnosticar este setup, no son necesarios en un proyecto nuevo.)
+
+## Variables de entorno en Vercel — gotcha importante
+Este es un sitio estático (Vite SPA): las variables `VITE_*` se "hornean" dentro del bundle **en el momento del build**, no se leen en runtime. Por eso, en Vercel:
+- Hay que agregarlas en **Settings → Environment Variables**, marcando **Production** (no alcanza con tenerlas solo en `.env` local — eso nunca llega al servidor).
+- **No marcarlas como "Sensitive"** — ese modo no las deja disponibles para el proceso de build estático, así que Vite las ve como `undefined` aunque la variable "exista" en el dashboard. Usarlas como variables normales (ninguna de las 4 — anon key, IDs de Formspree — es secreta de todos modos).
+- Después de agregar/cambiar una, hay que **Redeploy** explícito (Deployments → "..." → Redeploy) — Vercel no reconstruye builds ya hechos solo por cambiar una env var.
+- Si algo no toma el valor esperado, confirmarlo inspeccionando el bundle ya desplegado en vez de confiar en lo que muestra el dashboard: `curl` el chunk JS de la vista en cuestión y buscar el string esperado (anon key, form ID) — los nombres de archivo de Vite son hash de contenido, así que un valor distinto da un hash distinto.
 
 ## Qué hace la Edge Function (`functions/notify-submission/index.ts`)
 Recibe `{ table, record }` desde el trigger de Postgres (valida primero el header `x-webhook-secret`) y manda dos emails por cada fila nueva: uno al equipo (`STAFF_NOTIFICATION_EMAIL`, por defecto `info@ascadlatam.org`) con el detalle completo, y uno de confirmación a la persona que llenó el formulario (`record.email`).
