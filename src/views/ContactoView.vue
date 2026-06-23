@@ -107,7 +107,7 @@ const paises = [
 
 const contactItems = [
   { icon: 'user', label: 'Gonzalo Esquivel (Costa Rica)', value: '+506 8374 3617 · ascadcr@gmail.com' },
-  { icon: 'user', label: 'Adriano Shuster (Paraguay)', value: '0984430915 · adrianoschuster2014@gmail.com' },
+  { icon: 'user', label: 'Adriano Schuster (Paraguay)', value: '+595984430915 · adrianoschuster2014@gmail.com' },
   { icon: 'globe', label: 'Cobertura', value: 'América Latina y Brasil' },
   { icon: 'clock', label: 'Horario de atención', value: 'Lun – Vie · 8:00 – 17:00 (hora Costa Rica)' },
 ]
