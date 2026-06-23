@@ -185,15 +185,11 @@
             </div>
 
             <div class="form-footer">
-              <div class="fee-display" v-if="currentStep === 4">
-                <span class="fee-big">USD ${{ cert.fee }}</span>
-                <span class="muted" style="font-size:.84rem;">{{ $t('solicitud.cuotaNoReembolsable') }}</span>
-              </div>
               <div class="form-nav">
                 <button v-if="currentStep > 1" type="button" class="btn btn-outline" @click="prevStep">
                   ← Anterior
                 </button>
-                <button v-if="currentStep < 4" type="button" class="btn btn-gold" @click="nextStep(cert.code)">
+                <button v-if="currentStep < 3" type="button" class="btn btn-gold" @click="nextStep(cert.code)">
                   Siguiente →
                 </button>
                 <button v-else type="submit" class="btn btn-gold" :disabled="sending[cert.code]">
@@ -610,8 +606,6 @@ function validateAllFields(code) {
   gap: 20px; padding: 24px 0; border-top: 1px solid var(--line); flex-wrap: wrap;
 }
 .form-nav { display: flex; gap: 12px; }
-.fee-display { text-align: left; }
-.fee-big { display: block; font-family: var(--font-display); font-size: 2rem; color: var(--accent); font-weight: 700; line-height: 1; }
 .form-msg {
   padding: 16px 20px; border-radius: var(--radius-sm);
   font-size: .9rem; font-weight: 500;
