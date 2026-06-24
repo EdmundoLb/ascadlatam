@@ -18,7 +18,7 @@
   },
   "footer": {
     "brandLabel": "Certificação Internacional",
-    "brandDesc": "Consórcio Latino-Americano de Certificação em Adições. Padrões de qualidade, ética e competência desde 2004. Certificação culturalmente adaptável à América Latina.",
+    "brandDesc": "Consórcio Latino-Americano de Certificação em Adições. Padrões de qualidade, ética e competência desde 2001. Certificação culturalmente adaptável à América Latina.",
     "certificaciones": "Certificações",
     "ost": "OST - Operador Socioterapêutico",
     "epr": "EPR - Treinador de Pares em Recuperação",
@@ -47,6 +47,8 @@
     "certificados": "Profissionais certificados",
     "paises": "Países da América Latina",
     "anos": "Anos de experiência",
+    "aniversarioEyebrow": "Aniversário",
+    "aniversarioDesde": "Formando e certificando profissionais em adições desde 2001, em toda a América Latina.",
     "estandarInternacional": "Padrão internacional",
     "certificacionesOtorgadas": "Certificações concedidas",
     "sobreNosostros": "Sobre Nós",

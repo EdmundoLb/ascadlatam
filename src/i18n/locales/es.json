@@ -18,7 +18,7 @@
   },
   "footer": {
     "brandLabel": "Certificación Internacional",
-    "brandDesc": "Consorcio Latinoamericano de Certificación en Adicciones. Estándares de calidad, ética y competencia desde 2004. Certificación culturalmente adaptable a Latinoamérica.",
+    "brandDesc": "Consorcio Latinoamericano de Certificación en Adicciones. Estándares de calidad, ética y competencia desde 2001. Certificación culturalmente adaptable a Latinoamérica.",
     "certificaciones": "Certificaciones",
     "ost": "OST - Operador Socioterapéutico",
     "epr": "EPR - Entrenador de Pares en Recuperación",
@@ -47,6 +47,8 @@
     "certificados": "Profesionales certificados",
     "paises": "Países de Latinoamérica",
     "anos": "Años de experiencia",
+    "aniversarioEyebrow": "Aniversario",
+    "aniversarioDesde": "Formando y certificando profesionales en adicciones desde 2001, en toda Latinoamérica.",
     "estandarInternacional": "Estándar internacional",
     "certificacionesOtorgadas": "Certificaciones otorgadas",
     "sobreNosostros": "Sobre Nosotros",

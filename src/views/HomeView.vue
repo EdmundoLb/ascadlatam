@@ -82,7 +82,28 @@
     </div>
   </section>
 
-  
+  <!-- ANIVERSARIO 25 AÑOS -->
+  <section class="anniversary-section">
+    <div class="container">
+      <div ref="anniversaryEl" class="anniversary-card animate-on-scroll">
+        <div class="anniversary-ring">
+          <svg class="anniversary-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="54" />
+            <circle ref="ringProgressEl" class="ring-progress" cx="60" cy="60" r="54" />
+          </svg>
+          <div class="anniversary-number" aria-hidden="true">
+            <span ref="anniversaryCounterEl">0</span><span class="anniversary-plus">+</span>
+          </div>
+          <span class="sr-only">25</span>
+        </div>
+        <div class="anniversary-text">
+          <div class="anniversary-eyebrow">{{ $t('home.aniversarioEyebrow') }}</div>
+          <h3 class="anniversary-title">{{ $t('home.anos') }}</h3>
+          <p class="anniversary-since">{{ $t('home.aniversarioDesde') }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ABOUT -->
   <section class="section about-section animate-on-scroll">
@@ -354,7 +375,7 @@
 <script setup>
 import { useCertificacionesStore } from '@/stores/certificaciones'
 import { storeToRefs } from 'pinia'
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { levelIcons } from '@/data/certificaciones'
 
 const store = useCertificacionesStore()
@@ -366,6 +387,41 @@ const observerOptions = {
 }
 
 let scrollObserver = null
+let anniversaryObserver = null
+
+const anniversaryEl = ref(null)
+const anniversaryCounterEl = ref(null)
+const ringProgressEl = ref(null)
+
+const ANNIVERSARY_YEARS = 25
+const RING_CIRCUMFERENCE = 2 * Math.PI * 54
+
+function animateAnniversary() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (prefersReducedMotion) {
+    if (anniversaryCounterEl.value) anniversaryCounterEl.value.textContent = String(ANNIVERSARY_YEARS)
+    if (ringProgressEl.value) ringProgressEl.value.style.strokeDashoffset = '0'
+    return
+  }
+
+  const duration = 1800
+  const start = performance.now()
+
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1)
+    const eased = 1 - Math.pow(1 - progress, 3)
+    if (anniversaryCounterEl.value) {
+      anniversaryCounterEl.value.textContent = String(Math.round(eased * ANNIVERSARY_YEARS))
+    }
+    if (ringProgressEl.value) {
+      ringProgressEl.value.style.strokeDashoffset = String(RING_CIRCUMFERENCE * (1 - eased))
+    }
+    if (progress < 1) requestAnimationFrame(tick)
+  }
+
+  requestAnimationFrame(tick)
+}
 
 onMounted(() => {
   scrollObserver = new IntersectionObserver((entries) => {
@@ -380,12 +436,28 @@ onMounted(() => {
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
     scrollObserver.observe(el)
   })
+
+  if (anniversaryEl.value) {
+    anniversaryObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateAnniversary()
+          anniversaryObserver.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.4 })
+    anniversaryObserver.observe(anniversaryEl.value)
+  }
 })
 
 onUnmounted(() => {
   if (scrollObserver) {
     scrollObserver.disconnect()
     scrollObserver = null
+  }
+  if (anniversaryObserver) {
+    anniversaryObserver.disconnect()
+    anniversaryObserver = null
   }
 })
 </script>
@@ -660,6 +732,116 @@ onUnmounted(() => {
   width: 160px;
   height: 160px;
   object-fit: contain;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ANIVERSARIO */
+.anniversary-section { padding: 56px 0 0; }
+.anniversary-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 60%, var(--primary-dark) 100%);
+  border-radius: var(--radius-xl);
+  padding: 48px 56px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.anniversary-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 12% 25%, rgba(201,168,76,0.25) 0%, transparent 55%);
+  pointer-events: none;
+}
+.anniversary-ring {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.anniversary-ring::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.35);
+  animation: pulse-ring 2.5s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 0.05; }
+}
+.anniversary-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.15);
+  stroke-width: 6;
+}
+.ring-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 339.292;
+  stroke-dashoffset: 339.292;
+  filter: drop-shadow(0 0 6px rgba(201,168,76,0.6));
+}
+.anniversary-number {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: var(--white);
+}
+.anniversary-plus { font-size: 1.25rem; color: var(--accent); }
+.anniversary-text { color: var(--white); position: relative; z-index: 1; }
+.anniversary-eyebrow {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.anniversary-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--white);
+}
+.anniversary-since {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  max-width: 520px;
 }
 
 /* ABOUT */
@@ -1062,6 +1244,8 @@ onUnmounted(() => {
   .cultural-title { font-size: 2rem; }
   .scroll-indicator { bottom: 24px; }
   .standards-grid { grid-template-columns: repeat(2, 1fr); }
+  .anniversary-card { flex-direction: column; text-align: center; padding: 40px 28px; gap: 24px; }
+  .anniversary-since { max-width: 100%; }
 }
 @media (max-width: 480px) {
   .hero-actions { flex-direction: column; }
@@ -1090,6 +1274,9 @@ onUnmounted(() => {
   .hero-content {
     animation: none;
     opacity: 1;
+  }
+  .anniversary-ring::after {
+    animation: none;
   }
 }
 </style>

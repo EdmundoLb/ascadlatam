@@ -1,8 +1,8 @@
 const content = {
   es: {
     origins: [
-      { year: '2004', label: 'Creación del consorcio<br>en Costa Rica' },
-      { year: '2019', label: 'Evolución formal<br>a ASCAD LATAM' },
+      { year: '2001', label: 'Creación del consorcio<br>en Costa Rica' },
+      { year: '2018', label: 'Evolución formal<br>a ASCAD LATAM' },
       { year: 'ES + PT', label: 'Certificaciones en<br>español y portugués' },
     ],
     levels: [
@@ -22,8 +22,8 @@ const content = {
   },
   pt: {
     origins: [
-      { year: '2004', label: 'Criação do consórcio<br>na Costa Rica' },
-      { year: '2019', label: 'Evolução formal<br>para ASCAD LATAM' },
+      { year: '2001', label: 'Criação do consórcio<br>na Costa Rica' },
+      { year: '2018', label: 'Evolução formal<br>para ASCAD LATAM' },
       { year: 'ES + PT', label: 'Certificações em<br>espanhol e português' },
     ],
     levels: [
