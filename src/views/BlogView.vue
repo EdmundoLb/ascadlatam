@@ -20,7 +20,7 @@
               class="cat-btn"
               :class="{ active: activeCategory === cat }"
               @click="changeCategory(cat)"
-            >{{ cat }}</button>
+            >{{ $t(`blog.categories.${categoryLabelKeys[cat]}`) }}</button>
           </div>
           <div class="blog-search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -30,7 +30,7 @@
               type="search"
               v-model="searchQuery"
               :placeholder="$t('blog.buscar') || 'Buscar artículos...'"
-              aria-label="Buscar artículos"
+              :aria-label="$t('blog.buscarAriaLabel')"
             />
           </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="blog-img">{{ post.emoji }}</div>
             <div class="blog-body">
               <div class="blog-meta">
-                <span class="blog-cat">{{ post.category }}</span>
+                <span class="blog-cat">{{ $t(`blog.categories.${categoryLabelKeys[post.category]}`) }}</span>
                 <span class="blog-date">{{ post.date }}</span>
               </div>
               <h3>{{ post.title }}</h3>
@@ -63,7 +63,7 @@
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
-          <p>{{ searchQuery ? 'No se encontraron artículos para tu búsqueda.' : 'No hay publicaciones en esta categoría todavía.' }}</p>
+          <p>{{ searchQuery ? $t('blog.sinResultadosBusqueda') : $t('blog.sinPublicaciones') }}</p>
         </div>
 
         <Pagination
@@ -78,7 +78,7 @@
     <Teleport to="body">
       <div v-if="selectedPost" class="post-modal-overlay" @click.self="closePost">
         <div class="post-modal" role="dialog" aria-modal="true" :aria-label="selectedPost.title">
-          <button class="modal-close" @click="closePost" aria-label="Cerrar">
+          <button class="modal-close" @click="closePost" :aria-label="$t('common.close')">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
@@ -86,7 +86,7 @@
           <div class="post-modal-header">
             <div class="blog-img-modal">{{ selectedPost.emoji }}</div>
             <div class="post-modal-meta">
-              <span class="blog-cat">{{ selectedPost.category }}</span>
+              <span class="blog-cat">{{ $t(`blog.categories.${categoryLabelKeys[selectedPost.category]}`) }}</span>
               <span class="blog-date">{{ selectedPost.date }}</span>
             </div>
             <h2>{{ selectedPost.title }}</h2>
@@ -95,10 +95,10 @@
             <p>{{ selectedPost.content || selectedPost.excerpt }}</p>
             <div class="post-cta">
               <router-link to="/solicitud" class="btn btn-gold" @click="closePost">
-                Iniciar mi certificación
+                {{ $t('directorio.ctaIniciar') }}
               </router-link>
               <router-link to="/contacto" class="btn btn-outline" @click="closePost">
-                Más información
+                {{ $t('certificaciones.masInfo') }}
               </router-link>
             </div>
           </div>
@@ -110,11 +110,14 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import { blogPosts, blogCategories } from '@/data/blog'
+import { useI18n } from 'vue-i18n'
+import { getBlogPosts, blogCategories, categoryLabelKeys } from '@/data/blog'
 import Pagination from '@/components/ui/Pagination.vue'
 
+const { locale } = useI18n()
+
 const categories = blogCategories
-const posts = blogPosts
+const posts = computed(() => getBlogPosts(locale.value))
 
 const activeCategory = ref('Todas')
 const searchQuery = ref('')
@@ -123,7 +126,7 @@ const postsPerPage = 6
 const selectedPost = ref(null)
 
 const filteredPosts = computed(() => {
-  let result = posts
+  let result = posts.value
 
   if (activeCategory.value !== 'Todas') {
     result = result.filter(p => p.category === activeCategory.value)

@@ -4,7 +4,7 @@
       class="page-btn"
       :disabled="currentPage === 1"
       @click="$emit('page-change', currentPage - 1)"
-      aria-label="Página anterior"
+      :aria-label="$t('common.paginaAnterior')"
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="15 18 9 12 15 6"/>
@@ -26,7 +26,7 @@
       class="page-btn"
       :disabled="currentPage === totalPages"
       @click="$emit('page-change', currentPage + 1)"
-      aria-label="Página siguiente"
+      :aria-label="$t('common.paginaSiguiente')"
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="9 18 15 12 9 6"/>

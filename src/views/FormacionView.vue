@@ -2,10 +2,10 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Formación Académica y Continua</div>
-        <h1>Bienvenido al Futuro de la<br><em class="gold">Educación en Adicciones</em></h1>
+        <div class="eyebrow">{{ $t('formacion.heroEyebrow') }}</div>
+        <h1>{{ $t('formacion.heroTituloPre') }}<br><em class="gold">{{ $t('formacion.heroTituloEm') }}</em></h1>
         <p class="lead" style="margin-top:18px;">
-          Formamos profesionales comprometidos con la transformación de vidas a través de la recuperación, la salud mental y el tratamiento basado en evidencia.
+          {{ $t('formacion.heroLead') }}
         </p>
       </div>
     </section>
@@ -13,7 +13,7 @@
     <section class="intro-section section">
       <div class="container">
         <div class="intro-content">
-          <p>Nuestros programas académicos y de capacitación continua brinda las herramientas necesarias para desarrollar competencias especializadas en la atención de personas afectadas por trastornos por uso de sustancias (TUS) y otros desafíos relacionados con la salud mental.</p>
+          <p>{{ $t('formacion.introTexto') }}</p>
         </div>
       </div>
     </section>
@@ -21,35 +21,35 @@
     <section class="section certifications-section">
       <div class="container">
         <div class="section-header">
-          <span class="badge">Programas de Certificación</span>
-          <h2>Certificaciones Profesionales</h2>
+          <span class="badge">{{ $t('formacion.certBadge') }}</span>
+          <h2>{{ $t('formacion.certTitulo') }}</h2>
         </div>
 
         <div class="program-card">
           <div class="program-header">
-            <h3>Consejería en Alcohol y Otras Drogas</h3>
-            <p>Programa diseñado para desarrollar competencias profesionales en consejería especializada para personas afectadas por trastornos por uso de sustancias.</p>
+            <h3>{{ $t('formacion.programas.consejeriaTitulo') }}</h3>
+            <p>{{ $t('formacion.programas.consejeriaDesc') }}</p>
           </div>
           <div class="program-levels">
             <div class="level-item">
               <div class="level-icon">I</div>
               <div class="level-info">
-                <h4>Nivel 1: Consejería Inicial</h4>
-                <p>Fundamentos de la consejería en adicciones y primeros auxilios psicológicos.</p>
+                <h4>{{ $t('formacion.programas.consejeriaNivel1Titulo') }}</h4>
+                <p>{{ $t('formacion.programas.consejeriaNivel1Desc') }}</p>
               </div>
             </div>
             <div class="level-item">
               <div class="level-icon">II</div>
               <div class="level-info">
-                <h4>Nivel 2: Consejería Estructurada</h4>
-                <p>Desarrollo de habilidades terapéuticas y técnicas de intervención avanzada.</p>
+                <h4>{{ $t('formacion.programas.consejeriaNivel2Titulo') }}</h4>
+                <p>{{ $t('formacion.programas.consejeriaNivel2Desc') }}</p>
               </div>
             </div>
             <div class="level-item">
               <div class="level-icon">III</div>
               <div class="level-info">
-                <h4>Nivel 3: Consejería Avanzada</h4>
-                <p>Especialización en casos complejos y supervisión de procesos clínicos.</p>
+                <h4>{{ $t('formacion.programas.consejeriaNivel3Titulo') }}</h4>
+                <p>{{ $t('formacion.programas.consejeriaNivel3Desc') }}</p>
               </div>
             </div>
           </div>
@@ -57,38 +57,38 @@
 
         <div class="program-card">
           <div class="program-header">
-            <h3>Operador Socio Terapéutico en Alcohol y Otras Drogas</h3>
-            <p>Formación orientada al desarrollo de habilidades para el acompañamiento terapéutico y la recuperación integral.</p>
+            <h3>{{ $t('formacion.programas.operadorTitulo') }}</h3>
+            <p>{{ $t('formacion.programas.operadorDesc') }}</p>
           </div>
           <div class="program-roles">
-            <p class="roles-title">Los egresados podrán desempeñarse como:</p>
+            <p class="roles-title">{{ $t('formacion.programas.operadorRolesTitulo') }}</p>
             <ul class="roles-list">
-              <li>Asistente de Consejería</li>
-              <li>Asistente de Pacientes</li>
-              <li>Educador</li>
-              <li>Monitor Terapéutico</li>
+              <li>{{ $t('formacion.programas.operadorRol1') }}</li>
+              <li>{{ $t('formacion.programas.operadorRol2') }}</li>
+              <li>{{ $t('formacion.programas.operadorRol3') }}</li>
+              <li>{{ $t('formacion.programas.operadorRol4') }}</li>
             </ul>
           </div>
         </div>
 
         <div class="program-card">
           <div class="program-header">
-            <h3>Entrenador de Pares</h3>
-            <p>Capacitación especializada para personas con experiencia en recuperación que desean acompañar y orientar a otros en su proceso de cambio y crecimiento personal.</p>
+            <h3>{{ $t('formacion.programas.entrenadorParesTitulo') }}</h3>
+            <p>{{ $t('formacion.programas.entrenadorParesDesc') }}</p>
           </div>
         </div>
 
         <div class="program-card">
           <div class="program-header">
-            <h3>Entrenador de Recuperación</h3>
-            <p>Programa enfocado en la gestión y acompañamiento de procesos de recuperación a largo plazo, fortaleciendo la autonomía y el bienestar de las personas atendidas.</p>
+            <h3>{{ $t('formacion.programas.entrenadorRecuperacionTitulo') }}</h3>
+            <p>{{ $t('formacion.programas.entrenadorRecuperacionDesc') }}</p>
           </div>
         </div>
 
         <div class="program-card">
           <div class="program-header">
-            <h3>Supervisor de Recursos Humanos en Tratamiento y Recuperación</h3>
-            <p>Formación especializada para la supervisión, liderazgo y desarrollo de equipos de trabajo en organizaciones, centros de tratamiento y programas de recuperación.</p>
+            <h3>{{ $t('formacion.programas.supervisorTitulo') }}</h3>
+            <p>{{ $t('formacion.programas.supervisorDesc') }}</p>
           </div>
         </div>
       </div>
@@ -97,9 +97,9 @@
     <section class="section specialized-section">
       <div class="container">
         <div class="section-header">
-          <span class="badge">Programas Avanzados</span>
-          <h2>Formación y Entrenamiento Especializado</h2>
-          <p class="section-subtitle">Programas avanzados diseñados para fortalecer competencias específicas en áreas de alta demanda profesional.</p>
+          <span class="badge">{{ $t('formacion.especializadosBadge') }}</span>
+          <h2>{{ $t('formacion.especializadosTitulo') }}</h2>
+          <p class="section-subtitle">{{ $t('formacion.especializadosSubtitulo') }}</p>
         </div>
 
         <div class="specialized-grid">
@@ -109,7 +109,7 @@
                 <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
               </svg>
             </div>
-            <h4>Manejo de Trauma y Programas Receptivos al Trauma</h4>
+            <h4>{{ $t('formacion.especializados.item1') }}</h4>
           </div>
           <div class="specialized-item">
             <div class="specialized-icon">
@@ -117,7 +117,7 @@
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
             </div>
-            <h4>Tratamiento de Mujeres con Trastorno por Uso de Sustancias (TUS)</h4>
+            <h4>{{ $t('formacion.especializados.item2') }}</h4>
           </div>
           <div class="specialized-item">
             <div class="specialized-icon">
@@ -125,7 +125,7 @@
                 <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
               </svg>
             </div>
-            <h4>Protocolo de Sesiones para la Transición al Tratamiento del TUS</h4>
+            <h4>{{ $t('formacion.especializados.item3') }}</h4>
           </div>
           <div class="specialized-item">
             <div class="specialized-icon">
@@ -133,7 +133,7 @@
                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/>
               </svg>
             </div>
-            <h4>Protocolo de Sesiones para la Transición a la Recuperación: de la Atención Clínica a la Autogestión</h4>
+            <h4>{{ $t('formacion.especializados.item4') }}</h4>
           </div>
           <div class="specialized-item">
             <div class="specialized-icon">
@@ -141,7 +141,7 @@
                 <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
               </svg>
             </div>
-            <h4>Protocolo de Sesiones: Habilidades y Autocuidado en los Primeros 5 Años de Recuperación</h4>
+            <h4>{{ $t('formacion.especializados.item5') }}</h4>
           </div>
           <div class="specialized-item">
             <div class="specialized-icon">
@@ -149,7 +149,7 @@
                 <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
               </svg>
             </div>
-            <h4>Facilitación de Consejería en la Gestión Terapéutica de los 12 Pasos</h4>
+            <h4>{{ $t('formacion.especializados.item6') }}</h4>
           </div>
         </div>
       </div>
@@ -158,9 +158,9 @@
     <section class="section continuing-section">
       <div class="container">
         <div class="section-header">
-          <span class="badge">Actualización Profesional</span>
-          <h2>Educación Continua y Actualización Profesional</h2>
-          <p class="section-subtitle">Manténgase actualizado con las mejores prácticas y enfoques innovadores en recuperación, salud mental y tratamiento de adicciones.</p>
+          <span class="badge">{{ $t('formacion.continuaBadge') }}</span>
+          <h2>{{ $t('formacion.continuaTitulo') }}</h2>
+          <p class="section-subtitle">{{ $t('formacion.continuaSubtitulo') }}</p>
         </div>
 
         <div class="topics-grid">
@@ -170,7 +170,7 @@
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
               </svg>
             </span>
-            <span>Manejo del Duelo, Depresión, Ansiedad, Ira, Vergüenza y Culpa</span>
+            <span>{{ $t('formacion.temas.item1') }}</span>
           </div>
           <div class="topic-item">
             <span class="topic-icon">
@@ -178,7 +178,7 @@
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
               </svg>
             </span>
-            <span>Autoestima y Autocompasión</span>
+            <span>{{ $t('formacion.temas.item2') }}</span>
           </div>
           <div class="topic-item">
             <span class="topic-icon">
@@ -186,7 +186,7 @@
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
               </svg>
             </span>
-            <span>Introducción al Tratamiento del TUS</span>
+            <span>{{ $t('formacion.temas.item3') }}</span>
           </div>
           <div class="topic-item">
             <span class="topic-icon">
@@ -194,7 +194,7 @@
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
               </svg>
             </span>
-            <span>Rompimiento de Conductas de Riesgo</span>
+            <span>{{ $t('formacion.temas.item4') }}</span>
           </div>
           <div class="topic-item">
             <span class="topic-icon">
@@ -202,7 +202,7 @@
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
             </span>
-            <span>Sociabilización y Reinserción Social</span>
+            <span>{{ $t('formacion.temas.item5') }}</span>
           </div>
           <div class="topic-item">
             <span class="topic-icon">
@@ -210,7 +210,7 @@
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
             </span>
-            <span>Prevención de Recaídas para Adolescentes, Adultos y Mujeres</span>
+            <span>{{ $t('formacion.temas.item6') }}</span>
           </div>
           <div class="topic-item">
             <span class="topic-icon">
@@ -218,7 +218,7 @@
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
               </svg>
             </span>
-            <span>Manejo de Trastornos Concurrentes en Recuperación</span>
+            <span>{{ $t('formacion.temas.item7') }}</span>
           </div>
           <div class="topic-item">
             <span class="topic-icon">
@@ -226,7 +226,7 @@
                 <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
               </svg>
             </span>
-            <span>Mindfulness y Prevención de Recaídas</span>
+            <span>{{ $t('formacion.temas.item8') }}</span>
           </div>
         </div>
       </div>
@@ -235,8 +235,8 @@
     <section class="section modalities-section">
       <div class="container">
         <div class="section-header">
-          <span class="badge">Modalidades</span>
-          <h2>Modalidades de Estudio</h2>
+          <span class="badge">{{ $t('formacion.modalidadesBadge') }}</span>
+          <h2>{{ $t('formacion.modalidadesTitulo') }}</h2>
         </div>
 
         <div class="modalities-grid">
@@ -246,8 +246,8 @@
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
             </div>
-            <h4>Modalidad Presencial</h4>
-            <p>Aprendizaje directo con docentes y compañeros en entornos educativos especializados.</p>
+            <h4>{{ $t('formacion.presencialTitulo') }}</h4>
+            <p>{{ $t('formacion.presencialDesc') }}</p>
           </div>
           <div class="modality-card">
             <div class="modality-icon">
@@ -255,23 +255,23 @@
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
               </svg>
             </div>
-            <h4>Modalidad Virtual</h4>
-            <p>Flexibilidad para estudiar desde cualquier lugar con acceso a recursos digitales interactivos.</p>
+            <h4>{{ $t('formacion.virtualTitulo') }}</h4>
+            <p>{{ $t('formacion.virtualDesc') }}</p>
           </div>
         </div>
 
         <div class="features-list">
           <div class="feature-item">
             <span class="feature-check">✓</span>
-            <span>Formación especializada basada en evidencia científica</span>
+            <span>{{ $t('formacion.features.item1') }}</span>
           </div>
           <div class="feature-item">
             <span class="feature-check">✓</span>
-            <span>Enfoque integral en recuperación, salud mental y tratamiento de adicciones</span>
+            <span>{{ $t('formacion.features.item2') }}</span>
           </div>
           <div class="feature-item">
             <span class="feature-check">✓</span>
-            <span>Docentes con experiencia clínica, comunitaria y académica</span>
+            <span>{{ $t('formacion.features.item3') }}</span>
           </div>
         </div>
       </div>
@@ -280,10 +280,10 @@
     <section class="section cta-section">
       <div class="container">
         <div class="cta-content">
-          <h2>Impulse Su Carrera Profesional</h2>
-          <p>Mejore sus habilidades, fortalezca su currículo y amplíe sus oportunidades laborales mediante programas de formación reconocidos y orientados a las necesidades actuales del campo de la recuperación y la salud mental.</p>
-          <div class="cta-tagline">Transformando vidas a través de la educación, la recuperación y la excelencia profesional.</div>
-          <RouterLink to="/contacto" class="cta-button">Contáctenos</RouterLink>
+          <h2>{{ $t('formacion.ctaTitulo') }}</h2>
+          <p>{{ $t('formacion.ctaTexto') }}</p>
+          <div class="cta-tagline">{{ $t('formacion.ctaTagline') }}</div>
+          <RouterLink to="/contacto" class="cta-button">{{ $t('formacion.ctaBoton') }}</RouterLink>
         </div>
       </div>
     </section>

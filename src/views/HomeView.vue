@@ -45,7 +45,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">6</span>
                 </div>
-                <span class="stat-short-label" title="OST, EPR, CCAAD I, CCAAD II, CCAAD III, CCAAD IV">{{ $t('home.anos') }}</span>
+                <span class="stat-short-label" title="OST, EPR, CCAAD I, CCAAD II, CCAAD III, CCAAD IV">{{ $t('home.niveles') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -56,7 +56,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">TAP 21</span>
                 </div>
-                <span class="stat-short-label" title="Treatment Accessibility Protocol 21">{{ $t('home.anos') }}</span>
+                <span class="stat-short-label" title="Treatment Accessibility Protocol 21">{{ $t('home.estandarInternacional') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -67,7 +67,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">TIP 64</span>
                 </div>
-                <span class="stat-short-label" title="Treatment Improvement Protocol 64">{{ $t('home.anos') }}</span>
+                <span class="stat-short-label" title="Treatment Improvement Protocol 64">{{ $t('home.estandarInternacional') }}</span>
               </div>
             </div>
           </div>

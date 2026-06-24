@@ -26,12 +26,12 @@
 
         <div class="directory-cta">
           <div class="cta-content">
-            <h3>¿Sos profesional de la salud o las ciencias sociales?</h3>
-            <p>Obtené tu certificación internacional y forma parte de la red de profesionales certificados más grande de América Latina.</p>
+            <h3>{{ $t('directorio.ctaPregunta') }}</h3>
+            <p>{{ $t('directorio.ctaTexto') }}</p>
           </div>
           <div class="cta-actions">
-            <router-link to="/solicitud" class="btn btn-gold btn-lg">Iniciar mi certificación</router-link>
-            <router-link to="/certificaciones" class="btn btn-outline btn-lg">Ver certificaciones</router-link>
+            <router-link to="/solicitud" class="btn btn-gold btn-lg">{{ $t('directorio.ctaIniciar') }}</router-link>
+            <router-link to="/certificaciones" class="btn btn-outline btn-lg">{{ $t('directorio.ctaVerCertificaciones') }}</router-link>
           </div>
         </div>
 
@@ -116,8 +116,8 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             ASCAD/LATAM
           </div>
-          <h2>Asociación Latinoamericana para la<br><em class="gold">Certificación y Acreditación de Consejeros en Adicciones</em></h2>
-          <p>La Certificación Internacional ASCAD/LATAM representa una oportunidad estratégica para que los países miembros fortalezcan sus sistemas nacionales de atención mediante la profesionalización del talento humano, la certificación basada en competencias y la implementación de estándares internacionales reconocidos.</p>
+          <h2>{{ $t('directorio.asociacionTituloPre') }}<br><em class="gold">{{ $t('directorio.asociacionTituloEm') }}</em></h2>
+          <p>{{ $t('etica.redLatinoamericanaDesc3') }}</p>
           <div class="ascad-features">
             <div class="ascad-feature">
               <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>

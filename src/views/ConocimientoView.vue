@@ -2,10 +2,10 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Centro de Conocimiento</div>
-        <h1>Recursos de aprendizaje y<br><em class="gold">consulta</em></h1>
+        <div class="eyebrow">{{ $t('conocimiento.heroEyebrow') }}</div>
+        <h1>{{ $t('conocimiento.heroTituloPre') }}<br><em class="gold">{{ $t('conocimiento.heroTituloEm') }}</em></h1>
         <p class="lead" style="margin-top:18px;">
-          Accedé de forma organizada a contenidos educativos, materiales de apoyo y herramientas de capacitación en adicciones.
+          {{ $t('conocimiento.heroLead') }}
         </p>
       </div>
     </section>
@@ -14,8 +14,8 @@
     <section class="section featured-section">
       <div class="container">
         <div class="section-header">
-          <div class="eyebrow">Recursos destacados</div>
-          <h2>Contenido <em class="gold">recomendado</em></h2>
+          <div class="eyebrow">{{ $t('conocimiento.destacadosEyebrow') }}</div>
+          <h2>{{ $t('conocimiento.destacadosTituloPre') }} <em class="gold">{{ $t('conocimiento.destacadosTituloEm') }}</em></h2>
         </div>
         <div class="featured-grid">
           <article v-for="item in featuredItems" :key="item.id" class="featured-card">
@@ -50,8 +50,8 @@
         <!-- Biblioteca Tab -->
         <div v-if="activeTab === 'biblioteca'" class="tab-content">
           <div class="biblioteca-intro">
-            <h3>Biblioteca de Contenidos</h3>
-            <p>Guías, manuales, artículos especializados y casos de éxito para profundizar tu conocimiento en adicciones.</p>
+            <h3>{{ $t('conocimiento.bibliotecaTitulo') }}</h3>
+            <p>{{ $t('conocimiento.bibliotecaDesc') }}</p>
           </div>
           <div class="library-grid">
             <div v-for="item in libraryItems" :key="item.id" class="library-card">
@@ -60,7 +60,7 @@
               <div class="library-content">
                 <h4>{{ item.title }}</h4>
                 <p>{{ item.description }}</p>
-                <span class="library-count">{{ item.count }} recursos</span>
+                <span class="library-count">{{ item.count }} {{ $t('conocimiento.recursosSufijo') }}</span>
               </div>
             </div>
           </div>
@@ -69,8 +69,8 @@
         <!-- Infografías Tab -->
         <div v-if="activeTab === 'infografias'" class="tab-content">
           <div class="infografias-intro">
-            <h3>Infografías</h3>
-            <p>Representaciones visuales de procesos, niveles y competencias para facilitar la comprensión de conceptos clave.</p>
+            <h3>{{ $t('conocimiento.infografiasTitulo') }}</h3>
+            <p>{{ $t('conocimiento.infografiasDesc') }}</p>
           </div>
           <div class="infografias-grid">
             <div v-for="item in infografiasItems" :key="item.id" class="infografia-card" @click="openLightbox(item.image)">
@@ -93,14 +93,14 @@
           <button class="lightbox-close" @click="closeLightbox">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
-          <img :src="lightboxImage" alt="Infografía ampliada" @click.stop />
+          <img :src="lightboxImage" :alt="$t('conocimiento.infografiaAmpliadaAlt')" @click.stop />
         </div>
 
         <!-- Artículos Tab -->
         <div v-if="activeTab === 'articulos'" class="tab-content">
           <div class="articulos-intro">
-            <h3>Artículos Especializados</h3>
-            <p>Publicaciones de autores reconocidos sobre tendencias, investigaciones y mejores prácticas en el campo de las adicciones.</p>
+            <h3>{{ $t('conocimiento.articulosTitulo') }}</h3>
+            <p>{{ $t('conocimiento.articulosDesc') }}</p>
           </div>
           <div class="articulos-list">
             <article v-for="item in articulosItems" :key="item.id" class="articulo-card" :class="{ open: openArticleId === item.id }">
@@ -127,8 +127,8 @@
         <!-- Base de Conocimiento Tab -->
         <div v-if="activeTab === 'base'" class="tab-content">
           <div class="faq-intro">
-            <h3>Base de Conocimiento</h3>
-            <p>Preguntas frecuentes, buenas prácticas y documentación técnica para resolver tus dudas.</p>
+            <h3>{{ $t('conocimiento.faqTitulo') }}</h3>
+            <p>{{ $t('conocimiento.faqDesc') }}</p>
           </div>
           <div class="faq-grid">
             <div v-for="faq in faqItems" :key="faq.id" class="faq-card">
@@ -142,9 +142,9 @@
         <div v-if="activeTab === 'comunidad'" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <h3>Comunidad de Profesionales</h3>
-            <p>Foros de discusión, intercambio de experiencias y espacios de colaboración entre profesionales.</p>
-            <span class="coming-badge">Próximamente</span>
+            <h3>{{ $t('conocimiento.comunidadTitulo') }}</h3>
+            <p>{{ $t('conocimiento.comunidadDesc') }}</p>
+            <span class="coming-badge">{{ $t('conocimiento.proximamente') }}</span>
           </div>
         </div>
 
@@ -152,9 +152,9 @@
         <div v-if="activeTab === 'academia'" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-            <h3>Academia</h3>
-            <p>Programas de formación por niveles, evaluaciones y seguimiento de tu progreso de aprendizaje.</p>
-            <span class="coming-badge">Próximamente</span>
+            <h3>{{ $t('conocimiento.academiaTitulo') }}</h3>
+            <p>{{ $t('conocimiento.academiaDesc') }}</p>
+            <span class="coming-badge">{{ $t('conocimiento.proximamente') }}</span>
           </div>
         </div>
 
@@ -162,9 +162,9 @@
         <div v-if="activeTab === 'cursos'" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg></div>
-            <h3>Cursos y Capacitación</h3>
-            <p>Cursos en línea, rutas de aprendizaje, certificaciones y cápsulas de microlearning.</p>
-            <span class="coming-badge">Próximamente</span>
+            <h3>{{ $t('conocimiento.cursosTitulo') }}</h3>
+            <p>{{ $t('conocimiento.cursosDesc') }}</p>
+            <span class="coming-badge">{{ $t('conocimiento.proximamente') }}</span>
           </div>
         </div>
 
@@ -172,9 +172,9 @@
         <div v-if="activeTab === 'webinars'" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
-            <h3>Webinars y Eventos</h3>
-            <p>Próximos webinars, grabaciones de sesiones anteriores, calendario de actividades y registro.</p>
-            <span class="coming-badge">Próximamente</span>
+            <h3>{{ $t('conocimiento.webinarsTitulo') }}</h3>
+            <p>{{ $t('conocimiento.webinarsDesc') }}</p>
+            <span class="coming-badge">{{ $t('conocimiento.proximamente') }}</span>
           </div>
         </div>
       </div>
@@ -184,9 +184,9 @@
     <section class="section cta-knowledge">
       <div class="container">
         <div class="cta-inner">
-          <h2>¿No encontraste lo que buscabas?</h2>
-          <p>Contactá a nuestro equipo para resolver tus dudas o solicitar información específica.</p>
-          <router-link to="/contacto" class="btn btn-gold btn-lg">Contactanos</router-link>
+          <h2>{{ $t('conocimiento.ctaTitulo') }}</h2>
+          <p>{{ $t('conocimiento.ctaTexto') }}</p>
+          <router-link to="/contacto" class="btn btn-gold btn-lg">{{ $t('conocimiento.ctaBoton') }}</router-link>
         </div>
       </div>
     </section>
@@ -194,9 +194,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import info01 from '/images/optimized/info01.webp'
 import infor02 from '/images/optimized/infor02.webp'
+
+const { t } = useI18n()
 
 const activeTab = ref('articulos')
 const openArticleId = ref(null)
@@ -214,202 +217,166 @@ const closeLightbox = () => {
   lightboxImage.value = null
 }
 
-const tabs = [
-  { id: 'biblioteca', label: 'Biblioteca', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>' },
-  { id: 'infografias', label: 'Infografías', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>' },
-  { id: 'articulos', label: 'Artículos', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' },
-  { id: 'base', label: 'Base de Conocimiento', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' },
-  { id: 'comunidad', label: 'Comunidad', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
-  { id: 'academia', label: 'Academia', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>' },
-  { id: 'cursos', label: 'Cursos', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg>' },
-  { id: 'webinars', label: 'Webinars', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' },
-]
+const tabs = computed(() => [
+  { id: 'biblioteca', label: t('conocimiento.tabs.biblioteca'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>' },
+  { id: 'infografias', label: t('conocimiento.tabs.infografias'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>' },
+  { id: 'articulos', label: t('conocimiento.tabs.articulos'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' },
+  { id: 'base', label: t('conocimiento.tabs.base'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' },
+  { id: 'comunidad', label: t('conocimiento.tabs.comunidad'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+  { id: 'academia', label: t('conocimiento.tabs.academia'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>' },
+  { id: 'cursos', label: t('conocimiento.tabs.cursos'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg>' },
+  { id: 'webinars', label: t('conocimiento.tabs.webinars'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' },
+])
 
-const featuredItems = [
+const featuredItems = computed(() => [
   {
     id: 1,
     type: 'article',
-    typeLabel: 'Artículo',
-    title: 'Comprensión del Trastorno por Uso de Sustancias',
-    description: 'Fundamentos actualizados sobre la comprensión integral de las adicciones desde enfoques biopsicosociales.',
-    date: 'Mayo 2026',
+    typeLabel: t('conocimiento.featured.item1TypeLabel'),
+    title: t('conocimiento.featured.item1Title'),
+    description: t('conocimiento.featured.item1Description'),
+    date: t('conocimiento.featured.item1Date'),
     tag: 'TAP 21'
   },
   {
     id: 2,
     type: 'guide',
-    typeLabel: 'Guía',
-    title: 'Manual de Funciones del Operador Socioterapéutico',
-    description: 'Descripción detallada de las funciones, competencias y alcances del perfil OST en comunidades terapéuticas.',
-    date: 'Mayo 2026',
+    typeLabel: t('conocimiento.featured.item2TypeLabel'),
+    title: t('conocimiento.featured.item2Title'),
+    description: t('conocimiento.featured.item2Description'),
+    date: t('conocimiento.featured.item2Date'),
     tag: 'OST'
   },
   {
     id: 3,
     type: 'case',
-    typeLabel: 'Caso de Éxito',
-    title: 'Experiencias de Implementación en América Latina',
-    description: 'Casos reales de aplicación de estándares internacionales en contextos diversos de la región.',
-    date: 'Abril 2026',
+    typeLabel: t('conocimiento.featured.item3TypeLabel'),
+    title: t('conocimiento.featured.item3Title'),
+    description: t('conocimiento.featured.item3Description'),
+    date: t('conocimiento.featured.item3Date'),
     tag: 'Regional'
   }
-]
+])
 
-const libraryItems = [
+const libraryItems = computed(() => [
   {
     id: 1,
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
-    title: 'Guías y Manuales',
-    description: 'Documentos técnicos, protocolos y lineamentos para la práctica profesional.',
+    title: t('conocimiento.library.item1Title'),
+    description: t('conocimiento.library.item1Description'),
     count: 12
   },
   {
     id: 2,
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
-    title: 'E-books y Documentos',
-    description: 'Publicaciones digitales sobre competencias, estándares y mejores prácticas.',
+    title: t('conocimiento.library.item2Title'),
+    description: t('conocimiento.library.item2Description'),
     count: 8
   },
   {
     id: 3,
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
-    title: 'Infografías',
-    description: 'Representaciones visuales de procesos, niveles y competencias.',
+    title: t('conocimiento.library.item3Title'),
+    description: t('conocimiento.library.item3Description'),
     count: 15
   },
   {
     id: 4,
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
-    title: 'Casos de Éxito',
-    description: 'Experiencias reales de implementación y resultados obtenidos.',
+    title: t('conocimiento.library.item4Title'),
+    description: t('conocimiento.library.item4Description'),
     count: 6
   },
   {
     id: 5,
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>',
-    title: 'Artículos Especializados',
-    description: 'Publicaciones académicas y técnicas sobre adicciones y recuperación.',
+    title: t('conocimiento.library.item5Title'),
+    description: t('conocimiento.library.item5Description'),
     count: 24
   },
   {
     id: 6,
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>',
-    title: 'Entrevistas y Revistas',
-    description: 'Contenido audiovisual y publicaciones periódicas del consorcio.',
+    title: t('conocimiento.library.item6Title'),
+    description: t('conocimiento.library.item6Description'),
     count: 10
   }
-]
+])
 
-const faqItems = [
+const faqItems = computed(() => [
   {
     id: 1,
-    question: '¿Qué es ASCAD LATAM?',
-    answer: 'ASCAD LATAM es el Consorcio Latinoamericano de Certificación en Adicciones, una organización que establece estándares internacionales para la formación y certificación de profesionales en el campo de las adicciones en toda América Latina.'
+    question: t('conocimiento.faq.item1Question'),
+    answer: t('conocimiento.faq.item1Answer')
   },
   {
     id: 2,
-    question: '¿Cuáles son los niveles de certificación?',
-    answer: 'Existen 6 niveles: OST (Operador Socioterapéutico), ER (Entrenador de Recuperación), CCAAD I, CCAAD II, CCAAD III y CCAAD IV (Supervisor Profesional). Cada nivel tiene requisitos específicos de formación y experiencia.'
+    question: t('conocimiento.faq.item2Question'),
+    answer: t('conocimiento.faq.item2Answer')
   },
   {
     id: 3,
-    question: '¿Las certificaciones son reconocidas internacionalmente?',
-    answer: 'Sí, las certificaciones están basadas en estándares internacionales como TAP 21, TIP 64 y TIP 52 de SAMHSA (Substance Abuse and Mental Health Services Administration) de Estados Unidos.'
+    question: t('conocimiento.faq.item3Question'),
+    answer: t('conocimiento.faq.item3Answer')
   },
   {
     id: 4,
-    question: '¿Cuánto tiempo es válida la certificación?',
-    answer: 'La certificación ASCAD LATAM tiene validez de 2 años (bianual). Para renovar es necesario acumular horas de educación continua específicas por nivel y presentar la documentación de renovación.'
+    question: t('conocimiento.faq.item4Question'),
+    answer: t('conocimiento.faq.item4Answer')
   },
   {
     id: 5,
-    question: '¿Puedo trabajar en cualquier país de América Latina?',
-    answer: 'La certificación ASCAD LATAM está reconocida en los países miembros del Consorcio. Cada país puede tener requisitos adicionales de validación local.'
+    question: t('conocimiento.faq.item5Question'),
+    answer: t('conocimiento.faq.item5Answer')
   },
   {
     id: 6,
-    question: '¿Qué requisitos necesito para certificarme?',
-    answer: 'Los requisitos varían según el nivel. En general incluyen: formación académica mínima, horas de experiencia supervisada, horas de formación específica, avales profesionales, examen de certificación y firma del código de ética.'
+    question: t('conocimiento.faq.item6Question'),
+    answer: t('conocimiento.faq.item6Answer')
   }
-]
+])
 
-const infografiasItems = [
+const infografiasItems = computed(() => [
   {
     id: 1,
-    title: 'Equipo de Recuperación',
-    description: 'Conoce la composición y roles del equipo multidisciplinario que acompaña el proceso de recuperación.',
+    title: t('conocimiento.infografias.item1Title'),
+    description: t('conocimiento.infografias.item1Description'),
     image: info01
   },
   {
     id: 2,
-    title: 'Etapas de Afrontamiento',
-    description: 'Las fases del proceso de recuperación desde la intervención inicial hasta la integración social.',
+    title: t('conocimiento.infografias.item2Title'),
+    description: t('conocimiento.infografias.item2Description'),
     image: infor02
   }
-]
+])
 
-const articulosItems = [
+const articulosItems = computed(() => [
   {
     id: 1,
-    title: 'Desarrollando un Entorno de Cambio para el Especialista en Apoyo de Recuperación entre Pares',
+    title: t('conocimiento.articulos.item1Title'),
     author: 'Cynthia Moreno Tuohy',
-    credentials: 'NCAC II, CDC III, SAP, Directora Ejecutiva de NAADAC',
-    preview: 'La profesión de las adicciones se encuentra en un punto de quiebre. Actualmente, en Estados Unidos hay más personas que necesitan servicios de prevención, tratamiento y apoyo para la recuperación de las adicciones que profesionales disponibles para atender esas necesidades.',
-    content: `La profesión de las adicciones se encuentra en un punto de quiebre. Actualmente, en Estados Unidos hay más personas que necesitan servicios de prevención, tratamiento y apoyo para la recuperación de las adicciones que profesionales disponibles para atender esas necesidades. Esta escasez de personal especializado es grave y continuará aumentando en los próximos años.
-
-Según el Departamento de Trabajo de los Estados Unidos, la necesidad de profesionales de las adicciones crecerá un 20% para el año 2026. Este aumento responde tanto a factores negativos, como la epidemia de opioides, como a factores positivos, entre ellos: mayor concienciación pública sobre las adicciones, mayor acceso a los servicios gracias a la Ley de Paridad y la Ley de Cuidado de Salud Asequible, e incremento del financiamiento mediante leyes como la 21st Century Cures Act y la Comprehensive Addiction and Recovery Act.
-
-El papel de los Especialistas en Apoyo de Recuperación entre Pares (PRSS) es fundamental para enfrentar esta escasez. La Comisión Nacional de Certificación para Profesionales de las Adicciones (NCC AP) trabaja en establecer estándares nacionales mediante la credencial de Especialista Nacional Certificado en Apoyo de Recuperación entre Pares (NCPRSS) y consolidar esta figura como parte fundamental de la trayectoria profesional nacional.
-
-Los servicios que puede ofrecer un PRSS certificado incluyen: brindar apoyo individual para navegar sistemas de salud y grupos de apoyo mutuo, facilitar la incorporación de personas a grupos de apoyo, y conectar a los usuarios con recursos comunitarios relacionados con educación, empleo, vivienda, ropa, alimentación, transporte, cuidado infantil y redes de apoyo para egresados y recuperación.
-
-La credencial NCPRSS es valorada por organizaciones como Optum porque: es una certificación nacional con criterios uniformes, existe un expediente nacional de credenciales administrado por NCC AP y NAADAC, hay un Código Nacional de Ética específico, y los titulares pueden obtener seguros de responsabilidad profesional.
-
-Entre el trabajo pendiente se encuentran: fortalecer el reconocimiento nacional, ampliar los sistemas de reembolso, mejorar los sistemas de facturación, expandir el acceso a los servicios en agencias de salud mental, hospitales, salas de emergencia y centros comunitarios, e impulsar la investigación sobre la efectividad de los especialistas PRSS.
-
-La meta es construir un sistema nacional de Especialistas en Apoyo de Recuperación entre Pares que sea integral, estandarizado, calificado y reconocido profesionalmente, contribuyendo al bienestar y la salud de individuos, familias y comunidades.`
+    credentials: t('conocimiento.articulos.item1Credentials'),
+    preview: t('conocimiento.articulos.item1Preview'),
+    content: t('conocimiento.articulos.item1Content')
   },
   {
     id: 2,
-    title: 'Apoyo entre Pares Basado en la Diversidad Cultural',
+    title: t('conocimiento.articulos.item2Title'),
     author: 'Gonzalo Esquivel',
-    credentials: 'CCAD III, IV',
-    preview: 'Los trabajadores de apoyo entre pares son personas que han tenido éxito en su propio proceso de recuperación y que ayudan a otras personas durante el suyo.',
-    content: `Los trabajadores de apoyo entre pares son personas que han tenido éxito en su propio proceso de recuperación y que ayudan a otras personas durante el suyo. A través de la comprensión compartida, el respeto y el empoderamiento comunitario, estos trabajadores ayudan a que las personas permanezcan activas en su recuperación. El apoyo entre pares también puede reducir la probabilidad de recaída en quienes se encuentran en recuperación.
-
-La sensibilidad cultural es la capacidad de aprender de las personas y relacionarse respetuosamente tanto con individuos de la propia cultura como de otras culturas. En el contexto de la recuperación, implica brindar servicios que incorporen y respeten las creencias culturales de cada persona.
-
-Los trabajadores de apoyo entre pares realizan una amplia variedad de actividades: defender los intereses de las personas en recuperación, compartir recursos y habilidades para la vida, ayudar a construir comunidad y relaciones saludables, dirigir grupos de recuperación, orientar y acompañar a personas en recuperación, capacitar a otros trabajadores pares, supervisar programas y agencias de recuperación, y educar a responsables políticos sobre las necesidades de sus pares.
-
-Los trabajadores de apoyo entre pares deben desarrollar competencias culturales adicionales para brindar servicios imparciales a grupos específicos que comparten experiencias de recuperación, como diversas minorías. El sesgo implícito opera de manera interna pero puede manifestarse externamente en la prestación de servicios, influyendo en la toma de decisiones, la distribución de recursos, el acceso a apoyos comunitarios, la construcción de relaciones y la dirección de grupos de recuperación.
-
-Para reducir la discriminación y el estrés ambiental, los trabajadores deben: evitar proyectar percepciones propias y preguntar directamente cómo desea ser llamada la persona, garantizar acceso equitativo a recursos sin menospreciar los deseos de ninguna persona, procurar apoyo organizacional para que los trabajadores pares tengan acceso equitativo a recursos y financiamiento, asumir buenas intenciones al trabajar con otros profesionales, expresar preocupaciones de manera abierta cuando algo genere malestar, y evitar suposiciones culturales basadas en información insuficiente.
-
-Los valores culturales aprendidos influyen de manera inconsciente y pueden generar sesgos implícitos que reducen la efectividad de los apoyos de recuperación e incluso causar daño. Las prácticas culturalmente sensibles deben incorporarse de manera activa en el trabajo cotidiano de apoyo a la recuperación.`
+    credentials: t('conocimiento.articulos.item2Credentials'),
+    preview: t('conocimiento.articulos.item2Preview'),
+    content: t('conocimiento.articulos.item2Content')
   },
   {
     id: 3,
-    title: 'Entrenadores de Recuperación: Una Profesión Emergente',
+    title: t('conocimiento.articulos.item3Title'),
     author: 'James "Kansas" Cafferty',
-    credentials: 'LMFT, MAC, NCAAC, Presidente de NCC AP',
-    preview: 'En nuestro campo, que evoluciona constantemente, siempre hay algo nuevo que aprender. He tenido reacciones parecidas frente a un nuevo sector de nuestra profesión: el coaching de recuperación.',
-    content: `En nuestro campo, que evoluciona constantemente, siempre hay algo nuevo que aprender. Cuando comencé mi carrera, trabajaba con adolescentes y recuerdo que un consejero experimentado decía: "La consejería para adolescentes es fácil; solo hay que seguir las tres C: controlar, confrontar y aplicar consecuencias." Sin embargo, eso ocurrió antes de que las investigaciones sobre la entrevista motivacional transformaran nuestra comprensión del tratamiento.
-
-He tenido reacciones parecidas frente a un nuevo sector de nuestra profesión: el coaching de recuperación. Actualmente, el coaching de recuperación está ganando gran popularidad, especialmente en el sector privado. Mi reacción inicial fue de resistencia, principalmente porque era algo nuevo y no lo comprendía completamente.
-
-El problema de la falta de regulación me llevaba a rechazar la idea de que una persona con un trastorno por consumo de sustancias pudiera ser tratada sin confrontarla directamente. Comencé a recibir correos electrónicos promocionando capacitaciones para coaches de recuperación que ofrecían "certificaciones" sin contar con autoridad reguladora para emitirlas. Al final del día, todo lo que se necesita para ser un coach de recuperación independiente es un montón de tarjetas de presentación.
-
-Para comprender esta preocupación, NCC AP actualizó sus principales exámenes de certificación: National Certified Addiction Counselor Level I, National Certified Addiction Counselor Level II, Master Addiction Counselor (MAC), y desarrolló la certificación para Especialistas Nacionales en Apoyo de Recuperación entre Pares (NCPRSS).
-
-Un proceso basado en evidencia implica: analizar científicamente las tareas y competencias necesarias para ejercer, elaborar un "plano profesional" o blueprint, diseñar preguntas de examen alineadas con dicho plano, revisarlas con expertos y psicometristas, y realizar pruebas piloto para identificar preguntas problemáticas.
-
-El objetivo principal de NCC AP es proteger al público contra posibles daños. Los organismos certificadores actúan como una escudo que protege a las personas vulnerables que buscan ayuda. Quienes han demostrado competencia profesional son fácilmente identificables porque poseen credenciales reconocidas que respaldan sus conocimientos y habilidades.
-
-El coaching de recuperación ha llegado para quedarse. Sin embargo, en el campo de las adicciones se trata literalmente de cuestiones de vida o muerte. NCC AP ofrece colaborar con la industria del coaching de recuperación para ayudarla a desarrollar sistemas de acreditación, mecanismos de protección pública, estándares profesionales, reconocimiento legislativo y credibilidad ante financiadores y aseguradoras.
-
-La reflexión final es buscar una forma de llevar el coaching de recuperación independiente desde un concepto prometedor hasta una verdadera profesión.`
+    credentials: t('conocimiento.articulos.item3Credentials'),
+    preview: t('conocimiento.articulos.item3Preview'),
+    content: t('conocimiento.articulos.item3Content')
   }
-]
+])
 </script>
 
 <style scoped>

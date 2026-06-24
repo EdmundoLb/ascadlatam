@@ -2,10 +2,10 @@
   <div>
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Nuestra Historia</div>
-        <h1>ASCAD-LATAM</h1>
+        <div class="eyebrow">{{ $t('ascadlatam.heroEyebrow') }}</div>
+        <h1>{{ $t('ascadlatam.heroTitulo') }}</h1>
         <p class="lead" style="margin-top:18px;">
-          Liderando la certificación de competencias profesionales para la recuperación y el bienestar en América Latina.
+          {{ $t('ascadlatam.heroLead') }}
         </p>
       </div>
     </section>
@@ -14,7 +14,7 @@
       <div class="container">
         <div class="intro-content">
           <p class="intro-text">
-            ASCAD LATAM es una organización líder en América Latina dedicada al desarrollo, evaluación y certificación de competencias profesionales en los campos de las adicciones, la recuperación, el apoyo entre pares y los servicios de bienestar. Su labor se fundamenta en principios de ética, transparencia, excelencia profesional y estándares internacionales adaptados a la realidad latinoamericana.
+            {{ $t('ascadlatam.introTexto') }}
           </p>
         </div>
       </div>
@@ -24,41 +24,41 @@
       <div class="container">
         <div class="timeline">
           <div class="timeline-item">
-            <div class="timeline-year">2001</div>
+            <div class="timeline-year">{{ $t('ascadlatam.timeline.item1Anio') }}</div>
             <div class="timeline-content">
-              <h3>Inicio del Proyecto</h3>
+              <h3>{{ $t('ascadlatam.timeline.item1Titulo') }}</h3>
               <p>
-                Nuestra historia comenzó en Costa Rica en 2001 con la creación de ASCAD, una iniciativa pionera orientada a profesionalizar la atención de las adicciones mediante procesos de formación y certificación basados en competencias.
+                {{ $t('ascadlatam.timeline.item1Texto') }}
               </p>
             </div>
           </div>
 
           <div class="timeline-item">
-            <div class="timeline-year">2004</div>
+            <div class="timeline-year">{{ $t('ascadlatam.timeline.item2Anio') }}</div>
             <div class="timeline-content">
-              <h3>Hito Histórico Regional</h3>
+              <h3>{{ $t('ascadlatam.timeline.item2Titulo') }}</h3>
               <p>
-                En 2004 se alcanzó un hito histórico para la región cuando Costa Rica se convirtió en el primer país de América Latina en obtener la aprobación de un Manual Nacional de Certificación avalado por el International Certification & Reciprocity Consortium (IC&RC), posicionándose como referente regional en la evaluación y certificación de profesionales de la recuperación.
+                {{ $t('ascadlatam.timeline.item2Texto') }}
               </p>
             </div>
           </div>
 
           <div class="timeline-item">
-            <div class="timeline-year">2018</div>
+            <div class="timeline-year">{{ $t('ascadlatam.timeline.item3Anio') }}</div>
             <div class="timeline-content">
-              <h3>Nacimiento de ASCAD LATAM</h3>
+              <h3>{{ $t('ascadlatam.timeline.item3Titulo') }}</h3>
               <p>
-                Impulsada por este liderazgo y por una sólida red de alianzas internacionales, en 2018 nació ASCAD LATAM con el propósito de extender este modelo de calidad a toda América Latina, promoviendo sistemas de certificación culturalmente pertinentes y alineados con las mejores prácticas internacionales.
+                {{ $t('ascadlatam.timeline.item3Texto') }}
               </p>
             </div>
           </div>
 
           <div class="timeline-item">
-            <div class="timeline-year">Actual</div>
+            <div class="timeline-year">{{ $t('ascadlatam.timeline.item4Anio') }}</div>
             <div class="timeline-content">
-              <h3>Presente y Futuro</h3>
+              <h3>{{ $t('ascadlatam.timeline.item4Titulo') }}</h3>
               <p>
-                Actualmente, ASCAD LATAM desarrolla estándares de competencia y procesos de certificación para consejeros en adicciones, operadores en recuperación, entrenadores de recuperación (Recovery Coaches), supervisores internacionales y otros profesionales dedicados al acompañamiento de procesos de recuperación y bienestar.
+                {{ $t('ascadlatam.timeline.item4Texto') }}
               </p>
             </div>
           </div>
@@ -70,11 +70,11 @@
       <div class="container">
         <div class="closing-content">
           <p class="closing-text">
-            Hoy, ASCAD LATAM es un referente regional para quienes buscan validar sus competencias con integridad, credibilidad y rigor técnico, contribuyendo al fortalecimiento de una fuerza laboral más preparada, ética y comprometida con la recuperación y el bienestar de las comunidades latinoamericanas.
+            {{ $t('ascadlatam.closingTexto') }}
           </p>
           <div class="tagline">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>ASCAD LATAM: Liderando la certificación de competencias profesionales para la recuperación y el bienestar en América Latina.</span>
+            <span>{{ $t('ascadlatam.tagline') }}</span>
           </div>
         </div>
       </div>

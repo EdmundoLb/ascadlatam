@@ -164,45 +164,9 @@
           <p>{{ $t('etica.beneficiosPaisesDesc2') }}</p>
           <p>{{ $t('etica.beneficiosPaisesDesc3') }}</p>
           <ul class="benefits-list">
-            <li>
+            <li v-for="n in 10" :key="n">
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Acceso a un modelo regional de certificación reconocido internacionalmente.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Fortalecimiento de las capacidades técnicas del recurso humano especializado.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Estandarización de competencias profesionales en el campo de las adicciones.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Mejora continua de la calidad de los servicios de prevención, tratamiento y recuperación.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Integración a una red latinoamericana de intercambio de experiencias y buenas prácticas.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Acceso a programas permanentes de capacitación y actualización profesional.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Promoción de políticas y programas alineados con estándares internacionales.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Reconocimiento regional de las certificaciones obtenidas por los profesionales.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Mayor credibilidad y fortalecimiento institucional de las organizaciones participantes.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Desarrollo de sistemas de atención más eficientes, humanos y centrados en las personas.</span>
+              <span>{{ $t(`etica.beneficiosPaisesLista.item${n}`) }}</span>
             </li>
           </ul>
         </div>
@@ -213,33 +177,9 @@
           <p>{{ $t('etica.beneficiosInstitucionesDesc') }}</p>
           <p>{{ $t('etica.principalesBeneficiosInst') }}</p>
           <ul class="benefits-list">
-            <li>
+            <li v-for="n in 7" :key="n">
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Personal certificado bajo estándares internacionales.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Mejora en la calidad y efectividad de los servicios prestados.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Mayor confianza y credibilidad institucional.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Fortalecimiento de los procesos de supervisión clínica.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Desarrollo de una cultura organizacional orientada a la excelencia.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Reconocimiento nacional e internacional de las buenas prácticas.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Equipos de trabajo más competentes, comprometidos y actualizados.</span>
+              <span>{{ $t(`etica.beneficiosInstitucionesLista.item${n}`) }}</span>
             </li>
           </ul>
         </div>
@@ -250,37 +190,9 @@
           <p>{{ $t('etica.beneficiosProfesionalesDesc') }}</p>
           <p>{{ $t('etica.laCertificacionPermite') }}</p>
           <ul class="benefits-list">
-            <li>
+            <li v-for="n in 8" :key="n">
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Obtener reconocimiento profesional a nivel nacional e internacional.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Validar competencias mediante estándares objetivos y basados en evidencia.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Incrementar oportunidades laborales y de crecimiento profesional.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Acceder a procesos continuos de capacitación y actualización.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Integrarse a una red regional de profesionales certificados.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Fortalecer la práctica ética y la responsabilidad profesional.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Mejorar la calidad de la atención brindada a las personas en recuperación.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Desarrollar una ruta clara de crecimiento profesional dentro del sistema ASCAD/LATAM.</span>
+              <span>{{ $t(`etica.beneficiosProfesionalesLista.item${n}`) }}</span>
             </li>
           </ul>
         </div>
@@ -291,29 +203,9 @@
           <p>{{ $t('etica.beneficiosFamiliasDesc') }}</p>
           <p>{{ $t('etica.estoSeTraduce') }}</p>
           <ul class="benefits-list">
-            <li>
+            <li v-for="n in 6" :key="n">
               <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Atención más segura, ética y efectiva.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Intervenciones basadas en evidencia científica.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Mayor respeto por los derechos humanos y la dignidad de las personas.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Procesos de recuperación más estructurados y orientados a resultados.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Servicios de tratamiento con estándares verificables de calidad.</span>
-            </li>
-            <li>
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Mayor confianza de las familias en los programas de atención y recuperación.</span>
+              <span>{{ $t(`etica.beneficiosPersonasLista.item${n}`) }}</span>
             </li>
           </ul>
         </div>

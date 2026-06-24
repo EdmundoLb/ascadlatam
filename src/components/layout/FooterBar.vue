@@ -15,7 +15,7 @@
             </router-link>
             <p class="brand-desc">{{ $t('footer.brandDesc') }}</p>
             <div class="social-links">
-              <a href="#" :aria-label="'LinkedIn de ASCAD LATAM'" class="social-btn" target="_blank" rel="noopener noreferrer">
+              <a href="#" :aria-label="$t('footer.linkedinAriaLabel')" class="social-btn" target="_blank" rel="noopener noreferrer">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
             </div>
@@ -35,7 +35,7 @@
 
           <div class="footer-col">
             <h5>{{ $t('footer.explorar') }}</h5>
-            <nav aria-label="Navegación del footer">
+            <nav :aria-label="$t('footer.navFooter')">
               <ul>
                 <li><router-link to="/">{{ $t('nav.inicio') }}</router-link></li>
                 <li><router-link to="/certificaciones">{{ $t('nav.certificaciones') }}</router-link></li>

@@ -15,7 +15,7 @@
         </div>
       </router-link>
 
-      <nav class="desktop-nav" role="navigation" aria-label="Navegación principal">
+      <nav class="desktop-nav" role="navigation" :aria-label="$t('nav.navPrincipal')">
         <router-link to="/">{{ $t('nav.inicio') }}</router-link>
         <router-link to="/certificaciones">{{ $t('nav.certificaciones') }}</router-link>
         <router-link to="/etica">{{ $t('nav.etica') }}</router-link>
@@ -63,7 +63,7 @@
       class="mobile-menu"
       :class="{ open: menuOpen }"
       role="navigation"
-      aria-label="Menú móvil"
+      :aria-label="$t('nav.menuMovil')"
       @keydown.escape="closeMenu"
     >
       <router-link to="/" @click="closeMenu" tabindex="0">{{ $t('nav.inicio') }}</router-link>

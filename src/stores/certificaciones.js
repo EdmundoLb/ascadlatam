@@ -1,32 +1,51 @@
 import { defineStore } from 'pinia'
-import { origins, levels, stats, levelIcons } from '@/data/certificaciones'
-import { certificationsFull } from '@/data/certificacionesFull'
-import { formCertifications } from '@/data/solicitudForms'
+import { getOrigins, getLevels, getStats, levelIcons } from '@/data/certificaciones'
+import { getCertificationsFull } from '@/data/certificacionesFull'
+import { getFormCertifications } from '@/data/solicitudForms'
+import i18n from '@/i18n'
 
 export const useCertificacionesStore = defineStore('certificaciones', {
   state: () => ({
-    origins,
-    levels,
-    stats,
     levelIcons,
-    certifications: certificationsFull,
-    formCertifications,
   }),
 
   getters: {
-    getLevelByCode: (state) => (code) => {
-      return state.levels.find(l => l.code === code)
+    origins() {
+      return getOrigins(i18n.global.locale.value)
     },
-    getCertByCode: (state) => (code) => {
-      return state.certifications.find(c => c.code === code)
+    levels() {
+      return getLevels(i18n.global.locale.value)
     },
-    getFormCertByCode: (state) => (code) => {
-      return state.formCertifications.find(c => c.code === code)
+    stats() {
+      return getStats(i18n.global.locale.value)
     },
-    levelsCount: (state) => state.levels.length,
-    certificationsCount: (state) => state.certifications.length,
-    minFee: (state) => Math.min(...state.certifications.map(c => c.fee)),
-    maxFee: (state) => Math.max(...state.certifications.map(c => c.fee)),
+    certifications() {
+      return getCertificationsFull(i18n.global.locale.value)
+    },
+    formCertifications() {
+      return getFormCertifications(i18n.global.locale.value)
+    },
+    getLevelByCode() {
+      return (code) => this.levels.find(l => l.code === code)
+    },
+    getCertByCode() {
+      return (code) => this.certifications.find(c => c.code === code)
+    },
+    getFormCertByCode() {
+      return (code) => this.formCertifications.find(c => c.code === code)
+    },
+    levelsCount() {
+      return this.levels.length
+    },
+    certificationsCount() {
+      return this.certifications.length
+    },
+    minFee() {
+      return Math.min(...this.certifications.map(c => c.fee))
+    },
+    maxFee() {
+      return Math.max(...this.certifications.map(c => c.fee))
+    },
     getLevelIcon: (state) => (code) => {
       return state.levelIcons[code] || state.levelIcons['OST']
     },

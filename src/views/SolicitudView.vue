@@ -187,7 +187,7 @@
                     </div>
                     <div class="form-group">
                       <label>{{ $t('solicitud.institucionPrograma') }}</label>
-                      <input type="text" name="institucion" placeholder="Centro o programa actual" />
+                      <input type="text" name="institucion" :placeholder="$t('solicitud.placeholders.institucion')" />
                     </div>
                     <div class="form-group" v-for="horas in cert.horasFields" :key="horas.name">
                       <label>{{ horas.label }}</label>
@@ -199,7 +199,7 @@
                         type="number"
                         name="anios_recuperacion"
                         required
-                        placeholder="Mínimo 2 años"
+                        :placeholder="$t('solicitud.placeholders.aniosRecuperacion')"
                         min="2"
                         @input="clearError($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-anios_recuperacion`] }"
@@ -210,13 +210,13 @@
                 </fieldset>
 
                 <fieldset v-show="currentStep === 3" class="fieldset">
-                  <legend>Revisión y Envío</legend>
+                  <legend>{{ $t('solicitud.revisionEnvio') }}</legend>
                   <div class="review-section">
                     <div class="review-header">
                       <div class="review-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
                       </div>
-                      <h4>Resumen de tu solicitud</h4>
+                      <h4>{{ $t('solicitud.resumenSolicitud') }}</h4>
                     </div>
                     <div class="review-grid">
                       <div class="review-item">
@@ -244,15 +244,15 @@
                         <span class="review-value">{{ fieldValue(cert.code, 'pais') }}, {{ fieldValue(cert.code, 'ciudad') }}</span>
                       </div>
                       <div class="review-item">
-                        <span class="review-label">Certificación</span>
+                        <span class="review-label">{{ $t('solicitud.certificacion') }}</span>
                         <span class="review-value">{{ cert.code }} – {{ cert.name }}</span>
                       </div>
                       <div class="review-item">
-                        <span class="review-label">Cuota bianual</span>
+                        <span class="review-label">{{ $t('solicitud.cuotaBianualLabel') }}</span>
                         <span class="review-value highlight">USD ${{ cert.fee }}</span>
                       </div>
                     </div>
-                    <p class="review-note">¿Algo no es correcto? Volvé a "Anterior" para corregirlo. {{ $t('solicitud.cuotaNoReembolsable') }}</p>
+                    <p class="review-note">{{ $t('solicitud.noEsCorrecto') }} {{ $t('solicitud.cuotaNoReembolsable') }}</p>
                   </div>
                 </fieldset>
             </div>
@@ -260,10 +260,10 @@
             <div class="form-footer">
               <div class="form-nav">
                 <button v-if="currentStep > 1" type="button" class="btn btn-outline" @click="prevStep">
-                  ← Anterior
+                  ← {{ $t('solicitud.btnAnterior') }}
                 </button>
                 <button v-if="currentStep < 3" type="button" class="btn btn-gold" @click="nextStep(cert.code)">
-                  Siguiente →
+                  {{ $t('solicitud.btnSiguiente') }} →
                 </button>
                 <button v-else type="submit" class="btn btn-gold" :disabled="sending[cert.code]">
                   {{ sending[cert.code] ? $t('solicitud.btnEnviarProcesando') : `${$t('solicitud.btnEnviar')} ${cert.code} →` }}
@@ -282,7 +282,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { showToast } from '@/composables/toast.js'
@@ -290,8 +290,9 @@ import { useCertificacionesStore } from '@/stores/certificaciones'
 import StepIndicator from '@/components/forms/StepIndicator.vue'
 import { supabase } from '@/lib/supabase'
 import { trackEvent } from '@/composables/analytics.js'
+import { getCountries } from '@/data/countries.js'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const store = useCertificacionesStore()
@@ -304,17 +305,13 @@ const messages = ref({})
 const errors = ref({})
 const formRefs = ref({})
 
-const steps = [
-  { id: 'datos', label: 'Datos Personales' },
-  { id: 'profesional', label: 'Info Profesional' },
-  { id: 'revision', label: 'Revisión' },
-]
+const steps = computed(() => [
+  { id: 'datos', label: t('solicitud.datosPersonales') },
+  { id: 'profesional', label: t('solicitud.infoProfesional') },
+  { id: 'revision', label: t('solicitud.revision') },
+])
 
-const paises = [
-  'Argentina','Bolivia','Brasil','Chile','Colombia','Costa Rica','Cuba',
-  'Ecuador','El Salvador','Guatemala','Honduras','México','Nicaragua',
-  'Panamá','Paraguay','Perú','República Dominicana','Uruguay','Venezuela','Otro'
-]
+const paises = computed(() => getCountries(locale.value))
 
 const certs = store.formCertifications
 
@@ -347,11 +344,11 @@ function goToStep(step) {
 
 function nextStep(code) {
   if (currentStep.value === 1 && !validateStep1(code)) {
-    showToast('Completá los campos obligatorios', 'error')
+    showToast(t('solicitud.toastCamposIncompletos'), 'error')
     return
   }
   if (currentStep.value === 2 && !validateStep2(code)) {
-    showToast('Completá los campos obligatorios en información profesional', 'error')
+    showToast(t('solicitud.toastCamposIncompletosProfesional'), 'error')
     return
   }
   currentStep.value++
@@ -386,7 +383,7 @@ function validateStep1(code) {
     if (!input) continue
 
     if (!input.value.trim()) {
-      errors.value[`${code}-${field}`] = 'Este campo es obligatorio'
+      errors.value[`${code}-${field}`] = t('solicitud.camposObligatorios')
       isValid = false
     } else {
       const fieldValid = validateField(field, input.value, code)
@@ -407,7 +404,7 @@ function validateStep2(code) {
   if (cert.needsDegree) {
     const tituloInput = form.querySelector('[name="titulo"]')
     if (tituloInput && !tituloInput.value.trim()) {
-      errors.value[`${code}-titulo`] = 'Este campo es obligatorio'
+      errors.value[`${code}-titulo`] = t('solicitud.camposObligatorios')
       return false
     }
   }
@@ -415,7 +412,7 @@ function validateStep2(code) {
   if (code === 'EPR') {
     const aniosInput = form.querySelector('[name="anios_recuperacion"]')
     if (aniosInput && (!aniosInput.value || parseInt(aniosInput.value) < 2)) {
-      errors.value[`${code}-anios_recuperacion`] = 'Mínimo 2 años de recuperación requeridos'
+      errors.value[`${code}-anios_recuperacion`] = t('solicitud.aniosRecuperacionMinimo')
       return false
     }
   }
@@ -447,14 +444,14 @@ function validateField(name, value, code) {
 
   if (name === 'fecha_nacimiento') {
     if (!value) {
-      error = 'La fecha de nacimiento es obligatoria'
+      error = t('solicitud.validacion.fechaRequerida')
     } else {
       const birthDate = new Date(value)
       const age = Math.floor((today - birthDate) / (365.25 * 24 * 60 * 60 * 1000))
       if (age < 18) {
-        error = 'Debes tener al menos 18 años'
+        error = t('solicitud.validacion.edadMinima')
       } else if (age > 100) {
-        error = 'La fecha de nacimiento no es válida'
+        error = t('solicitud.validacion.fechaInvalida')
       }
     }
   }
@@ -462,14 +459,14 @@ function validateField(name, value, code) {
   if (name === 'email' && value) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(value)) {
-      error = 'Ingresá un correo electrónico válido'
+      error = t('solicitud.validacion.emailInvalido')
     }
   }
 
   if (name === 'telefono' && value) {
     const phoneRegex = /^[\d\s+\-()]{7,20}$/
     if (!phoneRegex.test(value)) {
-      error = 'Ingresá un teléfono válido'
+      error = t('solicitud.validacion.telefonoInvalido')
     }
   }
 
@@ -532,7 +529,7 @@ async function handleSubmit(event, code) {
   const form = formRefs.value[code]
 
   if (!validateAllFields(code)) {
-    showToast('Corregí los errores en el formulario antes de enviar.', 'error')
+    showToast(t('solicitud.validacion.corregirErrores'), 'error')
     return
   }
 
@@ -548,7 +545,7 @@ async function handleSubmit(event, code) {
 
     if (supabaseOk || formspreeOk) {
       messages.value[code] = { type: 'success', text: t('solicitud.mensajes.exito') }
-      showToast('Solicitud enviada correctamente', 'success')
+      showToast(t('solicitud.toastEnviado'), 'success')
       trackEvent('generate_lead', { form_name: 'solicitud', certification_code: code })
       form.reset()
       currentStep.value = 1
@@ -557,7 +554,7 @@ async function handleSubmit(event, code) {
     }
   } catch {
     messages.value[code] = { type: 'error', text: t('solicitud.mensajes.error') }
-    showToast('Error al enviar la solicitud', 'error')
+    showToast(t('solicitud.toastErrorEnviar'), 'error')
   } finally {
     sending.value[code] = false
   }
@@ -586,7 +583,7 @@ function validateAllFields(code) {
     const value = input.value
 
     if (!value.trim()) {
-      errors.value[`${code}-${field.name}`] = 'Este campo es obligatorio'
+      errors.value[`${code}-${field.name}`] = t('solicitud.camposObligatorios')
       isValid = false
     } else {
       delete errors.value[`${code}-${field.name}`]

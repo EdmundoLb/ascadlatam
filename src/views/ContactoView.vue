@@ -115,18 +115,15 @@ import { useI18n } from 'vue-i18n'
 import { showToast } from '@/composables/toast.js'
 import { supabase } from '@/lib/supabase'
 import { trackEvent } from '@/composables/analytics.js'
+import { getCountries } from '@/data/countries.js'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const formId = import.meta.env.VITE_FORMSPREE_CONTACT_ID || 'placeholder'
 const sending = ref(false)
 const message = ref(null)
 
-const paises = [
-  'Argentina','Bolivia','Brasil','Chile','Colombia','Costa Rica','Cuba',
-  'Ecuador','El Salvador','Guatemala','Honduras','México','Nicaragua',
-  'Panamá','Paraguay','Perú','República Dominicana','Uruguay','Venezuela','Otro'
-]
+const paises = computed(() => getCountries(locale.value))
 
 const contactPeople = computed(() => [
   { name: 'Gonzalo Esquivel', location: 'Costa Rica', phone: '+506 8374 3617', email: 'ascadcr@gmail.com' },
@@ -170,13 +167,13 @@ async function handleSubmit(event) {
 
     if (supabaseOk || formspreeOk) {
       message.value = { type: 'success', text: t('contacto.mensajes.exito') }
-      showToast('Mensaje enviado correctamente', 'success')
+      showToast(t('contacto.toastEnviado'), 'success')
       trackEvent('generate_lead', { form_name: 'contacto', subject: form.asunto.value || 'sin_asunto' })
       form.reset()
     } else throw new Error()
   } catch {
     message.value = { type: 'error', text: t('contacto.mensajes.error') }
-    showToast('Error al enviar el mensaje', 'error')
+    showToast(t('contacto.toastErrorEnviar'), 'error')
   } finally {
     sending.value = false
   }

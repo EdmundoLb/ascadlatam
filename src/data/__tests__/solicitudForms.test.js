@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { formCertifications } from '../solicitudForms'
-import { certificationsFull } from '../certificacionesFull'
+import { getFormCertifications } from '../solicitudForms'
+import { getCertificationsFull } from '../certificacionesFull'
+
+const formCertifications = getFormCertifications('es')
+const certificationsFull = getCertificationsFull('es')
 
 describe('data/solicitudForms.js', () => {
   it('has one form entry per certification level', () => {

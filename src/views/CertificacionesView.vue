@@ -270,7 +270,7 @@
 
     <!-- FULLSCREEN MODAL -->
     <div v-if="activeModal" class="cert-modal-overlay" @click="closeModal" role="presentation">
-      <div class="cert-modal" role="dialog" aria-modal="true" :aria-label="`Detalles de ${certData?.name}`" ref="modalRef" tabindex="-1" @click.stop>
+      <div class="cert-modal" role="dialog" aria-modal="true" :aria-label="$t('certificaciones.detallesDe', { name: certData?.name })" ref="modalRef" tabindex="-1" @click.stop>
         <button class="modal-close" @click="closeModal" :aria-label="$t('common.close') || 'Cerrar'">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
@@ -368,12 +368,14 @@
 <script setup>
 import { ref, onUnmounted, onMounted, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { levelIcons } from '@/data/certificaciones'
-import { certificationsFull } from '@/data/certificacionesFull'
+import { getCertificationsFull } from '@/data/certificacionesFull'
 import { supabase } from '@/lib/supabase'
 import Pagination from '@/components/ui/Pagination.vue'
 
 const router = useRouter()
+const { locale, t } = useI18n()
 const modalRef = ref(null)
 
 const activeModal = ref(null)
@@ -382,7 +384,7 @@ const expandedAxis = ref(null)
 let lastFocusedElement = null
 
 const certData = computed(() => {
-  const cert = certificationsFull.find(c => c.code === activeModal.value)
+  const cert = getCertificationsFull(locale.value).find(c => c.code === activeModal.value)
   if (!cert) return null
   return {
     ...cert,
@@ -390,16 +392,22 @@ const certData = computed(() => {
   }
 })
 
+const saberLabels = {
+  es: { saberConocer: 'Saber Conocer', saberHacer: 'Saber Hacer', saberSer: 'Saber Ser' },
+  pt: { saberConocer: 'Saber Conhecer', saberHacer: 'Saber Fazer', saberSer: 'Saber Ser' }
+}
+
 function transformCompetencies(comp) {
+  const labels = saberLabels[locale.value] || saberLabels.es
   const axes = []
   if (comp.saberConocer) {
-    axes.push({ axis: 'Saber Conocer', color: '#1565c0', items: comp.saberConocer })
+    axes.push({ axis: labels.saberConocer, color: '#1565c0', items: comp.saberConocer })
   }
   if (comp.saberHacer) {
-    axes.push({ axis: 'Saber Hacer', color: '#2e7d32', items: comp.saberHacer })
+    axes.push({ axis: labels.saberHacer, color: '#2e7d32', items: comp.saberHacer })
   }
   if (comp.saberSer) {
-    axes.push({ axis: 'Saber Ser', color: '#c9a84c', items: comp.saberSer })
+    axes.push({ axis: labels.saberSer, color: '#c9a84c', items: comp.saberSer })
   }
   return axes
 }
@@ -525,14 +533,43 @@ function getLevelIcon(code) {
   return levelIcons[code] || levelIcons['OST']
 }
 
-const comparisonData = [
-  { code: 'OST',      name: 'Operador Socioterapéutico',       desc: 'Nivel inicial de acompañamiento supervisado',     formacion: '80h',    experiencia: '1.000h',  supervision: '100h',    fee: 30,  highlight: false },
-  { code: 'EPR',      name: 'Entrenador de Recuperación',       desc: 'Apoyo desde la experiencia vivida en recuperación', formacion: '80h',    experiencia: '100h',    supervision: '100h',   fee: 30,  highlight: false },
-  { code: 'CCAAD I',  name: 'Consejero Asociado Junior',       desc: 'Primer nivel técnico profesional',                formacion: '120h',   experiencia: '1.500h',  supervision: '60h',    fee: 50,  highlight: false },
-  { code: 'CCAAD II', name: 'Consejero Certificado',          desc: 'Competencias avanzadas en consejería',            formacion: '150h',   experiencia: '2.000h',  supervision: '96h',    fee: 75,  highlight: false },
-  { code: 'CCAAD III',name: 'Consejero Senior',               desc: 'Nivel avanzado profesional con autonomía',          formacion: '170h',   experiencia: '3.000h',  supervision: '120h',   fee: 100, highlight: true  },
-  { code: 'CCAAD IV', name: 'Supervisor Profesional',          desc: 'Máximo nivel: supervisión y liderazgo',          formacion: '40h',    experiencia: '6.000h',  supervision: '120h',   fee: 125, highlight: false },
+const comparisonDescriptions = {
+  es: {
+    OST: 'Nivel inicial de acompañamiento supervisado',
+    EPR: 'Apoyo desde la experiencia vivida en recuperación',
+    'CCAAD I': 'Primer nivel técnico profesional',
+    'CCAAD II': 'Competencias avanzadas en consejería',
+    'CCAAD III': 'Nivel avanzado profesional con autonomía',
+    'CCAAD IV': 'Máximo nivel: supervisión y liderazgo',
+  },
+  pt: {
+    OST: 'Nível inicial de acompanhamento supervisionado',
+    EPR: 'Apoio a partir da experiência vivida em recuperação',
+    'CCAAD I': 'Primeiro nível técnico profissional',
+    'CCAAD II': 'Competências avançadas em aconselhamento',
+    'CCAAD III': 'Nível avançado profissional com autonomia',
+    'CCAAD IV': 'Nível máximo: supervisão e liderança',
+  },
+}
+
+const comparisonMeta = [
+  { code: 'OST',       formacion: '80h',  experiencia: '1.000h', supervision: '100h', fee: 30,  highlight: false },
+  { code: 'EPR',       formacion: '80h',  experiencia: '100h',   supervision: '100h', fee: 30,  highlight: false },
+  { code: 'CCAAD I',   formacion: '120h', experiencia: '1.500h', supervision: '60h',  fee: 50,  highlight: false },
+  { code: 'CCAAD II',  formacion: '150h', experiencia: '2.000h', supervision: '96h',  fee: 75,  highlight: false },
+  { code: 'CCAAD III', formacion: '170h', experiencia: '3.000h', supervision: '120h', fee: 100, highlight: true  },
+  { code: 'CCAAD IV',  formacion: '40h',  experiencia: '6.000h', supervision: '120h', fee: 125, highlight: false },
 ]
+
+const comparisonData = computed(() => {
+  const certs = getCertificationsFull(locale.value)
+  const descs = comparisonDescriptions[locale.value] || comparisonDescriptions.es
+  return comparisonMeta.map(meta => ({
+    ...meta,
+    name: certs.find(c => c.code === meta.code)?.name || meta.code,
+    desc: descs[meta.code] || '',
+  }))
+})
 
 const certColors = {
   'OST':      { primary: '#1a3a5c', accent: '#c9a84c' },
@@ -543,215 +580,428 @@ const certColors = {
   'CCAAD IV': { primary: '#0a2540', accent: '#c9a84c' },
 }
 
-const certifications = [
-  {
-    code: 'OST', fee: 30,
-    name: 'Operador Socioterapéutico',
-    summary: 'Nivel inicial de acompañamiento supervisado en comunidades terapéuticas.',
-    description: 'Nivel inicial en el abordaje de las adicciones. Brinda acompañamiento supervisado en comunidades terapéuticas, centros de tratamiento y programas de intervención temprana.',
-    competencies: [
-      { axis: 'Competencias Principales', color: certColors['OST'].primary, items: [
-        'Comprensión integral de las adicciones desde enfoques médicos, psicológicos y sociales.',
-        'Capacidad para identificar factores de riesgo, señales de consumo y necesidades de apoyo.',
-        'Aplicación de estrategias de acompañamiento, orientación y seguimiento terapéutico.',
-        'Trabajo colaborativo con equipos interdisciplinarios y redes de apoyo.',
-        'Manejo ético y confidencial de la información.',
-        'Desarrollo de habilidades de comunicación, escucha activa y empatía.',
-        'Intervención básica en crisis y derivación oportuna.',
-        'Promoción del bienestar, la inclusión y la recuperación integral de la persona.',
-        'Compromiso con la formación continua, el autocuidado y la responsabilidad profesional.'
-      ]},
-      { axis: 'Ejes de Formación del Operador Socioterapéutico', color: certColors['OST'].primary, items: [
-        'Comprensión de la Adicción',
-        'Conocimiento sobre el Tratamiento',
-        'Aplicación a la Práctica',
-        'Preparación Profesional',
-        'Funciones del Operador Socioterapéutico'
-      ]},
-      { axis: 'Perfil Profesional', color: certColors['OST'].accent, items: [
-        'El operador socioterapéutico actúa con sensibilidad humana, respeto por la diversidad y vocación de servicio, fortaleciendo procesos de recuperación centrados en la persona y contribuyendo al desarrollo de entornos terapéuticos seguros y humanizados.'
-      ]}
-    ],
-    areas: ['Comunidades Terapéuticas', 'Centros de Día', 'Programas de Prevención', 'Acompañamiento Familiar'],
-    requirements: ['Secundaria completa o equivalente', '3 avales profesionales', 'Firma del código de ética', 'Aprobación del examen OST', 'Ejercicio laboral en el país de origen'],
-    hours: [{ value: '80h', label: 'Formación' }, { value: '1.000h', label: 'Experiencia supervisada' }, { value: '100h', label: 'Entrenamiento práctico' }]
-  },
-  {
-    code: 'EPR', fee: 30,
-    name: 'Entrenador de Recuperación',
-    summary: 'Apoyo desde la experiencia vivida en recuperación.',
-    description: 'Para personas con experiencia vivida en recuperación de adicciones. Brinda apoyo emocional, motivacional e informativo desde la empatía de quien ha transitado el mismo camino.',
-    competencies: [
-      { axis: 'Competencias Principales', color: certColors['EPR'].primary, items: [
-        'Comprensión del proceso de recuperación y del trastorno por uso de sustancias.',
-        'Capacidad para identificar señales de riesgo y necesidades de apoyo.',
-        'Habilidades de escucha activa, comunicación empática y acompañamiento humano.',
-        'Orientación y motivación basada en la experiencia compartida.',
-        'Facilitación de grupos de apoyo y espacios seguros de recuperación.',
-        'Promoción de hábitos saludables, bienestar y prevención de recaídas.',
-        'Conexión de personas con recursos comunitarios y redes de recuperación.',
-        'Aplicación de principios éticos, confidencialidad y límites profesionales.',
-        'Sensibilidad cultural, inclusión y respeto por la diversidad.',
-        'Compromiso con el autocuidado, la formación continua y el crecimiento personal.'
-      ]},
-      { axis: 'Ejes de Formación del Entrenador de Recuperación', color: certColors['EPR'].primary, items: [
-        'Conocimiento sobre Recuperación y Trastorno por Uso de Sustancias',
-        'Rol y Funciones del Entrenador de Recuperación',
-        'Habilidades de Apoyo y Acompañamiento',
-        'Ética y Límites Profesionales',
-        'Diversidad, Inclusión y Sensibilidad Cultural',
-        'Construcción Comunitaria y Redes de Recuperación',
-        'Desarrollo Profesional y Autocuidado'
-      ]},
-      { axis: 'Perfil Profesional', color: certColors['EPR'].accent, items: [
-        'El Entrenador de Recuperación actúa como modelo positivo y agente de esperanza, fortaleciendo procesos de recuperación desde el apoyo mutuo, la integración comunitaria y el acompañamiento no clínico, siempre desde una visión humana y libre de estigmas.'
-      ]}
-    ],
-    areas: ['Programas de Recuperación', 'Comunidades Terapéuticas', 'Centros de Reinserción', 'Redes de Apoyo comunitario'],
-    requirements: ['Experiencia vivida en recuperación (mín. 2 años)', 'Secundaria completa o equivalente', '2 a 3 avales personales o profesionales', 'Firma del código de ética', 'Aprobación del examen EPR'],
-    hours: [{ value: '80h', label: 'Formación' }, { value: '80h', label: 'Entrenamiento práctico' }]
-  },
-  {
-    code: 'CCAAD I', fee: 50,
-    name: 'Consejero Asociado Junior',
-    summary: 'Primer nivel técnico profesional con intervenciones supervisadas.',
-    description: 'Primer nivel técnico profesional. Realiza intervenciones estructuradas y supervisadas para la atención de personas con trastornos por uso de sustancias (TUS).',
-    competencies: [
-      { axis: 'Competencias Principales', color: certColors['CCAAD I'].primary, items: [
-        'Comprensión integral del trastorno por uso de sustancias y sus efectos biopsicosociales.',
-        'Identificación de factores de riesgo, protección, recaída y recuperación.',
-        'Aplicación de procesos de tamizaje, admisión y evaluación inicial.',
-        'Uso de entrevistas estructuradas y herramientas básicas de evaluación.',
-        'Diseño de metas terapéuticas y seguimiento del proceso de recuperación.',
-        'Coordinación de derivaciones y trabajo con redes de apoyo.',
-        'Desarrollo de consejería individual, grupal y familiar.',
-        'Aplicación de entrevista motivacional, psicoeducación y prevención de recaídas.',
-        'Promoción de habilidades de afrontamiento, autocuidado y adherencia terapéutica.',
-        'Manejo ético de la información, confidencialidad y responsabilidad profesional.',
-        'Trabajo interdisciplinario con enfoque humano, empático y libre de estigmas.'
-      ]},
-      { axis: 'Ejes de Formación del Consejero Asociado Junior – CCAAD I', color: certColors['CCAAD I'].primary, items: [
-        'Comprensión del Trastorno por Uso de Sustancias Psicoactivas',
-        'Selección, Evaluación y Participación',
-        'Planificación, Colaboración y Derivación del Tratamiento',
-        'Consejería',
-        'Responsabilidad Profesional y Ética'
-      ]},
-      { axis: 'Perfil Profesional', color: certColors['CCAAD I'].accent, items: [
-        'El Consejero Asociado Junior CCAAD I brinda apoyo estructurado y acompañamiento terapéutico desde una perspectiva ética, técnica y centrada en la persona, fortaleciendo procesos de recuperación y bienestar integral.'
-      ]}
-    ],
-    areas: ['Centros de Tratamiento', 'Hospitales', 'Programas Ambulatorios', 'Comunidades Terapéuticas', 'Centros de Reinserción'],
-    requirements: ['Secundaria completa o equivalente', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen internacional', 'Ejercicio en el país de origen'],
-    hours: [{ value: '120h', label: 'Formación' }, { value: '1.500h', label: 'Experiencia supervisada' }, { value: '60h', label: 'Entrenamiento práctico' }]
-  },
-  {
-    code: 'CCAAD II', fee: 75,
-    name: 'Consejero Certificado',
-    summary: 'Competencias avanzadas en consejería con mayor responsabilidad profesional.',
-    description: 'Competencias avanzadas en consejería con mayor responsabilidad profesional. Realiza evaluaciones integrales, diseña planes de tratamiento individualizados y coordina redes de apoyo.',
-    competencies: [
-      { axis: 'Competencias Principales', color: certColors['CCAAD II'].primary, items: [
-        'Comprensión del trastorno por uso de sustancias desde un enfoque biopsicosocial.',
-        'Identificación de factores de riesgo, recaída, recuperación y necesidades de apoyo.',
-        'Aplicación de procesos de tamizaje, admisión, orientación y evaluación inicial.',
-        'Uso de entrevistas estructuradas y herramientas básicas de detección.',
-        'Participación en planes de tratamiento centrados en la persona.',
-        'Coordinación de derivaciones y acceso a redes de apoyo comunitario.',
-        'Desarrollo de consejería individual y grupal de apoyo.',
-        'Aplicación de escucha activa, motivación y psicoeducación.',
-        'Promoción de habilidades de afrontamiento y hábitos saludables.',
-        'Registro técnico y seguimiento del proceso terapéutico.',
-        'Aplicación de principios éticos, confidencialidad y responsabilidad profesional.',
-        'Trabajo colaborativo dentro de equipos interdisciplinarios.'
-      ]},
-      { axis: 'Ejes de Formación del Consejero Certificado – CCAAD II', color: certColors['CCAAD II'].primary, items: [
-        'Comprensión del Trastorno por Uso de Sustancias Psicoactivas',
-        'Selección, Evaluación y Participación',
-        'Planificación, Colaboración y Derivación del Tratamiento',
-        'Consejería',
-        'Responsabilidad Profesional y Ética'
-      ]},
-      { axis: 'Perfil Profesional', color: certColors['CCAAD II'].accent, items: [
-        'El Consejero Certificado CCAAD II actúa con empatía, responsabilidad y compromiso humano, contribuyendo al acompañamiento terapéutico y fortaleciendo procesos de recuperación desde una atención ética, organizada y centrada en la dignidad de la persona.'
-      ]}
-    ],
-    areas: ['Centros de Tratamiento Especializado', 'Hospitales Generales', 'Programas de Rehabilitación', 'Consultoría en Políticas Públicas'],
-    requirements: ['Bachillerato o secundaria completa', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen', 'Ejercicio en país miembro'],
-    hours: [{ value: '150h', label: 'Formación' }, { value: '2.000h', label: 'Experiencia supervisada' }, { value: '96h', label: 'Entrenamiento práctico' }]
-  },
-  {
-    code: 'CCAAD III', fee: 100,
-    name: 'Consejero Senior',
-    summary: 'Nivel avanzado profesional con evaluación biopsicosocial.',
-    description: 'Nivel avanzado profesional con competencias para la evaluación biopsicosocial, diagnósticos funcionales y manejo de casos complejos.',
-    competencies: [
-      { axis: 'Competencias Principales', color: certColors['CCAAD III'].primary, items: [
-        'Comprensión avanzada del trastorno por uso de sustancias desde enfoques neurobiológicos, psicológicos y sociales.',
-        'Identificación de factores de riesgo, protección y capital de recuperación.',
-        'Aplicación de procesos avanzados de evaluación, admisión y entrevista profesional.',
-        'Integración de información biopsicosocial para la planificación terapéutica.',
-        'Diseño de planes de tratamiento estructurados y orientados a metas.',
-        'Coordinación de recursos institucionales, comunitarios y redes de apoyo.',
-        'Desarrollo de consejería individual, grupal y familiar educativa.',
-        'Aplicación de entrevista motivacional y enfoques cognitivo-conductuales.',
-        'Fortalecimiento de habilidades de afrontamiento, prevención de recaídas y empoderamiento personal.',
-        'Seguimiento y evaluación continua del proceso de acompañamiento.',
-        'Aplicación de principios éticos, legales y de confidencialidad.',
-        'Participación en procesos de supervisión profesional, mejora continua y trabajo interdisciplinario.'
-      ]},
-      { axis: 'Ejes de Formación del Consejero Senior – CCAAD III', color: certColors['CCAAD III'].primary, items: [
-        'Comprensión del Trastorno por Uso de Sustancias Psicoactivas',
-        'Selección, Evaluación y Participación',
-        'Planificación, Colaboración y Derivación del Tratamiento',
-        'Consejería Avanzada',
-        'Responsabilidad Profesional y Ética'
-      ]},
-      { axis: 'Perfil Profesional', color: certColors['CCAAD III'].accent, items: [
-        'El profesional CCAAD III actúa como líder en procesos de acompañamiento avanzado, promoviendo la recuperación integral, el fortalecimiento de redes de apoyo y la atención centrada en la persona, siempre dentro de los límites éticos y profesionales de su competencia.'
-      ]}
-    ],
-    areas: ['Centros de Alta Complejidad', 'Hospitales Psiquiátricos', 'Consultoría Privada', 'Formación y Docencia', 'Dirección de Programas'],
-    requirements: ['Licenciatura en Psicología, Trabajo Social o carreras afines', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen', 'Ejercicio en país miembro'],
-    hours: [{ value: '170h', label: 'Formación' }, { value: '3.000h', label: 'Experiencia en consejería' }, { value: '120h', label: 'Práctica supervisada' }]
-  },
-  {
-    code: 'CCAAD IV', fee: 125,
-    name: 'Supervisor Profesional en Adicciones',
-    summary: 'Máximo nivel: supervisión profesional y liderazgo de equipos.',
-    description: 'Máximo nivel de la ruta de certificación. Diseña sistemas de supervisión profesional, lidera equipos de trabajo, garantiza la calidad asistencial y promueve la formación continua.',
-    competencies: [
-      { axis: 'Competencias Principales', color: certColors['CCAAD IV'].primary, items: [
-        'Comprensión de los fundamentos y modelos de supervisión profesional en adicciones.',
-        'Gestión de procesos de supervisión, calidad asistencial y desarrollo profesional.',
-        'Definición de roles, límites y alcances de la supervisión profesional.',
-        'Desarrollo de relaciones de supervisión basadas en confianza, colaboración y aprendizaje reflexivo.',
-        'Aplicación de modelos y enfoques integrativos de supervisión.',
-        'Análisis de casos profesionales y acompañamiento profesional especializado.',
-        'Evaluación objetiva del desempeño profesional y técnico.',
-        'Diseño de planes de mejora, seguimiento y retroalimentación estructurada.',
-        'Aplicación de principios éticos, legales y normativos en supervisión profesional.',
-        'Gestión responsable de información confidencial y toma de decisiones éticas.',
-        'Liderazgo profesional, trabajo interdisciplinario y fortalecimiento institucional.',
-        'Promoción del aprendizaje continuo, innovación y mejora de la calidad profesional.'
-      ]},
-      { axis: 'Ejes de Formación del Supervisor Profesional – CCAAD IV', color: certColors['CCAAD IV'].primary, items: [
-        'Fundamentos de la Supervisión Profesional',
-        'Gestión del Alcance y Roles de la Supervisión',
-        'Desarrollo de la Relación de Supervisión',
-        'Aplicación de Modelos y Enfoques de Supervisión',
-        'Ética, Legalidad y Responsabilidad Profesional',
-        'Evaluación y Monitoreo del Desempeño'
-      ]},
-      { axis: 'Perfil Profesional', color: certColors['CCAAD IV'].accent, items: [
-        'El profesional CCAAD IV posee capacidades avanzadas para supervisar, formar y fortalecer equipos de consejería y atención en adicciones, garantizando calidad técnica, ética profesional y desarrollo continuo del talento humano dentro de modelos orientados a la recuperación y estándares internacionales.'
-      ]}
-    ],
-    areas: ['Dirección Clínica', 'Supervisión de Equipos', 'Consultoría Organizacional', 'Formación de Supervisores', 'Asesoría en Políticas de Salud'],
-    requirements: ['Licenciatura o superior en salud mental', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen', 'Ejercicio en país miembro'],
-    hours: [{ value: '40h', label: 'Formación en supervisión' }, { value: '2.000h', label: 'Como consejero' }, { value: '4.000h', label: 'Supervisión profesional' }, { value: '120h', label: 'Supervisión recibida' }]
-  }
-]
+const certificationsContent = {
+  es: [
+    {
+      code: 'OST', fee: 30,
+      name: 'Operador Socioterapéutico',
+      summary: 'Nivel inicial de acompañamiento supervisado en comunidades terapéuticas.',
+      description: 'Nivel inicial en el abordaje de las adicciones. Brinda acompañamiento supervisado en comunidades terapéuticas, centros de tratamiento y programas de intervención temprana.',
+      competencies: [
+        { axis: 'Competencias Principales', color: certColors['OST'].primary, items: [
+          'Comprensión integral de las adicciones desde enfoques médicos, psicológicos y sociales.',
+          'Capacidad para identificar factores de riesgo, señales de consumo y necesidades de apoyo.',
+          'Aplicación de estrategias de acompañamiento, orientación y seguimiento terapéutico.',
+          'Trabajo colaborativo con equipos interdisciplinarios y redes de apoyo.',
+          'Manejo ético y confidencial de la información.',
+          'Desarrollo de habilidades de comunicación, escucha activa y empatía.',
+          'Intervención básica en crisis y derivación oportuna.',
+          'Promoción del bienestar, la inclusión y la recuperación integral de la persona.',
+          'Compromiso con la formación continua, el autocuidado y la responsabilidad profesional.'
+        ]},
+        { axis: 'Ejes de Formación del Operador Socioterapéutico', color: certColors['OST'].primary, items: [
+          'Comprensión de la Adicción',
+          'Conocimiento sobre el Tratamiento',
+          'Aplicación a la Práctica',
+          'Preparación Profesional',
+          'Funciones del Operador Socioterapéutico'
+        ]},
+        { axis: 'Perfil Profesional', color: certColors['OST'].accent, items: [
+          'El operador socioterapéutico actúa con sensibilidad humana, respeto por la diversidad y vocación de servicio, fortaleciendo procesos de recuperación centrados en la persona y contribuyendo al desarrollo de entornos terapéuticos seguros y humanizados.'
+        ]}
+      ],
+      areas: ['Comunidades Terapéuticas', 'Centros de Día', 'Programas de Prevención', 'Acompañamiento Familiar'],
+      requirements: ['Secundaria completa o equivalente', '3 avales profesionales', 'Firma del código de ética', 'Aprobación del examen OST', 'Ejercicio laboral en el país de origen'],
+      hours: [{ value: '80h', label: 'Formación' }, { value: '1.000h', label: 'Experiencia supervisada' }, { value: '100h', label: 'Entrenamiento práctico' }]
+    },
+    {
+      code: 'EPR', fee: 30,
+      name: 'Entrenador de Recuperación',
+      summary: 'Apoyo desde la experiencia vivida en recuperación.',
+      description: 'Para personas con experiencia vivida en recuperación de adicciones. Brinda apoyo emocional, motivacional e informativo desde la empatía de quien ha transitado el mismo camino.',
+      competencies: [
+        { axis: 'Competencias Principales', color: certColors['EPR'].primary, items: [
+          'Comprensión del proceso de recuperación y del trastorno por uso de sustancias.',
+          'Capacidad para identificar señales de riesgo y necesidades de apoyo.',
+          'Habilidades de escucha activa, comunicación empática y acompañamiento humano.',
+          'Orientación y motivación basada en la experiencia compartida.',
+          'Facilitación de grupos de apoyo y espacios seguros de recuperación.',
+          'Promoción de hábitos saludables, bienestar y prevención de recaídas.',
+          'Conexión de personas con recursos comunitarios y redes de recuperación.',
+          'Aplicación de principios éticos, confidencialidad y límites profesionales.',
+          'Sensibilidad cultural, inclusión y respeto por la diversidad.',
+          'Compromiso con el autocuidado, la formación continua y el crecimiento personal.'
+        ]},
+        { axis: 'Ejes de Formación del Entrenador de Recuperación', color: certColors['EPR'].primary, items: [
+          'Conocimiento sobre Recuperación y Trastorno por Uso de Sustancias',
+          'Rol y Funciones del Entrenador de Recuperación',
+          'Habilidades de Apoyo y Acompañamiento',
+          'Ética y Límites Profesionales',
+          'Diversidad, Inclusión y Sensibilidad Cultural',
+          'Construcción Comunitaria y Redes de Recuperación',
+          'Desarrollo Profesional y Autocuidado'
+        ]},
+        { axis: 'Perfil Profesional', color: certColors['EPR'].accent, items: [
+          'El Entrenador de Recuperación actúa como modelo positivo y agente de esperanza, fortaleciendo procesos de recuperación desde el apoyo mutuo, la integración comunitaria y el acompañamiento no clínico, siempre desde una visión humana y libre de estigmas.'
+        ]}
+      ],
+      areas: ['Programas de Recuperación', 'Comunidades Terapéuticas', 'Centros de Reinserción', 'Redes de Apoyo comunitario'],
+      requirements: ['Experiencia vivida en recuperación (mín. 2 años)', 'Secundaria completa o equivalente', '2 a 3 avales personales o profesionales', 'Firma del código de ética', 'Aprobación del examen EPR'],
+      hours: [{ value: '80h', label: 'Formación' }, { value: '80h', label: 'Entrenamiento práctico' }]
+    },
+    {
+      code: 'CCAAD I', fee: 50,
+      name: 'Consejero Asociado Junior',
+      summary: 'Primer nivel técnico profesional con intervenciones supervisadas.',
+      description: 'Primer nivel técnico profesional. Realiza intervenciones estructuradas y supervisadas para la atención de personas con trastornos por uso de sustancias (TUS).',
+      competencies: [
+        { axis: 'Competencias Principales', color: certColors['CCAAD I'].primary, items: [
+          'Comprensión integral del trastorno por uso de sustancias y sus efectos biopsicosociales.',
+          'Identificación de factores de riesgo, protección, recaída y recuperación.',
+          'Aplicación de procesos de tamizaje, admisión y evaluación inicial.',
+          'Uso de entrevistas estructuradas y herramientas básicas de evaluación.',
+          'Diseño de metas terapéuticas y seguimiento del proceso de recuperación.',
+          'Coordinación de derivaciones y trabajo con redes de apoyo.',
+          'Desarrollo de consejería individual, grupal y familiar.',
+          'Aplicación de entrevista motivacional, psicoeducación y prevención de recaídas.',
+          'Promoción de habilidades de afrontamiento, autocuidado y adherencia terapéutica.',
+          'Manejo ético de la información, confidencialidad y responsabilidad profesional.',
+          'Trabajo interdisciplinario con enfoque humano, empático y libre de estigmas.'
+        ]},
+        { axis: 'Ejes de Formación del Consejero Asociado Junior – CCAAD I', color: certColors['CCAAD I'].primary, items: [
+          'Comprensión del Trastorno por Uso de Sustancias Psicoactivas',
+          'Selección, Evaluación y Participación',
+          'Planificación, Colaboración y Derivación del Tratamiento',
+          'Consejería',
+          'Responsabilidad Profesional y Ética'
+        ]},
+        { axis: 'Perfil Profesional', color: certColors['CCAAD I'].accent, items: [
+          'El Consejero Asociado Junior CCAAD I brinda apoyo estructurado y acompañamiento terapéutico desde una perspectiva ética, técnica y centrada en la persona, fortaleciendo procesos de recuperación y bienestar integral.'
+        ]}
+      ],
+      areas: ['Centros de Tratamiento', 'Hospitales', 'Programas Ambulatorios', 'Comunidades Terapéuticas', 'Centros de Reinserción'],
+      requirements: ['Secundaria completa o equivalente', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen internacional', 'Ejercicio en el país de origen'],
+      hours: [{ value: '120h', label: 'Formación' }, { value: '1.500h', label: 'Experiencia supervisada' }, { value: '60h', label: 'Entrenamiento práctico' }]
+    },
+    {
+      code: 'CCAAD II', fee: 75,
+      name: 'Consejero Certificado',
+      summary: 'Competencias avanzadas en consejería con mayor responsabilidad profesional.',
+      description: 'Competencias avanzadas en consejería con mayor responsabilidad profesional. Realiza evaluaciones integrales, diseña planes de tratamiento individualizados y coordina redes de apoyo.',
+      competencies: [
+        { axis: 'Competencias Principales', color: certColors['CCAAD II'].primary, items: [
+          'Comprensión del trastorno por uso de sustancias desde un enfoque biopsicosocial.',
+          'Identificación de factores de riesgo, recaída, recuperación y necesidades de apoyo.',
+          'Aplicación de procesos de tamizaje, admisión, orientación y evaluación inicial.',
+          'Uso de entrevistas estructuradas y herramientas básicas de detección.',
+          'Participación en planes de tratamiento centrados en la persona.',
+          'Coordinación de derivaciones y acceso a redes de apoyo comunitario.',
+          'Desarrollo de consejería individual y grupal de apoyo.',
+          'Aplicación de escucha activa, motivación y psicoeducación.',
+          'Promoción de habilidades de afrontamiento y hábitos saludables.',
+          'Registro técnico y seguimiento del proceso terapéutico.',
+          'Aplicación de principios éticos, confidencialidad y responsabilidad profesional.',
+          'Trabajo colaborativo dentro de equipos interdisciplinarios.'
+        ]},
+        { axis: 'Ejes de Formación del Consejero Certificado – CCAAD II', color: certColors['CCAAD II'].primary, items: [
+          'Comprensión del Trastorno por Uso de Sustancias Psicoactivas',
+          'Selección, Evaluación y Participación',
+          'Planificación, Colaboración y Derivación del Tratamiento',
+          'Consejería',
+          'Responsabilidad Profesional y Ética'
+        ]},
+        { axis: 'Perfil Profesional', color: certColors['CCAAD II'].accent, items: [
+          'El Consejero Certificado CCAAD II actúa con empatía, responsabilidad y compromiso humano, contribuyendo al acompañamiento terapéutico y fortaleciendo procesos de recuperación desde una atención ética, organizada y centrada en la dignidad de la persona.'
+        ]}
+      ],
+      areas: ['Centros de Tratamiento Especializado', 'Hospitales Generales', 'Programas de Rehabilitación', 'Consultoría en Políticas Públicas'],
+      requirements: ['Bachillerato o secundaria completa', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen', 'Ejercicio en país miembro'],
+      hours: [{ value: '150h', label: 'Formación' }, { value: '2.000h', label: 'Experiencia supervisada' }, { value: '96h', label: 'Entrenamiento práctico' }]
+    },
+    {
+      code: 'CCAAD III', fee: 100,
+      name: 'Consejero Senior',
+      summary: 'Nivel avanzado profesional con evaluación biopsicosocial.',
+      description: 'Nivel avanzado profesional con competencias para la evaluación biopsicosocial, diagnósticos funcionales y manejo de casos complejos.',
+      competencies: [
+        { axis: 'Competencias Principales', color: certColors['CCAAD III'].primary, items: [
+          'Comprensión avanzada del trastorno por uso de sustancias desde enfoques neurobiológicos, psicológicos y sociales.',
+          'Identificación de factores de riesgo, protección y capital de recuperación.',
+          'Aplicación de procesos avanzados de evaluación, admisión y entrevista profesional.',
+          'Integración de información biopsicosocial para la planificación terapéutica.',
+          'Diseño de planes de tratamiento estructurados y orientados a metas.',
+          'Coordinación de recursos institucionales, comunitarios y redes de apoyo.',
+          'Desarrollo de consejería individual, grupal y familiar educativa.',
+          'Aplicación de entrevista motivacional y enfoques cognitivo-conductuales.',
+          'Fortalecimiento de habilidades de afrontamiento, prevención de recaídas y empoderamiento personal.',
+          'Seguimiento y evaluación continua del proceso de acompañamiento.',
+          'Aplicación de principios éticos, legales y de confidencialidad.',
+          'Participación en procesos de supervisión profesional, mejora continua y trabajo interdisciplinario.'
+        ]},
+        { axis: 'Ejes de Formación del Consejero Senior – CCAAD III', color: certColors['CCAAD III'].primary, items: [
+          'Comprensión del Trastorno por Uso de Sustancias Psicoactivas',
+          'Selección, Evaluación y Participación',
+          'Planificación, Colaboración y Derivación del Tratamiento',
+          'Consejería Avanzada',
+          'Responsabilidad Profesional y Ética'
+        ]},
+        { axis: 'Perfil Profesional', color: certColors['CCAAD III'].accent, items: [
+          'El profesional CCAAD III actúa como líder en procesos de acompañamiento avanzado, promoviendo la recuperación integral, el fortalecimiento de redes de apoyo y la atención centrada en la persona, siempre dentro de los límites éticos y profesionales de su competencia.'
+        ]}
+      ],
+      areas: ['Centros de Alta Complejidad', 'Hospitales Psiquiátricos', 'Consultoría Privada', 'Formación y Docencia', 'Dirección de Programas'],
+      requirements: ['Licenciatura en Psicología, Trabajo Social o carreras afines', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen', 'Ejercicio en país miembro'],
+      hours: [{ value: '170h', label: 'Formación' }, { value: '3.000h', label: 'Experiencia en consejería' }, { value: '120h', label: 'Práctica supervisada' }]
+    },
+    {
+      code: 'CCAAD IV', fee: 125,
+      name: 'Supervisor Profesional en Adicciones',
+      summary: 'Máximo nivel: supervisión profesional y liderazgo de equipos.',
+      description: 'Máximo nivel de la ruta de certificación. Diseña sistemas de supervisión profesional, lidera equipos de trabajo, garantiza la calidad asistencial y promueve la formación continua.',
+      competencies: [
+        { axis: 'Competencias Principales', color: certColors['CCAAD IV'].primary, items: [
+          'Comprensión de los fundamentos y modelos de supervisión profesional en adicciones.',
+          'Gestión de procesos de supervisión, calidad asistencial y desarrollo profesional.',
+          'Definición de roles, límites y alcances de la supervisión profesional.',
+          'Desarrollo de relaciones de supervisión basadas en confianza, colaboración y aprendizaje reflexivo.',
+          'Aplicación de modelos y enfoques integrativos de supervisión.',
+          'Análisis de casos profesionales y acompañamiento profesional especializado.',
+          'Evaluación objetiva del desempeño profesional y técnico.',
+          'Diseño de planes de mejora, seguimiento y retroalimentación estructurada.',
+          'Aplicación de principios éticos, legales y normativos en supervisión profesional.',
+          'Gestión responsable de información confidencial y toma de decisiones éticas.',
+          'Liderazgo profesional, trabajo interdisciplinario y fortalecimiento institucional.',
+          'Promoción del aprendizaje continuo, innovación y mejora de la calidad profesional.'
+        ]},
+        { axis: 'Ejes de Formación del Supervisor Profesional – CCAAD IV', color: certColors['CCAAD IV'].primary, items: [
+          'Fundamentos de la Supervisión Profesional',
+          'Gestión del Alcance y Roles de la Supervisión',
+          'Desarrollo de la Relación de Supervisión',
+          'Aplicación de Modelos y Enfoques de Supervisión',
+          'Ética, Legalidad y Responsabilidad Profesional',
+          'Evaluación y Monitoreo del Desempeño'
+        ]},
+        { axis: 'Perfil Profesional', color: certColors['CCAAD IV'].accent, items: [
+          'El profesional CCAAD IV posee capacidades avanzadas para supervisar, formar y fortalecer equipos de consejería y atención en adicciones, garantizando calidad técnica, ética profesional y desarrollo continuo del talento humano dentro de modelos orientados a la recuperación y estándares internacionales.'
+        ]}
+      ],
+      areas: ['Dirección Clínica', 'Supervisión de Equipos', 'Consultoría Organizacional', 'Formación de Supervisores', 'Asesoría en Políticas de Salud'],
+      requirements: ['Licenciatura o superior en salud mental', '3 referencias profesionales', 'Firma del código de ética', 'Aprobación del examen', 'Ejercicio en país miembro'],
+      hours: [{ value: '40h', label: 'Formación en supervisión' }, { value: '2.000h', label: 'Como consejero' }, { value: '4.000h', label: 'Supervisión profesional' }, { value: '120h', label: 'Supervisión recibida' }]
+    }
+  ],
+  pt: [
+    {
+      code: 'OST', fee: 30,
+      name: 'Operador Socioterapêutico',
+      summary: 'Nível inicial de acompanhamento supervisionado em comunidades terapêuticas.',
+      description: 'Nível inicial na abordagem das adições. Oferece acompanhamento supervisionado em comunidades terapêuticas, centros de tratamento e programas de intervenção precoce.',
+      competencies: [
+        { axis: 'Competências Principais', color: certColors['OST'].primary, items: [
+          'Compreensão integral das adições a partir de enfoques médicos, psicológicos e sociais.',
+          'Capacidade para identificar fatores de risco, sinais de consumo e necessidades de apoio.',
+          'Aplicação de estratégias de acompanhamento, orientação e acompanhamento terapêutico.',
+          'Trabalho colaborativo com equipes interdisciplinares e redes de apoio.',
+          'Manejo ético e confidencial da informação.',
+          'Desenvolvimento de habilidades de comunicação, escuta ativa e empatia.',
+          'Intervenção básica em crise e encaminhamento oportuno.',
+          'Promoção do bem-estar, da inclusão e da recuperação integral da pessoa.',
+          'Compromisso com a formação contínua, o autocuidado e a responsabilidade profissional.'
+        ]},
+        { axis: 'Eixos de Formação do Operador Socioterapêutico', color: certColors['OST'].primary, items: [
+          'Compreensão da Adição',
+          'Conhecimento sobre o Tratamento',
+          'Aplicação à Prática',
+          'Preparação Profissional',
+          'Funções do Operador Socioterapêutico'
+        ]},
+        { axis: 'Perfil Profissional', color: certColors['OST'].accent, items: [
+          'O operador socioterapêutico atua com sensibilidade humana, respeito pela diversidade e vocação de serviço, fortalecendo processos de recuperação centrados na pessoa e contribuindo para o desenvolvimento de ambientes terapêuticos seguros e humanizados.'
+        ]}
+      ],
+      areas: ['Comunidades Terapêuticas', 'Centros de Dia', 'Programas de Prevenção', 'Acompanhamento Familiar'],
+      requirements: ['Ensino médio completo ou equivalente', '3 avais profissionais', 'Assinatura do código de ética', 'Aprovação no exame OST', 'Atuação profissional no país de origem'],
+      hours: [{ value: '80h', label: 'Formação' }, { value: '1.000h', label: 'Experiência supervisionada' }, { value: '100h', label: 'Treinamento prático' }]
+    },
+    {
+      code: 'EPR', fee: 30,
+      name: 'Treinador de Recuperação',
+      summary: 'Apoio a partir da experiência vivida em recuperação.',
+      description: 'Para pessoas com experiência vivida em recuperação de adições. Oferece apoio emocional, motivacional e informativo a partir da empatia de quem percorreu o mesmo caminho.',
+      competencies: [
+        { axis: 'Competências Principais', color: certColors['EPR'].primary, items: [
+          'Compreensão do processo de recuperação e do transtorno por uso de substâncias.',
+          'Capacidade para identificar sinais de risco e necessidades de apoio.',
+          'Habilidades de escuta ativa, comunicação empática e acompanhamento humano.',
+          'Orientação e motivação baseadas na experiência compartilhada.',
+          'Facilitação de grupos de apoio e espaços seguros de recuperação.',
+          'Promoção de hábitos saudáveis, bem-estar e prevenção de recaídas.',
+          'Conexão de pessoas com recursos comunitários e redes de recuperação.',
+          'Aplicação de princípios éticos, confidencialidade e limites profissionais.',
+          'Sensibilidade cultural, inclusão e respeito pela diversidade.',
+          'Compromisso com o autocuidado, a formação contínua e o crescimento pessoal.'
+        ]},
+        { axis: 'Eixos de Formação do Treinador de Recuperação', color: certColors['EPR'].primary, items: [
+          'Conhecimento sobre Recuperação e Transtorno por Uso de Substâncias',
+          'Papel e Funções do Treinador de Recuperação',
+          'Habilidades de Apoio e Acompanhamento',
+          'Ética e Limites Profissionais',
+          'Diversidade, Inclusão e Sensibilidade Cultural',
+          'Construção Comunitária e Redes de Recuperação',
+          'Desenvolvimento Profissional e Autocuidado'
+        ]},
+        { axis: 'Perfil Profissional', color: certColors['EPR'].accent, items: [
+          'O Treinador de Recuperação atua como modelo positivo e agente de esperança, fortalecendo processos de recuperação a partir do apoio mútuo, da integração comunitária e do acompanhamento não clínico, sempre a partir de uma visão humana e livre de estigmas.'
+        ]}
+      ],
+      areas: ['Programas de Recuperação', 'Comunidades Terapêuticas', 'Centros de Reinserção', 'Redes de Apoio Comunitário'],
+      requirements: ['Experiência vivida em recuperação (mín. 2 anos)', 'Ensino médio completo ou equivalente', '2 a 3 avais pessoais ou profissionais', 'Assinatura do código de ética', 'Aprovação no exame EPR'],
+      hours: [{ value: '80h', label: 'Formação' }, { value: '80h', label: 'Treinamento prático' }]
+    },
+    {
+      code: 'CCAAD I', fee: 50,
+      name: 'Conselheiro Associado Júnior',
+      summary: 'Primeiro nível técnico profissional com intervenções supervisionadas.',
+      description: 'Primeiro nível técnico profissional. Realiza intervenções estruturadas e supervisionadas para a atenção de pessoas com transtornos por uso de substâncias (TUS).',
+      competencies: [
+        { axis: 'Competências Principais', color: certColors['CCAAD I'].primary, items: [
+          'Compreensão integral do transtorno por uso de substâncias e seus efeitos biopsicossociais.',
+          'Identificação de fatores de risco, proteção, recaída e recuperação.',
+          'Aplicação de processos de triagem, admissão e avaliação inicial.',
+          'Uso de entrevistas estruturadas e ferramentas básicas de avaliação.',
+          'Elaboração de metas terapêuticas e acompanhamento do processo de recuperação.',
+          'Coordenação de encaminhamentos e trabalho com redes de apoio.',
+          'Desenvolvimento de aconselhamento individual, grupal e familiar.',
+          'Aplicação de entrevista motivacional, psicoeducação e prevenção de recaídas.',
+          'Promoção de habilidades de enfrentamento, autocuidado e adesão terapêutica.',
+          'Manejo ético da informação, confidencialidade e responsabilidade profissional.',
+          'Trabalho interdisciplinar com enfoque humano, empático e livre de estigmas.'
+        ]},
+        { axis: 'Eixos de Formação do Conselheiro Associado Júnior – CCAAD I', color: certColors['CCAAD I'].primary, items: [
+          'Compreensão do Transtorno por Uso de Substâncias Psicoativas',
+          'Seleção, Avaliação e Participação',
+          'Planejamento, Colaboração e Encaminhamento do Tratamento',
+          'Aconselhamento',
+          'Responsabilidade Profissional e Ética'
+        ]},
+        { axis: 'Perfil Profissional', color: certColors['CCAAD I'].accent, items: [
+          'O Conselheiro Associado Júnior CCAAD I oferece apoio estruturado e acompanhamento terapêutico a partir de uma perspectiva ética, técnica e centrada na pessoa, fortalecendo processos de recuperação e bem-estar integral.'
+        ]}
+      ],
+      areas: ['Centros de Tratamento', 'Hospitais', 'Programas Ambulatoriais', 'Comunidades Terapêuticas', 'Centros de Reinserção'],
+      requirements: ['Ensino médio completo ou equivalente', '3 referências profissionais', 'Assinatura do código de ética', 'Aprovação no exame internacional', 'Atuação no país de origem'],
+      hours: [{ value: '120h', label: 'Formação' }, { value: '1.500h', label: 'Experiência supervisionada' }, { value: '60h', label: 'Treinamento prático' }]
+    },
+    {
+      code: 'CCAAD II', fee: 75,
+      name: 'Conselheiro Certificado',
+      summary: 'Competências avançadas em aconselhamento com maior responsabilidade profissional.',
+      description: 'Competências avançadas em aconselhamento com maior responsabilidade profissional. Realiza avaliações integrais, elabora planos de tratamento individualizados e coordena redes de apoio.',
+      competencies: [
+        { axis: 'Competências Principais', color: certColors['CCAAD II'].primary, items: [
+          'Compreensão do transtorno por uso de substâncias a partir de um enfoque biopsicossocial.',
+          'Identificação de fatores de risco, recaída, recuperação e necessidades de apoio.',
+          'Aplicação de processos de triagem, admissão, orientação e avaliação inicial.',
+          'Uso de entrevistas estruturadas e ferramentas básicas de detecção.',
+          'Participação em planos de tratamento centrados na pessoa.',
+          'Coordenação de encaminhamentos e acesso a redes de apoio comunitário.',
+          'Desenvolvimento de aconselhamento individual e grupal de apoio.',
+          'Aplicação de escuta ativa, motivação e psicoeducação.',
+          'Promoção de habilidades de enfrentamento e hábitos saudáveis.',
+          'Registro técnico e acompanhamento do processo terapêutico.',
+          'Aplicação de princípios éticos, confidencialidade e responsabilidade profissional.',
+          'Trabalho colaborativo dentro de equipes interdisciplinares.'
+        ]},
+        { axis: 'Eixos de Formação do Conselheiro Certificado – CCAAD II', color: certColors['CCAAD II'].primary, items: [
+          'Compreensão do Transtorno por Uso de Substâncias Psicoativas',
+          'Seleção, Avaliação e Participação',
+          'Planejamento, Colaboração e Encaminhamento do Tratamento',
+          'Aconselhamento',
+          'Responsabilidade Profissional e Ética'
+        ]},
+        { axis: 'Perfil Profissional', color: certColors['CCAAD II'].accent, items: [
+          'O Conselheiro Certificado CCAAD II atua com empatia, responsabilidade e compromisso humano, contribuindo para o acompanhamento terapêutico e fortalecendo processos de recuperação a partir de uma atenção ética, organizada e centrada na dignidade da pessoa.'
+        ]}
+      ],
+      areas: ['Centros de Tratamento Especializado', 'Hospitais Gerais', 'Programas de Reabilitação', 'Consultoria em Políticas Públicas'],
+      requirements: ['Ensino médio completo', '3 referências profissionais', 'Assinatura do código de ética', 'Aprovação no exame', 'Atuação em país membro'],
+      hours: [{ value: '150h', label: 'Formação' }, { value: '2.000h', label: 'Experiência supervisionada' }, { value: '96h', label: 'Treinamento prático' }]
+    },
+    {
+      code: 'CCAAD III', fee: 100,
+      name: 'Conselheiro Sênior',
+      summary: 'Nível avançado profissional com avaliação biopsicossocial.',
+      description: 'Nível avançado profissional com competências para a avaliação biopsicossocial, diagnósticos funcionais e manejo de casos complexos.',
+      competencies: [
+        { axis: 'Competências Principais', color: certColors['CCAAD III'].primary, items: [
+          'Compreensão avançada do transtorno por uso de substâncias a partir de enfoques neurobiológicos, psicológicos e sociais.',
+          'Identificação de fatores de risco, proteção e capital de recuperação.',
+          'Aplicação de processos avançados de avaliação, admissão e entrevista profissional.',
+          'Integração de informação biopsicossocial para o planejamento terapêutico.',
+          'Elaboração de planos de tratamento estruturados e orientados a metas.',
+          'Coordenação de recursos institucionais, comunitários e redes de apoio.',
+          'Desenvolvimento de aconselhamento individual, grupal e familiar educativo.',
+          'Aplicação de entrevista motivacional e enfoques cognitivo-comportamentais.',
+          'Fortalecimento de habilidades de enfrentamento, prevenção de recaídas e empoderamento pessoal.',
+          'Acompanhamento e avaliação contínua do processo de acompanhamento.',
+          'Aplicação de princípios éticos, legais e de confidencialidade.',
+          'Participação em processos de supervisão profissional, melhoria contínua e trabalho interdisciplinar.'
+        ]},
+        { axis: 'Eixos de Formação do Conselheiro Sênior – CCAAD III', color: certColors['CCAAD III'].primary, items: [
+          'Compreensão do Transtorno por Uso de Substâncias Psicoativas',
+          'Seleção, Avaliação e Participação',
+          'Planejamento, Colaboração e Encaminhamento do Tratamento',
+          'Aconselhamento Avançado',
+          'Responsabilidade Profissional e Ética'
+        ]},
+        { axis: 'Perfil Profissional', color: certColors['CCAAD III'].accent, items: [
+          'O profissional CCAAD III atua como líder em processos de acompanhamento avançado, promovendo a recuperação integral, o fortalecimento de redes de apoio e a atenção centrada na pessoa, sempre dentro dos limites éticos e profissionais de sua competência.'
+        ]}
+      ],
+      areas: ['Centros de Alta Complexidade', 'Hospitais Psiquiátricos', 'Consultoria Privada', 'Formação e Docência', 'Direção de Programas'],
+      requirements: ['Graduação em Psicologia, Serviço Social ou áreas afins', '3 referências profissionais', 'Assinatura do código de ética', 'Aprovação no exame', 'Atuação em país membro'],
+      hours: [{ value: '170h', label: 'Formação' }, { value: '3.000h', label: 'Experiência em aconselhamento' }, { value: '120h', label: 'Prática supervisionada' }]
+    },
+    {
+      code: 'CCAAD IV', fee: 125,
+      name: 'Supervisor Profissional em Adições',
+      summary: 'Nível máximo: supervisão profissional e liderança de equipes.',
+      description: 'Nível máximo da trajetória de certificação. Elabora sistemas de supervisão profissional, lidera equipes de trabalho, garante a qualidade assistencial e promove a formação contínua.',
+      competencies: [
+        { axis: 'Competências Principais', color: certColors['CCAAD IV'].primary, items: [
+          'Compreensão dos fundamentos e modelos de supervisão profissional em adições.',
+          'Gestão de processos de supervisão, qualidade assistencial e desenvolvimento profissional.',
+          'Definição de papéis, limites e alcances da supervisão profissional.',
+          'Desenvolvimento de relações de supervisão baseadas em confiança, colaboração e aprendizagem reflexiva.',
+          'Aplicação de modelos e enfoques integrativos de supervisão.',
+          'Análise de casos profissionais e acompanhamento profissional especializado.',
+          'Avaliação objetiva do desempenho profissional e técnico.',
+          'Elaboração de planos de melhoria, acompanhamento e retroalimentação estruturada.',
+          'Aplicação de princípios éticos, legais e normativos em supervisão profissional.',
+          'Gestão responsável de informação confidencial e tomada de decisões éticas.',
+          'Liderança profissional, trabalho interdisciplinar e fortalecimento institucional.',
+          'Promoção da aprendizagem contínua, inovação e melhoria da qualidade profissional.'
+        ]},
+        { axis: 'Eixos de Formação do Supervisor Profissional – CCAAD IV', color: certColors['CCAAD IV'].primary, items: [
+          'Fundamentos da Supervisão Profissional',
+          'Gestão do Alcance e Papéis da Supervisão',
+          'Desenvolvimento da Relação de Supervisão',
+          'Aplicação de Modelos e Enfoques de Supervisão',
+          'Ética, Legalidade e Responsabilidade Profissional',
+          'Avaliação e Monitoramento do Desempenho'
+        ]},
+        { axis: 'Perfil Profissional', color: certColors['CCAAD IV'].accent, items: [
+          'O profissional CCAAD IV possui capacidades avançadas para supervisionar, formar e fortalecer equipes de aconselhamento e atenção em adições, garantindo qualidade técnica, ética profissional e desenvolvimento contínuo do talento humano dentro de modelos orientados à recuperação e padrões internacionais.'
+        ]}
+      ],
+      areas: ['Direção Clínica', 'Supervisão de Equipes', 'Consultoria Organizacional', 'Formação de Supervisores', 'Assessoria em Políticas de Saúde'],
+      requirements: ['Graduação ou superior em saúde mental', '3 referências profissionais', 'Assinatura do código de ética', 'Aprovação no exame', 'Atuação em país membro'],
+      hours: [{ value: '40h', label: 'Formação em supervisão' }, { value: '2.000h', label: 'Como conselheiro' }, { value: '4.000h', label: 'Supervisão profissional' }, { value: '120h', label: 'Supervisão recebida' }]
+    }
+  ]
+}
+
+const certifications = computed(() => certificationsContent[locale.value] || certificationsContent.es)
 
 const processSteps = [
   { title: 'Completá la solicitud', desc: 'Formulario en línea con tus datos personales y profesionales.', note: 'Adjuntá toda la documentación requerida' },
@@ -761,24 +1011,42 @@ const processSteps = [
   { title: 'Tu certificación', desc: 'Nombre publicado en el directorio público verificable.', note: 'Válido por 2 años' }
 ]
 
-const faqs = [
-  { question: '¿Qué es ASCAD LATAM?', answer: 'ASCAD LATAM es una entidad internacional de certificación profesional especializada en el desarrollo, evaluación y acreditación de competencias en consejería, recuperación, supervisión clínica y atención de las adicciones en América Latina. Sus estándares están fundamentados en los modelos internacionales TAP 21, TIP 64 y TIP 52 de SAMHSA, promoviendo una formación basada en evidencia, ética profesional y mejora continua. Las certificaciones de ASCAD LATAM validan que el profesional ha demostrado competencias específicas de acuerdo con estándares internacionales reconocidos para el trabajo en prevención, tratamiento, recuperación y apoyo a personas con trastornos por uso de sustancias. La validez y reconocimiento legal de cada certificación puede variar según las leyes, regulaciones y requisitos profesionales de cada país. Por ello, se recomienda consultar con el representante nacional de ASCAD LATAM o con las autoridades competentes del país donde se pretende ejercer profesionalmente. Lo que ASCAD LATAM garantiza es que la persona certificada ha demostrado las competencias, conocimientos, habilidades y estándares éticos necesarios para desempeñarse profesionalmente dentro del campo de las adicciones en cualquier país de América Latina, de acuerdo con los criterios internacionales de certificación establecidos por la organización.' },
-  { question: '¿Quiénes pueden certificarse en ASCAD LATAM?', answer: 'Las certificaciones ASCAD LATAM están abiertas a profesionales, técnicos, operadores, entrenadores de recuperación, estudiantes avanzados y especialistas que cumplan con los requisitos académicos, de experiencia supervisada, formación específica y evaluación correspondientes a cada nivel de certificación.' },
-  { question: '¿Cuáles son los niveles de certificación disponibles?', answer: 'ASCAD LATAM ofrece una ruta progresiva de desarrollo profesional: OST – Operador Socioterapéutico. EPR/ER – Entrenador de Recuperación (Recovery Coach). CCAAD I – Consejero Asociado en Adicciones. CCAAD II – Técnico en Counselling en Adicciones. CCAAD III – Licenciado Profesional en Counselling Avanzada No Clínica. CCAAD IV – Supervisor Clínico Certificado en Adicciones.' },
-  { question: '¿Cuál es la vigencia de la certificación?', answer: 'La certificación tiene una vigencia de dos (2) años. Al finalizar ese período, el profesional deberá realizar el proceso de recertificación para mantener activa su credencial profesional.' },
-  { question: '¿Cuál es el procedimiento de recertificación?', answer: 'La recertificación se realiza cada dos años y requiere demostrar participación en actividades de actualización profesional mediante la presentación de horas de educación continua, capacitación especializada, congresos, seminarios o programas de formación relacionados con el campo de las adicciones y la recuperación.' },
-  { question: '¿Qué sucede si no aprobo el examen de certificación?', answer: 'La aprobación del examen internacional es un requisito para obtener la certificación. Si el candidato no alcanza la puntuación requerida, podrá volver a presentar el examen de acuerdo con las políticas y procedimientos vigentes establecidos por ASCAD LATAM.' },
-  { question: '¿Se reconoce la experiencia obtenida en otros países?', answer: 'Sí. La experiencia profesional obtenida en otros países puede ser reconocida siempre que esté debidamente documentada, sea verificable y cumpla con los requisitos de experiencia supervisada establecidos para el nivel de certificación solicitado.' },
-  { question: '¿Puedo trabajar en cualquier país de América Latina con una certificación ASCAD LATAM?', answer: 'La certificación ASCAD LATAM acredita competencias profesionales con estándares internacionales reconocidos para el trabajo en adicciones y recuperación en América Latina. Sin embargo, el ejercicio profesional puede estar sujeto a las leyes, regulaciones y requisitos específicos de cada país. Por ello, se recomienda consultar con el representante nacional de ASCAD LATAM o con las autoridades competentes del país donde se pretende ejercer. La certificación garantiza que el profesional posee las competencias necesarias para desempeñarse conforme a estándares internacionales, pero no sustituye los requisitos legales que puedan existir en cada jurisdicción.' },
-  { question: '¿Puedo certificarme en más de un nivel al mismo tiempo?', answer: 'Sí. Un candidato puede solicitar más de una certificación simultáneamente, siempre que cumpla con todos los requisitos académicos, de experiencia, formación específica y práctica supervisada establecidos para cada nivel.' },
-  { question: '¿Existen beneficios para personas asociadas y organizaciones afiliadas?', answer: 'Sí. Las personas asociadas y las organizaciones afiliadas pueden acceder a beneficios como: descuentos en procesos de certificación y recertificación, acceso preferencial a capacitaciones, congresos y eventos académicos, participación en redes profesionales nacionales e internacionales, acceso a recursos educativos especializados, oportunidades de desarrollo profesional continuo, reconocimiento institucional dentro de la red ASCAD LATAM, oportunidades de colaboración académica y profesional.' },
-  { question: '¿Por qué es importante la certificación ASCAD LATAM?', answer: 'La certificación ASCAD LATAM permite validar competencias profesionales mediante estándares internacionales reconocidos, fortaleciendo la credibilidad profesional, la calidad de los servicios, la ética de la práctica y el desarrollo continuo de la fuerza laboral especializada en adicciones y recuperación. Además, proporciona una ruta estructurada de crecimiento profesional que facilita el desarrollo progresivo de competencias desde niveles de entrada y apoyo hasta niveles avanzados de supervisión clínica y liderazgo.' },
-  { question: '¿Cómo inicio mi proceso de certificación?', answer: 'El candidato debe seleccionar el nivel de certificación correspondiente a su formación y experiencia, completar la documentación requerida, presentar las referencias profesionales, acreditar las horas de experiencia y formación exigidas, firmar el Código de Ética Profesional y aprobar el examen internacional correspondiente. Para obtener información específica sobre requisitos, fechas de aplicación y procedimientos administrativos, puede comunicarse con el representante de ASCAD LATAM en su país.' }
-]
+const faqsContent = {
+  es: [
+    { question: '¿Qué es ASCAD LATAM?', answer: 'ASCAD LATAM es una entidad internacional de certificación profesional especializada en el desarrollo, evaluación y acreditación de competencias en consejería, recuperación, supervisión clínica y atención de las adicciones en América Latina. Sus estándares están fundamentados en los modelos internacionales TAP 21, TIP 64 y TIP 52 de SAMHSA, promoviendo una formación basada en evidencia, ética profesional y mejora continua. Las certificaciones de ASCAD LATAM validan que el profesional ha demostrado competencias específicas de acuerdo con estándares internacionales reconocidos para el trabajo en prevención, tratamiento, recuperación y apoyo a personas con trastornos por uso de sustancias. La validez y reconocimiento legal de cada certificación puede variar según las leyes, regulaciones y requisitos profesionales de cada país. Por ello, se recomienda consultar con el representante nacional de ASCAD LATAM o con las autoridades competentes del país donde se pretende ejercer profesionalmente. Lo que ASCAD LATAM garantiza es que la persona certificada ha demostrado las competencias, conocimientos, habilidades y estándares éticos necesarios para desempeñarse profesionalmente dentro del campo de las adicciones en cualquier país de América Latina, de acuerdo con los criterios internacionales de certificación establecidos por la organización.' },
+    { question: '¿Quiénes pueden certificarse en ASCAD LATAM?', answer: 'Las certificaciones ASCAD LATAM están abiertas a profesionales, técnicos, operadores, entrenadores de recuperación, estudiantes avanzados y especialistas que cumplan con los requisitos académicos, de experiencia supervisada, formación específica y evaluación correspondientes a cada nivel de certificación.' },
+    { question: '¿Cuáles son los niveles de certificación disponibles?', answer: 'ASCAD LATAM ofrece una ruta progresiva de desarrollo profesional: OST – Operador Socioterapéutico. EPR/ER – Entrenador de Recuperación (Recovery Coach). CCAAD I – Consejero Asociado en Adicciones. CCAAD II – Técnico en Counselling en Adicciones. CCAAD III – Licenciado Profesional en Counselling Avanzada No Clínica. CCAAD IV – Supervisor Clínico Certificado en Adicciones.' },
+    { question: '¿Cuál es la vigencia de la certificación?', answer: 'La certificación tiene una vigencia de dos (2) años. Al finalizar ese período, el profesional deberá realizar el proceso de recertificación para mantener activa su credencial profesional.' },
+    { question: '¿Cuál es el procedimiento de recertificación?', answer: 'La recertificación se realiza cada dos años y requiere demostrar participación en actividades de actualización profesional mediante la presentación de horas de educación continua, capacitación especializada, congresos, seminarios o programas de formación relacionados con el campo de las adicciones y la recuperación.' },
+    { question: '¿Qué sucede si no aprobo el examen de certificación?', answer: 'La aprobación del examen internacional es un requisito para obtener la certificación. Si el candidato no alcanza la puntuación requerida, podrá volver a presentar el examen de acuerdo con las políticas y procedimientos vigentes establecidos por ASCAD LATAM.' },
+    { question: '¿Se reconoce la experiencia obtenida en otros países?', answer: 'Sí. La experiencia profesional obtenida en otros países puede ser reconocida siempre que esté debidamente documentada, sea verificable y cumpla con los requisitos de experiencia supervisada establecidos para el nivel de certificación solicitado.' },
+    { question: '¿Puedo trabajar en cualquier país de América Latina con una certificación ASCAD LATAM?', answer: 'La certificación ASCAD LATAM acredita competencias profesionales con estándares internacionales reconocidos para el trabajo en adicciones y recuperación en América Latina. Sin embargo, el ejercicio profesional puede estar sujeto a las leyes, regulaciones y requisitos específicos de cada país. Por ello, se recomienda consultar con el representante nacional de ASCAD LATAM o con las autoridades competentes del país donde se pretende ejercer. La certificación garantiza que el profesional posee las competencias necesarias para desempeñarse conforme a estándares internacionales, pero no sustituye los requisitos legales que puedan existir en cada jurisdicción.' },
+    { question: '¿Puedo certificarme en más de un nivel al mismo tiempo?', answer: 'Sí. Un candidato puede solicitar más de una certificación simultáneamente, siempre que cumpla con todos los requisitos académicos, de experiencia, formación específica y práctica supervisada establecidos para cada nivel.' },
+    { question: '¿Existen beneficios para personas asociadas y organizaciones afiliadas?', answer: 'Sí. Las personas asociadas y las organizaciones afiliadas pueden acceder a beneficios como: descuentos en procesos de certificación y recertificación, acceso preferencial a capacitaciones, congresos y eventos académicos, participación en redes profesionales nacionales e internacionales, acceso a recursos educativos especializados, oportunidades de desarrollo profesional continuo, reconocimiento institucional dentro de la red ASCAD LATAM, oportunidades de colaboración académica y profesional.' },
+    { question: '¿Por qué es importante la certificación ASCAD LATAM?', answer: 'La certificación ASCAD LATAM permite validar competencias profesionales mediante estándares internacionales reconocidos, fortaleciendo la credibilidad profesional, la calidad de los servicios, la ética de la práctica y el desarrollo continuo de la fuerza laboral especializada en adicciones y recuperación. Además, proporciona una ruta estructurada de crecimiento profesional que facilita el desarrollo progresivo de competencias desde niveles de entrada y apoyo hasta niveles avanzados de supervisión clínica y liderazgo.' },
+    { question: '¿Cómo inicio mi proceso de certificación?', answer: 'El candidato debe seleccionar el nivel de certificación correspondiente a su formación y experiencia, completar la documentación requerida, presentar las referencias profesionales, acreditar las horas de experiencia y formación exigidas, firmar el Código de Ética Profesional y aprobar el examen internacional correspondiente. Para obtener información específica sobre requisitos, fechas de aplicación y procedimientos administrativos, puede comunicarse con el representante de ASCAD LATAM en su país.' }
+  ],
+  pt: [
+    { question: 'O que é a ASCAD LATAM?', answer: 'A ASCAD LATAM é uma entidade internacional de certificação profissional especializada no desenvolvimento, avaliação e credenciamento de competências em aconselhamento, recuperação, supervisão clínica e atendimento às adições na América Latina. Seus padrões são fundamentados nos modelos internacionais TAP 21, TIP 64 e TIP 52 da SAMHSA, promovendo uma formação baseada em evidências, ética profissional e melhoria contínua. As certificações da ASCAD LATAM validam que o profissional demonstrou competências específicas de acordo com padrões internacionais reconhecidos para o trabalho em prevenção, tratamento, recuperação e apoio a pessoas com transtornos por uso de substâncias. A validade e o reconhecimento legal de cada certificação podem variar de acordo com as leis, regulamentações e requisitos profissionais de cada país. Por isso, recomenda-se consultar o representante nacional da ASCAD LATAM ou as autoridades competentes do país onde se pretende exercer profissionalmente. O que a ASCAD LATAM garante é que a pessoa certificada demonstrou as competências, conhecimentos, habilidades e padrões éticos necessários para atuar profissionalmente no campo das adições em qualquer país da América Latina, de acordo com os critérios internacionais de certificação estabelecidos pela organização.' },
+    { question: 'Quem pode se certificar na ASCAD LATAM?', answer: 'As certificações da ASCAD LATAM estão abertas a profissionais, técnicos, operadores, treinadores de recuperação, estudantes avançados e especialistas que cumpram os requisitos acadêmicos, de experiência supervisionada, formação específica e avaliação correspondentes a cada nível de certificação.' },
+    { question: 'Quais são os níveis de certificação disponíveis?', answer: 'A ASCAD LATAM oferece uma trajetória progressiva de desenvolvimento profissional: OST – Operador Socioterapêutico. EPR/ER – Treinador de Recuperação (Recovery Coach). CCAAD I – Conselheiro Associado em Adições. CCAAD II – Técnico em Counselling em Adições. CCAAD III – Licenciado Profissional em Counselling Avançada Não Clínica. CCAAD IV – Supervisor Clínico Certificado em Adições.' },
+    { question: 'Qual é a validade da certificação?', answer: 'A certificação tem validade de dois (2) anos. Ao final desse período, o profissional deverá realizar o processo de recertificação para manter ativa sua credencial profissional.' },
+    { question: 'Qual é o procedimento de recertificação?', answer: 'A recertificação é realizada a cada dois anos e exige comprovar a participação em atividades de atualização profissional mediante a apresentação de horas de educação continuada, capacitação especializada, congressos, seminários ou programas de formação relacionados ao campo das adições e da recuperação.' },
+    { question: 'O que acontece se eu não for aprovado no exame de certificação?', answer: 'A aprovação no exame internacional é um requisito para obter a certificação. Se o candidato não alcançar a pontuação exigida, poderá realizar novamente o exame de acordo com as políticas e procedimentos vigentes estabelecidos pela ASCAD LATAM.' },
+    { question: 'A experiência obtida em outros países é reconhecida?', answer: 'Sim. A experiência profissional obtida em outros países pode ser reconhecida desde que esteja devidamente documentada, seja verificável e cumpra os requisitos de experiência supervisionada estabelecidos para o nível de certificação solicitado.' },
+    { question: 'Posso trabalhar em qualquer país da América Latina com uma certificação ASCAD LATAM?', answer: 'A certificação ASCAD LATAM credencia competências profissionais com padrões internacionais reconhecidos para o trabalho em adições e recuperação na América Latina. No entanto, o exercício profissional pode estar sujeito às leis, regulamentações e requisitos específicos de cada país. Por isso, recomenda-se consultar o representante nacional da ASCAD LATAM ou as autoridades competentes do país onde se pretende exercer. A certificação garante que o profissional possui as competências necessárias para atuar de acordo com padrões internacionais, mas não substitui os requisitos legais que possam existir em cada jurisdição.' },
+    { question: 'Posso me certificar em mais de um nível ao mesmo tempo?', answer: 'Sim. Um candidato pode solicitar mais de uma certificação simultaneamente, desde que cumpra todos os requisitos acadêmicos, de experiência, formação específica e prática supervisionada estabelecidos para cada nível.' },
+    { question: 'Existem benefícios para pessoas associadas e organizações afiliadas?', answer: 'Sim. As pessoas associadas e as organizações afiliadas podem acessar benefícios como: descontos em processos de certificação e recertificação, acesso preferencial a capacitações, congressos e eventos acadêmicos, participação em redes profissionais nacionais e internacionais, acesso a recursos educacionais especializados, oportunidades de desenvolvimento profissional contínuo, reconhecimento institucional dentro da rede ASCAD LATAM, oportunidades de colaboração acadêmica e profissional.' },
+    { question: 'Por que a certificação ASCAD LATAM é importante?', answer: 'A certificação ASCAD LATAM permite validar competências profissionais por meio de padrões internacionais reconhecidos, fortalecendo a credibilidade profissional, a qualidade dos serviços, a ética da prática e o desenvolvimento contínuo da força de trabalho especializada em adições e recuperação. Além disso, oferece uma trajetória estruturada de crescimento profissional que facilita o desenvolvimento progressivo de competências desde níveis de entrada e apoio até níveis avançados de supervisão clínica e liderança.' },
+    { question: 'Como inicio meu processo de certificação?', answer: 'O candidato deve selecionar o nível de certificação correspondente à sua formação e experiência, preencher a documentação exigida, apresentar as referências profissionais, comprovar as horas de experiência e formação exigidas, assinar o Código de Ética Profissional e ser aprovado no exame internacional correspondente. Para obter informações específicas sobre requisitos, datas de inscrição e procedimentos administrativos, pode entrar em contato com o representante da ASCAD LATAM em seu país.' }
+  ]
+}
 
-const consortium = [
-  { name: 'ASCAD LATAM', icon: '🏛️', role: 'Certificación Internacional' },
-]
+const faqs = computed(() => faqsContent[locale.value] || faqsContent.es)
+
+const consortium = computed(() => [
+  { name: 'ASCAD LATAM', icon: '🏛️', role: t('nav.brandLabel') },
+])
 </script>
 
 <style scoped>
