@@ -15,7 +15,7 @@
       <div class="container">
         <div class="stats-summary">
           <div class="stat-item">
-            <span class="stat-number">9</span>
+            <span class="stat-number">10</span>
             <span class="stat-label">{{ $t('directorio.paisesAfiliados') }}</span>
           </div>
           <div class="stat-item">
@@ -102,6 +102,13 @@
             <div class="country-info">
               <h4>{{ $t('home.uruguay') }}</h4>
               <p>{{ $t('directorio.uruguayDesc') }}</p>
+            </div>
+          </div>
+          <div class="country-card">
+            <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" class="country-flag" loading="lazy" />
+            <div class="country-info">
+              <h4>{{ $t('home.bolivia') }}</h4>
+              <p>{{ $t('directorio.boliviaDesc') }}</p>
             </div>
           </div>
         </div>

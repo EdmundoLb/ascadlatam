@@ -32,9 +32,9 @@
               </div>
               <div class="stat-info">
                 <div class="stat-number-row">
-                  <span class="stat-number">9</span>
+                  <span class="stat-number">10</span>
                 </div>
-                <span class="stat-short-label" title="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile, Uruguay">{{ $t('home.paises') }}</span>
+                <span class="stat-short-label" title="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile, Uruguay, Bolivia">{{ $t('home.paises') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -347,6 +347,13 @@
           <div class="country-info">
             <h4>{{ $t('home.uruguay') }}</h4>
             <p>{{ $t('home.uruguayDesc') }}</p>
+          </div>
+        </div>
+        <div class="country-card">
+          <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" class="country-flag" loading="lazy" />
+          <div class="country-info">
+            <h4>{{ $t('home.bolivia') }}</h4>
+            <p>{{ $t('home.boliviaDesc') }}</p>
           </div>
         </div>
       </div>
