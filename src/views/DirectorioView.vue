@@ -213,7 +213,7 @@
             <div class="avatar-wrap">
               <img :src="imgParaguay" alt="Adriano Shuster" class="avatar-img" />
             </div>
-            <h4 class="d-nombre">Adriano Shuster <span class="dr-hc">Dr.h.c.</span></h4>
+            <h4 class="d-nombre">Adriano Schuster <span class="dr-hc">Dr.h.c.</span></h4>
             <p class="d-cred">OST · CCAAD II</p>
             <div class="d-pais-badge">
               <img src="https://flagcdn.com/w20/py.png" alt="Paraguay" class="d-bandera" />
