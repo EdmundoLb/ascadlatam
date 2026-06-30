@@ -235,6 +235,31 @@
             <span class="d-cargo">{{ $t('directorio.delegadoRegional') }}</span>
           </div>
 
+          <div class="delegado-card">
+            <div class="avatar-wrap">
+              <img :src="imgBolivia" alt="Jhonny Huanto Flores" class="avatar-img" />
+            </div>
+            <h4 class="d-nombre">Jhonny Huanto Flores</h4>
+            <div class="d-pais-badge">
+              <img src="https://flagcdn.com/w20/bo.png" alt="Bolivia" class="d-bandera" />
+              <span>{{ $t('home.bolivia') }}</span>
+            </div>
+            <span class="d-cargo">{{ $t('directorio.delegadoRegional') }}</span>
+          </div>
+
+          <div class="delegado-card">
+            <div class="avatar-wrap">
+              <img :src="imgPanama" alt="María Sandra Olmedo" class="avatar-img" />
+            </div>
+            <h4 class="d-nombre">María Sandra Olmedo</h4>
+            <p class="d-cred">Prof. de Español · Tec. en Trat. y Rehab. de Sustancias</p>
+            <div class="d-pais-badge">
+              <img src="https://flagcdn.com/w20/pa.png" alt="Panamá" class="d-bandera" />
+              <span>{{ $t('home.panama') }}</span>
+            </div>
+            <span class="d-cargo">{{ $t('directorio.delegadaRegional') }}</span>
+          </div>
+
           <!-- Costa Rica: foto pendiente -->
           <div class="delegado-card">
             <div class="avatar-wrap avatar-pending">
@@ -295,10 +320,12 @@
 
 <script setup>
 import imgCoordinador from '/images/Delegados/coordinador-general.jpg'
+import imgBolivia from '/images/Delegados/bolivia.png'
 import imgChile from '/images/Delegados/chile.jpg'
 import imgEcuador from '/images/Delegados/ecuador.jpg'
 import imgMexico from '/images/Delegados/mexico.jpg'
 import imgNicaragua from '/images/Delegados/nicaragua.jpg'
+import imgPanama from '/images/Delegados/panama.jpg'
 import imgParaguay from '/images/Delegados/paraguay.jpg'
 import imgRepDom from '/images/Delegados/republica-dominicana.jpg'
 import imgUruguay from '/images/Delegados/uruguay.jpg'
