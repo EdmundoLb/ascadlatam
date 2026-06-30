@@ -326,7 +326,13 @@
     "ctaIniciar": "Iniciar mi certificación",
     "ctaVerCertificaciones": "Ver certificaciones",
     "asociacionTituloPre": "Asociación Latinoamericana para la",
-    "asociacionTituloEm": "Certificación y Acreditación de Consejeros en Adicciones"
+    "asociacionTituloEm": "Certificación y Acreditación de Consejeros en Adicciones",
+    "liderazgoRegional": "Liderazgo Regional",
+    "coordinadorGeneral": "Coordinador General Latinoamérica",
+    "delegadosRegionales": "Delegados Regionales",
+    "delegadosDesc": "Profesionales que representan y lideran la red ASCAD/LATAM en cada país afiliado.",
+    "delegadoRegional": "Delegado Regional",
+    "delegadaRegional": "Delegada Regional"
   },
   "blog": {
     "titulo": "Blog y Recursos",

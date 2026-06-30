@@ -330,7 +330,13 @@
     "ctaIniciar": "Iniciar minha certificação",
     "ctaVerCertificaciones": "Ver certificações",
     "asociacionTituloPre": "Associação Latino-Americana para a",
-    "asociacionTituloEm": "Certificação e Acreditação de Conselheiros em Adições"
+    "asociacionTituloEm": "Certificação e Acreditação de Conselheiros em Adições",
+    "liderazgoRegional": "Liderança Regional",
+    "coordinadorGeneral": "Coordenador Geral da América Latina",
+    "delegadosRegionales": "Delegados Regionais",
+    "delegadosDesc": "Profissionais que representam e lideram a rede ASCAD/LATAM em cada país afiliado.",
+    "delegadoRegional": "Delegado Regional",
+    "delegadaRegional": "Delegada Regional"
   },
   "blog": {
     "titulo": "Blog e Recursos",
