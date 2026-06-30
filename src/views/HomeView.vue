@@ -7,8 +7,11 @@
       <div class="hero-inner">
         <div class="hero-content animate-fade-in-up">
 <h1 class="hero-title">
-            <!-- v-html: texto fijo desde locales es/pt, no contenido dinámico -->
-            <span class="title-main" v-html="$t('home.tituloHero')"></span>
+              <span class="title-main">
+              {{ $t('home.tituloHero1') }}<br>
+              <span class="text-gradient">{{ $t('home.tituloHero2') }}</span><br>
+              {{ $t('home.tituloHero3') }}
+            </span>
           </h1>
           <p class="hero-lead">
             {{ $t('home.descripcion') }}
@@ -176,27 +179,6 @@
     </div>
   </section>
 
-  <!-- CTA INTERMEDIO -->
-  <section class="section cta-intermediate">
-    <div class="container">
-      <div class="cta-intermediate-inner">
-        <div class="cta-intermediate-content">
-          <h3>{{ $t('home.ctaIntermedioTitulo') }}</h3>
-          <p>{{ $t('home.ctaIntermedioDesc') }}</p>
-        </div>
-        <div class="cta-intermediate-actions">
-          <router-link to="/certificaciones" class="btn btn-gold btn-lg">
-            {{ $t('home.ver') }} {{ $t('home.certificaciones').toLowerCase() }}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </router-link>
-          <router-link to="/solicitud" class="btn btn-outline btn-lg">
-{{ $t('home.iniciarSolicitud') }}
-          </router-link>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CULTURAL ADAPTABILITY -->
   <section class="section cultural-section section-alt animate-on-scroll">
     <div class="container">
@@ -205,8 +187,11 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
           {{ $t('home.adaptacionCultural') }}
         </div>
-        <!-- v-html: texto fijo desde locales es/pt, no contenido dinámico -->
-        <h2 class="cultural-title" v-html="$t('home.culturalTitulo')"></h2>
+        <h2 class="cultural-title">
+          {{ $t('home.culturalTitulo1') }}
+          <em class="gold">{{ $t('home.culturalTitulo2') }}</em>
+          {{ $t('home.culturalTitulo3') }}
+        </h2>
         <div class="cultural-grid">
           <div class="cultural-point">
             <div class="cultural-point-icon">
@@ -285,77 +270,53 @@
         <h2>{{ $t('home.paisesMiembros') }} <em class="gold">{{ $t('home.miembros') }}</em></h2>
         <p class="lead" style="margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto;">{{ $t('home.redRegional') }}</p>
       </div>
-      <div class="countries-grid">
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.costaRica') }}</h4>
-            <p>{{ $t('home.costaRicaDesc') }}</p>
-          </div>
+      <div class="flags-strip">
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.costaRica') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.nicaragua') }}</h4>
-            <p>{{ $t('home.nicaraguaDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.nicaragua') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.panama') }}</h4>
-            <p>{{ $t('home.panamaDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.panama') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.mexico') }}</h4>
-            <p>{{ $t('home.mexicoDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.mexico') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.republicaDominicana')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.repDominicana') }}</h4>
-            <p>{{ $t('home.republicaDominicanaDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.repDominicana')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.repDominicana') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.ecuador') }}</h4>
-            <p>{{ $t('home.ecuadorDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.ecuador') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.paraguay') }}</h4>
-            <p>{{ $t('home.paraguayDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.paraguay') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.chile') }}</h4>
-            <p>{{ $t('home.chileDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.chile') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/uy.png" :alt="$t('home.uruguay')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.uruguay') }}</h4>
-            <p>{{ $t('home.uruguayDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/uy.png" :alt="$t('home.uruguay')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.uruguay') }}</span>
         </div>
-        <div class="country-card">
-          <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" class="country-flag" loading="lazy" />
-          <div class="country-info">
-            <h4>{{ $t('home.bolivia') }}</h4>
-            <p>{{ $t('home.boliviaDesc') }}</p>
-          </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.bolivia') }}</span>
         </div>
+      </div>
+      <div class="countries-cta">
+        <router-link to="/directorio" class="btn btn-outline">
+          {{ $t('home.verDirectorio') }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </router-link>
       </div>
     </div>
   </section>
@@ -676,16 +637,16 @@ onUnmounted(() => {
 .stat-icon {
   width: 48px; height: 48px;
   border-radius: var(--radius);
-  background: var(--accent-light);
+  background: rgba(10, 37, 64, 0.07);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-dark);
+  color: var(--primary);
 }
 .stat-info { display: flex; flex-direction: column; gap: 2px; }
 .stat-number-row { display: flex; align-items: baseline; gap: 8px; }
 .stat-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); line-height: 1; font-family: var(--font-display); }
-.stat-short-label { font-family: var(--font-mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-dark); background: var(--accent-light); padding: 3px 8px; border-radius: var(--radius-sm); cursor: help; position: relative; }
+.stat-short-label { font-family: var(--font-mono); font-size: .625rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); background: var(--bg-light); padding: 3px 8px; border-radius: var(--radius-sm); cursor: help; position: relative; }
 .stat-short-label:hover::after {
   content: attr(title);
   position: absolute;
@@ -1061,37 +1022,46 @@ onUnmounted(() => {
 
 /* COUNTRIES */
 .countries-section { background: var(--bg-light); }
-.countries-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+.flags-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
   margin-top: 48px;
 }
-.country-card {
-  background: var(--white);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 24px;
+.flag-chip {
   display: flex;
   align-items: center;
-  gap: 16px;
-  transition: all .3s ease;
-}
-.country-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--accent-light);
-}
-.country-flag {
-  width: 48px;
-  height: 36px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  flex-shrink: 0;
+  gap: 10px;
+  background: var(--white);
   border: 1px solid var(--line-light);
+  border-radius: 999px;
+  padding: 8px 16px 8px 8px;
+  transition: all .25s ease;
 }
-.country-info h4 { font-size: .9375rem; color: var(--text); margin-bottom: 4px; }
-.country-info p { font-size: .75rem; color: var(--text-muted); line-height: 1.4; }
+.flag-chip:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+.flag-img {
+  width: 28px;
+  height: 21px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--line-light);
+  flex-shrink: 0;
+}
+.flag-chip span {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+}
+.countries-cta {
+  text-align: center;
+  margin-top: 40px;
+}
 
 /* CULTURAL SECTION */
 .cultural-section {

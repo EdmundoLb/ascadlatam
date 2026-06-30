@@ -5,7 +5,7 @@
     <div class="container nav-inner">
       <router-link to="/" class="brand">
         <div class="brand-logo">
-          <img :src="logoAscad" :alt="'ASCAD LATAM - Logo'" width="72" height="72" />
+          <img :src="logoAscad" :alt="'ASCAD LATAM - Logo'" width="64" height="64" />
         </div>
         <div class="brand-text">
           <span class="brand-label">{{ $t('nav.brandLabel') }}</span>
@@ -18,17 +18,38 @@
       <nav class="desktop-nav" role="navigation" :aria-label="$t('nav.navPrincipal')">
         <router-link to="/">{{ $t('nav.inicio') }}</router-link>
         <router-link to="/certificaciones">{{ $t('nav.certificaciones') }}</router-link>
-        <router-link to="/etica">{{ $t('nav.etica') }}</router-link>
-        <router-link to="/ascadlatam">{{ $t('nav.ascadlatam') }}</router-link>
-        <router-link to="/formacion">{{ $t('nav.formacion') }}</router-link>
-        <router-link to="/noticias">{{ $t('nav.recursos') }}</router-link>
+
+        <!-- Dropdown Nosotros -->
+        <div
+          class="nav-dropdown"
+          :class="{ open: dropdownOpen, active: nosotrosActive }"
+          @mouseenter="dropdownOpen = true"
+          @mouseleave="dropdownOpen = false"
+        >
+          <button
+            class="nav-dropdown-trigger"
+            :aria-expanded="dropdownOpen"
+            @click="dropdownOpen = !dropdownOpen"
+            @keydown.escape="dropdownOpen = false"
+          >
+            {{ $t('nav.nosotros') }}
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-dropdown-panel" role="menu">
+            <router-link to="/etica"      role="menuitem" @click="dropdownOpen = false">{{ $t('nav.etica') }}</router-link>
+            <router-link to="/ascadlatam" role="menuitem" @click="dropdownOpen = false">{{ $t('nav.ascadlatam') }}</router-link>
+            <router-link to="/formacion"  role="menuitem" @click="dropdownOpen = false">{{ $t('nav.formacion') }}</router-link>
+            <router-link to="/noticias"   role="menuitem" @click="dropdownOpen = false">{{ $t('nav.recursos') }}</router-link>
+          </div>
+        </div>
+
         <router-link to="/directorio">{{ $t('nav.paises') }}</router-link>
         <router-link to="/contacto">{{ $t('nav.contacto') }}</router-link>
       </nav>
 
       <div class="nav-actions">
         <button class="lang-btn" @click="toggleLocale" :aria-label="$t('common.language')">
-          {{ currentLocale === 'es' ? '🇪🇸' : '🇧🇷' }}
+          {{ currentLocale === 'es' ? 'ES' : 'PT' }}
         </button>
 
         <router-link to="/solicitud" class="btn btn-gold hide-mobile">
@@ -68,15 +89,31 @@
     >
       <router-link to="/" @click="closeMenu" tabindex="0">{{ $t('nav.inicio') }}</router-link>
       <router-link to="/certificaciones" @click="closeMenu" tabindex="0">{{ $t('nav.certificaciones') }}</router-link>
-      <router-link to="/etica" @click="closeMenu" tabindex="0">{{ $t('nav.etica') }}</router-link>
-      <router-link to="/ascadlatam" @click="closeMenu" tabindex="0">{{ $t('nav.ascadlatam') }}</router-link>
-      <router-link to="/formacion" @click="closeMenu" tabindex="0">{{ $t('nav.formacion') }}</router-link>
-      <router-link to="/noticias" @click="closeMenu" tabindex="0">{{ $t('nav.recursos') }}</router-link>
+
+      <!-- Nosotros expandible en móvil -->
+      <div class="mobile-group">
+        <button
+          class="mobile-group-trigger"
+          @click="mobileNosotrosOpen = !mobileNosotrosOpen"
+          :aria-expanded="mobileNosotrosOpen"
+        >
+          {{ $t('nav.nosotros') }}
+          <svg class="chevron" :class="{ rotated: mobileNosotrosOpen }" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mobile-sublinks" :class="{ open: mobileNosotrosOpen }">
+          <router-link to="/etica"      @click="closeMenu" tabindex="0">{{ $t('nav.etica') }}</router-link>
+          <router-link to="/ascadlatam" @click="closeMenu" tabindex="0">{{ $t('nav.ascadlatam') }}</router-link>
+          <router-link to="/formacion"  @click="closeMenu" tabindex="0">{{ $t('nav.formacion') }}</router-link>
+          <router-link to="/noticias"   @click="closeMenu" tabindex="0">{{ $t('nav.recursos') }}</router-link>
+        </div>
+      </div>
+
       <router-link to="/directorio" @click="closeMenu" tabindex="0">{{ $t('nav.paises') }}</router-link>
       <router-link to="/contacto" @click="closeMenu" tabindex="0">{{ $t('nav.contacto') }}</router-link>
+
       <div class="mobile-lang">
-        <button @click="setLocale('es')" :class="{ active: currentLocale === 'es' }">🇪🇸 Español</button>
-        <button @click="setLocale('pt')" :class="{ active: currentLocale === 'pt' }">🇧🇷 Português</button>
+        <button @click="setLocale('es')" :class="{ active: currentLocale === 'es' }">ES · Español</button>
+        <button @click="setLocale('pt')" :class="{ active: currentLocale === 'pt' }">PT · Português</button>
       </div>
       <router-link to="/solicitud" @click="closeMenu" class="mobile-cta" tabindex="0">{{ $t('nav.iniciarSolicitud') }} →</router-link>
     </nav>
@@ -84,14 +121,22 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick } from 'vue'
+import { ref, watch, nextTick, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
 
 const { locale } = useI18n()
+const route = useRoute()
 const currentLocale = ref(locale.value)
 const menuOpen = ref(false)
 const hamburgerRef = ref(null)
+const dropdownOpen = ref(false)
+const mobileNosotrosOpen = ref(false)
+
+const nosotrosActive = computed(() =>
+  ['/etica', '/ascadlatam', '/formacion', '/noticias'].some(p => route.path.startsWith(p))
+)
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
@@ -99,6 +144,7 @@ function toggleMenu() {
 
 function closeMenu() {
   menuOpen.value = false
+  mobileNosotrosOpen.value = false
   nextTick(() => {
     hamburgerRef.value?.focus()
   })
@@ -155,7 +201,6 @@ watch(locale, (val) => {
   background: var(--primary);
   box-shadow: var(--shadow-md);
   padding: 8px 0;
-  overflow-x: hidden;
 }
 .nav-inner {
   display: flex;
@@ -163,8 +208,9 @@ watch(locale, (val) => {
   justify-content: space-between;
   min-height: var(--nav-height);
   gap: 24px;
-  overflow-x: hidden;
 }
+
+/* BRAND */
 .brand {
   display: flex;
   align-items: center;
@@ -173,15 +219,15 @@ watch(locale, (val) => {
   margin-left: 8px;
 }
 .brand-logo {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
   overflow: hidden;
 }
-.brand-logo img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 50%;
 }
 .brand-text {
@@ -212,39 +258,23 @@ watch(locale, (val) => {
 .brand-ascal { color: var(--white); }
 
 @media (max-width: 600px) {
-  .brand-name {
-    white-space: normal;
-    flex-wrap: wrap;
-    gap: 2px;
-  }
-  .brand-logo {
-    width: 56px;
-    height: 56px;
-  }
-  .brand-text {
-    padding-left: 0;
-  }
+  .brand-name { white-space: normal; flex-wrap: wrap; gap: 2px; }
+  .brand-logo { width: 56px; height: 56px; }
+  .brand-text { padding-left: 0; }
 }
-
 @media (max-width: 380px) {
-  .brand-logo {
-    width: 44px;
-    height: 44px;
-  }
-  .brand-label {
-    font-size: .5rem;
-  }
-  .brand-name {
-    font-size: .875rem;
-  }
+  .brand-logo { width: 44px; height: 44px; }
+  .brand-label { font-size: .5rem; }
+  .brand-name { font-size: .875rem; }
 }
 
+/* DESKTOP NAV */
 .desktop-nav {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-.desktop-nav a {
+.desktop-nav > a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -256,19 +286,102 @@ watch(locale, (val) => {
   transition: all var(--duration-normal);
   text-decoration: none;
 }
-.desktop-nav a:hover {
+.desktop-nav > a:hover {
   color: var(--white);
   background: rgba(255,255,255,0.1);
 }
-.desktop-nav a.router-link-active {
+.desktop-nav > a.router-link-active {
   color: var(--white);
   background: rgba(255,255,255,0.15);
 }
-.desktop-nav a.router-link-exact-active {
+.desktop-nav > a.router-link-exact-active {
   color: var(--white);
   font-weight: 600;
 }
 
+/* DROPDOWN */
+.nav-dropdown {
+  position: relative;
+}
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-normal);
+}
+.nav-dropdown-trigger:hover,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+}
+.nav-dropdown.open .nav-dropdown-trigger .chevron {
+  transform: rotate(180deg);
+}
+.chevron {
+  transition: transform var(--duration-normal);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* active state: cuando alguna ruta hija está activa */
+.nav-dropdown.active .nav-dropdown-trigger {
+  color: var(--white);
+  background: rgba(255,255,255,0.15);
+}
+
+.nav-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-dark);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  z-index: 200;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-dropdown.open .nav-dropdown-panel {
+  display: flex;
+  animation: fadeDropdown .15s ease;
+}
+@keyframes fadeDropdown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.nav-dropdown-panel a {
+  display: block;
+  font-size: .875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  transition: all var(--duration-fast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-dropdown-panel a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+}
+.nav-dropdown-panel a.router-link-active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* HAMBURGER */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -281,10 +394,7 @@ watch(locale, (val) => {
   transition: background var(--duration-normal);
 }
 .hamburger:hover { background: rgba(255,255,255,0.1); }
-.hamburger:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
+.hamburger:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .hamburger span {
   display: block;
   width: 22px;
@@ -297,6 +407,7 @@ watch(locale, (val) => {
 .hamburger span.active:nth-child(2) { opacity: 0; }
 .hamburger span.active:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
+/* MOBILE BACKDROP */
 .mobile-backdrop {
   display: none;
   position: fixed;
@@ -306,11 +417,9 @@ watch(locale, (val) => {
   opacity: 0;
   transition: opacity var(--duration-normal);
 }
-.mobile-backdrop.active {
-  display: block;
-  opacity: 1;
-}
+.mobile-backdrop.active { display: block; opacity: 1; }
 
+/* MOBILE MENU */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -330,9 +439,9 @@ watch(locale, (val) => {
 }
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.mobile-menu a {
+.mobile-menu > a {
   font-size: 1rem;
   font-weight: 500;
   color: rgba(255,255,255,0.8);
@@ -340,19 +449,11 @@ watch(locale, (val) => {
   border-bottom: 1px solid rgba(255,255,255,0.1);
   transition: color var(--duration-fast);
   text-decoration: none;
-  overflow-wrap: break-word;
-  word-break: break-word;
 }
-.mobile-menu a:hover,
-.mobile-menu a:focus {
-  color: var(--white);
-  outline: none;
-}
-.mobile-menu a:focus-visible {
-  background: rgba(255,255,255,0.1);
-  border-radius: var(--radius-sm);
-}
-.mobile-menu a.router-link-exact-active { color: var(--white); font-weight: 600; }
+.mobile-menu > a:hover,
+.mobile-menu > a:focus { color: var(--white); outline: none; }
+.mobile-menu > a:focus-visible { background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); }
+.mobile-menu > a.router-link-exact-active { color: var(--white); font-weight: 600; }
 .mobile-menu .mobile-cta {
   color: var(--accent);
   font-weight: 600;
@@ -360,38 +461,75 @@ watch(locale, (val) => {
   margin-top: 12px;
 }
 
-@media (max-width: 1100px) {
-  .desktop-nav { display: none; }
-  .hamburger { display: flex; }
+/* MOBILE NOSOTROS GROUP */
+.mobile-group {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+.mobile-group-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  padding: 14px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+.mobile-group-trigger .chevron { opacity: 0.6; }
+.mobile-group-trigger .chevron.rotated { transform: rotate(180deg); }
 
+.mobile-sublinks {
+  display: none;
+  flex-direction: column;
+  padding: 0 0 8px 16px;
+}
+.mobile-sublinks.open { display: flex; }
+.mobile-sublinks a {
+  font-size: .9375rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+}
+.mobile-sublinks a:last-child { border-bottom: none; }
+.mobile-sublinks a:hover { color: var(--white); }
+.mobile-sublinks a.router-link-active { color: var(--accent); font-weight: 600; }
+
+/* LANG BUTTON */
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .lang-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  height: 36px;
+  padding: 0 12px;
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: var(--radius);
-  font-size: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,0.85);
   cursor: pointer;
   transition: all var(--duration-normal);
 }
 .lang-btn:hover {
-  background: rgba(255,255,255,0.15);
-  transform: scale(1.05);
-}
-.lang-btn:active {
-  transform: scale(0.95);
+  background: rgba(255,255,255,0.18);
+  color: var(--white);
 }
 
+/* MOBILE LANG */
 .mobile-lang {
   display: flex;
   gap: 8px;
@@ -405,14 +543,12 @@ watch(locale, (val) => {
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius);
   color: rgba(255,255,255,0.7);
-  font-size: .875rem;
+  font-size: .8125rem;
+  font-family: var(--font-mono);
   cursor: pointer;
   transition: all var(--duration-fast);
 }
-.mobile-lang button:hover {
-  background: rgba(255,255,255,0.12);
-  color: var(--white);
-}
+.mobile-lang button:hover { background: rgba(255,255,255,0.12); color: var(--white); }
 .mobile-lang button.active {
   background: var(--accent);
   border-color: var(--accent);
@@ -420,6 +556,10 @@ watch(locale, (val) => {
   font-weight: 600;
 }
 
+@media (max-width: 1100px) {
+  .desktop-nav { display: none; }
+  .hamburger { display: flex; }
+}
 @media (max-width: 768px) {
   .nav-actions { display: none; }
 }
