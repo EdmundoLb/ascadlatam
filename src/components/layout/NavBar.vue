@@ -16,15 +16,12 @@
       </router-link>
 
       <nav class="desktop-nav" role="navigation" :aria-label="$t('nav.navPrincipal')">
-        <router-link to="/">{{ $t('nav.inicio') }}</router-link>
         <router-link to="/certificaciones">{{ $t('nav.certificaciones') }}</router-link>
 
         <!-- Dropdown Nosotros -->
         <div
           class="nav-dropdown"
           :class="{ open: dropdownOpen, active: nosotrosActive }"
-          @mouseenter="openDropdown"
-          @mouseleave="closeDropdown"
         >
           <button
             class="nav-dropdown-trigger"
@@ -35,7 +32,7 @@
             {{ $t('nav.nosotros') }}
             <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="nav-dropdown-panel" role="menu" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+          <div class="nav-dropdown-panel" role="menu">
             <router-link to="/etica"      role="menuitem" @click="dropdownOpen = false">{{ $t('nav.etica') }}</router-link>
             <router-link to="/ascadlatam" role="menuitem" @click="dropdownOpen = false">{{ $t('nav.ascadlatam') }}</router-link>
             <router-link to="/formacion"  role="menuitem" @click="dropdownOpen = false">{{ $t('nav.formacion') }}</router-link>
@@ -87,7 +84,6 @@
       :aria-label="$t('nav.menuMovil')"
       @keydown.escape="closeMenu"
     >
-      <router-link to="/" @click="closeMenu" tabindex="0">{{ $t('nav.inicio') }}</router-link>
       <router-link to="/certificaciones" @click="closeMenu" tabindex="0">{{ $t('nav.certificaciones') }}</router-link>
 
       <!-- Nosotros expandible en móvil -->
@@ -133,18 +129,6 @@ const menuOpen = ref(false)
 const hamburgerRef = ref(null)
 const dropdownOpen = ref(false)
 const mobileNosotrosOpen = ref(false)
-let dropdownTimer = null
-
-function openDropdown() {
-  clearTimeout(dropdownTimer)
-  dropdownOpen.value = true
-}
-
-function closeDropdown() {
-  dropdownTimer = setTimeout(() => {
-    dropdownOpen.value = false
-  }, 120)
-}
 
 const nosotrosActive = computed(() =>
   ['/etica', '/ascadlatam', '/formacion', '/noticias'].some(p => route.path.startsWith(p))
@@ -330,10 +314,12 @@ watch(locale, (val) => {
   transition: all var(--duration-normal);
 }
 .nav-dropdown-trigger:hover,
+.nav-dropdown:hover .nav-dropdown-trigger,
 .nav-dropdown.open .nav-dropdown-trigger {
   color: var(--white);
   background: rgba(255,255,255,0.1);
 }
+.nav-dropdown:hover .nav-dropdown-trigger .chevron,
 .nav-dropdown.open .nav-dropdown-trigger .chevron {
   transform: rotate(180deg);
 }
@@ -351,9 +337,9 @@ watch(locale, (val) => {
 
 .nav-dropdown-panel {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 4px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-6px);
   background: var(--primary-dark);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: var(--radius-lg);
@@ -361,17 +347,20 @@ watch(locale, (val) => {
   min-width: 180px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   z-index: 200;
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 2px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease, visibility .15s ease;
 }
+.nav-dropdown:hover .nav-dropdown-panel,
 .nav-dropdown.open .nav-dropdown-panel {
-  display: flex;
-  animation: fadeDropdown .15s ease;
-}
-@keyframes fadeDropdown {
-  from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 .nav-dropdown-panel a {
   display: block;

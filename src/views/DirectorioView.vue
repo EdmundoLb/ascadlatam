@@ -260,10 +260,9 @@
             <span class="d-cargo">{{ $t('directorio.delegadaRegional') }}</span>
           </div>
 
-          <!-- Costa Rica: foto pendiente -->
           <div class="delegado-card">
-            <div class="avatar-wrap avatar-pending">
-              <span class="avatar-initials">JB</span>
+            <div class="avatar-wrap">
+              <img :src="imgCostaRica" alt="Dra. Jessica Bolaños" class="avatar-img" />
             </div>
             <h4 class="d-nombre">Dra. Jessica Bolaños <span class="dr-hc">Dr.h.c.</span></h4>
             <p class="d-cred">EPR · CCAAD III · VI</p>
@@ -320,6 +319,7 @@
 
 <script setup>
 import imgCoordinador from '/images/Delegados/coordinador-general.jpg'
+import imgCostaRica from '/images/Delegados/Costa-Rica.png'
 import imgBolivia from '/images/Delegados/bolivia.png'
 import imgChile from '/images/Delegados/chile.jpg'
 import imgEcuador from '/images/Delegados/ecuador.jpg'
