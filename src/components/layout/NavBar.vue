@@ -23,8 +23,8 @@
         <div
           class="nav-dropdown"
           :class="{ open: dropdownOpen, active: nosotrosActive }"
-          @mouseenter="dropdownOpen = true"
-          @mouseleave="dropdownOpen = false"
+          @mouseenter="openDropdown"
+          @mouseleave="closeDropdown"
         >
           <button
             class="nav-dropdown-trigger"
@@ -35,7 +35,7 @@
             {{ $t('nav.nosotros') }}
             <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="nav-dropdown-panel" role="menu">
+          <div class="nav-dropdown-panel" role="menu" @mouseenter="openDropdown" @mouseleave="closeDropdown">
             <router-link to="/etica"      role="menuitem" @click="dropdownOpen = false">{{ $t('nav.etica') }}</router-link>
             <router-link to="/ascadlatam" role="menuitem" @click="dropdownOpen = false">{{ $t('nav.ascadlatam') }}</router-link>
             <router-link to="/formacion"  role="menuitem" @click="dropdownOpen = false">{{ $t('nav.formacion') }}</router-link>
@@ -133,6 +133,18 @@ const menuOpen = ref(false)
 const hamburgerRef = ref(null)
 const dropdownOpen = ref(false)
 const mobileNosotrosOpen = ref(false)
+let dropdownTimer = null
+
+function openDropdown() {
+  clearTimeout(dropdownTimer)
+  dropdownOpen.value = true
+}
+
+function closeDropdown() {
+  dropdownTimer = setTimeout(() => {
+    dropdownOpen.value = false
+  }, 120)
+}
 
 const nosotrosActive = computed(() =>
   ['/etica', '/ascadlatam', '/formacion', '/noticias'].some(p => route.path.startsWith(p))
