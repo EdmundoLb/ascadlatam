@@ -272,43 +272,43 @@
       </div>
       <div class="flags-strip">
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.costaRica') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.nicaragua') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.panama') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.mexico') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.repDominicana')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.repDominicana')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.repDominicana') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.ecuador') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.paraguay') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.chile') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/uy.png" :alt="$t('home.uruguay')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/uy.png" :alt="$t('home.uruguay')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.uruguay') }}</span>
         </div>
         <div class="flag-chip">
-          <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" class="flag-img" loading="lazy" />
+          <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.bolivia') }}</span>
         </div>
       </div>
@@ -441,38 +441,6 @@ onUnmounted(() => {
 .animate-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* MICROINTERACTIONS */
-.btn {
-  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-.btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.btn:hover::after {
-  opacity: 1;
-}
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-.btn:active {
-  transform: translateY(0) scale(0.98);
-}
-.btn-gold {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-  border-color: var(--accent-dark);
-}
-.btn-gold:hover {
-  background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
 }
 
 .hero {

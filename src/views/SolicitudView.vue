@@ -294,7 +294,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { showToast } from '@/composables/toast.js'
@@ -338,6 +338,10 @@ function fieldValue(code, name) {
   return input ? input.value : ''
 }
 
+function trackStepView(code, step) {
+  trackEvent('solicitud_paso_view', { step, certification_code: code })
+}
+
 function changeTab(code) {
   const oldCode = activeTab.value
   activeTab.value = code
@@ -348,6 +352,7 @@ function changeTab(code) {
     })
   }
   messages.value[code] = null
+  trackStepView(code, 1)
 }
 
 function focusStepLegend(code, step) {
@@ -359,6 +364,7 @@ function focusStepLegend(code, step) {
 function goToStep(step) {
   currentStep.value = step
   focusStepLegend(activeTab.value, step)
+  trackStepView(activeTab.value, step)
 }
 
 function nextStep(code) {
@@ -373,12 +379,14 @@ function nextStep(code) {
   currentStep.value++
   window.scrollTo({ top: 0, behavior: 'smooth' })
   focusStepLegend(code, currentStep.value)
+  trackStepView(code, currentStep.value)
 }
 
 function prevStep(code) {
   currentStep.value--
   window.scrollTo({ top: 0, behavior: 'smooth' })
   focusStepLegend(code, currentStep.value)
+  trackStepView(code, currentStep.value)
 }
 
 function clearError(event, code) {
@@ -441,6 +449,8 @@ function validateStep2(code) {
   return true
 }
 
+let submitted = false
+
 onMounted(() => {
   const nivel = route.query.nivel
   if (nivel) {
@@ -448,6 +458,13 @@ onMounted(() => {
     if (found) {
       activeTab.value = nivel
     }
+  }
+  trackStepView(activeTab.value, currentStep.value)
+})
+
+onUnmounted(() => {
+  if (!submitted) {
+    trackEvent('solicitud_abandonada', { step: currentStep.value, certification_code: activeTab.value })
   }
 })
 
@@ -568,6 +585,7 @@ async function handleSubmit(event, code) {
       messages.value[code] = { type: 'success', text: t('solicitud.mensajes.exito') }
       showToast(t('solicitud.toastEnviado'), 'success')
       trackEvent('generate_lead', { form_name: 'solicitud', certification_code: code })
+      submitted = true
       form.reset()
       currentStep.value = 1
     } else {
