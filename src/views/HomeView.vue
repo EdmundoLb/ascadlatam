@@ -37,7 +37,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">10</span>
                 </div>
-                <span class="stat-short-label" title="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile, Uruguay, Bolivia">{{ $t('home.paises') }}</span>
+                <span class="stat-short-label" data-tooltip="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile, Uruguay, Bolivia">{{ $t('home.paises') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -48,7 +48,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">6</span>
                 </div>
-                <span class="stat-short-label" title="OST, EPR, CCAAD I, CCAAD II, CCAAD III, CCAAD IV">{{ $t('home.niveles') }}</span>
+                <span class="stat-short-label" data-tooltip="OST, EPR, CCAAD I, CCAAD II, CCAAD III, CCAAD IV">{{ $t('home.niveles') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -59,7 +59,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">TAP 21</span>
                 </div>
-                <span class="stat-short-label" title="Treatment Accessibility Protocol 21">{{ $t('home.estandarInternacional') }}</span>
+                <span class="stat-short-label" data-tooltip="Treatment Accessibility Protocol 21">{{ $t('home.estandarInternacional') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -70,7 +70,7 @@
                 <div class="stat-number-row">
                   <span class="stat-number">TIP 64</span>
                 </div>
-                <span class="stat-short-label" title="Treatment Improvement Protocol 64">{{ $t('home.estandarInternacional') }}</span>
+                <span class="stat-short-label" data-tooltip="Treatment Improvement Protocol 64">{{ $t('home.estandarInternacional') }}</span>
               </div>
             </div>
           </div>
@@ -648,7 +648,7 @@ onUnmounted(() => {
 .stat-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); line-height: 1; font-family: var(--font-display); }
 .stat-short-label { font-family: var(--font-mono); font-size: .625rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); background: var(--bg-light); padding: 3px 8px; border-radius: var(--radius-sm); cursor: help; position: relative; }
 .stat-short-label:hover::after {
-  content: attr(title);
+  content: attr(data-tooltip);
   position: absolute;
   bottom: 120%;
   left: 50%;

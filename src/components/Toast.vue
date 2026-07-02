@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <transition name="toast">
-      <div v-if="toast" class="toast" :class="toast.type" role="alert" aria-live="polite">
+      <div v-if="toast" class="toast" :class="[toast.type, { 'above-cookie-banner': !consentDecided }]" role="alert" aria-live="polite">
         <span class="toast-icon">
           <svg v-if="toast.type === 'success'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
@@ -29,8 +29,10 @@
 
 <script setup>
 import { useToast } from '@/composables/toast.js'
+import { useConsent } from '@/composables/consent.js'
 
 const { toast, dismiss } = useToast()
+const { consentDecided } = useConsent()
 </script>
 
 <style scoped>
@@ -93,6 +95,9 @@ const { toast, dismiss } = useToast()
     right: 16px;
     bottom: 16px;
     max-width: none;
+  }
+  .toast.above-cookie-banner {
+    bottom: 230px;
   }
 }
 </style>

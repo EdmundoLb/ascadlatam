@@ -20,6 +20,7 @@
 
         <!-- Dropdown Nosotros -->
         <div
+          ref="dropdownRef"
           class="nav-dropdown"
           :class="{ open: dropdownOpen, active: nosotrosActive }"
         >
@@ -117,7 +118,7 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, computed } from 'vue'
+import { ref, watch, nextTick, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import logoAscad from '/images/optimized/LOGO_ASCAD10.webp'
@@ -128,6 +129,7 @@ const currentLocale = ref(locale.value)
 const menuOpen = ref(false)
 const hamburgerRef = ref(null)
 const dropdownOpen = ref(false)
+const dropdownRef = ref(null)
 const mobileNosotrosOpen = ref(false)
 
 const nosotrosActive = computed(() =>
@@ -170,6 +172,20 @@ watch(menuOpen, async (val) => {
 
 watch(locale, (val) => {
   currentLocale.value = val
+})
+
+function handleClickOutside(event) {
+  if (dropdownOpen.value && dropdownRef.value && !dropdownRef.value.contains(event.target)) {
+    dropdownOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
 })
 </script>
 

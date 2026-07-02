@@ -77,7 +77,7 @@
 
     <Teleport to="body">
       <div v-if="selectedPost" class="post-modal-overlay" @click.self="closePost">
-        <div class="post-modal" role="dialog" aria-modal="true" :aria-label="selectedPost.title">
+        <div class="post-modal" role="dialog" aria-modal="true" :aria-label="selectedPost.title" ref="modalRef" tabindex="-1">
           <button class="modal-close" @click="closePost" :aria-label="$t('common.close')">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -109,7 +109,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getBlogPosts, blogCategories, categoryLabelKeys } from '@/data/blog'
 import Pagination from '@/components/ui/Pagination.vue'
@@ -124,6 +124,8 @@ const searchQuery = ref('')
 const currentPage = ref(1)
 const postsPerPage = 6
 const selectedPost = ref(null)
+const modalRef = ref(null)
+let lastFocusedElement = null
 
 const filteredPosts = computed(() => {
   let result = posts.value
@@ -163,13 +165,20 @@ function handlePageChange(page) {
 }
 
 function goToPost(post) {
+  lastFocusedElement = document.activeElement
   selectedPost.value = post
   document.body.style.overflow = 'hidden'
+  setTimeout(() => {
+    modalRef.value?.focus()
+  }, 100)
 }
 
 function closePost() {
   selectedPost.value = null
   document.body.style.overflow = ''
+  nextTick(() => {
+    lastFocusedElement?.focus()
+  })
 }
 
 watch([activeCategory, searchQuery], () => {
@@ -177,8 +186,32 @@ watch([activeCategory, searchQuery], () => {
 })
 
 function handleKeydown(e) {
-  if (e.key === 'Escape' && selectedPost.value) {
+  if (!selectedPost.value) return
+
+  if (e.key === 'Escape') {
+    e.preventDefault()
     closePost()
+    return
+  }
+
+  if (e.key === 'Tab') {
+    const modal = modalRef.value
+    if (!modal) return
+
+    const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    const focusableElements = Array.from(modal.querySelectorAll(focusableSelectors))
+    if (focusableElements.length === 0) return
+
+    const firstEl = focusableElements[0]
+    const lastEl = focusableElements[focusableElements.length - 1]
+
+    if (e.shiftKey && document.activeElement === firstEl) {
+      e.preventDefault()
+      lastEl.focus()
+    } else if (!e.shiftKey && document.activeElement === lastEl) {
+      e.preventDefault()
+      firstEl.focus()
+    }
   }
 }
 
@@ -261,6 +294,10 @@ onUnmounted(() => {
   background: var(--white); border-radius: var(--radius-xl);
   max-width: 640px; width: 100%; max-height: 85vh; overflow-y: auto;
   position: relative; animation: modalIn 0.3s ease;
+  outline: none;
+}
+.post-modal:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent);
 }
 @keyframes modalIn {
   from { opacity: 0; transform: translateY(20px); }

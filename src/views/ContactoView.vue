@@ -67,7 +67,20 @@
             <div class="cf-grid">
               <div class="form-group">
                 <label for="nombre">{{ $t('contacto.nombre') }} *</label>
-                <input id="nombre" type="text" name="nombre" required autocomplete="name" :placeholder="$t('contacto.placeholders.nombre')" />
+                <input
+                  id="nombre"
+                  type="text"
+                  name="nombre"
+                  required
+                  autocomplete="name"
+                  :placeholder="$t('contacto.placeholders.nombre')"
+                  @input="clearError($event)"
+                  @blur="handleBlur($event)"
+                  :class="{ 'input-error': errors.nombre }"
+                  :aria-invalid="Boolean(errors.nombre)"
+                  :aria-describedby="errors.nombre ? 'nombre-error' : null"
+                />
+                <span v-if="errors.nombre" id="nombre-error" class="field-error">{{ errors.nombre }}</span>
               </div>
               <div class="form-group">
                 <label for="pais">{{ $t('contacto.pais') }}</label>
@@ -78,22 +91,47 @@
               </div>
               <div class="form-group form-full">
                 <label for="email">{{ $t('contacto.email') }} *</label>
-                <input id="email" type="email" name="email" required autocomplete="email" :placeholder="$t('contacto.placeholders.email')" />
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  :placeholder="$t('contacto.placeholders.email')"
+                  @input="clearError($event)"
+                  @blur="handleBlur($event)"
+                  :class="{ 'input-error': errors.email }"
+                  :aria-invalid="Boolean(errors.email)"
+                  :aria-describedby="errors.email ? 'email-error' : null"
+                />
+                <span v-if="errors.email" id="email-error" class="field-error">{{ errors.email }}</span>
               </div>
               <div class="form-group form-full">
                 <label for="asunto">{{ $t('contacto.asunto') }}</label>
                 <select id="asunto" name="asunto">
                   <option value="">{{ $t('contacto.placeholders.asunto') }}</option>
-                  <option>{{ $t('contacto.requisitosCertificacion') }}</option>
-                  <option>{{ $t('contacto.estadoSolicitud') }}</option>
-                  <option>{{ $t('contacto.verificarCertificado') }}</option>
-                  <option>{{ $t('contacto.alianzaInstitucional') }}</option>
-                  <option>{{ $t('common.other') }}</option>
+                  <option value="requisitos_certificacion">{{ $t('contacto.requisitosCertificacion') }}</option>
+                  <option value="estado_solicitud">{{ $t('contacto.estadoSolicitud') }}</option>
+                  <option value="verificar_certificado">{{ $t('contacto.verificarCertificado') }}</option>
+                  <option value="alianza_institucional">{{ $t('contacto.alianzaInstitucional') }}</option>
+                  <option value="otro">{{ $t('common.other') }}</option>
                 </select>
               </div>
               <div class="form-group form-full">
                 <label for="mensaje">{{ $t('contacto.mensaje') }} *</label>
-                <textarea id="mensaje" name="mensaje" required :placeholder="$t('contacto.placeholders.mensaje')" style="min-height:130px;"></textarea>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  required
+                  :placeholder="$t('contacto.placeholders.mensaje')"
+                  style="min-height:130px;"
+                  @input="clearError($event)"
+                  @blur="handleBlur($event)"
+                  :class="{ 'input-error': errors.mensaje }"
+                  :aria-invalid="Boolean(errors.mensaje)"
+                  :aria-describedby="errors.mensaje ? 'mensaje-error' : null"
+                ></textarea>
+                <span v-if="errors.mensaje" id="mensaje-error" class="field-error">{{ errors.mensaje }}</span>
               </div>
             </div>
             <button type="submit" class="btn btn-gold" style="width:100%; margin-top:8px; justify-content:center;" :disabled="sending">
@@ -122,8 +160,48 @@ const { t, locale } = useI18n()
 const formId = import.meta.env.VITE_FORMSPREE_CONTACT_ID || 'placeholder'
 const sending = ref(false)
 const message = ref(null)
+const errors = ref({})
 
 const paises = computed(() => getCountries(locale.value))
+
+function clearError(event) {
+  const key = event.target.name
+  if (errors.value[key]) delete errors.value[key]
+}
+
+function validateField(name, value) {
+  let error = ''
+
+  if (!value.trim()) {
+    error = t('solicitud.camposObligatorios')
+  } else if (name === 'email') {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(value)) error = t('solicitud.validacion.emailInvalido')
+  }
+
+  if (error) {
+    errors.value[name] = error
+  } else {
+    delete errors.value[name]
+  }
+  return !error
+}
+
+function handleBlur(event) {
+  const { name, value } = event.target
+  validateField(name, value)
+}
+
+function validateAllFields(form) {
+  const required = ['nombre', 'email', 'mensaje']
+  let isValid = true
+  for (const name of required) {
+    const input = form.querySelector(`[name="${name}"]`)
+    if (!input) continue
+    if (!validateField(name, input.value)) isValid = false
+  }
+  return isValid
+}
 
 const contactPeople = computed(() => [
   { name: 'Gonzalo Esquivel', location: 'Costa Rica', phone: '+506 8374 3617', email: 'ascadcr@gmail.com' },
@@ -155,6 +233,12 @@ async function submitToFormspree(form) {
 
 async function handleSubmit(event) {
   const form = event.target
+
+  if (!validateAllFields(form)) {
+    showToast(t('solicitud.validacion.corregirErrores'), 'error')
+    return
+  }
+
   sending.value = true
   message.value = null
   try {
@@ -212,6 +296,15 @@ async function handleSubmit(event) {
 .form-msg.success { background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); color: var(--success); }
 .form-msg.error   { background: rgba(239,68,68,.1);  border: 1px solid rgba(239,68,68,.3);  color: var(--danger); }
 button:disabled { opacity: .6; cursor: not-allowed; }
+
+.input-error { border-color: var(--danger) !important; }
+.field-error {
+  display: block;
+  font-size: .75rem;
+  color: var(--danger);
+  margin-top: 4px;
+  font-weight: 500;
+}
 
 @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
 @media (max-width: 600px) { .cf-grid { grid-template-columns: 1fr; } .form-full { grid-column: auto; } .contact-form-wrap { padding: 28px; } }

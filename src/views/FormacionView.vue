@@ -53,6 +53,7 @@
               </div>
             </div>
           </div>
+          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
         </div>
 
         <div class="program-card">
@@ -69,6 +70,7 @@
               <li>{{ $t('formacion.programas.operadorRol4') }}</li>
             </ul>
           </div>
+          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
         </div>
 
         <div class="program-card">
@@ -76,6 +78,7 @@
             <h3>{{ $t('formacion.programas.entrenadorParesTitulo') }}</h3>
             <p>{{ $t('formacion.programas.entrenadorParesDesc') }}</p>
           </div>
+          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
         </div>
 
         <div class="program-card">
@@ -83,6 +86,7 @@
             <h3>{{ $t('formacion.programas.entrenadorRecuperacionTitulo') }}</h3>
             <p>{{ $t('formacion.programas.entrenadorRecuperacionDesc') }}</p>
           </div>
+          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
         </div>
 
         <div class="program-card">
@@ -90,6 +94,7 @@
             <h3>{{ $t('formacion.programas.supervisorTitulo') }}</h3>
             <p>{{ $t('formacion.programas.supervisorDesc') }}</p>
           </div>
+          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
         </div>
       </div>
     </section>
@@ -283,7 +288,7 @@
           <h2>{{ $t('formacion.ctaTitulo') }}</h2>
           <p>{{ $t('formacion.ctaTexto') }}</p>
           <div class="cta-tagline">{{ $t('formacion.ctaTagline') }}</div>
-          <RouterLink to="/contacto" class="cta-button">{{ $t('formacion.ctaBoton') }}</RouterLink>
+          <RouterLink to="/contacto" class="btn btn-gold btn-lg">{{ $t('formacion.ctaBoton') }}</RouterLink>
         </div>
       </div>
     </section>
@@ -463,6 +468,15 @@ import { RouterLink } from 'vue-router'
   content: '→';
   color: var(--accent-dark);
 }
+.program-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+.program-link:hover { text-decoration: underline; }
 
 .specialized-section { background: var(--bg-light); }
 .specialized-grid {
@@ -478,11 +492,6 @@ import { RouterLink } from 'vue-router'
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  transition: all .2s;
-}
-.specialized-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
 }
 .specialized-icon { font-size: 1.5rem; flex-shrink: 0; }
 .specialized-item h4 {
@@ -581,18 +590,6 @@ import { RouterLink } from 'vue-router'
   color: var(--accent);
   margin-bottom: 32px;
 }
-.cta-button {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--white);
-  font-weight: 600;
-  padding: 14px 32px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  transition: background .2s;
-}
-.cta-button:hover { background: var(--accent-dark); }
-
 @media (max-width: 900px) {
   .program-levels { grid-template-columns: 1fr; }
   .specialized-grid { grid-template-columns: repeat(2, 1fr); }

@@ -34,10 +34,14 @@
     <!-- Tabs Navigation -->
     <section class="section tabs-section">
       <div class="container">
-        <div class="content-tabs">
+        <div class="content-tabs" role="tablist">
           <button
             v-for="tab in tabs"
             :key="tab.id"
+            :id="`tab-${tab.id}`"
+            role="tab"
+            :aria-selected="activeTab === tab.id"
+            :aria-controls="`panel-${tab.id}`"
             :class="['tab-btn', { active: activeTab === tab.id }]"
             @click="activeTab = tab.id"
           >
@@ -48,7 +52,7 @@
         </div>
 
         <!-- Biblioteca Tab -->
-        <div v-if="activeTab === 'biblioteca'" class="tab-content">
+        <div v-if="activeTab === 'biblioteca'" id="panel-biblioteca" role="tabpanel" aria-labelledby="tab-biblioteca" class="tab-content">
           <div class="biblioteca-intro">
             <h3>{{ $t('conocimiento.bibliotecaTitulo') }}</h3>
             <p>{{ $t('conocimiento.bibliotecaDesc') }}</p>
@@ -67,7 +71,7 @@
         </div>
 
         <!-- Infografías Tab -->
-        <div v-if="activeTab === 'infografias'" class="tab-content">
+        <div v-if="activeTab === 'infografias'" id="panel-infografias" role="tabpanel" aria-labelledby="tab-infografias" class="tab-content">
           <div class="infografias-intro">
             <h3>{{ $t('conocimiento.infografiasTitulo') }}</h3>
             <p>{{ $t('conocimiento.infografiasDesc') }}</p>
@@ -89,15 +93,24 @@
         </div>
 
         <!-- Lightbox Modal -->
-        <div v-if="lightboxImage" class="lightbox" @click="closeLightbox">
-          <button class="lightbox-close" @click="closeLightbox">
+        <div
+          v-if="lightboxImage"
+          class="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Infografía ampliada"
+          ref="lightboxRef"
+          tabindex="-1"
+          @click="closeLightbox"
+        >
+          <button class="lightbox-close" @click="closeLightbox" aria-label="Cerrar imagen ampliada">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
           <img :src="lightboxImage" :alt="$t('conocimiento.infografiaAmpliadaAlt')" @click.stop />
         </div>
 
         <!-- Artículos Tab -->
-        <div v-if="activeTab === 'articulos'" class="tab-content">
+        <div v-if="activeTab === 'articulos'" id="panel-articulos" role="tabpanel" aria-labelledby="tab-articulos" class="tab-content">
           <div class="articulos-intro">
             <h3>{{ $t('conocimiento.articulosTitulo') }}</h3>
             <p>{{ $t('conocimiento.articulosDesc') }}</p>
@@ -125,7 +138,7 @@
         </div>
 
         <!-- Base de Conocimiento Tab -->
-        <div v-if="activeTab === 'base'" class="tab-content">
+        <div v-if="activeTab === 'base'" id="panel-base" role="tabpanel" aria-labelledby="tab-base" class="tab-content">
           <div class="faq-intro">
             <h3>{{ $t('conocimiento.faqTitulo') }}</h3>
             <p>{{ $t('conocimiento.faqDesc') }}</p>
@@ -139,7 +152,7 @@
         </div>
 
         <!-- Comunidad Tab (Próximamente) -->
-        <div v-if="activeTab === 'comunidad'" class="tab-content coming-soon">
+        <div v-if="activeTab === 'comunidad'" id="panel-comunidad" role="tabpanel" aria-labelledby="tab-comunidad" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <h3>{{ $t('conocimiento.comunidadTitulo') }}</h3>
@@ -149,7 +162,7 @@
         </div>
 
         <!-- Academia Tab (Próximamente) -->
-        <div v-if="activeTab === 'academia'" class="tab-content coming-soon">
+        <div v-if="activeTab === 'academia'" id="panel-academia" role="tabpanel" aria-labelledby="tab-academia" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
             <h3>{{ $t('conocimiento.academiaTitulo') }}</h3>
@@ -159,7 +172,7 @@
         </div>
 
         <!-- Cursos Tab (Próximamente) -->
-        <div v-if="activeTab === 'cursos'" class="tab-content coming-soon">
+        <div v-if="activeTab === 'cursos'" id="panel-cursos" role="tabpanel" aria-labelledby="tab-cursos" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg></div>
             <h3>{{ $t('conocimiento.cursosTitulo') }}</h3>
@@ -169,7 +182,7 @@
         </div>
 
         <!-- Webinars Tab (Próximamente) -->
-        <div v-if="activeTab === 'webinars'" class="tab-content coming-soon">
+        <div v-if="activeTab === 'webinars'" id="panel-webinars" role="tabpanel" aria-labelledby="tab-webinars" class="tab-content coming-soon">
           <div class="coming-soon-inner">
             <div class="coming-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
             <h3>{{ $t('conocimiento.webinarsTitulo') }}</h3>
@@ -194,7 +207,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import info01 from '/images/optimized/info01.webp'
 import infor02 from '/images/optimized/infor02.webp'
@@ -204,18 +217,65 @@ const { t } = useI18n()
 const activeTab = ref('articulos')
 const openArticleId = ref(null)
 const lightboxImage = ref(null)
+const lightboxRef = ref(null)
+let lightboxLastFocused = null
 
 const toggleArticle = (id) => {
   openArticleId.value = openArticleId.value === id ? null : id
 }
 
 const openLightbox = (img) => {
+  lightboxLastFocused = document.activeElement
   lightboxImage.value = img
+  nextTick(() => {
+    lightboxRef.value?.focus()
+  })
 }
 
 const closeLightbox = () => {
   lightboxImage.value = null
+  nextTick(() => {
+    lightboxLastFocused?.focus()
+  })
 }
+
+function handleLightboxKeydown(e) {
+  if (!lightboxImage.value) return
+
+  if (e.key === 'Escape') {
+    e.preventDefault()
+    closeLightbox()
+    return
+  }
+
+  if (e.key === 'Tab') {
+    const modal = lightboxRef.value
+    if (!modal) return
+
+    const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    const focusableElements = Array.from(modal.querySelectorAll(focusableSelectors))
+    if (focusableElements.length === 0) return
+
+    const firstEl = focusableElements[0]
+    const lastEl = focusableElements[focusableElements.length - 1]
+
+    if (e.shiftKey && document.activeElement === firstEl) {
+      e.preventDefault()
+      lastEl.focus()
+    } else if (!e.shiftKey && document.activeElement === lastEl) {
+      e.preventDefault()
+      firstEl.focus()
+    }
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', handleLightboxKeydown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleLightboxKeydown)
+})
 
 const tabs = computed(() => [
   { id: 'biblioteca', label: t('conocimiento.tabs.biblioteca'), icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>' },
@@ -393,12 +453,6 @@ const articulosItems = computed(() => [
   border: 1px solid var(--line-light);
   border-radius: var(--radius-xl);
   padding: 32px;
-  transition: all .3s ease;
-}
-.featured-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent-light);
 }
 .featured-badge {
   display: inline-block;
@@ -506,12 +560,6 @@ const articulosItems = computed(() => [
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  transition: all .3s ease;
-}
-.library-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--accent-light);
 }
 .library-icon {
   width: 56px;
@@ -710,6 +758,7 @@ const articulosItems = computed(() => [
   padding: 40px;
   animation: fadeIn .2s ease;
 }
+.lightbox:focus-visible { outline: none; }
 .lightbox img {
   max-width: 100%;
   max-height: 90vh;

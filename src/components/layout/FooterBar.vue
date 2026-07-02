@@ -14,11 +14,6 @@
               </div>
             </router-link>
             <p class="brand-desc">{{ $t('footer.brandDesc') }}</p>
-            <div class="social-links">
-              <a href="#" :aria-label="$t('footer.linkedinAriaLabel')" class="social-btn" target="_blank" rel="noopener noreferrer">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-            </div>
           </div>
 
           <div class="footer-col">
@@ -128,26 +123,6 @@ const year = new Date().getFullYear()
   max-width: 300px;
   margin-bottom: 24px;
 }
-.social-links { display: flex; gap: 10px; }
-.social-btn {
-  width: 40px; height: 40px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.7);
-  transition: all var(--duration-normal);
-}
-.social-btn:hover {
-  background: var(--accent);
-  color: var(--white);
-}
-.social-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
 .footer-col h5 {
   font-family: var(--font-mono);
   font-size: .625rem;

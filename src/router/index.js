@@ -79,8 +79,8 @@ const routes = [
     name: 'directorio',
     component: () => import('@/views/DirectorioView.vue'),
     meta: {
-      title: 'Directorio | ASCAD LATAM',
-      description: 'Directorio público de profesionales certificados por ASCAD LATAM en América Latina y Brasil.'
+      title: 'Cobertura Regional | ASCAD LATAM',
+      description: 'Países miembros y delegados regionales de ASCAD LATAM en América Latina. El listado de profesionales certificados está disponible en la sección de Certificaciones.'
     }
   },
   {

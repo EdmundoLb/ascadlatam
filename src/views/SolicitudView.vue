@@ -50,11 +50,12 @@
 
             <div class="step-content">
                 <fieldset v-show="currentStep === 1" class="fieldset">
-                  <legend>{{ $t('solicitud.datosPersonales') }}</legend>
+                  <legend :id="`${cert.code}-legend-1`" tabindex="-1">{{ $t('solicitud.datosPersonales') }}</legend>
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>{{ $t('solicitud.campos.nombre') }} *</label>
+                      <label :for="`${cert.code}-nombre`">{{ $t('solicitud.campos.nombre') }} *</label>
                       <input
+                        :id="`${cert.code}-nombre`"
                         type="text"
                         name="nombre"
                         required
@@ -69,8 +70,9 @@
                       <span v-if="errors[`${cert.code}-nombre`]" :id="`${cert.code}-nombre-error`" class="field-error">{{ errors[`${cert.code}-nombre`] }}</span>
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('solicitud.documentoIdentidad') }} *</label>
+                      <label :for="`${cert.code}-documento`">{{ $t('solicitud.documentoIdentidad') }} *</label>
                       <input
+                        :id="`${cert.code}-documento`"
                         type="text"
                         name="documento"
                         required
@@ -84,9 +86,9 @@
                       <span v-if="errors[`${cert.code}-documento`]" :id="`${cert.code}-documento-error`" class="field-error">{{ errors[`${cert.code}-documento`] }}</span>
                     </div>
                     <div class="form-group">
-                      <label for="fecha_nacimiento">{{ $t('solicitud.fechaNacimiento') }} *</label>
+                      <label :for="`${cert.code}-fecha_nacimiento`">{{ $t('solicitud.fechaNacimiento') }} *</label>
                       <input
-                        id="fecha_nacimiento"
+                        :id="`${cert.code}-fecha_nacimiento`"
                         type="date"
                         name="fecha_nacimiento"
                         required
@@ -103,8 +105,9 @@
                       <span v-if="errors[`${cert.code}-fecha_nacimiento`]" :id="`${cert.code}-fecha_nacimiento-error`" class="field-error">{{ errors[`${cert.code}-fecha_nacimiento`] }}</span>
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('solicitud.campos.pais') }} *</label>
+                      <label :for="`${cert.code}-pais`">{{ $t('solicitud.campos.pais') }} *</label>
                       <select
+                        :id="`${cert.code}-pais`"
                         name="pais"
                         required
                         autocomplete="country-name"
@@ -120,8 +123,9 @@
                       <span v-if="errors[`${cert.code}-pais`]" :id="`${cert.code}-pais-error`" class="field-error">{{ errors[`${cert.code}-pais`] }}</span>
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('solicitud.ciudad') }} *</label>
+                      <label :for="`${cert.code}-ciudad`">{{ $t('solicitud.ciudad') }} *</label>
                       <input
+                        :id="`${cert.code}-ciudad`"
                         type="text"
                         name="ciudad"
                         required
@@ -136,8 +140,9 @@
                       <span v-if="errors[`${cert.code}-ciudad`]" :id="`${cert.code}-ciudad-error`" class="field-error">{{ errors[`${cert.code}-ciudad`] }}</span>
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('solicitud.telefonoWhatsapp') }} *</label>
+                      <label :for="`${cert.code}-telefono`">{{ $t('solicitud.telefonoWhatsapp') }} *</label>
                       <input
+                        :id="`${cert.code}-telefono`"
                         type="tel"
                         name="telefono"
                         required
@@ -152,8 +157,9 @@
                       <span v-if="errors[`${cert.code}-telefono`]" :id="`${cert.code}-telefono-error`" class="field-error">{{ errors[`${cert.code}-telefono`] }}</span>
                     </div>
                     <div class="form-group form-full">
-                      <label>{{ $t('solicitud.campos.email') }} *</label>
+                      <label :for="`${cert.code}-email`">{{ $t('solicitud.campos.email') }} *</label>
                       <input
+                        :id="`${cert.code}-email`"
                         type="email"
                         name="email"
                         required
@@ -171,31 +177,35 @@
                 </fieldset>
 
                 <fieldset v-show="currentStep === 2" class="fieldset">
-                  <legend>{{ $t('solicitud.infoProfesional') }}</legend>
+                  <legend :id="`${cert.code}-legend-2`" tabindex="-1">{{ $t('solicitud.infoProfesional') }}</legend>
                   <div class="form-grid">
                     <div class="form-group" v-if="cert.needsDegree">
-                      <label>{{ $t('solicitud.tituloUniversitario') }} *</label>
+                      <label :for="`${cert.code}-titulo`">{{ $t('solicitud.tituloUniversitario') }} *</label>
                       <input
+                        :id="`${cert.code}-titulo`"
                         type="text"
                         name="titulo"
                         required
                         :placeholder="cert.degreePlaceholder"
                         @input="clearError($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-titulo`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-titulo`])"
+                        :aria-describedby="errors[`${cert.code}-titulo`] ? `${cert.code}-titulo-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-titulo`]" class="field-error">{{ errors[`${cert.code}-titulo`] }}</span>
+                      <span v-if="errors[`${cert.code}-titulo`]" :id="`${cert.code}-titulo-error`" class="field-error">{{ errors[`${cert.code}-titulo`] }}</span>
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('solicitud.institucionPrograma') }}</label>
-                      <input type="text" name="institucion" :placeholder="$t('solicitud.placeholders.institucion')" />
+                      <label :for="`${cert.code}-institucion`">{{ $t('solicitud.institucionPrograma') }}</label>
+                      <input :id="`${cert.code}-institucion`" type="text" name="institucion" :placeholder="$t('solicitud.placeholders.institucion')" />
                     </div>
                     <div class="form-group" v-for="horas in cert.horasFields" :key="horas.name">
-                      <label>{{ horas.label }}</label>
-                      <input type="number" :name="horas.name" :placeholder="horas.placeholder" min="0" />
+                      <label :for="`${cert.code}-${horas.name}`">{{ horas.label }}</label>
+                      <input :id="`${cert.code}-${horas.name}`" type="number" :name="horas.name" :placeholder="horas.placeholder" min="0" />
                     </div>
                     <div class="form-group" v-if="cert.code === 'EPR'">
-                      <label>{{ $t('solicitud.aniosRecuperacion') }} *</label>
+                      <label :for="`${cert.code}-anios_recuperacion`">{{ $t('solicitud.aniosRecuperacion') }} *</label>
                       <input
+                        :id="`${cert.code}-anios_recuperacion`"
                         type="number"
                         name="anios_recuperacion"
                         required
@@ -203,14 +213,16 @@
                         min="2"
                         @input="clearError($event, cert.code)"
                         :class="{ 'input-error': errors[`${cert.code}-anios_recuperacion`] }"
+                        :aria-invalid="Boolean(errors[`${cert.code}-anios_recuperacion`])"
+                        :aria-describedby="errors[`${cert.code}-anios_recuperacion`] ? `${cert.code}-anios_recuperacion-error` : null"
                       />
-                      <span v-if="errors[`${cert.code}-anios_recuperacion`]" class="field-error">{{ errors[`${cert.code}-anios_recuperacion`] }}</span>
+                      <span v-if="errors[`${cert.code}-anios_recuperacion`]" :id="`${cert.code}-anios_recuperacion-error`" class="field-error">{{ errors[`${cert.code}-anios_recuperacion`] }}</span>
                     </div>
                   </div>
                 </fieldset>
 
                 <fieldset v-show="currentStep === 3" class="fieldset">
-                  <legend>{{ $t('solicitud.revisionEnvio') }}</legend>
+                  <legend :id="`${cert.code}-legend-3`" tabindex="-1">{{ $t('solicitud.revisionEnvio') }}</legend>
                   <div class="review-section">
                     <div class="review-header">
                       <div class="review-icon">
@@ -259,7 +271,7 @@
 
             <div class="form-footer">
               <div class="form-nav">
-                <button v-if="currentStep > 1" type="button" class="btn btn-outline" @click="prevStep">
+                <button v-if="currentStep > 1" type="button" class="btn btn-outline" @click="prevStep(cert.code)">
                   ← {{ $t('solicitud.btnAnterior') }}
                 </button>
                 <button v-if="currentStep < 3" type="button" class="btn btn-gold" @click="nextStep(cert.code)">
@@ -282,7 +294,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { showToast } from '@/composables/toast.js'
@@ -338,8 +350,15 @@ function changeTab(code) {
   messages.value[code] = null
 }
 
+function focusStepLegend(code, step) {
+  nextTick(() => {
+    document.getElementById(`${code}-legend-${step}`)?.focus()
+  })
+}
+
 function goToStep(step) {
   currentStep.value = step
+  focusStepLegend(activeTab.value, step)
 }
 
 function nextStep(code) {
@@ -353,11 +372,13 @@ function nextStep(code) {
   }
   currentStep.value++
   window.scrollTo({ top: 0, behavior: 'smooth' })
+  focusStepLegend(code, currentStep.value)
 }
 
-function prevStep() {
+function prevStep(code) {
   currentStep.value--
   window.scrollTo({ top: 0, behavior: 'smooth' })
+  focusStepLegend(code, currentStep.value)
 }
 
 function clearError(event, code) {

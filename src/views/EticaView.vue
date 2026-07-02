@@ -83,139 +83,10 @@
           <p>{{ $t('etica.redLatinoamericanaDesc3') }}</p>
         </div>
 
-        <!-- PAÍSES AFILIADOS -->
-        <div class="countries-intro">
-          <div class="section-header">
-            <div class="eyebrow">ASCAD/LATAM</div>
-            <h2>{{ $t('etica.paisesAfiliados') }} <em class="gold">ASCAD/LATAM</em></h2>
-          </div>
-        </div>
-
-        <div class="countries-grid">
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.costaRica') }}</h4>
-              <p>{{ $t('directorio.costaRicaDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.nicaragua') }}</h4>
-              <p>{{ $t('directorio.nicaraguaDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.panama') }}</h4>
-              <p>{{ $t('directorio.panamaDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.mexico') }}</h4>
-              <p>{{ $t('directorio.mexicoDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.republicaDominicana')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.repDominicana') }}</h4>
-              <p>{{ $t('directorio.republicaDominicanaDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.ecuador') }}</h4>
-              <p>{{ $t('directorio.ecuadorDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.paraguay') }}</h4>
-              <p>{{ $t('directorio.paraguayDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.chile') }}</h4>
-              <p>{{ $t('directorio.chileDesc') }}</p>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="https://flagcdn.com/w40/uy.png" :alt="$t('home.uruguay')" class="country-flag" loading="lazy" />
-            <div class="country-info">
-              <h4>{{ $t('home.uruguay') }}</h4>
-              <p>{{ $t('directorio.uruguayDesc') }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- BENEFICIOS PAÍSES -->
-        <div class="benefits-section">
-          <h2>{{ $t('etica.beneficiosPaises') }}</h2>
-          <p>{{ $t('etica.beneficiosPaisesDesc1') }}</p>
-          <p>{{ $t('etica.beneficiosPaisesDesc2') }}</p>
-          <p>{{ $t('etica.beneficiosPaisesDesc3') }}</p>
-          <ul class="benefits-list">
-            <li v-for="n in 10" :key="n">
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>{{ $t(`etica.beneficiosPaisesLista.item${n}`) }}</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- BENEFICIOS INSTITUCIONES -->
-        <div class="benefits-institutions-section">
-          <h2>{{ $t('etica.beneficiosInstituciones') }}</h2>
-          <p>{{ $t('etica.beneficiosInstitucionesDesc') }}</p>
-          <p>{{ $t('etica.principalesBeneficiosInst') }}</p>
-          <ul class="benefits-list">
-            <li v-for="n in 7" :key="n">
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>{{ $t(`etica.beneficiosInstitucionesLista.item${n}`) }}</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- BENEFICIOS PROFESIONALES -->
-        <div class="benefits-professionals-section">
-          <h2>{{ $t('etica.beneficiosProfesionales') }}</h2>
-          <p>{{ $t('etica.beneficiosProfesionalesDesc') }}</p>
-          <p>{{ $t('etica.laCertificacionPermite') }}</p>
-          <ul class="benefits-list">
-            <li v-for="n in 8" :key="n">
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>{{ $t(`etica.beneficiosProfesionalesLista.item${n}`) }}</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- BENEFICIOS PERSONAS Y FAMILIAS -->
-        <div class="benefits-families-section">
-          <h2>{{ $t('etica.beneficiosFamilias') }}</h2>
-          <p>{{ $t('etica.beneficiosFamiliasDesc') }}</p>
-          <p>{{ $t('etica.estoSeTraduce') }}</p>
-          <ul class="benefits-list">
-            <li v-for="n in 6" :key="n">
-              <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>{{ $t(`etica.beneficiosPersonasLista.item${n}`) }}</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- UNA INVERSIÓN PARA AMÉRICA LATINA -->
-        <div class="investment-section">
-          <h2>{{ $t('etica.inversionLatam') }}</h2>
-          <p>{{ $t('etica.inversionLatamDesc') }}</p>
-          <p>{{ $t('etica.ascadContinua') }}</p>
-        </div>
+        <!-- PAÍSES AFILIADOS: ver Directorio -->
+        <p class="directorio-link">
+          <router-link to="/directorio">{{ $t('etica.verDirectorioLink') }} →</router-link>
+        </p>
 
         <!-- CTA -->
         <div class="etica-cta">
@@ -277,7 +148,7 @@
 .monitoring-section > p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; }
 .monitoring-section > p strong { color: var(--text); }
 
-.ethics-list, .benefits-list {
+.ethics-list {
   list-style: none;
   padding: 0;
   margin: 0 0 24px 0;
@@ -285,7 +156,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
-.ethics-list li, .benefits-list li {
+.ethics-list li {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -305,7 +176,7 @@
   color: var(--accent-dark);
 }
 .check-icon svg { width: 14px; height: 14px; }
-.ethics-list li span:last-child, .benefits-list li span:last-child {
+.ethics-list li span:last-child {
   color: var(--text);
   font-size: .9375rem;
   line-height: 1.5;
@@ -360,74 +231,16 @@
 .network-section p:last-child { margin-bottom: 0; }
 .network-section strong { color: var(--accent); }
 
-.countries-intro {
-  margin-bottom: 24px;
-}
-.countries-intro .section-header {
+.directorio-link {
   text-align: center;
-}
-
-.countries-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
   margin-bottom: 48px;
 }
-.country-card {
-  background: var(--surface);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: all .3s ease;
+.directorio-link a {
+  color: var(--accent-dark);
+  font-weight: 600;
+  text-decoration: none;
 }
-.country-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent-light);
-}
-.country-flag {
-  width: 64px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  margin-bottom: 16px;
-  border: 1px solid var(--line);
-}
-.country-info h4 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
-.country-info p { font-size: .8125rem; color: var(--text-muted); line-height: 1.5; }
-
-.benefits-section,
-.benefits-institutions-section,
-.benefits-professionals-section,
-.benefits-families-section {
-  background: var(--surface);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 48px;
-  margin-bottom: 48px;
-}
-.benefits-section h2,
-.benefits-institutions-section h2,
-.benefits-professionals-section h2,
-.benefits-families-section h2 { margin-bottom: 16px; font-size: 1.5rem; }
-.benefits-section > p,
-.benefits-institutions-section > p,
-.benefits-professionals-section > p,
-.benefits-families-section > p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
-
-.investment-section {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
-  border-radius: var(--radius-xl);
-  padding: 56px;
-  margin-bottom: 48px;
-}
-.investment-section h2 { color: var(--white); margin-bottom: 24px; font-size: 1.5rem; }
-.investment-section p { color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 16px; }
-.investment-section p:last-child { margin-bottom: 0; }
+.directorio-link a:hover { text-decoration: underline; }
 
 .etica-cta {
   background: var(--accent-light);
@@ -441,20 +254,14 @@
 .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
 @media (max-width: 1024px) {
-  .countries-grid { grid-template-columns: repeat(2, 1fr); }
-  .ethics-list, .benefits-list { grid-template-columns: 1fr; }
+  .ethics-list { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
   .ethics-intro, .cert-system-section, .monitoring-section,
   .diversity-section, .transparency-section, .network-section,
-  .benefits-section, .benefits-institutions-section,
-  .benefits-professionals-section, .benefits-families-section,
-  .investment-section, .etica-cta { padding: 32px 24px; }
-  .countries-grid { grid-template-columns: repeat(2, 1fr); }
+  .etica-cta { padding: 32px 24px; }
 }
 @media (max-width: 600px) {
-  .countries-grid { grid-template-columns: 1fr; }
-  .country-card { flex-direction: column; }
   .cta-buttons { flex-direction: column; }
   .cta-buttons .btn { width: 100%; }
 }
