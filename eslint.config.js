@@ -159,7 +159,9 @@ export default [
         ResizeObserver: 'readonly',
         console: 'readonly',
         localStorage: 'readonly',
-        navigator: 'readonly'
+        navigator: 'readonly',
+        performance: 'readonly',
+        requestAnimationFrame: 'readonly'
       }
     }
   }
