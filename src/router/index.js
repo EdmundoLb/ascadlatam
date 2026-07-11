@@ -80,7 +80,16 @@ const routes = [
     component: () => import('@/views/DirectorioView.vue'),
     meta: {
       title: 'Cobertura Regional | ASCAD LATAM',
-      description: 'Países miembros y delegados regionales de ASCAD LATAM en América Latina. El listado de profesionales certificados está disponible en la sección de Certificaciones.'
+      description: 'Países miembros y delegados regionales de ASCAD LATAM en América Latina. El listado de profesionales certificados está disponible en la sección de Profesionales.'
+    }
+  },
+  {
+    path: '/profesionales',
+    name: 'profesionales',
+    component: () => import('@/views/ProfesionalesView.vue'),
+    meta: {
+      title: 'Profesionales Certificados | ASCAD LATAM',
+      description: 'Conocé a los profesionales certificados por ASCAD LATAM en toda Latinoamérica, verificados y con certificación vigente.'
     }
   },
   {

@@ -41,6 +41,7 @@
           </div>
         </div>
 
+        <router-link to="/profesionales">{{ $t('nav.profesionales') }}</router-link>
         <router-link to="/directorio">{{ $t('nav.paises') }}</router-link>
         <router-link to="/contacto">{{ $t('nav.contacto') }}</router-link>
       </nav>
@@ -105,6 +106,7 @@
         </div>
       </div>
 
+      <router-link to="/profesionales" @click="closeMenu" tabindex="0">{{ $t('nav.profesionales') }}</router-link>
       <router-link to="/directorio" @click="closeMenu" tabindex="0">{{ $t('nav.paises') }}</router-link>
       <router-link to="/contacto" @click="closeMenu" tabindex="0">{{ $t('nav.contacto') }}</router-link>
 

@@ -97,48 +97,6 @@
       </div>
     </section>
 
-    <!-- PROFESIONALES CERTIFICADOS -->
-    <section id="certificados" class="section certified-section">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow">{{ $t('certificaciones.redProfesional') }}</div>
-          <h2>{{ $t('certificaciones.profesionalesTitulo') }} <em class="gold">{{ $t('certificaciones.certificados') }}</em></h2>
-        </div>
-
-        <div v-if="certifiedLoading" class="certified-empty">
-          <p class="muted">{{ $t('certificaciones.cargandoCertificados') }}</p>
-        </div>
-
-        <div v-else-if="certifiedProfessionals.length === 0" class="certified-empty">
-          <div class="certified-empty-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>{{ $t('certificaciones.sinCertificadosTitulo') }}</h3>
-          <p class="muted">{{ $t('certificaciones.sinCertificadosDesc') }}</p>
-          <router-link to="/solicitud" class="btn btn-gold">{{ $t('certificaciones.sinCertificadosCta') }}</router-link>
-        </div>
-
-        <template v-else>
-          <div class="certified-grid">
-            <div v-for="person in paginatedCertified" :key="person.id" class="certified-card">
-              <div class="certified-avatar">{{ initials(person.full_name) }}</div>
-              <div class="certified-info">
-                <strong>{{ person.full_name }}</strong>
-                <span class="certified-meta">{{ person.certification_code }} · {{ person.country }}</span>
-                <span class="certified-date">{{ formatCertifiedDate(person.certified_at) }}</span>
-              </div>
-            </div>
-          </div>
-          <Pagination
-            v-if="certifiedTotalPages > 1"
-            :current-page="certifiedPage"
-            :total-pages="certifiedTotalPages"
-            @page-change="(page) => (certifiedPage = page)"
-          />
-        </template>
-      </div>
-    </section>
-
     <!-- CERTIFICATION DETAILS -->
     <section id="detalles" class="section details-section">
       <div class="container">
@@ -146,6 +104,10 @@
           <div class="eyebrow">{{ $t('certificaciones.nivelesCertificacion') || 'Niveles de certificación' }}</div>
           <h2>{{ $t('certificaciones.conoceCada') || 'Conocé cada' }} <em class="gold">{{ $t('certificaciones.certificacion') || 'certificación' }}</em></h2>
           <p class="lead" style="margin-top:16px; max-width: 600px;">{{ $t('certificaciones.hazClick') || 'Hacé click en cada nivel para ver los requisitos completos, competencias y horas requeridas.' }}</p>
+          <p class="details-hint">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            {{ $t('certificaciones.planDeEstudiosHint') }}
+          </p>
         </div>
 
         <div class="cert-grid">
@@ -361,6 +323,16 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 4-4 7-9 7s-8-3-8-7c0-4 4-7 8-7s9 3 9 7z"/></svg>
                 {{ $t('certificaciones.aplicar') }}
               </button>
+              <a
+                v-if="certData.brochureUrl"
+                :href="certData.brochureUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                {{ $t('certificaciones.descargarPrograma') }}
+              </a>
               <button @click="goToContacto()" class="btn btn-ghost">{{ $t('certificaciones.masInfo') }}</button>
             </div>
           </div>
@@ -376,8 +348,6 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { levelIcons } from '@/data/certificaciones'
 import { getCertificationsFull } from '@/data/certificacionesFull'
-import { supabase } from '@/lib/supabase'
-import Pagination from '@/components/ui/Pagination.vue'
 
 const router = useRouter()
 const { locale, t } = useI18n()
@@ -467,48 +437,6 @@ function handleKeydown(e) {
 
 onMounted(() => {
   document.addEventListener('keydown', handleKeydown)
-})
-
-const certifiedProfessionals = ref([])
-const certifiedLoading = ref(true)
-const certifiedPage = ref(1)
-const CERTIFIED_PER_PAGE = 9
-
-const certifiedTotalPages = computed(() => Math.ceil(certifiedProfessionals.value.length / CERTIFIED_PER_PAGE))
-
-const paginatedCertified = computed(() => {
-  const start = (certifiedPage.value - 1) * CERTIFIED_PER_PAGE
-  return certifiedProfessionals.value.slice(start, start + CERTIFIED_PER_PAGE)
-})
-
-function initials(fullName) {
-  return fullName
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0].toUpperCase())
-    .join('')
-}
-
-function formatCertifiedDate(dateString) {
-  return new Date(dateString).toLocaleDateString('es-ES', { year: 'numeric', month: 'long' })
-}
-
-onMounted(async () => {
-  if (!supabase) {
-    certifiedLoading.value = false
-    return
-  }
-  const { data, error } = await supabase
-    .from('certified_professionals')
-    .select('id, full_name, certification_code, country, certified_at')
-    .eq('status', 'active')
-    .order('certified_at', { ascending: false })
-
-  if (!error && data) {
-    certifiedProfessionals.value = data
-  }
-  certifiedLoading.value = false
 })
 
 onUnmounted(() => {
@@ -725,71 +653,18 @@ const consortium = computed(() => [
 .legend-item { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--text-muted); }
 .legend-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
-/* CERTIFIED PROFESSIONALS */
-.certified-section { background: var(--bg-light); }
-.certified-empty {
-  text-align: center;
-  max-width: 460px;
-  margin: 0 auto;
-  padding: 48px 24px;
-}
-.certified-empty-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--accent-light);
-  color: var(--accent-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-}
-.certified-empty h3 { margin-bottom: 10px; }
-.certified-empty p { margin-bottom: 24px; }
-.certified-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 40px;
-}
-.certified-card {
-  background: var(--white);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  transition: all .3s ease;
-}
-.certified-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--accent-light); }
-.certified-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: var(--white);
-  font-weight: 700;
-  font-family: var(--font-mono);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.certified-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.certified-info strong { font-size: .9375rem; color: var(--text); }
-.certified-meta { font-size: .8125rem; color: var(--accent-dark); font-weight: 600; }
-.certified-date { font-size: .75rem; color: var(--text-muted); }
-
-@media (max-width: 900px) {
-  .certified-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .certified-grid { grid-template-columns: 1fr; }
-}
-
 /* DETAILS SECTION */
 .details-section { background: var(--bg-light); }
+.details-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+}
+.details-hint svg { flex-shrink: 0; }
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
