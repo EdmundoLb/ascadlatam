@@ -147,28 +147,28 @@
   </section>
 
   <!-- ESTÁNDARES INTERNACIONALES -->
-  <section class="section standards-section section-alt animate-on-scroll">
+  <section class="section standards-section animate-on-scroll">
     <div class="container">
       <div class="section-header">
         <div class="eyebrow">{{ $t('home.estandares') }}</div>
         <h2>{{ $t('home.fundamentosTecnicos') }}<br><em class="gold">{{ $t('home.certificaciones') }}</em></h2>
       </div>
       <div class="standards-grid">
-        <div class="standard-card">
+        <div class="standard-card standard-card-primary">
           <div class="standard-badge">TAP 21</div>
           <div class="standard-content">
             <h4>Treatment Accessibility Protocol 21</h4>
             <p>{{ $t('home.tap21Desc') }}</p>
           </div>
         </div>
-        <div class="standard-card">
+        <div class="standard-card standard-card-secondary">
           <div class="standard-badge">TIP 64</div>
           <div class="standard-content">
             <h4>Treatment Improvement Protocol 64</h4>
             <p>{{ $t('home.tip64Desc') }}</p>
           </div>
         </div>
-        <div class="standard-card">
+        <div class="standard-card standard-card-accent">
           <div class="standard-badge">TIP 52</div>
           <div class="standard-content">
             <h4>Treatment Improvement Protocol 52</h4>
@@ -180,7 +180,7 @@
   </section>
 
   <!-- CULTURAL ADAPTABILITY -->
-  <section class="section cultural-section section-alt animate-on-scroll">
+  <section class="section cultural-section animate-on-scroll">
     <div class="container">
       <div class="cultural-inner">
         <div class="cultural-badge">
@@ -472,6 +472,27 @@ onUnmounted(() => {
     radial-gradient(circle at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
     radial-gradient(circle at 20% 80%, rgba(10,37,64,0.04) 0%, transparent 50%);
   pointer-events: none;
+}
+.hero-bg-pattern::before,
+.hero-bg-pattern::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+.hero-bg-pattern::before {
+  width: 480px;
+  height: 480px;
+  top: -140px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(201,168,76,0.22) 0%, rgba(201,168,76,0) 70%);
+}
+.hero-bg-pattern::after {
+  width: 420px;
+  height: 420px;
+  bottom: -160px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(10,37,64,0.12) 0%, rgba(10,37,64,0) 70%);
 }
 .hero-inner {
   display: grid;
@@ -795,7 +816,6 @@ onUnmounted(() => {
 
 /* ABOUT */
 .about-section { background: var(--white); }
-.section-alt { background: var(--bg-light); }
 .section-header { margin-bottom: 56px; }
 .section-header.centered { text-align: center; }
 .section-header.centered .lead { margin: 16px auto 0; }
@@ -873,7 +893,7 @@ onUnmounted(() => {
 .timeline-item p { font-size: .8125rem; color: var(--text-muted); line-height: 1.5; }
 
 /* STANDARDS SECTION */
-.standards-section { background: var(--white); }
+.standards-section { background: var(--bg-light); }
 .standards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -881,8 +901,9 @@ onUnmounted(() => {
   margin-top: 48px;
 }
 .standard-card {
-  background: var(--bg-light);
+  background: var(--white);
   border: 1px solid var(--line-light);
+  border-top: 3px solid var(--primary);
   border-radius: var(--radius-xl);
   padding: 32px;
   transition: all .3s ease;
@@ -890,8 +911,13 @@ onUnmounted(() => {
 .standard-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--accent-light);
+  border-left-color: var(--accent-light);
+  border-right-color: var(--accent-light);
+  border-bottom-color: var(--accent-light);
 }
+.standard-card-primary { border-top-color: var(--primary); }
+.standard-card-secondary { border-top-color: var(--secondary); }
+.standard-card-accent { border-top-color: var(--accent-dark); }
 .standard-badge {
   display: inline-block;
   font-family: var(--font-mono);
@@ -905,6 +931,8 @@ onUnmounted(() => {
   border-radius: var(--radius);
   margin-bottom: 20px;
 }
+.standard-card-secondary .standard-badge { background: var(--secondary); }
+.standard-card-accent .standard-badge { background: var(--accent-dark); }
 .standard-content h4 {
   font-family: var(--font-display);
   font-size: 1.125rem;
@@ -920,7 +948,7 @@ onUnmounted(() => {
 }
 
 /* PATH */
-.path-section { background: var(--white); }
+.path-section { background: var(--bg-light); }
 .path-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1002,7 +1030,7 @@ onUnmounted(() => {
 .section-cta { text-align: center; margin-top: 56px; }
 
 /* COUNTRIES */
-.countries-section { background: var(--bg-light); }
+.countries-section { background: var(--white); }
 .flags-strip {
   display: flex;
   flex-wrap: wrap;
@@ -1046,7 +1074,7 @@ onUnmounted(() => {
 
 /* CULTURAL SECTION */
 .cultural-section {
-  background: var(--bg-light);
+  background: var(--white);
   padding: 100px 0;
 }
 .cultural-inner {
