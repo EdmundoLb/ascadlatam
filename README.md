@@ -106,12 +106,12 @@ Setup completo de Supabase (esquema SQL, Edge Function, Resend, webhooks) en `su
 
 - **Husky + lint-staged**: corre ESLint y Prettier sobre los archivos staged antes de cada commit.
 - **commitlint**: exige Conventional Commits (`feat:`, `fix:`, `docs:`, etc. — ver `commitlint.config.js`).
-- **CI** (`.github/workflows/ci.yml`): lint, typecheck, tests unitarios con coverage, tests E2E (en PRs), build y deploy a Vercel.
+- **CI** (`.github/workflows/ci.yml`): lint, typecheck, tests unitarios con coverage, tests E2E (en PRs) y build. Valida cada push/PR; el deploy a Vercel corre aparte, por su integración nativa de Git.
 - **Accessibility audit** (`.github/workflows/accessibility.yml`): corre semanalmente contra el build de producción.
 
 ## Deployment
 
-Ver `DEPLOY.md`. La vía oficial es deploy automático a Vercel vía GitHub Actions al hacer push a `main`; también documenta una alternativa self-hosted con Nginx.
+Ver `DEPLOY.md`. La vía oficial es deploy automático a Vercel por su integración nativa de Git al hacer push a `main`; también documenta una alternativa self-hosted con Nginx.
 
 ## Licencia
 

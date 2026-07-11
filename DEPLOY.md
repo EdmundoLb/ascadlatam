@@ -1,22 +1,15 @@
 # Deploy de ASCAD LATAM
 
-## Vía oficial: Vercel (automático vía CI/CD)
+## Vía oficial: Vercel (integración nativa de Git)
 
-El pipeline en `.github/workflows/ci.yml` builda el proyecto y lo despliega a Vercel automáticamente:
+El proyecto está conectado directamente al repo por la integración nativa de Vercel↔GitHub (no por GitHub Actions):
 
 - **Push a `main`** → deploy a producción (`https://ascadlatam.org`).
-- **Pull Request** → deploy preview con URL propia, después de que pasen lint, typecheck, tests unitarios y build.
+- **Pull Request** → deploy preview con URL propia.
 
-No se necesita ningún paso manual: alcanza con mergear a `main`.
+No se necesita ningún paso manual: alcanza con mergear a `main`. La configuración de esta integración vive en el dashboard de Vercel (Project → Settings → Git), no en este repo.
 
-### Configuración requerida (una sola vez)
-En GitHub → Settings → Secrets and variables → Actions, configurar:
-
-| Secret | Descripción |
-|--------|--------------|
-| `VERCEL_TOKEN` | Token personal de Vercel |
-| `VERCEL_ORG_ID` | ID de la organización/equipo en Vercel |
-| `VERCEL_PROJECT_ID` | ID del proyecto en Vercel |
+Aparte, `.github/workflows/ci.yml` corre lint, typecheck, tests unitarios y build en cada push/PR como chequeo de calidad — no dispara ningún deploy.
 
 Las reglas de rewrite para el SPA están en `vercel.json`.
 

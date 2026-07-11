@@ -225,4 +225,4 @@ VITE_GA4_MEASUREMENT_ID=measurement_id_de_google_analytics_4  # opcional
 - Las vistas usan `<script setup>` con Composition API.
 - Los datos de certificaciones vienen del Pinia store `useCertificacionesStore`.
 - El router usa rutas con parámetros query (ej: `/solicitud?nivel=CCAAD III`).
-- Deploy automático a Vercel vía GitHub Actions al pushear a `main` — ver `DEPLOY.md`.
+- Deploy automático a Vercel por su integración nativa de Git al pushear a `main` (no vía GitHub Actions) — ver `DEPLOY.md`.
