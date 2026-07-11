@@ -73,8 +73,38 @@
           <h2>Impacto y <em class="gold">beneficios</em></h2>
         </div>
 
-        <div class="benefit-block">
-          <h3>{{ $t('ascadlatam.beneficiosPaises') }}</h3>
+        <div class="content-tabs" role="tablist">
+          <button
+            id="tab-paises" role="tab" :aria-selected="activeBenefitTab === 'paises'" aria-controls="panel-paises"
+            :class="['tab-btn', { active: activeBenefitTab === 'paises' }]" @click="activeBenefitTab = 'paises'"
+          >
+            <span class="tab-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+            {{ $t('ascadlatam.beneficiosPaises') }}
+          </button>
+          <button
+            id="tab-instituciones" role="tab" :aria-selected="activeBenefitTab === 'instituciones'" aria-controls="panel-instituciones"
+            :class="['tab-btn', { active: activeBenefitTab === 'instituciones' }]" @click="activeBenefitTab = 'instituciones'"
+          >
+            <span class="tab-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M14 9h1"/><path d="M14 13h1"/></svg></span>
+            {{ $t('ascadlatam.beneficiosInstituciones') }}
+          </button>
+          <button
+            id="tab-profesionales" role="tab" :aria-selected="activeBenefitTab === 'profesionales'" aria-controls="panel-profesionales"
+            :class="['tab-btn', { active: activeBenefitTab === 'profesionales' }]" @click="activeBenefitTab = 'profesionales'"
+          >
+            <span class="tab-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            {{ $t('ascadlatam.beneficiosProfesionales') }}
+          </button>
+          <button
+            id="tab-familias" role="tab" :aria-selected="activeBenefitTab === 'familias'" aria-controls="panel-familias"
+            :class="['tab-btn', { active: activeBenefitTab === 'familias' }]" @click="activeBenefitTab = 'familias'"
+          >
+            <span class="tab-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+            {{ $t('ascadlatam.beneficiosFamilias') }}
+          </button>
+        </div>
+
+        <div v-if="activeBenefitTab === 'paises'" id="panel-paises" role="tabpanel" aria-labelledby="tab-paises" class="benefit-block">
           <p>{{ $t('ascadlatam.beneficiosPaisesDesc1') }}</p>
           <p>{{ $t('ascadlatam.beneficiosPaisesDesc2') }}</p>
           <p>{{ $t('ascadlatam.beneficiosPaisesDesc3') }}</p>
@@ -86,8 +116,7 @@
           </ul>
         </div>
 
-        <div class="benefit-block">
-          <h3>{{ $t('ascadlatam.beneficiosInstituciones') }}</h3>
+        <div v-if="activeBenefitTab === 'instituciones'" id="panel-instituciones" role="tabpanel" aria-labelledby="tab-instituciones" class="benefit-block">
           <p>{{ $t('ascadlatam.beneficiosInstitucionesDesc') }}</p>
           <p>{{ $t('ascadlatam.principalesBeneficiosInst') }}</p>
           <ul class="benefit-list">
@@ -98,8 +127,7 @@
           </ul>
         </div>
 
-        <div class="benefit-block">
-          <h3>{{ $t('ascadlatam.beneficiosProfesionales') }}</h3>
+        <div v-if="activeBenefitTab === 'profesionales'" id="panel-profesionales" role="tabpanel" aria-labelledby="tab-profesionales" class="benefit-block">
           <p>{{ $t('ascadlatam.beneficiosProfesionalesDesc') }}</p>
           <p>{{ $t('ascadlatam.laCertificacionPermite') }}</p>
           <ul class="benefit-list">
@@ -110,8 +138,7 @@
           </ul>
         </div>
 
-        <div class="benefit-block">
-          <h3>{{ $t('ascadlatam.beneficiosFamilias') }}</h3>
+        <div v-if="activeBenefitTab === 'familias'" id="panel-familias" role="tabpanel" aria-labelledby="tab-familias" class="benefit-block">
           <p>{{ $t('ascadlatam.beneficiosFamiliasDesc') }}</p>
           <p>{{ $t('ascadlatam.estoSeTraduce') }}</p>
           <ul class="benefit-list">
@@ -153,6 +180,12 @@
     </section>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+const activeBenefitTab = ref('paises')
+</script>
 
 <style scoped>
 .intro-section { background: var(--white); }
@@ -246,15 +279,46 @@
 .section-header { text-align: center; margin-bottom: 48px; }
 .section-header h2 { font-family: var(--font-display); font-size: 2rem; color: var(--text); margin: 8px 0 0; }
 
+.content-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line-light);
+  margin-bottom: 40px;
+}
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: .875rem;
+  font-weight: 500;
+  padding: 12px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.tab-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
+.tab-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+.tab-icon { display: flex; }
+
 .benefit-block {
   background: var(--surface);
   border: 1px solid var(--line-light);
   border-radius: var(--radius-xl);
   padding: 48px;
-  margin-bottom: 32px;
+  animation: fadeIn .3s ease;
 }
-.benefit-block:last-child { margin-bottom: 0; }
-.benefit-block h3 { font-size: 1.5rem; color: var(--text); margin-bottom: 16px; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .benefit-block > p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
 
 .benefit-list {
@@ -305,5 +369,8 @@
   .tagline { flex-direction: column; text-align: center; }
   .benefit-block { padding: 32px 24px; }
   .benefit-list { grid-template-columns: 1fr; }
+  .content-tabs { gap: 6px; }
+  .tab-btn { padding: 10px 14px; font-size: .8125rem; }
+  .tab-btn .tab-icon { display: none; }
 }
 </style>

@@ -392,18 +392,31 @@ function animateAnniversary() {
 }
 
 onMounted(() => {
-  scrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-        scrollObserver.unobserve(entry.target)
-      }
-    })
-  }, observerOptions)
+  const scrollTargets = document.querySelectorAll('.animate-on-scroll')
 
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    scrollObserver.observe(el)
-  })
+  if (typeof IntersectionObserver === 'undefined') {
+    scrollTargets.forEach(el => el.classList.add('is-visible'))
+  } else {
+    scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          scrollObserver.unobserve(entry.target)
+        }
+      })
+    }, observerOptions)
+
+    scrollTargets.forEach(el => scrollObserver.observe(el))
+
+    // Red de seguridad: si el observer tiene un bug o nunca dispara para
+    // alguna sección (ej. rootMargin/threshold no calzan en una página muy
+    // larga), evita que quede en opacity:0 para siempre.
+    setTimeout(() => {
+      document.querySelectorAll('.animate-on-scroll:not(.is-visible)').forEach(el => {
+        el.classList.add('is-visible')
+      })
+    }, 8000)
+  }
 
   if (anniversaryEl.value) {
     anniversaryObserver = new IntersectionObserver((entries) => {
