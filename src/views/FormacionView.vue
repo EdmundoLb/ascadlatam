@@ -18,88 +18,48 @@
       </div>
     </section>
 
-    <section class="section certifications-section">
+    <section class="section toc-section">
       <div class="container">
-        <div class="section-header">
-          <span class="badge">{{ $t('formacion.certBadge') }}</span>
-          <h2>{{ $t('formacion.certTitulo') }}</h2>
-        </div>
-
-        <div class="program-card">
-          <div class="program-header">
-            <h3>{{ $t('formacion.programas.consejeriaTitulo') }}</h3>
-            <p>{{ $t('formacion.programas.consejeriaDesc') }}</p>
-          </div>
-          <div class="program-levels">
-            <div class="level-item">
-              <div class="level-icon">I</div>
-              <div class="level-info">
-                <h4>{{ $t('formacion.programas.consejeriaNivel1Titulo') }}</h4>
-                <p>{{ $t('formacion.programas.consejeriaNivel1Desc') }}</p>
-              </div>
-            </div>
-            <div class="level-item">
-              <div class="level-icon">II</div>
-              <div class="level-info">
-                <h4>{{ $t('formacion.programas.consejeriaNivel2Titulo') }}</h4>
-                <p>{{ $t('formacion.programas.consejeriaNivel2Desc') }}</p>
-              </div>
-            </div>
-            <div class="level-item">
-              <div class="level-icon">III</div>
-              <div class="level-info">
-                <h4>{{ $t('formacion.programas.consejeriaNivel3Titulo') }}</h4>
-                <p>{{ $t('formacion.programas.consejeriaNivel3Desc') }}</p>
-              </div>
-            </div>
-          </div>
-          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
-        </div>
-
-        <div class="program-card">
-          <div class="program-header">
-            <h3>{{ $t('formacion.programas.operadorTitulo') }}</h3>
-            <p>{{ $t('formacion.programas.operadorDesc') }}</p>
-          </div>
-          <div class="program-roles">
-            <p class="roles-title">{{ $t('formacion.programas.operadorRolesTitulo') }}</p>
-            <ul class="roles-list">
-              <li>{{ $t('formacion.programas.operadorRol1') }}</li>
-              <li>{{ $t('formacion.programas.operadorRol2') }}</li>
-              <li>{{ $t('formacion.programas.operadorRol3') }}</li>
-              <li>{{ $t('formacion.programas.operadorRol4') }}</li>
-            </ul>
-          </div>
-          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
-        </div>
-
-        <div class="program-card">
-          <div class="program-header">
-            <h3>{{ $t('formacion.programas.entrenadorParesTitulo') }}</h3>
-            <p>{{ $t('formacion.programas.entrenadorParesDesc') }}</p>
-          </div>
-          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
-        </div>
-
-        <div class="program-card">
-          <div class="program-header">
-            <h3>{{ $t('formacion.programas.entrenadorRecuperacionTitulo') }}</h3>
-            <p>{{ $t('formacion.programas.entrenadorRecuperacionDesc') }}</p>
-          </div>
-          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
-        </div>
-
-        <div class="program-card">
-          <div class="program-header">
-            <h3>{{ $t('formacion.programas.supervisorTitulo') }}</h3>
-            <p>{{ $t('formacion.programas.supervisorDesc') }}</p>
-          </div>
-          <RouterLink to="/certificaciones" class="program-link">Ver certificación relacionada →</RouterLink>
+        <p class="toc-intro">{{ $t('formacion.tocIntro') }}</p>
+        <div class="toc-grid">
+          <a href="#certificacion-internacional" class="toc-item">
+            <span class="toc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg>
+            </span>
+            <span class="toc-label">{{ $t('formacion.tocCertInternacional') }}</span>
+            <span class="toc-desc">{{ $t('formacion.tocCertInternacionalDesc') }}</span>
+          </a>
+          <a href="#entrenamiento-continuo" class="toc-item toc-item-entrenamiento">
+            <span class="toc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </span>
+            <span class="toc-label">{{ $t('formacion.tocEntrenamientoContinuo') }}</span>
+            <span class="toc-desc">{{ $t('formacion.tocEntrenamientoContinuoDesc') }}</span>
+          </a>
+          <a href="#actualizacion-profesional" class="toc-item toc-item-actualizacion">
+            <span class="toc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            </span>
+            <span class="toc-label">{{ $t('formacion.tocActualizacionProfesional') }}</span>
+            <span class="toc-desc">{{ $t('formacion.tocActualizacionProfesionalDesc') }}</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section specialized-section">
+    <section id="certificacion-internacional" class="section certifications-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge">{{ $t('formacion.certBadge') }}</span>
+          <h2>{{ $t('formacion.certTitulo') }}</h2>
+          <p class="section-subtitle">{{ $t('formacion.certSubtitulo') }}</p>
+        </div>
+
+        <CourseGrid :courses="certificacionInternacionalCourses" :item-badge="$t('formacion.programaOficialBadge')" />
+      </div>
+    </section>
+
+    <section id="entrenamiento-continuo" class="section specialized-section">
       <div class="container">
         <div class="section-header">
           <span class="badge">{{ $t('formacion.especializadosBadge') }}</span>
@@ -107,60 +67,11 @@
           <p class="section-subtitle">{{ $t('formacion.especializadosSubtitulo') }}</p>
         </div>
 
-        <div class="specialized-grid">
-          <div class="specialized-item">
-            <div class="specialized-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-              </svg>
-            </div>
-            <h4>{{ $t('formacion.especializados.item1') }}</h4>
-          </div>
-          <div class="specialized-item">
-            <div class="specialized-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-              </svg>
-            </div>
-            <h4>{{ $t('formacion.especializados.item2') }}</h4>
-          </div>
-          <div class="specialized-item">
-            <div class="specialized-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
-              </svg>
-            </div>
-            <h4>{{ $t('formacion.especializados.item3') }}</h4>
-          </div>
-          <div class="specialized-item">
-            <div class="specialized-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/>
-              </svg>
-            </div>
-            <h4>{{ $t('formacion.especializados.item4') }}</h4>
-          </div>
-          <div class="specialized-item">
-            <div class="specialized-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
-              </svg>
-            </div>
-            <h4>{{ $t('formacion.especializados.item5') }}</h4>
-          </div>
-          <div class="specialized-item">
-            <div class="specialized-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-              </svg>
-            </div>
-            <h4>{{ $t('formacion.especializados.item6') }}</h4>
-          </div>
-        </div>
+        <ThemedCourseList :themes="entrenamientoContinuoThemes" />
       </div>
     </section>
 
-    <section class="section continuing-section">
+    <section id="actualizacion-profesional" class="section continuing-section">
       <div class="container">
         <div class="section-header">
           <span class="badge">{{ $t('formacion.continuaBadge') }}</span>
@@ -168,72 +79,7 @@
           <p class="section-subtitle">{{ $t('formacion.continuaSubtitulo') }}</p>
         </div>
 
-        <div class="topics-grid">
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item1') }}</span>
-          </div>
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item2') }}</span>
-          </div>
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item3') }}</span>
-          </div>
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item4') }}</span>
-          </div>
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item5') }}</span>
-          </div>
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item6') }}</span>
-          </div>
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item7') }}</span>
-          </div>
-          <div class="topic-item">
-            <span class="topic-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
-            </span>
-            <span>{{ $t('formacion.temas.item8') }}</span>
-          </div>
-        </div>
+        <CourseGrid :courses="actualizacionProfesionalCourses" />
       </div>
     </section>
 
@@ -297,6 +143,21 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { getFormacionContinuaCategories, getEntrenamientoContinuoThemes } from '@/data/formacionContinua'
+import CourseGrid from '@/components/formacion/CourseGrid.vue'
+import ThemedCourseList from '@/components/formacion/ThemedCourseList.vue'
+
+const { locale } = useI18n()
+
+const formacionContinuaCategories = computed(() => getFormacionContinuaCategories(locale.value))
+function coursesFor(categoryId) {
+  return formacionContinuaCategories.value.find(cat => cat.id === categoryId)?.courses || []
+}
+const actualizacionProfesionalCourses = computed(() => coursesFor('actualizacion-profesional'))
+const certificacionInternacionalCourses = computed(() => coursesFor('certificacion-internacional'))
+const entrenamientoContinuoThemes = computed(() => getEntrenamientoContinuoThemes(locale.value))
 </script>
 
 <style scoped>
@@ -353,6 +214,61 @@ import { RouterLink } from 'vue-router'
   line-height: 1.8;
 }
 
+/* TABLE OF CONTENTS */
+.toc-section { background: var(--white); padding: 48px 0; }
+.toc-intro {
+  text-align: center;
+  font-size: .875rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.toc-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--bg-light);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.toc-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg, var(--shadow-md));
+  border-color: var(--accent);
+}
+.toc-item:hover .toc-icon {
+  background: var(--accent);
+  color: var(--white);
+}
+.toc-icon {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-dark);
+  margin-bottom: 14px;
+  transition: all 0.3s ease;
+}
+.toc-label { font-weight: 600; color: var(--text); font-size: .9375rem; }
+.toc-desc { font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
+
+.toc-item-entrenamiento .toc-icon { background: rgba(91,124,153,0.14); color: #5b7c99; }
+.toc-item-entrenamiento:hover .toc-icon { background: #5b7c99; color: var(--white); }
+.toc-item-entrenamiento:hover { border-color: #5b7c99; }
+.toc-item-actualizacion .toc-icon { background: rgba(107,143,113,0.14); color: #6b8f71; }
+.toc-item-actualizacion:hover .toc-icon { background: #6b8f71; color: var(--white); }
+.toc-item-actualizacion:hover { border-color: #6b8f71; }
+
 .section-header { text-align: center; margin-bottom: 48px; }
 .badge {
   display: inline-block;
@@ -381,145 +297,9 @@ import { RouterLink } from 'vue-router'
   line-height: 1.7;
 }
 
-.program-card {
-  background: var(--surface);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-lg);
-  padding: 32px 36px;
-  margin-bottom: 24px;
-  transition: box-shadow .3s;
-}
-.program-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-}
-.program-header h3 {
-  font-family: var(--font-display);
-  font-size: 1.375rem;
-  color: var(--primary);
-  margin: 0 0 12px;
-}
-.program-header p {
-  font-size: .9375rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin: 0;
-}
-.program-levels {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 28px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line-light);
-}
-.level-item {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-.level-icon {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--white);
-  background: var(--accent-dark);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.level-info h4 {
-  font-family: var(--font-display);
-  font-size: .9375rem;
-  color: var(--text);
-  margin: 0 0 4px;
-}
-.level-info p {
-  font-size: .8125rem;
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.5;
-}
-.program-roles { margin-top: 24px; }
-.roles-title {
-  font-weight: 600;
-  color: var(--text);
-  margin: 0 0 16px;
-}
-.roles-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.roles-list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: .9375rem;
-  color: var(--text-secondary);
-}
-.roles-list li::before {
-  content: '→';
-  color: var(--accent-dark);
-}
-.program-link {
-  display: inline-block;
-  margin-top: 20px;
-  font-size: .875rem;
-  font-weight: 600;
-  color: var(--accent-dark);
-  text-decoration: none;
-}
-.program-link:hover { text-decoration: underline; }
-
 .specialized-section { background: var(--bg-light); }
-.specialized-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-.specialized-item {
-  background: var(--surface);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius);
-  padding: 24px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-.specialized-icon { font-size: 1.5rem; flex-shrink: 0; }
-.specialized-item h4 {
-  font-family: var(--font-display);
-  font-size: .875rem;
-  color: var(--text);
-  margin: 0;
-  line-height: 1.4;
-}
 
 .continuing-section { background: var(--white); }
-.topics-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-.topic-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  background: var(--bg-light);
-  border-radius: var(--radius);
-  font-size: .875rem;
-  color: var(--text);
-  line-height: 1.4;
-}
-.topic-icon { font-size: 1.25rem; flex-shrink: 0; }
 
 .modalities-section { background: var(--bg-light); }
 .modalities-grid {
@@ -591,17 +371,11 @@ import { RouterLink } from 'vue-router'
   margin-bottom: 32px;
 }
 @media (max-width: 900px) {
-  .program-levels { grid-template-columns: 1fr; }
-  .specialized-grid { grid-template-columns: repeat(2, 1fr); }
-  .topics-grid { grid-template-columns: repeat(2, 1fr); }
+  .toc-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .page-hero h1 { font-size: 2rem; }
   .section { padding: 60px 0; }
-  .program-card { padding: 24px; }
-  .roles-list { grid-template-columns: 1fr; }
-  .specialized-grid { grid-template-columns: 1fr; }
-  .topics-grid { grid-template-columns: 1fr; }
   .modalities-grid { grid-template-columns: 1fr; }
   .cta-content h2 { font-size: 1.75rem; }
 }
