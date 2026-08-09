@@ -15,7 +15,7 @@
       <div class="container">
         <div class="stats-summary">
           <div class="stat-item">
-            <span class="stat-number">10</span>
+            <span class="stat-number">11</span>
             <span class="stat-label">{{ $t('directorio.paisesAfiliados') }}</span>
           </div>
           <div class="stat-item">
@@ -40,75 +40,82 @@
           <h2>{{ $t('directorio.paisesAfiliados') }} <em class="gold">a ASCAD/LATAM</em></h2>
         </div>
 
-        <div class="countries-grid">
-          <div class="country-card">
+        <div class="countries-list">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/cr.png" :alt="$t('home.costaRica')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.costaRica') }}</h4>
               <p>{{ $t('directorio.costaRicaDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/ni.png" :alt="$t('home.nicaragua')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.nicaragua') }}</h4>
               <p>{{ $t('directorio.nicaraguaDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/pa.png" :alt="$t('home.panama')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.panama') }}</h4>
               <p>{{ $t('directorio.panamaDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/mx.png" :alt="$t('home.mexico')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.mexico') }}</h4>
               <p>{{ $t('directorio.mexicoDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/do.png" :alt="$t('home.republicaDominicana')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.repDominicana') }}</h4>
               <p>{{ $t('directorio.republicaDominicanaDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/ec.png" :alt="$t('home.ecuador')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.ecuador') }}</h4>
               <p>{{ $t('directorio.ecuadorDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/py.png" :alt="$t('home.paraguay')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.paraguay') }}</h4>
               <p>{{ $t('directorio.paraguayDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/cl.png" :alt="$t('home.chile')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.chile') }}</h4>
               <p>{{ $t('directorio.chileDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/uy.png" :alt="$t('home.uruguay')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.uruguay') }}</h4>
               <p>{{ $t('directorio.uruguayDesc') }}</p>
             </div>
           </div>
-          <div class="country-card">
+          <div class="country-row">
             <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" class="country-flag" loading="lazy" />
             <div class="country-info">
               <h4>{{ $t('home.bolivia') }}</h4>
               <p>{{ $t('directorio.boliviaDesc') }}</p>
+            </div>
+          </div>
+          <div class="country-row">
+            <img src="https://flagcdn.com/w40/ar.png" :alt="$t('home.argentina')" class="country-flag" loading="lazy" />
+            <div class="country-info">
+              <h4>{{ $t('home.argentina') }}</h4>
+              <p>{{ $t('directorio.argentinaDesc') }}</p>
             </div>
           </div>
         </div>
@@ -273,6 +280,19 @@
             <span class="d-cargo">{{ $t('directorio.delegadaRegional') }}</span>
           </div>
 
+          <div class="delegado-card">
+            <div class="avatar-wrap">
+              <img :src="imgArgentina" alt="Liliana Augusto" class="avatar-img" />
+            </div>
+            <h4 class="d-nombre">Liliana Augusto</h4>
+            <p class="d-cred">Esp. en Adicciones · Suicidóloga · Pdta. Red Mundial de Salud Mental y Suicidio</p>
+            <div class="d-pais-badge">
+              <img src="https://flagcdn.com/w20/ar.png" alt="Argentina" class="d-bandera" />
+              <span>{{ $t('home.argentina') }}</span>
+            </div>
+            <span class="d-cargo">{{ $t('directorio.delegadaRegional') }}</span>
+          </div>
+
         </div>
       </div>
     </section>
@@ -329,42 +349,40 @@ import imgPanama from '/images/Delegados/panama.jpg'
 import imgParaguay from '/images/Delegados/paraguay.jpg'
 import imgRepDom from '/images/Delegados/republica-dominicana.jpg'
 import imgUruguay from '/images/Delegados/uruguay.jpg'
+import imgArgentina from '/images/Delegados/Argentina.jpg'
 </script>
 
 <style scoped>
 
 /* ── PAÍSES ── */
 .countries-section { background: var(--white); }
-.countries-grid {
+.countries-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 32px;
   margin-top: 48px;
+  border-top: 1px solid var(--line-light);
 }
-.country-card {
-  background: var(--bg-light);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 32px;
+.country-row {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  transition: all .3s ease;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 4px;
+  border-bottom: 1px solid var(--line-light);
+  transition: background .2s ease;
 }
-.country-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--accent-light);
-}
+.country-row:hover { background: var(--bg-light); }
 .country-flag {
-  width: 40px;
-  height: 30px;
+  width: 36px;
+  height: 27px;
   object-fit: cover;
   border-radius: var(--radius-sm);
+  border: 1px solid var(--line-light);
   flex-shrink: 0;
 }
-.country-info h4 { font-size: 1.125rem; color: var(--text); margin-bottom: 8px; }
-.country-info p  { font-size: .875rem; color: var(--text-muted); line-height: 1.6; }
+.country-info { min-width: 0; }
+.country-info h4 { font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+.country-info p  { font-size: .8125rem; color: var(--text-muted); line-height: 1.5; }
 
 /* ── SECCIÓN EQUIPO ── */
 .equipo-section { background: var(--bg-light); }
@@ -661,18 +679,15 @@ import imgUruguay from '/images/Delegados/uruguay.jpg'
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
-  .countries-grid  { grid-template-columns: repeat(3, 1fr); }
   .delegados-grid  { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) {
-  .countries-grid  { grid-template-columns: repeat(2, 1fr); }
   .delegados-grid  { grid-template-columns: repeat(2, 1fr); }
   .ascad-features  { grid-template-columns: 1fr; }
   .coordinador-card { padding: 32px 28px; }
 }
 @media (max-width: 600px) {
-  .countries-grid  { grid-template-columns: 1fr; }
-  .country-card    { flex-direction: column; }
+  .countries-list  { grid-template-columns: 1fr; }
   .coordinador-card {
     flex-direction: column;
     text-align: center;

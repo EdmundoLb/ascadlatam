@@ -63,8 +63,7 @@ const categories = [
       { slug: 'sobriedad-basada-mindfulness', title: { es: 'Sobriedad Basada en Mindfulness', pt: 'Sobriedade Baseada em Mindfulness' }, theme: { es: 'Mindfulness', pt: 'Mindfulness' } },
       { slug: 'teoria-practica-consejeria-grupal', title: { es: 'Teoría y Práctica de la Consejería Grupal', pt: 'Teoria e Prática do Aconselhamento Grupal' }, theme: { es: 'Consejería Grupal', pt: 'Aconselhamento Grupal' } },
       { slug: 'trabajar-personas-resistencia-al-cambio', title: { es: 'Trabajar con Personas en Resistencia al Cambio', pt: 'Trabalhar com Pessoas em Resistência à Mudança' }, theme: { es: 'Consejería Individual', pt: 'Aconselhamento Individual' } },
-      { slug: 'arte-consejeria-integradora-2018', title: { es: 'El Arte de la Consejería Integradora (2018)', pt: 'A Arte do Aconselhamento Integrador (2018)' }, theme: { es: 'Consejería Grupal', pt: 'Aconselhamento Grupal' } },
-      { slug: 'trastornos-concurrentes', title: { es: 'Trastornos Concurrentes', pt: 'Transtornos Concorrentes' }, theme: { es: 'Trastornos Coocurrentes', pt: 'Transtornos Coocorrentes' } }
+      { slug: 'arte-consejeria-integradora-2018', title: { es: 'El Arte de la Consejería Integradora (2018)', pt: 'A Arte do Aconselhamento Integrador (2018)' }, theme: { es: 'Consejería Grupal', pt: 'Aconselhamento Grupal' } }
     ]
   }
 ]

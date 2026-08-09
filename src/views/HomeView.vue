@@ -35,9 +35,9 @@
               </div>
               <div class="stat-info">
                 <div class="stat-number-row">
-                  <span class="stat-number">10</span>
+                  <span class="stat-number">11</span>
                 </div>
-                <span class="stat-short-label" data-tooltip="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile, Uruguay, Bolivia">{{ $t('home.paises') }}</span>
+                <span class="stat-short-label" data-tooltip="Costa Rica, Nicaragua, Panamá, México, República Dominicana, Ecuador, Paraguay, Chile, Uruguay, Bolivia, Argentina">{{ $t('home.paises') }}</span>
               </div>
             </div>
             <div class="stat-card">
@@ -192,32 +192,32 @@
           <em class="gold">{{ $t('home.culturalTitulo2') }}</em>
           {{ $t('home.culturalTitulo3') }}
         </h2>
-        <div class="cultural-grid">
-          <div class="cultural-point">
-            <div class="cultural-point-icon">
+        <div class="cultural-strip">
+          <div class="cultural-item">
+            <span class="cultural-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            </div>
+            </span>
             <h4>{{ $t('home.culturalItem1Titulo') }}</h4>
             <p>{{ $t('home.culturalItem1Desc') }}</p>
           </div>
-          <div class="cultural-point">
-            <div class="cultural-point-icon">
+          <div class="cultural-item">
+            <span class="cultural-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
+            </span>
             <h4>{{ $t('home.culturalItem2Titulo') }}</h4>
             <p>{{ $t('home.culturalItem2Desc') }}</p>
           </div>
-          <div class="cultural-point">
-            <div class="cultural-point-icon">
+          <div class="cultural-item">
+            <span class="cultural-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
+            </span>
             <h4>{{ $t('home.culturalItem3Titulo') }}</h4>
             <p>{{ $t('home.culturalItem3Desc') }}</p>
           </div>
-          <div class="cultural-point">
-            <div class="cultural-point-icon">
+          <div class="cultural-item">
+            <span class="cultural-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            </div>
+            </span>
             <h4>{{ $t('home.culturalItem4Titulo') }}</h4>
             <p>{{ $t('home.culturalItem4Desc') }}</p>
           </div>
@@ -234,22 +234,18 @@
         <h2>Tu {{ $t('home.rutaFormacion').toLowerCase() }}<br>en <em class="gold">{{ $t('home.adicciones') }}</em></h2>
         <p class="lead" style="margin-top: 16px; max-width: 600px;">{{ $t('home.rutaFormacionDesc') }}</p>
       </div>
-      <div class="path-grid">
-        <div v-for="(level, index) in levels" :key="level.code" class="path-card" :style="{ animationDelay: (index * 0.1) + 's' }">
-          <div class="path-card-header">
-            <div class="path-node">
-              <span class="path-code">{{ level.code }}</span>
-              <!-- v-html: SVG fijo definido en data/certificaciones.js -->
-              <span class="path-icon" v-html="levelIcons[level.code]"></span>
-            </div>
-            <div class="path-number">{{ String(index + 1).padStart(2, '0') }}</div>
+      <div class="path-track">
+        <div v-for="(level, index) in levels" :key="level.code" class="path-step" :style="{ animationDelay: (index * 0.08) + 's' }">
+          <div class="path-step-node">
+            <!-- v-html: SVG fijo definido en data/certificaciones.js -->
+            <span class="path-icon" v-html="levelIcons[level.code]"></span>
           </div>
-          <div class="path-card-body">
+          <div class="path-step-connector" v-if="index < levels.length - 1"></div>
+          <div class="path-step-content">
+            <span class="path-step-code">{{ level.code }}</span>
             <h4>{{ level.name }}</h4>
             <p>{{ level.desc }}</p>
-            <div class="path-fee">
-              <span class="badge badge-gold">USD ${{ level.fee }}</span>
-            </div>
+            <span class="badge badge-gold">USD ${{ level.fee }}</span>
           </div>
         </div>
       </div>
@@ -310,6 +306,10 @@
         <div class="flag-chip">
           <img src="https://flagcdn.com/w40/bo.png" :alt="$t('home.bolivia')" width="28" height="21" class="flag-img" loading="lazy" />
           <span>{{ $t('home.bolivia') }}</span>
+        </div>
+        <div class="flag-chip">
+          <img src="https://flagcdn.com/w40/ar.png" :alt="$t('home.argentina')" width="28" height="21" class="flag-img" loading="lazy" />
+          <span>{{ $t('home.argentina') }}</span>
         </div>
       </div>
       <div class="countries-cta">
@@ -949,23 +949,12 @@ onUnmounted(() => {
 
 /* PATH */
 .path-section { background: var(--bg-light); }
-.path-grid {
+.path-track {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 56px;
-}
-.path-card {
-  background: var(--white);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 28px;
-  transition: all .3s ease;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
   position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s ease forwards;
+  margin: 64px 0 8px;
 }
 @keyframes fadeInUp {
   to {
@@ -973,60 +962,58 @@ onUnmounted(() => {
     transform: translateY(0);
   }
 }
-.path-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.path-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent-light);
-}
-.path-card:hover::before { opacity: 1; }
-.path-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-.path-node {
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: var(--accent-light);
-  border: 2px solid var(--accent);
+.path-step {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 0 10px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+.path-step-node {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 14px rgba(10,37,64,0.22);
+  margin-bottom: 18px;
+  border: 3px solid var(--bg-light);
   transition: all .3s ease;
 }
-.path-card:hover .path-node {
+.path-step:hover .path-step-node {
   background: var(--accent);
+  color: var(--primary);
+  transform: scale(1.08);
 }
-.path-node svg { color: var(--accent-dark); }
-.path-card:hover .path-node svg { color: var(--white); }
-.path-code { font-size: .5rem; font-weight: 700; color: var(--accent-dark); letter-spacing: .05em; }
-.path-card:hover .path-code { color: var(--white); }
-.path-icon { font-size: 1.25rem; margin-top: 2px; }
-.path-icon svg { width: 24px; height: 24px; }
-.path-number {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
+.path-icon svg { width: 22px; height: 22px; }
+.path-step-connector {
+  position: absolute;
+  top: 28px;
+  left: calc(50% + 34px);
+  right: calc(-50% + 34px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--line-light));
+  z-index: 1;
+}
+.path-step-code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .625rem;
   font-weight: 700;
-  color: var(--accent-light);
-  line-height: 1;
-  opacity: 0.5;
+  letter-spacing: .1em;
+  color: var(--accent-dark);
+  margin-bottom: 8px;
 }
-.path-card-body h4 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
-.path-card-body p { font-size: .8125rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; }
-.path-fee { display: flex; }
+.path-step-content h4 { font-size: .875rem; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+.path-step-content p { font-size: .75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; min-height: 54px; }
 .section-cta { text-align: center; margin-top: 56px; }
 
 /* COUNTRIES */
@@ -1106,49 +1093,39 @@ onUnmounted(() => {
   margin-bottom: 56px;
   text-align: center;
 }
-.cultural-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+.cultural-strip {
+  display: flex;
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
 }
-.cultural-point {
-  background: var(--bg-light);
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xl);
-  padding: 32px;
-  transition: all .3s ease;
+.cultural-item {
+  flex: 1;
+  padding: 40px 24px;
+  text-align: center;
+  border-left: 1px solid var(--line-light);
 }
-.cultural-point:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--accent-light);
-}
-.cultural-point-icon {
-  width: 48px; height: 48px;
-  border-radius: var(--radius);
-  background: var(--white);
-  border: 1px solid var(--accent-light);
+.cultural-item:first-child { border-left: none; }
+.cultural-item-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--accent-light);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-dark);
-  margin-bottom: 16px;
+  margin: 0 auto 18px;
 }
-.cultural-point h4 {
+.cultural-item h4 {
   font-family: var(--font-display);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
-.cultural-point p {
-  font-size: .9375rem;
+.cultural-item p {
+  font-size: .875rem;
   color: var(--text-muted);
   line-height: 1.6;
   margin: 0;
-}
-.cultural-point em.gold {
-  color: var(--accent-dark);
-  font-style: normal;
 }
 
 /* CTA INTERMEDIO */
@@ -1211,16 +1188,18 @@ onUnmounted(() => {
 @media (max-width: 1100px) {
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
   .hero-stats { max-width: 500px; }
-  .path-grid { grid-template-columns: repeat(2, 1fr); }
-  .cultural-grid { grid-template-columns: repeat(2, 1fr); }
+  .path-track { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
+  .path-step-connector { display: none; }
 }
 @media (max-width: 768px) {
   .about-grid { grid-template-columns: 1fr; }
   .about-timeline { grid-template-columns: repeat(2, 1fr); padding: 28px; }
   .allies-grid { justify-content: center; }
   .ally-card { padding: 40px; max-width: 400px; }
-  .path-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
-  .cultural-grid { grid-template-columns: 1fr; }
+  .path-track { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; row-gap: 32px; }
+  .cultural-strip { flex-direction: column; }
+  .cultural-item { border-left: none; border-top: 1px solid var(--line-light); padding: 28px 16px; }
+  .cultural-item:first-child { border-top: none; }
   .cta-intermediate-inner { flex-direction: column; text-align: center; padding: 40px 32px; }
   .cta-intermediate-actions { flex-direction: column; width: 100%; }
   .cta-intermediate-actions .btn { width: 100%; justify-content: center; }
