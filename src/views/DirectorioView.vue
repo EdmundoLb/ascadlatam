@@ -15,7 +15,7 @@
       <div class="container">
         <div class="stats-summary">
           <div class="stat-item">
-            <span class="stat-number">11</span>
+            <span class="stat-number">12</span>
             <span class="stat-label">{{ $t('directorio.paisesAfiliados') }}</span>
           </div>
           <div class="stat-item">
@@ -116,6 +116,13 @@
             <div class="country-info">
               <h4>{{ $t('home.argentina') }}</h4>
               <p>{{ $t('directorio.argentinaDesc') }}</p>
+            </div>
+          </div>
+          <div class="country-row">
+            <img src="https://flagcdn.com/w40/sv.png" :alt="$t('home.elSalvador')" class="country-flag" loading="lazy" />
+            <div class="country-info">
+              <h4>{{ $t('home.elSalvador') }}</h4>
+              <p>{{ $t('directorio.elSalvadorDesc') }}</p>
             </div>
           </div>
         </div>
@@ -293,6 +300,32 @@
             <span class="d-cargo">{{ $t('directorio.delegadaRegional') }}</span>
           </div>
 
+          <div class="delegado-card">
+            <div class="avatar-wrap">
+              <img :src="imgElSalvadorEduardo" alt="Eduardo Loyola Arguello" class="avatar-img" />
+            </div>
+            <h4 class="d-nombre">Eduardo Loyola Arguello</h4>
+            <p class="d-cred">Director General y Terapeuta · Centro Terapéutico y de Adicciones de El Salvador</p>
+            <div class="d-pais-badge">
+              <img src="https://flagcdn.com/w20/sv.png" alt="El Salvador" class="d-bandera" />
+              <span>{{ $t('home.elSalvador') }}</span>
+            </div>
+            <span class="d-cargo">{{ $t('directorio.delegadoRegional') }}</span>
+          </div>
+
+          <div class="delegado-card">
+            <div class="avatar-wrap">
+              <img :src="imgElSalvadorAdriana" alt="Adriana Hill de Loyola" class="avatar-img" />
+            </div>
+            <h4 class="d-nombre">Adriana Hill de Loyola</h4>
+            <p class="d-cred">Directora Administrativa y Fundadora · Centro Terapéutico y de Adicciones de El Salvador</p>
+            <div class="d-pais-badge">
+              <img src="https://flagcdn.com/w20/sv.png" alt="El Salvador" class="d-bandera" />
+              <span>{{ $t('home.elSalvador') }}</span>
+            </div>
+            <span class="d-cargo">{{ $t('directorio.delegadaRegional') }}</span>
+          </div>
+
         </div>
       </div>
     </section>
@@ -350,6 +383,8 @@ import imgParaguay from '/images/Delegados/paraguay.jpg'
 import imgRepDom from '/images/Delegados/republica-dominicana.jpg'
 import imgUruguay from '/images/Delegados/uruguay.jpg'
 import imgArgentina from '/images/Delegados/Argentina.jpg'
+import imgElSalvadorEduardo from '/images/Delegados/Eduardo Loyola Arguello.jpg'
+import imgElSalvadorAdriana from '/images/Delegados/Adriana Hill de Loyola.jpg'
 </script>
 
 <style scoped>
